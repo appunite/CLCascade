@@ -9,7 +9,7 @@ This is a beta version of CLCascade library
 Simple projects
 ===============
 
-Simple project screencast: [http://www.youtube.com/watch?v=XFtc1ksqOmU][]
+Simple project screencast: [Screencast][]
 
 
 Authors
@@ -18,3 +18,6 @@ Authors
 CreativeLabs.pl
 
 - Emil Wojtaszek
+
+[Screencast]: http://www.youtube.com/watch?v=XFtc1ksqOmU
+[info@creativelabs.pl]: info@creativelabs.pl
