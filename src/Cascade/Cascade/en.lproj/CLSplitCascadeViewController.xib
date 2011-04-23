@@ -47,23 +47,10 @@
 						<int key="NSvFlags">276</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIView" id="620130356">
-								<reference key="NSNextResponder" ref="14290644"/>
-								<int key="NSvFlags">264</int>
-								<string key="NSFrame">{{0, 698}, {320, 50}}</string>
-								<reference key="NSSuperview" ref="14290644"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="908254303"/>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC43NSAwLjA3NTU5Nzg2MTY4IDAuMTczMjMyNzk2NwA</bytes>
-								</object>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							</object>
 							<object class="IBUIView" id="3411477">
 								<reference key="NSNextResponder" ref="14290644"/>
 								<int key="NSvFlags">288</int>
-								<string key="NSFrameSize">{320, 148}</string>
+								<string key="NSFrameSize">{320, 72}</string>
 								<reference key="NSSuperview" ref="14290644"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="705160304"/>
@@ -77,10 +64,10 @@
 							<object class="IBUITableView" id="705160304">
 								<reference key="NSNextResponder" ref="14290644"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{0, 148}, {320, 550}}</string>
+								<string key="NSFrame">{{0, 72}, {320, 676}}</string>
 								<reference key="NSSuperview" ref="14290644"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="620130356"/>
+								<reference key="NSNextKeyView" ref="908254303"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC44OTEzMDQzNDc4IDAuODEwMjYyODc5OCAwAA</bytes>
@@ -115,6 +102,7 @@
 						<string key="NSFrame">{{66, 0}, {958, 748}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -202,14 +190,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">footerView</string>
-						<reference key="source" ref="14290644"/>
-						<reference key="destination" ref="620130356"/>
-					</object>
-					<int key="connectionID">22</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">categoriesView</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="14290644"/>
@@ -277,19 +257,14 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="3411477"/>
-							<reference ref="620130356"/>
 							<reference ref="705160304"/>
 						</object>
 						<reference key="parent" ref="766721923"/>
+						<string key="objectName">Categories View</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
 						<reference key="object" ref="3411477"/>
-						<reference key="parent" ref="14290644"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">21</int>
-						<reference key="object" ref="620130356"/>
 						<reference key="parent" ref="14290644"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -320,7 +295,6 @@
 					<string>2.CustomClassName</string>
 					<string>2.IBEditorWindowLastContentRect</string>
 					<string>2.IBPluginDependency</string>
-					<string>21.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>5.CustomClassName</string>
 					<string>5.IBPluginDependency</string>
@@ -334,7 +308,6 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>CLSplitCascadeView</string>
 					<string>{{513, 0}, {783, 856}}</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>CLCascadeContentNavigator</string>
@@ -353,7 +326,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">26</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

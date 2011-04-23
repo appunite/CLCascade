@@ -20,8 +20,6 @@
     CLCascadeViewController* _rootViewController;
     CLCascadeViewController* _lastCascadeViewController;
     
-    CGFloat     _cascadeViewWidth;
-    
     NSMutableArray* _viewControllers;
     
     UIInterfaceOrientation _orientation;
@@ -42,21 +40,12 @@
 @property (nonatomic, retain) CLCascadeViewController* lastCascadeViewController;
 
 /*
- This property determine cascade view width. Width of cascade 
- view is the same in landscape and portreit orientation, 
- only height is changing. It is recommended that the width 
- was a half-width of CascadeContentNavigator in landscape 
- orientation. This property is required.
- */
-@property (nonatomic, assign) CGFloat   cascadeViewWidth;
-
-/*
  List of CLViewControllers on stock.
  */
 @property (nonatomic, retain) NSMutableArray* viewControllers;
 
 /*
- Defining interface current interface orientation. Current interface orientation
+ Defining current interface orientation. Current interface orientation
  is set in method willAnimateFirstHalfOfRotationToInterfaceOrientation:duration: 
  by CLSplitCascadeViewController.
  */

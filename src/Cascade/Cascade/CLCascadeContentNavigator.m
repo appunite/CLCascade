@@ -9,12 +9,13 @@
 #import "CLCascadeContentNavigator.h"
 #import "CLViewController.h"
 #import "CLCascadeViewController.h"
-//
+
 @implementation CLCascadeContentNavigator
+
+#define kCascadeViewWidth 479
 
 @synthesize rootViewController = _rootViewController;
 @synthesize lastCascadeViewController = _lastCascadeViewController;
-@synthesize cascadeViewWidth = _cascadeViewWidth;
 @synthesize viewControllers = _viewControllers;
 @synthesize orientation = _orientation;
 @synthesize delegate = _delegate;
@@ -44,44 +45,22 @@
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)coder {
-    self = [super initWithCoder:coder];
-    if (self) {
-        // this value determine cascade view width
-        [self setCascadeViewWidth: 479.0];
-//        _orientation = UIInterfaceOrientationLandscapeLeft;
-
-    }
-    return self;
-}
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
 
     for (NSUInteger i = [_viewControllers count]; i>0; i--) {
         UIView* view = [[_viewControllers objectAtIndex: i-1] view];
                 
         CGRect covertRect = [self convertRect:view.bounds fromView:view];
-//        NSLog(@"self.bounds: %f %f %f %f", self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
-//        NSLog(@"coverRect: %f %f %f %f", self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
-//        NSLog(@"point: %f %f", point.x, point.y);
+
         if (CGRectContainsPoint(covertRect, point)) {
             
             int x = point.x;
-            CGFloat b = x%479;
+            CGFloat b = x % kCascadeViewWidth;
             
             CGPoint covertPoint = [view.superview convertPoint:CGPointMake(b, point.y) toView: view];
             
-//            if (covertRect.origin.x == 0) {
-//                
-//                if ([_viewControllers count] >= i) {
-//                    UIView* nextView = [[_viewControllers objectAtIndex: i] view];
-//                    CGPoint pp2 = [nextView.superview convertPoint:CGPointMake(b, point.y) toView: nextView];
-//                    return [nextView hitTest:pp2 withEvent:event];
-//                }
-//            } else {
-//                
-                return [view hitTest:covertPoint withEvent:event];
-//            }
+            return [view hitTest:covertPoint withEvent:event];
         }
         
     }
@@ -121,17 +100,15 @@
 }
 
 - (CGSize) singleCascadeContentSize {
-    NSAssert(_cascadeViewWidth > 0.0, @"cascadeViewWidth property should by grater than 0.0");
-
     CGRect contentNavigatorFrame = [self cascadeContentNavigatorBounds];
     
     if (UIInterfaceOrientationIsLandscape(_orientation)) {
-        return  CGSizeMake(self.cascadeViewWidth, contentNavigatorFrame.size.height);
+        return  CGSizeMake(kCascadeViewWidth, contentNavigatorFrame.size.height);
     }
 
     if (UIInterfaceOrientationIsPortrait(_orientation)) {
 
-        CGFloat detailViewWidth = 479.0;
+        CGFloat detailViewWidth = kCascadeViewWidth;
         CGFloat navigatorContainerWidth = 702.0;
         CGFloat rootScrollViewOriginX = navigatorContainerWidth - detailViewWidth;
         CGFloat rootScrollViewWidth = 290;
@@ -144,17 +121,15 @@
 }
 
 - (CGSize) doubleCascadeContentSize {
-    NSAssert(_cascadeViewWidth > 0.0, @"cascadeViewWidth property should by grater than 0.0");
-    
     CGRect contentNavigatorFrame = [self cascadeContentNavigatorBounds];
     
     if (UIInterfaceOrientationIsLandscape(_orientation)) {
-        return CGSizeMake(self.cascadeViewWidth*2, contentNavigatorFrame.size.height);
+        return CGSizeMake(kCascadeViewWidth*2, contentNavigatorFrame.size.height);
     }
 
     if (UIInterfaceOrientationIsPortrait(_orientation)) {
         
-        CGFloat detailViewWidth = 479.0;
+        CGFloat detailViewWidth = kCascadeViewWidth;
         CGFloat navigatorContainerWidth = 702.0;
         CGFloat rootScrollViewOriginX = navigatorContainerWidth - detailViewWidth;
         CGFloat rootScrollViewWidth = 290;
@@ -167,38 +142,34 @@
 }
 
 - (CGRect) masterCascadeFrame {
-    NSAssert(_cascadeViewWidth > 0.0, @"cascadeViewWidth property should by grater than 0.0");
-    
     CGRect contentNavigatorFrame = [self cascadeContentNavigatorBounds];
     
     if (UIInterfaceOrientationIsLandscape(_orientation)) {
-        return CGRectMake(0.0, 0.0, self.cascadeViewWidth, contentNavigatorFrame.size.height);
+        return CGRectMake(0.0, 0.0, kCascadeViewWidth, contentNavigatorFrame.size.height);
     }
 
     if (UIInterfaceOrientationIsPortrait(_orientation)) {
-//        CGFloat detailViewWidth = 479.0;
+//        CGFloat detailViewWidth = kCascadeViewWidth;
 //        CGFloat navigatorContainerWidth = 702.0;
 //        CGFloat rootScrollViewOriginX = navigatorContainerWidth - detailViewWidth;
 //        CGFloat rootScrollViewWidth = 290;
 //        CGFloat offset = rootScrollViewOriginX + rootScrollViewWidth - detailViewWidth;
 
-        return CGRectMake(0.0, 0.0, self.cascadeViewWidth, contentNavigatorFrame.size.height);
+        return CGRectMake(0.0, 0.0, kCascadeViewWidth, contentNavigatorFrame.size.height);
     }
     
     return CGRectZero;
 }
 
 - (CGRect) detailCascadeFrame {
-    NSAssert(_cascadeViewWidth > 0.0, @"cascadeViewWidth property should by grater than 0.0");
-    
     CGRect contentNavigatorFrame = [self cascadeContentNavigatorBounds];
     
     if (UIInterfaceOrientationIsLandscape(_orientation)) {
-        return CGRectMake(self.cascadeViewWidth, 0.0, self.cascadeViewWidth, contentNavigatorFrame.size.height);
+        return CGRectMake(kCascadeViewWidth, 0.0, kCascadeViewWidth, contentNavigatorFrame.size.height);
     }
     
     if (UIInterfaceOrientationIsPortrait(_orientation)) {
-        CGFloat detailViewWidth = 479.0;
+        CGFloat detailViewWidth = kCascadeViewWidth;
         CGFloat navigatorContainerWidth = 702.0;
         CGFloat rootScrollViewOriginX = navigatorContainerWidth - detailViewWidth;
         CGFloat rootScrollViewWidth = 290;
@@ -214,12 +185,12 @@
 - (CGPoint) masterContentOffsetLeadToDetailView {
 
     if (UIInterfaceOrientationIsLandscape(_orientation)) {
-        return CGPointMake(self.cascadeViewWidth, 0.0);
+        return CGPointMake(kCascadeViewWidth, 0.0);
     }
     
     if (UIInterfaceOrientationIsPortrait(_orientation)) {
         
-        CGFloat detailViewWidth = 479.0;
+        CGFloat detailViewWidth = kCascadeViewWidth;
         CGFloat navigatorContainerWidth = 702.0;
         CGFloat rootScrollViewOriginX = navigatorContainerWidth - detailViewWidth;
         CGFloat rootScrollViewWidth = 290;
@@ -237,7 +208,7 @@
     }
     
     if (UIInterfaceOrientationIsPortrait(_orientation)) {
-        CGFloat detailViewWidth = 479.0;
+        CGFloat detailViewWidth = kCascadeViewWidth;
         CGFloat navigatorContainerWidth = 702.0;
         CGFloat rootScrollViewOriginX = navigatorContainerWidth - detailViewWidth;
         CGFloat rootScrollViewWidth = 290;
@@ -255,12 +226,12 @@
 - (CGSize) contentSizeRootViewController {
 
     if (UIInterfaceOrientationIsLandscape(_orientation)) {
-        return  CGSizeMake(479.0, self.bounds.size.height);
+        return  CGSizeMake(kCascadeViewWidth, self.bounds.size.height);
     }
     
     if (UIInterfaceOrientationIsPortrait(_orientation)) {
         
-        CGFloat detailViewWidth = 479.0;
+        CGFloat detailViewWidth = kCascadeViewWidth;
         CGFloat navigatorContainerWidth = 702.0;
         CGFloat rootScrollViewOriginX = navigatorContainerWidth - detailViewWidth;
         CGFloat rootScrollViewWidth = 290;
@@ -279,12 +250,12 @@
 - (CGRect) frameRootViewController {
 
     if (UIInterfaceOrientationIsLandscape(_orientation)) {
-        return  CGRectMake(479.0, 0.0, 479.0, self.bounds.size.height);
+        return  CGRectMake(kCascadeViewWidth, 0.0, kCascadeViewWidth, self.bounds.size.height);
     }
     
     if (UIInterfaceOrientationIsPortrait(_orientation)) {
                 
-        CGFloat detailViewWidth = 479.0;
+        CGFloat detailViewWidth = kCascadeViewWidth;
         CGFloat navigatorContainerWidth = 702.0;
         CGFloat rootScrollViewOriginX = navigatorContainerWidth - detailViewWidth;
         CGFloat rootScrollViewWidth = 290;
@@ -298,12 +269,12 @@
 
 - (CGRect) cascadeScrollableViewFrame {
     if (UIInterfaceOrientationIsLandscape(_orientation)) {
-        return  CGRectMake(0.0, 0.0, 479.0, self.bounds.size.height);
+        return  CGRectMake(0.0, 0.0, kCascadeViewWidth, self.bounds.size.height);
     }
     
     if (UIInterfaceOrientationIsPortrait(_orientation)) {
         
-        CGFloat detailViewWidth = 479.0;
+        CGFloat detailViewWidth = kCascadeViewWidth;
         CGFloat navigatorContainerWidth = 702.0;
         CGFloat rootScrollViewOriginX = navigatorContainerWidth - detailViewWidth;
         CGFloat rootScrollViewWidth = 290;
@@ -315,6 +286,7 @@
     return CGRectZero;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) adjustFrameAndContentAfterRotation:(UIInterfaceOrientation)newOrientation {
     // we need to set current interface orientation
     _orientation = newOrientation;
@@ -410,6 +382,7 @@
 #pragma mark -
 #pragma mark CLCascadeViewControllerDelegate
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeViewController:(CLCascadeViewController*)cascadeViewController didChangeScrollPosition:(CLCascadeViewScrollPositions)scrollPosition {
     if (cascadeViewController == _rootViewController) {
 

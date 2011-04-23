@@ -96,7 +96,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     CLTableViewController* rootTableViewController = [[CLTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
     CLCascadeViewController* rootCascadeViewController = [[CLCascadeViewController alloc] initWithMasterPositionViewController:rootTableViewController];
     
