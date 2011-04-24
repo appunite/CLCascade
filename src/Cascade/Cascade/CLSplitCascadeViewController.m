@@ -35,6 +35,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     [self.cascadeNavigator adjustFrameAndContentAfterRotation: UIInterfaceOrientationPortrait];        
+//    [self.categoriesView.tableView setBackgroundColor:[UIColor redColor]];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -47,7 +47,7 @@
     self.alwaysBounceHorizontal = YES;
     self.alwaysBounceVertical = NO;
     self.pagingEnabled = YES;
-    self.showsHorizontalScrollIndicator = YES;
+    self.showsHorizontalScrollIndicator = NO;
 }
 
 @end

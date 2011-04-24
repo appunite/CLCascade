@@ -25,6 +25,8 @@
 		20BB344E133FBAA4003EEB6E /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3446133FBAA4003EEB6E /* CLViewController.m */; };
 		20BB3450133FBAA4003EEB6E /* CLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3449133FBAA4003EEB6E /* CLTableViewController.m */; };
 		20BB3453133FC07A003EEB6E /* CLSplitCascadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3452133FC07A003EEB6E /* CLSplitCascadeView.m */; };
+		20F2DBA9136494350076E80D /* CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F2DBA8136494350076E80D /* CLSegmentedView.m */; };
+		20F2DBB0136495560076E80D /* CLSegmentedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F2DBAF136495560076E80D /* CLSegmentedTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,10 @@
 		20BB3449133FBAA4003EEB6E /* CLTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTableViewController.m; sourceTree = "<group>"; };
 		20BB3451133FC07A003EEB6E /* CLSplitCascadeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSplitCascadeView.h; sourceTree = "<group>"; };
 		20BB3452133FC07A003EEB6E /* CLSplitCascadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSplitCascadeView.m; sourceTree = "<group>"; };
+		20F2DBA7136494350076E80D /* CLSegmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSegmentedView.h; sourceTree = "<group>"; };
+		20F2DBA8136494350076E80D /* CLSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSegmentedView.m; sourceTree = "<group>"; };
+		20F2DBAE136495550076E80D /* CLSegmentedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSegmentedTableView.h; sourceTree = "<group>"; };
+		20F2DBAF136495560076E80D /* CLSegmentedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSegmentedTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +106,6 @@
 		205A69BA136375AB00F6544D /* CustomViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				20BB3442133FBAA4003EEB6E /* CLCascadeViewController.h */,
-				20BB3443133FBAA4003EEB6E /* CLCascadeViewController.m */,
 				20BB3445133FBAA4003EEB6E /* CLViewController.h */,
 				20BB3446133FBAA4003EEB6E /* CLViewController.m */,
 				20BB3448133FBAA4003EEB6E /* CLTableViewController.h */,
@@ -126,6 +130,10 @@
 				20084B2B13413490000DA01A /* CLTitleView.m */,
 				20BB343E133FBAA4003EEB6E /* CLScrollView.h */,
 				20BB343F133FBAA4003EEB6E /* CLScrollView.m */,
+				20F2DBA7136494350076E80D /* CLSegmentedView.h */,
+				20F2DBA8136494350076E80D /* CLSegmentedView.m */,
+				20F2DBAE136495550076E80D /* CLSegmentedTableView.h */,
+				20F2DBAF136495560076E80D /* CLSegmentedTableView.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -187,10 +195,20 @@
 				205A69B71363756F00F6544D /* CLSplitViewController */,
 				205A69B91363758A00F6544D /* CLCategories */,
 				205A69BB136375CA00F6544D /* CLCascadeNavigationController */,
+				20F2DBC81364C9C80076E80D /* CLCascadeViewController */,
 				205A69BA136375AB00F6544D /* CustomViewControllers */,
 				205A69BD1363761500F6544D /* Other */,
 			);
 			name = Cascade;
+			sourceTree = "<group>";
+		};
+		20F2DBC81364C9C80076E80D /* CLCascadeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				20BB3442133FBAA4003EEB6E /* CLCascadeViewController.h */,
+				20BB3443133FBAA4003EEB6E /* CLCascadeViewController.m */,
+			);
+			name = CLCascadeViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +282,8 @@
 				20BB3453133FC07A003EEB6E /* CLSplitCascadeView.m in Sources */,
 				20084B2C13413490000DA01A /* CLTitleView.m in Sources */,
 				203CA4391343305F00DF6509 /* CLCategoriesView.m in Sources */,
+				20F2DBA9136494350076E80D /* CLSegmentedView.m in Sources */,
+				20F2DBB0136495560076E80D /* CLSegmentedTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

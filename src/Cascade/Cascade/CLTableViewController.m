@@ -7,16 +7,11 @@
 //
 
 #import "CLTableViewController.h"
-@interface CLTableViewController (Private)
-- (void)titleViewTap:(UITapGestureRecognizer*)recognizer;
-@end
 
 @implementation CLTableViewController
 
-#define DEF_TITLE_VIEW_HEIGHT 45
-
-@synthesize tableView = _tableView;
-@synthesize titleView = _titleView;
+@dynamic view;
+@dynamic tableView;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id) initWithTableViewStyle:(UITableViewStyle)style
@@ -31,8 +26,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_tableView release], _tableView = nil;
-    [_titleView release], _titleView = nil;
     [super dealloc];
 }
 
@@ -45,23 +38,16 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - Class methods
+#pragma mark - View lifecycle
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) updateLayout {
-
-    [super updateLayout];
-
-    CLCascadeContentNavigator* contentNavigator = [self.parentCascadeViewController contentNavigator];
-    CGSize pageSize = [contentNavigator masterCascadeFrame].size;
-    
-    [_titleView setFrame: CGRectMake(0.0, 0.0, pageSize.width, DEF_TITLE_VIEW_HEIGHT)];
-    [_tableView setFrame: CGRectMake(0.0, DEF_TITLE_VIEW_HEIGHT, pageSize.width, pageSize.height - DEF_TITLE_VIEW_HEIGHT)];
-    //    [_tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin];
-
+- (void) loadView {
+    CLSegmentedTableView* segmentTableView = [[CLSegmentedTableView alloc] initWithFrame:CGRectZero style:_tableViewStyle];
+    [segmentTableView setDelegate: self];    
+    [segmentTableView setDataSource: self];    
+    self.view = segmentTableView;
+    [segmentTableView release];
 }
-
-#pragma mark - View lifecycle
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)viewDidLoad
@@ -73,22 +59,10 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
     [self.view setBackgroundColor: [UIColor clearColor]];
-    
-    _titleView = [[CLTitleView alloc] init];
-    [self.view addSubview:_titleView];      
-    
-    UITapGestureRecognizer* gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleViewTap:)];
-    [_titleView addGestureRecognizer: gestureRecognizer];
-    [gestureRecognizer release];
+    [self.tableView setDirectionalLockEnabled: YES];
 
-    _tableView = [[UITableView alloc] initWithFrame: CGRectZero style:_tableViewStyle];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    [_tableView setDirectionalLockEnabled: YES];
-    [self.view addSubview:_tableView];
-
-    [self updateLayout];
 }
 
 
@@ -98,9 +72,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    
-    [_tableView release], _tableView = nil;
-    [_titleView release], _titleView = nil;
 }
 
 
@@ -157,14 +128,10 @@
 }
 
 #pragma mark -
-#pragma mark Private
+#pragma mark Getters
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)titleViewTap:(UITapGestureRecognizer*)recognizer {
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];    
+- (UITableView*) tableView {
+    return [self.view tableView];
 }
-
 
 @end

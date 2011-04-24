@@ -147,16 +147,11 @@
         // set up master position view frame
         UIView* rootMasterView = _masterPositionViewController.view;
         [rootMasterView setFrame: [navigator masterCascadeFrame]];
-        
-        // update layout of view
-        [_masterPositionViewController updateLayout];
-        
+                
     } else {
         UIView* view = [_masterPositionViewController view];
         [view setFrame: [navigator masterCascadeFrame]];
 
-        // update layout of view
-        [self.masterPositionViewController updateLayout];
     }
     
     if (_detailPositionViewController != nil) {

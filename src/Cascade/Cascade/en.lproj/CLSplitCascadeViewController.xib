@@ -47,30 +47,15 @@
 						<int key="NSvFlags">276</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIView" id="3411477">
-								<reference key="NSNextResponder" ref="14290644"/>
-								<int key="NSvFlags">288</int>
-								<string key="NSFrameSize">{320, 72}</string>
-								<reference key="NSSuperview" ref="14290644"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="705160304"/>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC43NSAwLjA3NTU5Nzg2MTY4IDAuMTczMjMyNzk2NwA</bytes>
-								</object>
-								<int key="IBUIContentMode">7</int>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							</object>
-							<object class="IBUITableView" id="705160304">
+							<object class="IBUITableView" id="195807678">
 								<reference key="NSNextResponder" ref="14290644"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{0, 72}, {320, 676}}</string>
+								<string key="NSFrame">{{0, 251}, {320, 247}}</string>
 								<reference key="NSSuperview" ref="14290644"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="908254303"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC44OTEzMDQzNDc4IDAuODEwMjYyODc5OCAwAA</bytes>
+									<bytes key="NSRGB">MC4wMzY3OTczNTMwOCAwLjEyOTQyNzE2NzEgMQA</bytes>
 								</object>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -86,7 +71,7 @@
 						<string key="NSFrameSize">{320, 748}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="3411477"/>
+						<reference key="NSNextKeyView" ref="908254303"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -158,22 +143,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">headerView</string>
-						<reference key="source" ref="14290644"/>
-						<reference key="destination" ref="3411477"/>
-					</object>
-					<int key="connectionID">15</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">tableView</string>
-						<reference key="source" ref="14290644"/>
-						<reference key="destination" ref="705160304"/>
-					</object>
-					<int key="connectionID">16</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">categoriesView</string>
 						<reference key="source" ref="766721923"/>
 						<reference key="destination" ref="14290644"/>
@@ -198,27 +167,51 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">dataSource</string>
-						<reference key="source" ref="705160304"/>
-						<reference key="destination" ref="841351856"/>
-					</object>
-					<int key="connectionID">24</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="705160304"/>
-						<reference key="destination" ref="841351856"/>
-					</object>
-					<int key="connectionID">25</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="908254303"/>
 						<reference key="destination" ref="766721923"/>
 					</object>
 					<int key="connectionID">26</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">dataSource</string>
+						<reference key="source" ref="14290644"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">29</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="14290644"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">30</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">dataSource</string>
+						<reference key="source" ref="195807678"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">35</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="195807678"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">36</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tableView</string>
+						<reference key="source" ref="14290644"/>
+						<reference key="destination" ref="195807678"/>
+					</object>
+					<int key="connectionID">37</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -256,30 +249,20 @@
 						<reference key="object" ref="14290644"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="3411477"/>
-							<reference ref="705160304"/>
+							<reference ref="195807678"/>
 						</object>
 						<reference key="parent" ref="766721923"/>
 						<string key="objectName">Categories View</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">14</int>
-						<reference key="object" ref="3411477"/>
-						<reference key="parent" ref="14290644"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">4</int>
-						<reference key="object" ref="705160304"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-						</object>
-						<reference key="parent" ref="14290644"/>
-						<string key="objectName">Table View</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
 						<reference key="object" ref="908254303"/>
 						<reference key="parent" ref="766721923"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">34</int>
+						<reference key="object" ref="195807678"/>
+						<reference key="parent" ref="14290644"/>
 					</object>
 				</object>
 			</object>
@@ -291,11 +274,10 @@
 					<string>-2.CustomClassName</string>
 					<string>13.CustomClassName</string>
 					<string>13.IBPluginDependency</string>
-					<string>14.IBPluginDependency</string>
 					<string>2.CustomClassName</string>
 					<string>2.IBEditorWindowLastContentRect</string>
 					<string>2.IBPluginDependency</string>
-					<string>4.IBPluginDependency</string>
+					<string>34.IBPluginDependency</string>
 					<string>5.CustomClassName</string>
 					<string>5.IBPluginDependency</string>
 				</object>
@@ -304,7 +286,6 @@
 					<string>CLSplitCascadeViewController</string>
 					<string>UIResponder</string>
 					<string>CLCategoriesView</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>CLSplitCascadeView</string>
 					<string>{{513, 0}, {783, 856}}</string>
@@ -326,7 +307,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">27</int>
+			<int key="maxID">37</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -373,21 +354,38 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">CLCategoriesView</string>
-					<string key="superclassName">UIView</string>
+					<string key="superclassName">CLSegmentedTableView</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">cascadeNavigator</string>
+						<string key="NS.object.0">CLCascadeContentNavigator</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">cascadeNavigator</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">cascadeNavigator</string>
+							<string key="candidateClassName">CLCascadeContentNavigator</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CLCategoriesView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CLSegmentedTableView</string>
+					<string key="superclassName">CLSegmentedView</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>cascadeNavigator</string>
-							<string>footerView</string>
-							<string>headerView</string>
+							<string>dataSource</string>
+							<string>delegate</string>
 							<string>tableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>CLCascadeContentNavigator</string>
-							<string>UIView</string>
-							<string>UIView</string>
+							<string>id</string>
+							<string>id</string>
 							<string>UITableView</string>
 						</object>
 					</object>
@@ -395,24 +393,19 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>cascadeNavigator</string>
-							<string>footerView</string>
-							<string>headerView</string>
+							<string>dataSource</string>
+							<string>delegate</string>
 							<string>tableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
-								<string key="name">cascadeNavigator</string>
-								<string key="candidateClassName">CLCascadeContentNavigator</string>
+								<string key="name">dataSource</string>
+								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">footerView</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">headerView</string>
-								<string key="candidateClassName">UIView</string>
+								<string key="name">delegate</string>
+								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">tableView</string>
@@ -422,7 +415,54 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CLCategoriesView.h</string>
+						<string key="minorKey">./Classes/CLSegmentedTableView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CLSegmentedView</string>
+					<string key="superclassName">UIView</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>contentView</string>
+							<string>footerView</string>
+							<string>headerView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIView</string>
+							<string>UIView</string>
+							<string>UIView</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>contentView</string>
+							<string>footerView</string>
+							<string>headerView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">contentView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">footerView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">headerView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CLSegmentedView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

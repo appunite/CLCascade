@@ -10,6 +10,7 @@
 #import "CLCascadeViewController.h"
 
 @implementation CLViewController
+
 @synthesize parentCascadeViewController = _parentCascadeViewController;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,11 +33,17 @@
 #pragma mark - View lifecycle
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) loadView {
+    CLSegmentedView* segmentView = [[CLSegmentedView alloc] init];
+    self.view = segmentView;
+    [segmentView release];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.    
-    [self updateLayout];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,50 +65,20 @@
 #pragma mark Class methods
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) updateLayout {
-    if (_originShadow) {
+- (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha {
+    CAGradientLayer* shadow = [[[CAGradientLayer alloc] init] autorelease];
 
-        [CATransaction begin];
-        [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-        
-        CGRect originShadowFrame = CGRectMake(0 - _shadowWidth, 0.0, _shadowWidth, self.view.bounds.size.height);
-        _originShadow.frame = originShadowFrame;
-        
-        [CATransaction commit];
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha {
+    shadow.startPoint = CGPointMake(0, 0.5);
+    shadow.endPoint = CGPointMake(1.0, 0.5);
+    CGRect newShadowFrame = CGRectMake(0, 0, width, self.view.frame.size.height);
     
-//    self.view.clipsToBounds = NO;
-	//
-	// Construct the origin shadow if needed
-	//
-    
-    _shadowWidth = width;
-    
-	if (!_originShadow)
-	{
-
-        _originShadow = [[[CAGradientLayer alloc] init] autorelease];
-        _originShadow.startPoint = CGPointMake(0, 0.5);
-        _originShadow.endPoint = CGPointMake(1.0, 0.5);
-        CGRect newShadowFrame = CGRectMake(0, 0, _shadowWidth, self.view.frame.size.height);
-        
-        _originShadow.frame = newShadowFrame;
-        _originShadow.colors = [NSArray arrayWithObjects: 
+    shadow.frame = newShadowFrame;
+    shadow.colors = [NSArray arrayWithObjects: 
                             (id)([[UIColor clearColor] colorWithAlphaComponent:0.0].CGColor), 
                             (id)([shadowColor colorWithAlphaComponent: alpha].CGColor), 
                             nil];
-        
-        [self.view.layer insertSublayer:_originShadow atIndex:0];
-	} else { //if (![[self.view.layer.sublayers objectAtIndex:0] isEqual:_originShadow])
-        [_originShadow removeFromSuperlayer];
-		[self.view.layer insertSublayer:_originShadow atIndex:0];
-	}
     
-	[self updateLayout];
+    [(CLSegmentedView*)self.view setShadow:shadow withWidth:width];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,6 +89,17 @@
         [_parentCascadeViewController pushCascadeViewController: cascadeViewController];
         [cascadeViewController release];
     }
+}
+
+#pragma mark -
+#pragma mark Getters
+
+- (UIView*) headerView {
+    return [(CLSegmentedView*)self.view headerView];
+}
+
+- (UIView*) footerView {
+    return [(CLSegmentedView*)self.view footerView];
 }
 
 @end
