@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		20084B2C13413490000DA01A /* CLTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20084B2B13413490000DA01A /* CLTitleView.m */; };
 		203CA4391343305F00DF6509 /* CLCategoriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 203CA4381343305F00DF6509 /* CLCategoriesView.m */; };
 		20B0D97A1356518E008B1F7D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B0D9791356518E008B1F7D /* QuartzCore.framework */; };
 		20BB341E133FB8FF003EEB6E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20BB341D133FB8FF003EEB6E /* UIKit.framework */; };
@@ -280,7 +279,6 @@
 				20BB344E133FBAA4003EEB6E /* CLViewController.m in Sources */,
 				20BB3450133FBAA4003EEB6E /* CLTableViewController.m in Sources */,
 				20BB3453133FC07A003EEB6E /* CLSplitCascadeView.m in Sources */,
-				20084B2C13413490000DA01A /* CLTitleView.m in Sources */,
 				203CA4391343305F00DF6509 /* CLCategoriesView.m in Sources */,
 				20F2DBA9136494350076E80D /* CLSegmentedView.m in Sources */,
 				20F2DBB0136495560076E80D /* CLSegmentedTableView.m in Sources */,
