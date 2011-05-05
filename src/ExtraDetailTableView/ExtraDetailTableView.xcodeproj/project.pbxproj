@@ -1,0 +1,308 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2068AAE21371B63C001B81F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2068AAE11371B63C001B81F8 /* UIKit.framework */; };
+		2068AAE41371B63C001B81F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2068AAE31371B63C001B81F8 /* Foundation.framework */; };
+		2068AAE61371B63C001B81F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2068AAE51371B63C001B81F8 /* CoreGraphics.framework */; };
+		2068AAEC1371B63C001B81F8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2068AAEA1371B63C001B81F8 /* InfoPlist.strings */; };
+		2068AAEF1371B63C001B81F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2068AAEE1371B63C001B81F8 /* main.m */; };
+		2068AAF21371B63C001B81F8 /* ExtraDetailTableViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2068AAF11371B63C001B81F8 /* ExtraDetailTableViewAppDelegate.m */; };
+		2068AAF51371B63C001B81F8 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2068AAF31371B63C001B81F8 /* MainWindow.xib */; };
+		2068AAF81371B63C001B81F8 /* ExtraDetailTableViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2068AAF71371B63C001B81F8 /* ExtraDetailTableViewViewController.m */; };
+		2068AAFB1371B63C001B81F8 /* ExtraDetailTableViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2068AAF91371B63C001B81F8 /* ExtraDetailTableViewViewController.xib */; };
+		2068AB121371B7A5001B81F8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2068AB111371B7A5001B81F8 /* QuartzCore.framework */; };
+		2068AB191371BC90001B81F8 /* CLDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2068AB181371BC90001B81F8 /* CLDetailTableViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2068AADD1371B63C001B81F8 /* ExtraDetailTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExtraDetailTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2068AAE11371B63C001B81F8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2068AAE31371B63C001B81F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2068AAE51371B63C001B81F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2068AAE91371B63C001B81F8 /* ExtraDetailTableView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ExtraDetailTableView-Info.plist"; sourceTree = "<group>"; };
+		2068AAEB1371B63C001B81F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2068AAED1371B63C001B81F8 /* ExtraDetailTableView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExtraDetailTableView-Prefix.pch"; sourceTree = "<group>"; };
+		2068AAEE1371B63C001B81F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2068AAF01371B63C001B81F8 /* ExtraDetailTableViewAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtraDetailTableViewAppDelegate.h; sourceTree = "<group>"; };
+		2068AAF11371B63C001B81F8 /* ExtraDetailTableViewAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtraDetailTableViewAppDelegate.m; sourceTree = "<group>"; };
+		2068AAF41371B63C001B81F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		2068AAF61371B63C001B81F8 /* ExtraDetailTableViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtraDetailTableViewViewController.h; sourceTree = "<group>"; };
+		2068AAF71371B63C001B81F8 /* ExtraDetailTableViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtraDetailTableViewViewController.m; sourceTree = "<group>"; };
+		2068AAFA1371B63C001B81F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ExtraDetailTableViewViewController.xib; sourceTree = "<group>"; };
+		2068AB011371B679001B81F8 /* CLDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLDetailTableViewController.h; sourceTree = "<group>"; };
+		2068AB111371B7A5001B81F8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2068AB181371BC90001B81F8 /* CLDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLDetailTableViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2068AADA1371B63C001B81F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2068AB121371B7A5001B81F8 /* QuartzCore.framework in Frameworks */,
+				2068AAE21371B63C001B81F8 /* UIKit.framework in Frameworks */,
+				2068AAE41371B63C001B81F8 /* Foundation.framework in Frameworks */,
+				2068AAE61371B63C001B81F8 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2068AAD21371B63C001B81F8 = {
+			isa = PBXGroup;
+			children = (
+				2068AAE71371B63C001B81F8 /* ExtraDetailTableView */,
+				2068AAE01371B63C001B81F8 /* Frameworks */,
+				2068AADE1371B63C001B81F8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2068AADE1371B63C001B81F8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2068AADD1371B63C001B81F8 /* ExtraDetailTableView.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2068AAE01371B63C001B81F8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2068AB111371B7A5001B81F8 /* QuartzCore.framework */,
+				2068AAE11371B63C001B81F8 /* UIKit.framework */,
+				2068AAE31371B63C001B81F8 /* Foundation.framework */,
+				2068AAE51371B63C001B81F8 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2068AAE71371B63C001B81F8 /* ExtraDetailTableView */ = {
+			isa = PBXGroup;
+			children = (
+				2068AAF01371B63C001B81F8 /* ExtraDetailTableViewAppDelegate.h */,
+				2068AAF11371B63C001B81F8 /* ExtraDetailTableViewAppDelegate.m */,
+				2068AAF61371B63C001B81F8 /* ExtraDetailTableViewViewController.h */,
+				2068AAF71371B63C001B81F8 /* ExtraDetailTableViewViewController.m */,
+				2068AB011371B679001B81F8 /* CLDetailTableViewController.h */,
+				2068AB181371BC90001B81F8 /* CLDetailTableViewController.m */,
+				2068AAE81371B63C001B81F8 /* Supporting Files */,
+			);
+			path = ExtraDetailTableView;
+			sourceTree = "<group>";
+		};
+		2068AAE81371B63C001B81F8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2068AAF31371B63C001B81F8 /* MainWindow.xib */,
+				2068AAF91371B63C001B81F8 /* ExtraDetailTableViewViewController.xib */,
+				2068AB041371B680001B81F8 /* Images */,
+				2068AAE91371B63C001B81F8 /* ExtraDetailTableView-Info.plist */,
+				2068AAEA1371B63C001B81F8 /* InfoPlist.strings */,
+				2068AAED1371B63C001B81F8 /* ExtraDetailTableView-Prefix.pch */,
+				2068AAEE1371B63C001B81F8 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2068AB041371B680001B81F8 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2068AADC1371B63C001B81F8 /* ExtraDetailTableView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2068AAFE1371B63C001B81F8 /* Build configuration list for PBXNativeTarget "ExtraDetailTableView" */;
+			buildPhases = (
+				2068AAD91371B63C001B81F8 /* Sources */,
+				2068AADA1371B63C001B81F8 /* Frameworks */,
+				2068AADB1371B63C001B81F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ExtraDetailTableView;
+			productName = ExtraDetailTableView;
+			productReference = 2068AADD1371B63C001B81F8 /* ExtraDetailTableView.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2068AAD41371B63C001B81F8 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 2068AAD71371B63C001B81F8 /* Build configuration list for PBXProject "ExtraDetailTableView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2068AAD21371B63C001B81F8;
+			productRefGroup = 2068AADE1371B63C001B81F8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2068AADC1371B63C001B81F8 /* ExtraDetailTableView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2068AADB1371B63C001B81F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2068AAEC1371B63C001B81F8 /* InfoPlist.strings in Resources */,
+				2068AAF51371B63C001B81F8 /* MainWindow.xib in Resources */,
+				2068AAFB1371B63C001B81F8 /* ExtraDetailTableViewViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2068AAD91371B63C001B81F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2068AAEF1371B63C001B81F8 /* main.m in Sources */,
+				2068AAF21371B63C001B81F8 /* ExtraDetailTableViewAppDelegate.m in Sources */,
+				2068AAF81371B63C001B81F8 /* ExtraDetailTableViewViewController.m in Sources */,
+				2068AB191371BC90001B81F8 /* CLDetailTableViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2068AAEA1371B63C001B81F8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2068AAEB1371B63C001B81F8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2068AAF31371B63C001B81F8 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2068AAF41371B63C001B81F8 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		2068AAF91371B63C001B81F8 /* ExtraDetailTableViewViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2068AAFA1371B63C001B81F8 /* en */,
+			);
+			name = ExtraDetailTableViewViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2068AAFC1371B63C001B81F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		2068AAFD1371B63C001B81F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		2068AAFF1371B63C001B81F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tadeusz Wojtaszek (R7VEB36U8D)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ExtraDetailTableView/ExtraDetailTableView-Prefix.pch";
+				INFOPLIST_FILE = "ExtraDetailTableView/ExtraDetailTableView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B372AD6B-28B9-4F45-95BA-CCBC34B4AE43";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2068AB001371B63C001B81F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tadeusz Wojtaszek (R7VEB36U8D)";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ExtraDetailTableView/ExtraDetailTableView-Prefix.pch";
+				INFOPLIST_FILE = "ExtraDetailTableView/ExtraDetailTableView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B372AD6B-28B9-4F45-95BA-CCBC34B4AE43";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2068AAD71371B63C001B81F8 /* Build configuration list for PBXProject "ExtraDetailTableView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2068AAFC1371B63C001B81F8 /* Debug */,
+				2068AAFD1371B63C001B81F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2068AAFE1371B63C001B81F8 /* Build configuration list for PBXNativeTarget "ExtraDetailTableView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2068AAFF1371B63C001B81F8 /* Debug */,
+				2068AB001371B63C001B81F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2068AAD41371B63C001B81F8 /* Project object */;
+}
