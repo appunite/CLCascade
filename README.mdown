@@ -9,8 +9,9 @@ This is a beta version of CLCascade library
 Libraries
 =========
 CLCascade is a set of projects:
-* Cascade - on top of that you can build a twitter like swipe tabs
-* ExtraDetailTableView - added support for search in cell (drag the cell to show more info)
+
+ * Cascade - on top of that you can build a twitter like swipe tabs
+ * ExtraDetailTableView - added support for search in cell (drag the cell to show more info)
 
 Simple projects
 ===============
@@ -22,10 +23,11 @@ Roadmap
 
 Because of the great interest in the project CLCascade we want to inform you that we are planning further 
 development of the project, this is what we want to do in near future:
-* build a framework on top of CLCascade
-* some bugfixes that we found during testing the CLCascade
-* code some sample projects
-* write documentation
+
+ * build a framework on top of CLCascade
+ * some bugfixes that we found during testing the CLCascade
+ * code some sample projects
+ * write documentation
 
 Authors
 =======
