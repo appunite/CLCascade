@@ -1,0 +1,316 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2042B10D1379E65B00D35969 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2042B10C1379E65B00D35969 /* UIKit.framework */; };
+		2042B10F1379E65B00D35969 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2042B10E1379E65B00D35969 /* Foundation.framework */; };
+		2042B1111379E65B00D35969 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2042B1101379E65B00D35969 /* CoreGraphics.framework */; };
+		2042B1171379E65B00D35969 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2042B1151379E65B00D35969 /* InfoPlist.strings */; };
+		2042B11A1379E65B00D35969 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2042B1191379E65B00D35969 /* main.m */; };
+		2042B11D1379E65B00D35969 /* CLRetractableSectionAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2042B11C1379E65B00D35969 /* CLRetractableSectionAppDelegate.m */; };
+		2042B1201379E65B00D35969 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042B11E1379E65B00D35969 /* MainWindow.xib */; };
+		2042B1231379E65B00D35969 /* CLRetractableSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2042B1221379E65B00D35969 /* CLRetractableSectionViewController.m */; };
+		2042B1261379E65B00D35969 /* CLRetractableSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042B1241379E65B00D35969 /* CLRetractableSectionViewController.xib */; };
+		2042B1371379EF9E00D35969 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2042B1361379EF9E00D35969 /* QuartzCore.framework */; };
+		2042B279137AD26300D35969 /* CLRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2042B274137AD26300D35969 /* CLRetractableSectionController.m */; };
+		2042B27A137AD26300D35969 /* CLRetractableSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2042B276137AD26300D35969 /* CLRetractableSectionHeaderView.m */; };
+		2042B27B137AD26300D35969 /* CLRetractableSectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2042B278137AD26300D35969 /* CLRetractableSectionItem.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2042B1081379E65B00D35969 /* CLRetractableSection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLRetractableSection.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2042B10C1379E65B00D35969 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2042B10E1379E65B00D35969 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2042B1101379E65B00D35969 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2042B1141379E65B00D35969 /* CLRetractableSection-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CLRetractableSection-Info.plist"; sourceTree = "<group>"; };
+		2042B1161379E65B00D35969 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2042B1181379E65B00D35969 /* CLRetractableSection-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CLRetractableSection-Prefix.pch"; sourceTree = "<group>"; };
+		2042B1191379E65B00D35969 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2042B11B1379E65B00D35969 /* CLRetractableSectionAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRetractableSectionAppDelegate.h; sourceTree = "<group>"; };
+		2042B11C1379E65B00D35969 /* CLRetractableSectionAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLRetractableSectionAppDelegate.m; sourceTree = "<group>"; };
+		2042B11F1379E65B00D35969 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		2042B1211379E65B00D35969 /* CLRetractableSectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLRetractableSectionViewController.h; sourceTree = "<group>"; };
+		2042B1221379E65B00D35969 /* CLRetractableSectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLRetractableSectionViewController.m; sourceTree = "<group>"; };
+		2042B1251379E65B00D35969 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CLRetractableSectionViewController.xib; sourceTree = "<group>"; };
+		2042B1361379EF9E00D35969 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2042B273137AD26300D35969 /* CLRetractableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLRetractableSectionController.h; path = ../../../src/RetractableSections/CLRetractableSectionController.h; sourceTree = "<group>"; };
+		2042B274137AD26300D35969 /* CLRetractableSectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLRetractableSectionController.m; path = ../../../src/RetractableSections/CLRetractableSectionController.m; sourceTree = "<group>"; };
+		2042B275137AD26300D35969 /* CLRetractableSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLRetractableSectionHeaderView.h; path = ../../../src/RetractableSections/CLRetractableSectionHeaderView.h; sourceTree = "<group>"; };
+		2042B276137AD26300D35969 /* CLRetractableSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLRetractableSectionHeaderView.m; path = ../../../src/RetractableSections/CLRetractableSectionHeaderView.m; sourceTree = "<group>"; };
+		2042B277137AD26300D35969 /* CLRetractableSectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLRetractableSectionItem.h; path = ../../../src/RetractableSections/CLRetractableSectionItem.h; sourceTree = "<group>"; };
+		2042B278137AD26300D35969 /* CLRetractableSectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLRetractableSectionItem.m; path = ../../../src/RetractableSections/CLRetractableSectionItem.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2042B1051379E65B00D35969 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2042B1371379EF9E00D35969 /* QuartzCore.framework in Frameworks */,
+				2042B10D1379E65B00D35969 /* UIKit.framework in Frameworks */,
+				2042B10F1379E65B00D35969 /* Foundation.framework in Frameworks */,
+				2042B1111379E65B00D35969 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2042B0FD1379E65B00D35969 = {
+			isa = PBXGroup;
+			children = (
+				2042B1361379EF9E00D35969 /* QuartzCore.framework */,
+				2042B1121379E65B00D35969 /* CLRetractableSection */,
+				2042B10B1379E65B00D35969 /* Frameworks */,
+				2042B1091379E65B00D35969 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2042B1091379E65B00D35969 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2042B1081379E65B00D35969 /* CLRetractableSection.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2042B10B1379E65B00D35969 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2042B10C1379E65B00D35969 /* UIKit.framework */,
+				2042B10E1379E65B00D35969 /* Foundation.framework */,
+				2042B1101379E65B00D35969 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2042B1121379E65B00D35969 /* CLRetractableSection */ = {
+			isa = PBXGroup;
+			children = (
+				2042B1211379E65B00D35969 /* CLRetractableSectionViewController.h */,
+				2042B1221379E65B00D35969 /* CLRetractableSectionViewController.m */,
+				2042B12F1379E74C00D35969 /* Classes */,
+				2042B11B1379E65B00D35969 /* CLRetractableSectionAppDelegate.h */,
+				2042B11C1379E65B00D35969 /* CLRetractableSectionAppDelegate.m */,
+				2042B11E1379E65B00D35969 /* MainWindow.xib */,
+				2042B1241379E65B00D35969 /* CLRetractableSectionViewController.xib */,
+				2042B1131379E65B00D35969 /* Supporting Files */,
+			);
+			path = CLRetractableSection;
+			sourceTree = "<group>";
+		};
+		2042B1131379E65B00D35969 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2042B1141379E65B00D35969 /* CLRetractableSection-Info.plist */,
+				2042B1151379E65B00D35969 /* InfoPlist.strings */,
+				2042B1181379E65B00D35969 /* CLRetractableSection-Prefix.pch */,
+				2042B1191379E65B00D35969 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2042B12F1379E74C00D35969 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2042B273137AD26300D35969 /* CLRetractableSectionController.h */,
+				2042B274137AD26300D35969 /* CLRetractableSectionController.m */,
+				2042B275137AD26300D35969 /* CLRetractableSectionHeaderView.h */,
+				2042B276137AD26300D35969 /* CLRetractableSectionHeaderView.m */,
+				2042B277137AD26300D35969 /* CLRetractableSectionItem.h */,
+				2042B278137AD26300D35969 /* CLRetractableSectionItem.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2042B1071379E65B00D35969 /* CLRetractableSection */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2042B1291379E65B00D35969 /* Build configuration list for PBXNativeTarget "CLRetractableSection" */;
+			buildPhases = (
+				2042B1041379E65B00D35969 /* Sources */,
+				2042B1051379E65B00D35969 /* Frameworks */,
+				2042B1061379E65B00D35969 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CLRetractableSection;
+			productName = CLRetractableSection;
+			productReference = 2042B1081379E65B00D35969 /* CLRetractableSection.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2042B0FF1379E65B00D35969 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 2042B1021379E65B00D35969 /* Build configuration list for PBXProject "CLRetractableSection" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2042B0FD1379E65B00D35969;
+			productRefGroup = 2042B1091379E65B00D35969 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2042B1071379E65B00D35969 /* CLRetractableSection */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2042B1061379E65B00D35969 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2042B1171379E65B00D35969 /* InfoPlist.strings in Resources */,
+				2042B1201379E65B00D35969 /* MainWindow.xib in Resources */,
+				2042B1261379E65B00D35969 /* CLRetractableSectionViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2042B1041379E65B00D35969 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2042B11A1379E65B00D35969 /* main.m in Sources */,
+				2042B11D1379E65B00D35969 /* CLRetractableSectionAppDelegate.m in Sources */,
+				2042B1231379E65B00D35969 /* CLRetractableSectionViewController.m in Sources */,
+				2042B279137AD26300D35969 /* CLRetractableSectionController.m in Sources */,
+				2042B27A137AD26300D35969 /* CLRetractableSectionHeaderView.m in Sources */,
+				2042B27B137AD26300D35969 /* CLRetractableSectionItem.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2042B1151379E65B00D35969 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2042B1161379E65B00D35969 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2042B11E1379E65B00D35969 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2042B11F1379E65B00D35969 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		2042B1241379E65B00D35969 /* CLRetractableSectionViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2042B1251379E65B00D35969 /* en */,
+			);
+			name = CLRetractableSectionViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2042B1271379E65B00D35969 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		2042B1281379E65B00D35969 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		2042B12A1379E65B00D35969 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CLRetractableSection/CLRetractableSection-Prefix.pch";
+				INFOPLIST_FILE = "CLRetractableSection/CLRetractableSection-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2042B12B1379E65B00D35969 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CLRetractableSection/CLRetractableSection-Prefix.pch";
+				INFOPLIST_FILE = "CLRetractableSection/CLRetractableSection-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2042B1021379E65B00D35969 /* Build configuration list for PBXProject "CLRetractableSection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2042B1271379E65B00D35969 /* Debug */,
+				2042B1281379E65B00D35969 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2042B1291379E65B00D35969 /* Build configuration list for PBXNativeTarget "CLRetractableSection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2042B12A1379E65B00D35969 /* Debug */,
+				2042B12B1379E65B00D35969 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2042B0FF1379E65B00D35969 /* Project object */;
+}

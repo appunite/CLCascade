@@ -1,0 +1,506 @@
+TCLCascade
+v7
+r0
+t326972494.954056
+cCheck dependencies
+cProcessPCH /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch.gch CLCascade/CLCascade-Prefix.pch normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSplitCascadeViewController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeViewController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSplitCascadeView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCategoriesViewController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCategoriesView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeNavigationController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeNavigationView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeViewController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLViewController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLTableViewController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLTableViewController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLScrollView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLScrollView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSegmentedView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSegmentedView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/UIViewController+CLSegmentedView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/UIViewController+CLSegmentedView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeEnums.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeEnums.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cLibtool /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/libCLCascade.a normal i386
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk
+c000000004CC128950000000000000110
+t1287727253
+s272
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004CC1226D000000000029D5D0
+t1287725677
+s2741712
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004CC1225F0000000000001466
+t1287725663
+s5222
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.h
+c000000004CC1233C00000000000000C4
+t1287725884
+s196
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004CC1281F0000000000000AA1
+t1287727135
+s2721
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/CLCascade/CLCascade-Prefix.pch
+c000000004DC9632900000000000000BB
+t1305043753
+s187
+i<UIKit/UIKit.h>
+i<Foundation/Foundation.h>
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeEnums.h
+c000000004DC55FE50000000000000140
+t1304780773
+s320
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeEnums.m
+c000000004DC5620D00000000000000AC
+t1304781325
+s172
+i"CLCascadeEnums.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.h
+c000000004DC955A1000000000000084F
+t1305040289
+s2127
+i<UIKit/UIKit.h>
+i"CLCascadeViewController.h"
+i"CLCascadeNavigationView.h"
+i"CLViewController.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m
+c000000004DCB12340000000000003F68
+t1305154100
+s16232
+i"CLCascadeNavigationController.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationView.h
+c000000004DC56E290000000000000115
+t1304784425
+s277
+i<UIKit/UIKit.h>
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationView.m
+c000000004DCB0DDB00000000000009E9
+t1305152987
+s2537
+i"CLCascadeNavigationView.h"
+i"CLCascadeNavigationController.h"
+i"CLSplitCascadeViewController.h"
+i"CLCascadeViewController.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.h
+c000000004DC9559000000000000006E6
+t1305040272
+s1766
+i<UIKit/UIKit.h>
+i"CLViewController.h"
+i"CLCascadeNavigationController.h"
+i"CLCascadeEnums.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m
+c000000004DCC606C0000000000003B65
+t1305239660
+s15205
+i"CLCascadeViewController.h"
+i"CLScrollView.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.h
+c000000004DC552960000000000000105
+t1304777366
+s261
+i<UIKit/UIKit.h>
+i"CLSegmentedView.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.m
+c000000004DC5525A000000000000025A
+t1304777306
+s602
+i"CLCategoriesView.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.h
+c000000004DC552DF000000000000013F
+t1304777439
+s319
+i<UIKit/UIKit.h>
+i"CLTableViewController.h"
+i"CLCategoriesView.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.m
+c000000004DC977D60000000000000E60
+t1305049046
+s3680
+i"CLCategoriesViewController.h"
+i"CLCascadeViewController.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLScrollView.h
+c000000004DC42D2400000000000000E7
+t1304702244
+s231
+i<Foundation/Foundation.h>
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLScrollView.m
+c000000004DC42D2400000000000004CB
+t1304702244
+s1227
+i"CLScrollView.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSegmentedView.h
+c000000004DC52A130000000000000604
+t1304766995
+s1540
+i<UIKit/UIKit.h>
+i<QuartzCore/QuartzCore.h>
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSegmentedView.m
+c000000004DCC6FDA00000000000018FE
+t1305243610
+s6398
+i"CLSegmentedView.h"
+i<QuartzCore/QuartzCore.h>
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeView.h
+c000000004DCBED6A000000000000055F
+t1305210218
+s1375
+i<UIKit/UIKit.h>
+i"CLCascadeNavigationController.h"
+i"CLCascadeEnums.h"
+i"CLSplitCascadeViewController.h"
+i"CLCascadeViewController.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeView.m
+c000000004DCBEE030000000000001868
+t1305210371
+s6248
+i"CLSplitCascadeView.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeViewController.h
+c000000004DCBE869000000000000028F
+t1305208937
+s655
+i<UIKit/UIKit.h>
+i"CLCategoriesViewController.h"
+i"CLCascadeNavigationController.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeViewController.m
+c000000004DCBE8690000000000000CC0
+t1305208937
+s3264
+i"CLSplitCascadeViewController.h"
+i"CLSplitCascadeView.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLTableViewController.h
+c000000004DCC0B5200000000000001F9
+t1305217874
+s505
+i<UIKit/UIKit.h>
+i"CLViewController.h"
+i"UIViewController+CLSegmentedView.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLTableViewController.m
+c000000004DCC0B52000000000000125E
+t1305217874
+s4702
+i"CLTableViewController.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.h
+c000000004DCC09FD00000000000003B2
+t1305217533
+s946
+i<UIKit/UIKit.h>
+i<QuartzCore/QuartzCore.h>
+i"CLSegmentedView.h"
+i"UIViewController+CLSegmentedView.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.m
+c000000004DC535A30000000000000CC2
+t1304769955
+s3266
+i"CLViewController.h"
+i"CLCascadeViewController.h"
+i"CLCascadeNavigationController.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/UIViewController+CLSegmentedView.h
+c000000004DC52A34000000000000021C
+t1304767028
+s540
+i<Foundation/Foundation.h>
+i"CLSegmentedView.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/UIViewController+CLSegmentedView.m
+c000000004DC5510400000000000007F9
+t1304776964
+s2041
+i"UIViewController+CLSegmentedView.h"
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascade.LinkFileList
+c000000004DCCFCCD00000000000007DF
+t1305279693
+s2015
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeEnums.o
+t1305279694
+s228
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeNavigationController.o
+t1305279694
+s77112
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeNavigationView.o
+t1305279694
+s40376
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeViewController.o
+t1305279694
+s71064
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCategoriesView.o
+t1305279694
+s33672
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCategoriesViewController.o
+t1305279694
+s41904
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLScrollView.o
+t1305279694
+s35052
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSegmentedView.o
+t1305279694
+s50156
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSplitCascadeView.o
+t1305279694
+s55400
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSplitCascadeViewController.o
+t1305279694
+s45036
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLTableViewController.o
+t1305279694
+s51216
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLViewController.o
+t1305279694
+s45016
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/UIViewController+CLSegmentedView.o
+t1305279694
+s38104
+
+N/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/libCLCascade.a
+t1305279694
+s592848
+
+N/var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch.gch
+t1305279694
+s11992272
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies326972493#326972493#0(0"0(0#1#0"8621819392#0"0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeEnums.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeEnums.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.863947
+e326972494.913192
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeEnums.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeEnums.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@85"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeEnums.m326972494#326972494#0(0"0(0#0#77"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeEnums.m8624306144#2211"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeEnums.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeEnums.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeNavigationController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.269015
+e326972494.530813
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeNavigationController.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+o/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m: In function '-[CLCascadeNavigationController setRootViewController:]':
+o/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m:359: warning: class 'CLCascadeNavigationController' does not implement the 'CLCascadeViewControllerDelegate' protocol
+lSLF07#2@100"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m326972494#326972494#0(376"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m: In function '-[CLCascadeNavigationController setRootViewController:]':/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m:359: warning: class 'CLCascadeNavigationController' does not implement the 'CLCascadeViewControllerDelegate' protocol1(22@103"Class 'CLCascadeNavigationController' does not implement the 'CLCascadeViewControllerDelegate' protocol326972494#165#211#0(6@92"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m326846900#359#0#359#0#45"class '*' does not implement the '*' protocol0(0#0#92"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m8590298880#2241"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeNavigationController.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeNavigationView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.276131
+e326972494.383592
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeNavigationView.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationView.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@94"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationView.m326972494#326972494#0(0"0(0#0#86"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationView.m8624297600#2229"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationView.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeNavigationView.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeViewController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.383696
+e326972494.603294
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeViewController.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+o/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m: In function '-[CLCascadeViewController pushCascadeViewController:]':
+o/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m:263: warning: class 'CLCascadeNavigationController' does not implement the 'CLCascadeViewControllerDelegate' protocol
+lSLF07#2@94"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m326972494#326972494#0(362"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m: In function '-[CLCascadeViewController pushCascadeViewController:]':/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m:263: warning: class 'CLCascadeNavigationController' does not implement the 'CLCascadeViewControllerDelegate' protocol1(22@103"Class 'CLCascadeNavigationController' does not implement the 'CLCascadeViewControllerDelegate' protocol326972494#157#205#0(6@86"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m326932460#263#0#263#0#45"class '*' does not implement the '*' protocol0(0#0#86"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m8624403584#2229"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeViewController.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeViewController.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCategoriesView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.177627
+e326972494.276024
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCategoriesView.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@87"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.m326972494#326972494#0(0"0(0#0#79"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.m8613464256#2215"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCategoriesView.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCategoriesViewController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.152760
+e326972494.268908
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCategoriesViewController.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@97"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.m326972494#326972494#0(0"0(0#0#89"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.m8619111360#2235"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCategoriesViewController.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLScrollView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLScrollView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.660142
+e326972494.750447
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLScrollView.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLScrollView.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@83"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLScrollView.m326972494#326972494#0(0"0(0#0#75"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLScrollView.m8615284864#2207"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLScrollView.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLScrollView.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSegmentedView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSegmentedView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.745261
+e326972494.894732
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSegmentedView.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSegmentedView.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@86"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSegmentedView.m326972494#326972494#0(0"0(0#0#78"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSegmentedView.m8621793664#2213"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSegmentedView.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSegmentedView.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSplitCascadeView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.047261
+e326972494.177531
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSplitCascadeView.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeView.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@89"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeView.m326972494#326972494#0(0"0(0#0#81"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeView.m8620223520#2219"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeView.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSplitCascadeView.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSplitCascadeViewController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeViewController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.046233
+e326972494.152656
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSplitCascadeViewController.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@99"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeViewController.m326972494#326972494#0(0"0(0#0#91"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeViewController.m8620391072#2239"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeViewController.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLSplitCascadeViewController.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLTableViewController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLTableViewController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.603552
+e326972494.745154
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLTableViewController.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLTableViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@92"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLTableViewController.m326972494#326972494#0(0"0(0#0#84"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLTableViewController.m8615941216#2225"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLTableViewController.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLTableViewController.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLViewController.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.530910
+e326972494.660039
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLViewController.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@87"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.m326972494#326972494#0(0"0(0#0#79"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.m8621107776#2215"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLViewController.o0#
+
+CCompileC build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/UIViewController+CLSegmentedView.o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/UIViewController+CLSegmentedView.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972494.750554
+e326972494.863845
+r1
+xCompileC
+xbuild/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/UIViewController+CLSegmentedView.o
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/UIViewController+CLSegmentedView.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@103"Compile /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/UIViewController+CLSegmentedView.m326972494#326972494#0(0"0(0#0#95"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/UIViewController+CLSegmentedView.m8620928352#2247"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -include /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/UIViewController+CLSegmentedView.m -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/UIViewController+CLSegmentedView.o0#
+
+CLibtool /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/libCLCascade.a normal i386
+s326972494.913284
+e326972494.953904
+r1
+xLibtool
+x/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/libCLCascade.a
+xnormal
+xi386
+o/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC 
+o/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/libtool: file: /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeEnums.o has no symbols
+lSLF07#2@62"Libtool build/Debug-iphonesimulator/libCLCascade.a normal i386326972494#326972494#0(378"/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/libtool: -dynamic not specified the following flags are invalid: -ObjC /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/libtool: file: /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascadeEnums.o has no symbols0(0#0#0"8621513152#802"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/libtool -static -arch_only i386 -syslibroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -L/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -filelist /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/Objects-normal/i386/CLCascade.LinkFileList -ObjC -framework Foundation -o /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/libCLCascade.a0#
+
+CProcessPCH /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch.gch CLCascade/CLCascade-Prefix.pch normal i386 objective-c com.apple.compilers.llvmgcc42
+s326972493.452518
+e326972494.046128
+r1
+xProcessPCH
+x/var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch.gch
+xCLCascade/CLCascade-Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@41"Precompile CLCascade/CLCascade-Prefix.pch326972493#326972494#0(0"0(0#0#83"/Users/Emil/Documents/Projects/CLCascade/src/Cascade/CLCascade/CLCascade-Prefix.pch8618811104#2071"    cd /Users/Emil/Documents/Projects/CLCascade/src/Cascade    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -DDEBUG -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-generated-files.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-own-target-headers.hmap -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-all-target-headers.hmap -iquote /Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/CLCascade-project-headers.hmap -F/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Debug-iphonesimulator/include -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources/i386 -I/Users/Emil/Documents/Projects/CLCascade/src/Cascade/build/Cascade.build/Debug-iphonesimulator/CLCascade.build/DerivedSources -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -c /Users/Emil/Documents/Projects/CLCascade/src/Cascade/CLCascade/CLCascade-Prefix.pch -o /var/folders/T2/T2RQ84RTEDexwEeTH8sxn++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/CLCascade-Prefix-fhepphqytrhaudechpojkqvpuhdu/CLCascade-Prefix.pch.gch0#
+

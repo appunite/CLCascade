@@ -11,7 +11,7 @@ Libraries
 CLCascade is a set of projects:
 
  * Cascade - on top of that you can build a twitter like swipe tabs
- * ExtraDetailTableView - added support for search in cell (drag the cell to show more info)
+ * ExtraDetailTableView - additional view attached to the cell (click and drag with two fingers down)
 
 Simple projects
 ===============

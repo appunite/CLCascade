@@ -7,17 +7,19 @@
 //
 
 #import "CLSplitCascadeViewController.h"
+#import "CLSplitCascadeView.h"
 
 @implementation CLSplitCascadeViewController
 
-@synthesize categoriesView = _categoriesView;
-@synthesize cascadeNavigator = _cascadeNavigator;
+@synthesize cascadeNavigationController = _cascadeNavigationController;
+@synthesize categoriesViewController = _categoriesViewController;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_categoriesView release], _categoriesView = nil;
-    [_cascadeNavigator release], _cascadeNavigator = nil;
+    [_cascadeNavigationController release], _cascadeNavigationController = nil;
+    [_categoriesViewController release], _categoriesViewController = nil;
+    
     [super dealloc];
 }
 
@@ -32,9 +34,35 @@
 
 #pragma mark - View lifecycle
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) loadView {
+    NSString *nib = self.nibName;
+    NSBundle *bundle = self.nibBundle;
+    
+    if(!nib) nib = NSStringFromClass([self class]);
+    if(!bundle) bundle = [NSBundle mainBundle];
+    
+    NSString *path = [bundle pathForResource:nib ofType:@"nib"];
+    
+    if(path) {
+        self.view = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex: 0];
+        CLSplitCascadeView* view_ = (CLSplitCascadeView*)self.view;
+        [view_ setCategoriesView: self.categoriesViewController.view];
+        [view_ setCascadeView: self.cascadeNavigationController.view];
+        return;
+    }
+    
+    CLSplitCascadeView* view_ = [[CLSplitCascadeView alloc] init];
+    self.view = view_;
+    [view_ setCategoriesView: self.categoriesViewController.view];
+    [view_ setCascadeView: self.cascadeNavigationController.view];
+    [view_ release];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) viewDidLoad {
     [super viewDidLoad];
-    [self.cascadeNavigator adjustFrameAndContentAfterRotation: UIInterfaceOrientationPortrait];        
+//    [self.cascadeNavigator adjustFrameAndContentAfterRotation: UIInterfaceOrientationPortrait];        
 //    [self.categoriesView.tableView setBackgroundColor:[UIColor redColor]];
 }
 
@@ -44,8 +72,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.categoriesView = nil;
-    self.cascadeNavigator = nil;
+    self.cascadeNavigationController = nil;
+    self.categoriesViewController = nil;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,53 +85,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
-    [self.cascadeNavigator adjustFrameAndContentAfterRotation: interfaceOrientation];
-}
-
-
-#pragma mark - 
-#pragma mark Table view data source - Categories
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return 5;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    // Configure the cell...
-    cell.textLabel.text = @"text";
-    return cell;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CLTableViewController* rootTableViewController = [[CLTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
-    CLCascadeViewController* rootCascadeViewController = [[CLCascadeViewController alloc] initWithMasterPositionViewController:rootTableViewController];
-    
-    [self.cascadeNavigator setRootViewController: rootCascadeViewController];
-    
-    [rootTableViewController release];
-    [rootCascadeViewController release];
+    [self.cascadeNavigationController adjustFrameAndContentAfterRotation: interfaceOrientation];
 }
 
 @end

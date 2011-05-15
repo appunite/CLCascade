@@ -7,7 +7,7 @@
 //
 
 #import "CLSegmentedView.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @interface CLSegmentedView (Private)
 - (void) setupViews;
@@ -47,10 +47,11 @@
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        [self setupViews];
+//        [self setupViews];
     }
     return self;
 }
+
 
 #pragma mark -
 #pragma mark Private
@@ -66,7 +67,7 @@
     [_headerView setAutoresizingMask:
      UIViewAutoresizingFlexibleLeftMargin | 
      UIViewAutoresizingFlexibleRightMargin | 
-     UIViewAutoresizingFlexibleBottomMargin];
+     UIViewAutoresizingFlexibleTopMargin];
     
     [_footerView setAutoresizingMask:
      UIViewAutoresizingFlexibleLeftMargin | 
@@ -80,10 +81,31 @@
      UIViewAutoresizingFlexibleTopMargin | 
      UIViewAutoresizingFlexibleWidth | 
      UIViewAutoresizingFlexibleHeight];
+    
 }
 
 #pragma mark -
 #pragma mark Setters
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setContentView:(UIView*)contentView {
+    if (_contentView != contentView) {
+        [_contentView removeFromSuperview];
+        [_contentView release];
+        
+        _contentView = [contentView retain];
+        [_contentView setAutoresizingMask:
+         UIViewAutoresizingFlexibleLeftMargin | 
+         UIViewAutoresizingFlexibleRightMargin | 
+         UIViewAutoresizingFlexibleBottomMargin | 
+         UIViewAutoresizingFlexibleTopMargin | 
+         UIViewAutoresizingFlexibleWidth | 
+         UIViewAutoresizingFlexibleHeight];
+        
+        [self addSubview: _contentView];
+        [self setNeedsLayout];
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setHeaderView:(UIView*)headerView {

@@ -7,18 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "CLViewController.h"
-#import "CLSegmentedTableView.h"
-
-@class CLViewController;
+#import "UIViewController+CLSegmentedView.h"
 
 @interface CLTableViewController : CLViewController <UITableViewDataSource, UITableViewDelegate> {
     UITableViewStyle _tableViewStyle;
 }
 
-@property (nonatomic, retain) CLSegmentedTableView* view;
-@property (nonatomic, retain, readonly) UITableView* tableView;
+@property (nonatomic, retain) UITableView *tableView;
 
 - (id) initWithTableViewStyle:(UITableViewStyle)style;
 

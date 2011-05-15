@@ -2,23 +2,35 @@
 //  CLCategoriesView.m
 //  Cascade
 //
-//  Created by Emil Wojtaszek on 11-03-30.
-//  Copyright 2011 CreativeLabs.pl. All rights reserved.
+//  Created by Emil Wojtaszek on 11-05-07.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import "CLCategoriesView.h"
 
+
 @implementation CLCategoriesView
 
-@synthesize cascadeNavigator = _cascadeNavigator;
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+    }
+    return self;
+}
 
-#pragma mark - 
-#pragma mark dealloc
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+}
+*/
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_cascadeNavigator release], _cascadeNavigator = nil;
     [super dealloc];
 }
 

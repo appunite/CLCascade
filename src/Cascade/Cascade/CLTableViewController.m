@@ -26,6 +26,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
+    self.tableView = nil;
+    self.view = nil;
     [super dealloc];
 }
 
@@ -42,27 +44,42 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) loadView {
-    CLSegmentedTableView* segmentTableView = [[CLSegmentedTableView alloc] initWithFrame:CGRectZero style:_tableViewStyle];
-    [segmentTableView setDelegate: self];    
-    [segmentTableView setDataSource: self];    
-    self.view = segmentTableView;
-    [segmentTableView release];
+    NSString *nib = self.nibName;
+    NSBundle *bundle = self.nibBundle;
+    
+    if(!nib) nib = NSStringFromClass([self class]);
+    if(!bundle) bundle = [NSBundle mainBundle];
+    
+    NSString *path = [bundle pathForResource:nib ofType:@"nib"];
+    
+    if(path) {
+        self.view = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex: 0];
+        [self.view setBackgroundColor: [UIColor clearColor]];
+        return;
+    }
+    
+    // create SegmentedView
+    CLSegmentedView* view_ = [[CLSegmentedView alloc] init];
+    self.view = view_;
+    [view_ release];
+    
+    UITableView* tableView_ = [[UITableView alloc] initWithFrame:CGRectZero style:_tableViewStyle];
+    [tableView_ setDirectionalLockEnabled: YES];
+    [tableView_ setDelegate: self];
+    [tableView_ setDataSource: self];
+    [view_ setContentView: tableView_];
+    [tableView_ release];
+    
+    // set clear background color
+    [view_ setBackgroundColor: [UIColor clearColor]];
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    [self.view setBackgroundColor: [UIColor clearColor]];
-    [self.tableView setDirectionalLockEnabled: YES];
-
+    // set new content view (tableView)
 }
 
 
@@ -131,7 +148,18 @@
 #pragma mark Getters
 
 - (UITableView*) tableView {
-    return [self.view tableView];
+    return (UITableView*)[self.segmentedView contentView];
 }
+
+- (void) setTableView:(UITableView *)newTableView {
+    [self.segmentedView setContentView: newTableView];
+}
+
+//#pragma mark -
+//#pragma mark Class methods
+//
+//- (CLSegmentedView*) segmentedView {
+//    return (CLSegmentedView*)self.view;
+//}
 
 @end

@@ -32,7 +32,7 @@
 /*
  * Content view - located between header and footer view 
  */
-@property (nonatomic, retain) IBOutlet UIView* contentView;
+@property (nonatomic, retain, readonly) IBOutlet UIView* contentView;
 
 /*
  * Shadow on the left side of the view
@@ -43,6 +43,12 @@
  * The width of the shadow
  */
 @property (nonatomic, assign) CGFloat shadowWidth;
+
+/* 
+ * To set content view.
+ * This methoad add contentView to view and layout all views
+ */
+- (void) setContentView:(UIView*)contentView;
 
 /* 
  * If you want set header view (above contentView).

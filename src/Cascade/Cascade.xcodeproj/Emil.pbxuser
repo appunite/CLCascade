@@ -1,0 +1,116 @@
+// !$*UTF8*$!
+{
+	20940931137D32E5002C2D42 /* Cascade */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = Cascade;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	20940975137D3470002C2D42 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	20940976137D3470002C2D42 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	20BB3410133FB8FF003EEB6E /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 20940931137D32E5002C2D42 /* Cascade */;
+		activeTarget = 4C17F0E6137999E7003A11F9 /* CLCascade */;
+		codeSenseManager = 20940976137D3470002C2D42 /* Code sense */;
+		executables = (
+			20940931137D32E5002C2D42 /* Cascade */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					341,
+					20,
+					48.16259765625,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					301,
+					60,
+					20,
+					48.16259765625,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 326972480;
+			PBXWorkspaceStateSaveDate = 326972480;
+		};
+		sourceControlManager = 20940975137D3470002C2D42 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	20BB3418133FB8FF003EEB6E /* Cascade */ = {
+		activeExec = 0;
+		executables = (
+			20940931137D32E5002C2D42 /* Cascade */,
+		);
+	};
+	4C17F0E6137999E7003A11F9 /* CLCascade */ = {
+		activeExec = 0;
+	};
+	4C17F0F0137999E8003A11F9 /* CLCascadeTests */ = {
+		activeExec = 0;
+	};
+}

@@ -11,7 +11,6 @@
 
 @implementation CLCascadeViewController
 
-@synthesize contentNavigator = _contentNavigator;
 @synthesize detailPositionViewController = _detailPositionViewController;
 @synthesize masterPositionViewController = _masterPositionViewController;
 @synthesize scrollPosition = _scrollPosition;
@@ -24,7 +23,7 @@
     self = [super init];
     if (self) {
         _masterPositionViewController = [masterPositionViewController retain];
-        [self.masterPositionViewController setParentCascadeViewController: self];
+        [_masterPositionViewController setParentCascadeViewController: self];
     }
     return self;
 
@@ -34,8 +33,7 @@
 - (void)dealloc
 {
     _delegate = nil;
-    [_contentNavigator release], _contentNavigator = nil;
-    [_detailPositionViewController release], _detailPositionViewController = nil;
+//    [_detailPositionViewController release], _detailPositionViewController = nil;
     [_masterPositionViewController release], _masterPositionViewController = nil;
     [super dealloc];
 }
@@ -50,12 +48,7 @@
 }
 
 #pragma mark -
-#pragma mark Setters & getters
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CLViewController*) detailPositionViewController {
-    return _detailPositionViewController;
-}
+#pragma mark Getters
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setDetailPositionViewController:(CLCascadeViewController*)viewController {
@@ -72,7 +65,7 @@
     
     CGRect rect = CGRectZero;
     
-    CLCascadeContentNavigator* navigator = self.contentNavigator;
+    CLCascadeNavigationController* navigator = self.cascadeNavigationController;
     
     if (navigator == nil) {
         rect = [UIScreen mainScreen].bounds;
@@ -93,9 +86,22 @@
         
         UIView* view = [_masterPositionViewController view];
         [view setFrame: [navigator masterCascadeFrame]];
+        
+        [_masterPositionViewController viewWillAppear: YES];
         [self.view addSubview: view];
+        [_masterPositionViewController viewDidAppear: YES];
     }    
     
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    [_masterPositionViewController viewWillAppear: animated];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear: animated];
+    [_masterPositionViewController viewDidAppear: animated];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -125,7 +131,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) adjustFrameAndContentToInterfaceOrientation:(UIInterfaceOrientation)newOrientation {
 
-    CLCascadeContentNavigator* navigator = self.contentNavigator;
+    CLCascadeNavigationController* navigator = self.cascadeNavigationController;
     
     if ([self isRootCascadeViewController]) {
         // get rootViewController view 
@@ -160,7 +166,7 @@
         CGRect detailRect = [navigator detailCascadeFrame];
         [_detailPositionViewController.view setFrame: detailRect];
         
-        if ([self isRootCascadeViewController] && (UIInterfaceOrientationIsPortrait([self.contentNavigator orientation]))) {
+        if ([self isRootCascadeViewController] && (UIInterfaceOrientationIsPortrait([self interfaceOrientation]))) {
             // update scrollview content size
             [(CLScrollView*)self.view setContentSize: [navigator contentSizeRootViewController]];
             // update scrollview content offset leading to detailview
@@ -188,12 +194,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) isRootCascadeViewController {
-    return (self == [self.contentNavigator rootViewController]) ? YES : NO;
+    return (self == [self.cascadeNavigationController rootViewController]) ? YES : NO;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) isLastCascadeViewController {
-    return (self == [self.contentNavigator lastCascadeViewController]) ? YES : NO;
+    return (self == [self.cascadeNavigationController lastCascadeViewController]) ? YES : NO;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,17 +232,44 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popDetailPositionViewController {
-    
-    if (_detailPositionViewController != nil) {
-        [_detailPositionViewController.view removeFromSuperview];
-        [_contentNavigator removeViewControllersStartingFrom: _detailPositionViewController.masterPositionViewController];
 
-//        [_detailPositionViewController popMasterAndDetailPositionViewController];
-        [_detailPositionViewController release], _detailPositionViewController = nil;
-        
-//        [(CLScrollView*)self.view setContentOffset: CGPointMake(0.0, 0.0) animated:YES];
-        [(CLScrollView*)self.view setContentSize: [_contentNavigator singleCascadeContentSize]];
-    }
+//    if (_detailPositionViewController == nil) {
+//        
+//    }
+    
+//    [_detailPositionViewController popDetailPositionViewController];
+//    NSLog(@"detail %i", [_detailPositionViewController retainCount]);
+//    [_detailPositionViewController setParentCascadeViewController: nil];
+//    
+//    NSLog(@"master %i", [_detailPositionViewController retainCount]);
+//    [_detailPositionViewController release];
+
+//    if (_detailPositionViewController != nil) {
+//        [_detailPositionViewController release];
+//        NSLog(@"%i", [_detailPositionViewController retainCount]);
+//        [_masterPositionViewController release];
+//        
+//    } else {
+//
+//        [_detailPositionViewController setParentCascadeViewController: nil];
+//        [_detailPositionViewController release];
+//        [_masterPositionViewController release];
+//    }
+    
+    
+    
+//    if (_detailPositionViewController != nil) {
+//        [_detailPositionViewController popDetailPositionViewController];
+//
+//        [_detailPositionViewController.view removeFromSuperview];
+//        [_cascadeNavigationController removeViewControllersStartingFrom: _detailPositionViewController.masterPositionViewController];
+//
+//        [_detailPositionViewController release];//, _detailPositionViewController = nil;
+//
+//        
+////        [(CLScrollView*)self.view setContentOffset: CGPointMake(0.0, 0.0) animated:YES];
+//        [(CLScrollView*)self.view setContentSize: [_cascadeNavigationController singleCascadeContentSize]];
+//    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -244,10 +277,10 @@
     
     [self popDetailPositionViewController];
     
-    CLCascadeContentNavigator* navigator = self.contentNavigator;
+    CLCascadeNavigationController* navigator = self.cascadeNavigationController;
     
     // set content nvigator
-    [viewController setContentNavigator: navigator];
+    [viewController setCascadeNavigationController: navigator];
     // set delegate to navigator
     [viewController setDelegate: navigator];
     // set parent
@@ -272,7 +305,7 @@
     // add view to controller stock
     [navigator addViewController: viewController.masterPositionViewController];
 
-    if ([self isRootCascadeViewController] && (UIInterfaceOrientationIsPortrait([self.contentNavigator orientation]))) {
+    if ([self isRootCascadeViewController] && (UIInterfaceOrientationIsPortrait([self interfaceOrientation]))) {
         // update scrollview content size
         [(CLScrollView*)self.view setContentSize: [navigator contentSizeRootViewController]];
         // update scrollview content offset leading to detailview
@@ -286,7 +319,9 @@
     
 
     // add view to super view
+    [_detailPositionViewController viewWillAppear:YES];
     [self.view addSubview: _detailPositionViewController.view];
+    [_detailPositionViewController viewDidAppear:YES];
 
     // update scrollview content offset leading to detailview
     [(CLScrollView*)_detailPositionViewController.view setContentOffset: [navigator detailContentOffsetAtShow] animated:YES];

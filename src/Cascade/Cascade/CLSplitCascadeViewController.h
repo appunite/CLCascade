@@ -7,17 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CLCascadeContentNavigator.h"
-#import "CLTableViewController.h"
-#import "CLCascadeViewController.h"
-#import "CLCategoriesView.h"
 
-@interface CLSplitCascadeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    CLCategoriesView* _categoriesView;
-    CLCascadeContentNavigator* _cascadeNavigator;
+#import "CLCategoriesViewController.h"
+#import "CLCascadeNavigationController.h"
+
+@interface CLSplitCascadeViewController : UIViewController {
+    CLCategoriesViewController*     _categoriesViewController;
+    CLCascadeNavigationController*  _cascadeNavigationController;
 }
 
-@property (nonatomic, retain) IBOutlet CLCategoriesView* categoriesView;
-@property (nonatomic, retain) IBOutlet CLCascadeContentNavigator* cascadeNavigator;
+@property (nonatomic, retain) IBOutlet CLCategoriesViewController* categoriesViewController;
+@property (nonatomic, retain) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
 
 @end

@@ -9,24 +9,23 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "CLCascadeContentNavigator.h"
 #import "CLSegmentedView.h"
+#import "UIViewController+CLSegmentedView.h"
 
 @class CLCascadeViewController;
+@class CLCascadeNavigationController;
 
 @interface CLViewController : UIViewController {
-    UIView* headerView;
-    UIView* footerView;
-    
     CLCascadeViewController* _parentCascadeViewController;
+    CLCascadeNavigationController* _cascadeNavigationController;
+    
     CAGradientLayer* _originShadow;
     CGFloat _shadowWidth;
 }
 
 @property (nonatomic, retain) CLCascadeViewController* parentCascadeViewController;
-//@property (nonatomic, retain) CLSegmentedView* view;
-@property (nonatomic, retain, readonly) UIView* headerView;
-@property (nonatomic, retain, readonly) UIView* footerView;
+@property (nonatomic, retain) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
+
 
 - (void) pushDetailViewController:(CLViewController *)viewController;
 - (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha;

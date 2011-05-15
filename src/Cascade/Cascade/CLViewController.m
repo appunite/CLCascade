@@ -8,16 +8,19 @@
 
 #import "CLViewController.h"
 #import "CLCascadeViewController.h"
+#import "CLCascadeNavigationController.h"
 
 @implementation CLViewController
 
 @synthesize parentCascadeViewController = _parentCascadeViewController;
+@synthesize cascadeNavigationController = _cascadeNavigationController;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
     [_parentCascadeViewController release], _parentCascadeViewController = nil;
-    [_originShadow release], _originShadow = nil;
+    [_cascadeNavigationController release], _cascadeNavigationController = nil;
+    [_originShadow release], _originShadow = nil;    
     [super dealloc];
 }
 
@@ -31,13 +34,6 @@
 }
 
 #pragma mark - View lifecycle
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) loadView {
-    CLSegmentedView* segmentView = [[CLSegmentedView alloc] init];
-    self.view = segmentView;
-    [segmentView release];
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)viewDidLoad
@@ -89,17 +85,6 @@
         [_parentCascadeViewController pushCascadeViewController: cascadeViewController];
         [cascadeViewController release];
     }
-}
-
-#pragma mark -
-#pragma mark Getters
-
-- (UIView*) headerView {
-    return [(CLSegmentedView*)self.view headerView];
-}
-
-- (UIView*) footerView {
-    return [(CLSegmentedView*)self.view footerView];
 }
 
 @end

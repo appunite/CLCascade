@@ -7,22 +7,47 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CLCascadeContentNavigator.h"
-#import "CLCategoriesView.h"
+#import "CLCascadeNavigationController.h"
+#import "CLCascadeEnums.h"
+#import "CLSplitCascadeViewController.h"
+#import "CLCascadeViewController.h"
 
-@interface CLSplitCascadeView : UIView <CLCascadeContentNavigatorDelegate> {
-    CLCategoriesView* _categoriesView;
-    CLCascadeContentNavigator* _cascadeNavigator;
+@interface CLSplitCascadeView : UIView <CLCascadeNavigationControllerDelegate> {
+    UIView* _categoriesView;
+    UIView* _cascadeView;
+ 
+    CLCascadeNavigationController* _cascadeNavigationController;
+    CLSplitCascadeViewController* _splitCascadeViewController;
+    
+    UIView*     _backgroundView;
+    
+    UIView*     _dividerView;
+    UIImage*    _horizontalDividerImage;
+    
 }
 
-/*
- Categories view - located on the left, view containing table view
- */
-@property (nonatomic, retain) IBOutlet CLCategoriesView* categoriesView;
+@property (nonatomic, retain) IBOutlet CLSplitCascadeViewController* splitCascadeViewController;
+
+///*
+// * Divider image - view between categories and cascade view
+// */
+//@property (nonatomic, retain) UIImage*  horizontalDivider;
 
 /*
- Cascade content navigator - located on the right, view containing cascade view controllers
+ * Background view - located under cascade view
  */
-@property (nonatomic, retain) IBOutlet CLCascadeContentNavigator* cascadeNavigator;
+@property (nonatomic, retain) UIView* backgroundView;
+
+/*
+ * Categories view - located on the left, view containing table view
+ */
+@property (nonatomic, retain) UIView* categoriesView;
+
+/*
+ * Cascade content navigator - located on the right, view containing cascade view controllers
+ */
+@property (nonatomic, retain) UIView* cascadeView;
+
+- (UIViewController*)viewController;
 
 @end

@@ -1,0 +1,18 @@
+//
+//  CLCategoriesViewController.h
+//  Cascade
+//
+//  Created by Emil Wojtaszek on 11-05-06.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "CLTableViewController.h"
+#import "CLCategoriesView.h"
+
+@interface CLCategoriesViewController : CLTableViewController {
+
+}
+
+
+@end
