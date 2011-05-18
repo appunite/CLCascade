@@ -4,7 +4,7 @@
 //
 //  Created by Emil Wojtaszek on 11-03-27.
 //  Copyright 2011 CreativeLabs.pl. All rights reserved.
-//
+// 
 
 #import "CascadeAppDelegate.h"
 #import "CLSplitCascadeViewController.h"
