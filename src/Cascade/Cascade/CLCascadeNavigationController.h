@@ -13,9 +13,8 @@
 
 @protocol CLCascadeNavigationControllerDelegate;
 
-@interface CLCascadeNavigationController : UIViewController {// <CLCascadeViewControllerDelegate> {
-    id<CLCascadeNavigationControllerDelegate> _delegate;
-    
+@interface CLCascadeNavigationController : UIViewController {
+
     CLCascadeViewController* _rootViewController;
     CLCascadeViewController* _lastCascadeViewController;
     
@@ -23,8 +22,6 @@
     
     UIView* _backgroundView;
 }
-
-@property (nonatomic, assign) IBOutlet id<CLCascadeNavigationControllerDelegate> delegate;
 
 /* 
  First in hierarchy CascadeViewController (opposite to lastCascadeViewController)
@@ -40,8 +37,6 @@
  List of CLViewControllers on stock.
  */
 @property (nonatomic, retain) NSMutableArray* viewControllers;
-
-@property (nonatomic, retain) IBOutlet UIView* backgroundView;
 
 - (CGRect) cascadeScrollableViewFrame;
 - (CGRect) cascadeContentNavigatorBounds;
@@ -66,7 +61,7 @@
 
 @end
 
-@protocol CLCascadeNavigationControllerDelegate <NSObject>
-- (void) rootViewControllerMoveToMasterPosition;
-- (void) rootViewControllerMoveToDetailPosition;
-@end
+//@protocol CLCascadeNavigationControllerDelegate <NSObject>
+//- (void) rootViewControllerMoveToMasterPosition;
+//- (void) rootViewControllerMoveToDetailPosition;
+//@end

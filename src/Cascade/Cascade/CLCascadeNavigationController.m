@@ -15,8 +15,6 @@
 @synthesize rootViewController = _rootViewController;
 @synthesize lastCascadeViewController = _lastCascadeViewController;
 @synthesize viewControllers = _viewControllers;
-@synthesize delegate = _delegate;
-@synthesize backgroundView = _backgroundView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -30,8 +28,6 @@
 
 - (void)dealloc
 {
-    _delegate = nil;
-    [_backgroundView release], _backgroundView = nil;
     [_rootViewController release], _rootViewController = nil;
     [_lastCascadeViewController release], _lastCascadeViewController = nil;
     [_viewControllers release], _viewControllers = nil;
@@ -380,8 +376,6 @@
         
         // set up content navigator
         [_rootViewController setCascadeNavigationController: self];
-        // set delegate
-        [_rootViewController setDelegate: self];
         // root view hasn't parentCascadeViewController
         [_rootViewController setParentCascadeViewController: nil];
         
@@ -448,19 +442,19 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeViewController:(CLCascadeViewController*)cascadeViewController didChangeScrollPosition:(CLCascadeViewScrollPositions)scrollPosition {
-    if (cascadeViewController == _rootViewController) {
-        
-        if (scrollPosition == CLCascadeViewScrollMasterPosition) {
-            if ([_delegate respondsToSelector:@selector(rootViewControllerMoveToMasterPosition)]) {
-                [_delegate rootViewControllerMoveToMasterPosition];
-            }
-        }
-        if (scrollPosition == CLCascadeViewScrollDetailPosition) {
-            if ([_delegate respondsToSelector:@selector(rootViewControllerMoveToDetailPosition)]) {
-                [_delegate rootViewControllerMoveToDetailPosition];
-            }
-        }
-    }
+//    if (cascadeViewController == _rootViewController) {
+//        
+//        if (scrollPosition == CLCascadeViewScrollMasterPosition) {
+//            if ([_delegate respondsToSelector:@selector(rootViewControllerMoveToMasterPosition)]) {
+//                [_delegate rootViewControllerMoveToMasterPosition];
+//            }
+//        }
+//        if (scrollPosition == CLCascadeViewScrollDetailPosition) {
+//            if ([_delegate respondsToSelector:@selector(rootViewControllerMoveToDetailPosition)]) {
+//                [_delegate rootViewControllerMoveToDetailPosition];
+//            }
+//        }
+//    }
 }
 
 

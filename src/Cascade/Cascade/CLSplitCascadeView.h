@@ -12,7 +12,7 @@
 #import "CLSplitCascadeViewController.h"
 #import "CLCascadeViewController.h"
 
-@interface CLSplitCascadeView : UIView <CLCascadeNavigationControllerDelegate> {
+@interface CLSplitCascadeView : UIView {
     // views
     UIView* _categoriesView;
     UIView* _cascadeView;

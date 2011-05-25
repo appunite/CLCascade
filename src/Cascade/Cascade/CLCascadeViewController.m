@@ -281,8 +281,6 @@
     
     // set content nvigator
     [viewController setCascadeNavigationController: navigator];
-    // set delegate to navigator
-    [viewController setDelegate: navigator];
     // set parent
     [viewController setParentCascadeViewController: self];
     // set detail position view
@@ -360,8 +358,10 @@
 
     if (contentOffset < 80.0) {
         position = CLCascadeViewScrollMasterPosition;
+//        [self.view setBounces: NO];
     } else if (contentOffset >= 80.0) {
         position = CLCascadeViewScrollDetailPosition;
+//        [self.view setBounces: YES];
     }
     
     return position;
@@ -373,7 +373,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -392,6 +391,7 @@
             [_delegate cascadeViewController:self didChangeScrollPosition: scrollPosition];
         }
     }
+    
 }     
 
 #pragma mark -
