@@ -48,22 +48,33 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
 
+//    NSLog(@"---");
+
     CLSplitCascadeViewController *viewController = (CLSplitCascadeViewController*)[self viewController];
     CLCascadeNavigationController* navigationController = viewController.cascadeNavigationController; 
     NSArray* viewControllers = navigationController.viewControllers;
     
     for (NSUInteger i = [viewControllers count]; i>0; i--) {
 
-        UIView* view = [[viewControllers objectAtIndex: i-1] view];
+        CLCascadeViewController* cascadeViewController = [viewControllers objectAtIndex: i-1];
         
+        UIView* view = [cascadeViewController view];
         CGRect covertRect = [self convertRect:view.frame fromView:view];
+
+//        NSLog(@"%@", [view description]);
         
         if (CGRectContainsPoint(covertRect, point)) {
 
             CGRect covertRect2 = [view convertRect:view.frame fromView:navigationController.view];
-
             CGPoint covertPoint = [view convertPoint:CGPointMake(point.x+covertRect2.origin.x , point.y) toView: view];
             
+            if ([cascadeViewController parentCascadeViewController].scrollPosition == CLCascadeViewScrollDetailPosition) {
+                if (i != [viewControllers count]) {
+                    UIView* vii = [[viewControllers objectAtIndex: i] view]; 
+                    return [vii hitTest:covertPoint withEvent:event];
+                }
+            }
+
             return [view hitTest:covertPoint withEvent:event];
         }
         
