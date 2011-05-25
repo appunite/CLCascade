@@ -35,28 +35,26 @@
 
 #pragma mark - View lifecycle
 
-//// Implement loadView to create a view hierarchy programmatically, without using a nib.
-//- (void)loadView
-//{
-//    NSString *nib = self.nibName;
-//    NSBundle *bundle = self.nibBundle;
-//    
-//    if(!nib) nib = NSStringFromClass([self class]);
-//    if(!bundle) bundle = [NSBundle mainBundle];
-//    
-//    NSString *path = [bundle pathForResource:nib ofType:@"nib"];
-//    
-//    if(path) {
-//        self.view = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex: 0];
-//        return;
-//    }
-//    
-//    CLCategoriesView* view_ = [[CLCategoriesView alloc] init]; 
-//    self.view = view_;
-//    [view_ release];
-//    
-//
-//}
+// Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadView
+{
+    NSString *nib = self.nibName;
+    NSBundle *bundle = self.nibBundle;
+    
+    if(!nib) nib = NSStringFromClass([self class]);
+    if(!bundle) bundle = [NSBundle mainBundle];
+    
+    NSString *path = [bundle pathForResource:nib ofType:@"nib"];
+    
+    if(path) {
+        self.view = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex: 0];
+        return;
+    }
+    
+    CLCategoriesView* view_ = [[CLCategoriesView alloc] init]; 
+    self.view = view_;
+    [view_ release];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
