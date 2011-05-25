@@ -23,15 +23,23 @@
     
     UIView*     _dividerView;
     UIImage*    _horizontalDividerImage;
+    CGFloat     _dividerWidth;
+    BOOL        _showDivider;
     
 }
 
 @property (nonatomic, retain) IBOutlet CLSplitCascadeViewController* splitCascadeViewController;
 
-///*
-// * Divider image - view between categories and cascade view
-// */
-//@property (nonatomic, retain) UIImage*  horizontalDivider;
+/*
+ * Dhow divider - determines whether to show or hide divder
+ * Remember to add a divider you need to set the backgroundView
+ */
+@property (nonatomic, assign) BOOL showDivider;
+
+/*
+ * Divider image - view between categories and cascade view
+ */
+@property (nonatomic, retain) UIImage* horizontalDivider;
 
 /*
  * Background view - located under cascade view
