@@ -13,14 +13,18 @@
 #import "CLCascadeViewController.h"
 
 @interface CLSplitCascadeView : UIView <CLCascadeNavigationControllerDelegate> {
+    // views
     UIView* _categoriesView;
     UIView* _cascadeView;
  
+    //controllers
     CLCascadeNavigationController* _cascadeNavigationController;
     CLSplitCascadeViewController* _splitCascadeViewController;
     
+    // background
     UIView*     _backgroundView;
-    
+
+    // divider
     UIView*     _dividerView;
     UIImage*    _horizontalDividerImage;
     CGFloat     _dividerWidth;
@@ -31,7 +35,7 @@
 @property (nonatomic, retain) IBOutlet CLSplitCascadeViewController* splitCascadeViewController;
 
 /*
- * Dhow divider - determines whether to show or hide divder
+ * Show divider - determines whether to show or hide divder
  * Remember to add a divider you need to set the backgroundView
  */
 @property (nonatomic, assign) BOOL showDivider;
@@ -55,6 +59,7 @@
  * Cascade content navigator - located on the right, view containing cascade view controllers
  */
 @property (nonatomic, retain) UIView* cascadeView;
+
 
 - (UIViewController*)viewController;
 
