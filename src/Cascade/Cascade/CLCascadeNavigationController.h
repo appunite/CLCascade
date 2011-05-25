@@ -19,8 +19,6 @@
     CLCascadeViewController* _lastCascadeViewController;
     
     NSMutableArray* _viewControllers;
-    
-    UIView* _backgroundView;
 }
 
 /* 
