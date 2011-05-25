@@ -9,6 +9,7 @@
 #import "CLViewController.h"
 #import "CLCascadeViewController.h"
 #import "CLCascadeNavigationController.h"
+#import "UIViewWithShadow.h"
 
 @implementation CLViewController
 

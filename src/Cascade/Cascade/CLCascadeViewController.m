@@ -74,7 +74,6 @@
         rect = [navigator cascadeScrollableViewFrame];        
     }
     
-    //    CLScrollView* scrollView = [[CLScrollView alloc] initWithFrame: viewFrame];
     CLScrollView* scrollView = [[CLScrollView alloc] initWithFrame: rect];
     [scrollView setBackgroundColor: [UIColor clearColor]];
     [scrollView setContentSize: [navigator singleCascadeContentSize]];
@@ -87,21 +86,9 @@
         UIView* view = [_masterPositionViewController view];
         [view setFrame: [navigator masterCascadeFrame]];
         
-        [_masterPositionViewController viewWillAppear: YES];
         [self.view addSubview: view];
-        [_masterPositionViewController viewDidAppear: YES];
     }    
     
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear: animated];
-    [_masterPositionViewController viewWillAppear: animated];
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear: animated];
-    [_masterPositionViewController viewDidAppear: animated];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -317,9 +304,7 @@
     
 
     // add view to super view
-    [_detailPositionViewController viewWillAppear:YES];
     [self.view addSubview: _detailPositionViewController.view];
-    [_detailPositionViewController viewDidAppear:YES];
 
     // update scrollview content offset leading to detailview
     [(CLScrollView*)_detailPositionViewController.view setContentOffset: [navigator detailContentOffsetAtShow] animated:YES];

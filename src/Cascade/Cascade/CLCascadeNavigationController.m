@@ -321,8 +321,9 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) adjustFrameAndContentAfterRotation:(UIInterfaceOrientation)newOrientation {
+- (void) adjustFrameAndContentAfterRotation {
     // we need to set current interface orientation
+    UIInterfaceOrientation newOrientation = [UIApplication sharedApplication].statusBarOrientation;
     [_rootViewController adjustFrameAndContentToInterfaceOrientation: newOrientation];
 }
 
@@ -387,7 +388,7 @@
         [self addViewController: viewController.masterPositionViewController];
         
         // set background color
-        [self.view setBackgroundColor: [UIColor clearColor]];
+        [self.view setBackgroundColor: [UIColor redColor]];
         
         // update contentSize
         [(UIScrollView*)_rootViewController.view setContentSize: [self contentSizeRootViewController]];

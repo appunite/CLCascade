@@ -55,7 +55,7 @@
 - (void) removeViewController:(CLViewController*)viewController;
 - (void) removeViewControllersStartingFrom:(CLViewController*)viewController;
 
-- (void) adjustFrameAndContentAfterRotation:(UIInterfaceOrientation)newOrientation;
+- (void) adjustFrameAndContentAfterRotation;
 
 @end
 

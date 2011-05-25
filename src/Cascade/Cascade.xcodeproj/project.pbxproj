@@ -13,6 +13,8 @@
 		206ECD5D137574E600B8405F /* CLCascadeNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD5C137574E600B8405F /* CLCascadeNavigationView.m */; };
 		206ECD60137589DB00B8405F /* CLCategoriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD5F137589DB00B8405F /* CLCategoriesView.m */; };
 		206ECD631375973D00B8405F /* CLCascadeEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD621375973C00B8405F /* CLCascadeEnums.m */; };
+		20A7E8D3138D73DF008B2969 /* CLCascadeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 20A7E8D1138D73DF008B2969 /* CLCascadeView.h */; };
+		20A7E8D4138D73DF008B2969 /* CLCascadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A7E8D2138D73DF008B2969 /* CLCascadeView.m */; };
 		20B0D97A1356518E008B1F7D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B0D9791356518E008B1F7D /* QuartzCore.framework */; };
 		20BB341E133FB8FF003EEB6E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20BB341D133FB8FF003EEB6E /* UIKit.framework */; };
 		20BB3420133FB8FF003EEB6E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20BB341F133FB8FF003EEB6E /* Foundation.framework */; };
@@ -76,6 +78,8 @@
 		206ECD5F137589DB00B8405F /* CLCategoriesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCategoriesView.m; sourceTree = "<group>"; };
 		206ECD611375973C00B8405F /* CLCascadeEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCascadeEnums.h; sourceTree = "<group>"; };
 		206ECD621375973C00B8405F /* CLCascadeEnums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCascadeEnums.m; sourceTree = "<group>"; };
+		20A7E8D1138D73DF008B2969 /* CLCascadeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCascadeView.h; sourceTree = "<group>"; };
+		20A7E8D2138D73DF008B2969 /* CLCascadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCascadeView.m; sourceTree = "<group>"; };
 		20B0D9791356518E008B1F7D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		20BB3419133FB8FF003EEB6E /* Cascade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cascade.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20BB341D133FB8FF003EEB6E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -290,6 +294,8 @@
 			children = (
 				20BB3442133FBAA4003EEB6E /* CLCascadeViewController.h */,
 				20BB3443133FBAA4003EEB6E /* CLCascadeViewController.m */,
+				20A7E8D1138D73DF008B2969 /* CLCascadeView.h */,
+				20A7E8D2138D73DF008B2969 /* CLCascadeView.m */,
 			);
 			name = CLCascadeViewController;
 			sourceTree = "<group>";
@@ -337,6 +343,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20A7E8D3138D73DF008B2969 /* CLCascadeView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +506,7 @@
 				4C17F11413799A27003A11F9 /* CLSegmentedView.m in Sources */,
 				4C17F11513799A27003A11F9 /* UIViewController+CLSegmentedView.m in Sources */,
 				4C17F11613799A27003A11F9 /* CLCascadeEnums.m in Sources */,
+				20A7E8D4138D73DF008B2969 /* CLCascadeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
