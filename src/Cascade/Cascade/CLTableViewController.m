@@ -140,7 +140,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CLTableViewController* viewController = [[CLTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
-    [self pushDetailViewController: viewController];
+    [self pushDetailViewController:viewController animated:YES];
     [viewController release];
 }
 
