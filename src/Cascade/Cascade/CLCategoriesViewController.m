@@ -113,21 +113,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CLTableViewController* rootTableViewController = [[CLTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
-
-    NSLog(@"rootTableViewController: %i",  [rootTableViewController retainCount]);
-
-    CLCascadeViewController* rootCascadeViewController = [[CLCascadeViewController alloc] initWithMasterPositionViewController:rootTableViewController];
-    
-    NSLog(@"rootTableViewController: %i",  [rootTableViewController retainCount]);
-    NSLog(@"rootCascadeViewController: %i",  [rootCascadeViewController retainCount]);
-
-    [self.cascadeNavigationController setRootViewController: rootCascadeViewController];
-    
+    [self.cascadeNavigationController setRootViewController:rootTableViewController animated:YES];
     [rootTableViewController release];
-    [rootCascadeViewController release];
-    
-    NSLog(@"rootTableViewController: %i",  [rootTableViewController retainCount]);
-    NSLog(@"rootCascadeViewController: %i",  [rootCascadeViewController retainCount]);
 
 }
 

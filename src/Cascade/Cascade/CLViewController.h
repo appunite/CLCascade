@@ -26,7 +26,7 @@
 @property (nonatomic, retain) CLCascadeViewController* parentCascadeViewController;
 @property (nonatomic, retain) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
 
-- (void) pushDetailViewController:(CLViewController *)viewController;
+- (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated;
 - (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha;
 
 @end

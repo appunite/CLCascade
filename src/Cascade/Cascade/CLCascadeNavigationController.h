@@ -21,20 +21,22 @@
     NSMutableArray* _viewControllers;
 }
 
+- (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated;
+
 /* 
  First in hierarchy CascadeViewController (opposite to lastCascadeViewController)
  */
-@property (nonatomic, retain) CLCascadeViewController* rootViewController;
+@property (nonatomic, retain, readonly) CLCascadeViewController* rootViewController;
 
 /* 
  Last in hierarchy CascadeViewController (opposite to rootViewController)
  */
-@property (nonatomic, retain) CLCascadeViewController* lastCascadeViewController;
+@property (nonatomic, retain, readwrite) CLCascadeViewController* lastCascadeViewController;
 
 /*
  List of CLViewControllers on stock.
  */
-@property (nonatomic, retain) NSMutableArray* viewControllers;
+@property (nonatomic, retain, readonly) NSMutableArray* viewControllers;
 
 - (CGRect) cascadeScrollableViewFrame;
 - (CGRect) cascadeContentNavigatorBounds;

@@ -260,7 +260,7 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) pushCascadeViewController:(CLCascadeViewController *)viewController {
+- (void) pushCascadeViewController:(CLCascadeViewController *)viewController animated:(BOOL)animated {
     
     [self popDetailPositionViewController];
     
@@ -274,19 +274,7 @@
     [self setDetailPositionViewController: viewController];
     // udate last cascade view controller
     [navigator setLastCascadeViewController: viewController];
-    
-    // set new detail frame
-    CGRect animationFinishRect = [navigator detailCascadeFrame];
-    CGRect animationStartRect = animationFinishRect;
-    animationStartRect.origin.x += 20;
-
-    [_detailPositionViewController.view setFrame: animationStartRect];
-    
-    
-    [UIView animateWithDuration:0.2 animations:^ {
-        [_detailPositionViewController.view setFrame: animationFinishRect];
-    }];
-    
+        
     // add view to controller stock
     [navigator addViewController: viewController.masterPositionViewController];
 
@@ -294,21 +282,38 @@
         // update scrollview content size
         [(CLScrollView*)self.view setContentSize: [navigator contentSizeRootViewController]];
         // update scrollview content offset leading to detailview
-        [(CLScrollView*)self.view setContentOffset: CGPointMake(223.0, 0.0) animated:YES];
+        [(CLScrollView*)self.view setContentOffset: CGPointMake(223.0, 0.0) animated:animated];
     } else {
         // update scrollview content size
         [(CLScrollView*)self.view setContentSize: [navigator doubleCascadeContentSize]];
         // update scrollview content offset leading to detailview
-        [(CLScrollView*)self.view setContentOffset: [navigator masterContentOffsetLeadToDetailView] animated:YES];
+        [(CLScrollView*)self.view setContentOffset: [navigator masterContentOffsetLeadToDetailView] animated:animated];
     }
     
-
-    // add view to super view
-    [self.view addSubview: _detailPositionViewController.view];
-
+    UIView* detailView = _detailPositionViewController.view;
     // update scrollview content offset leading to detailview
-    [(CLScrollView*)_detailPositionViewController.view setContentOffset: [navigator detailContentOffsetAtShow] animated:YES];
+    [(CLScrollView*)detailView setContentOffset: [navigator detailContentOffsetAtShow] animated:animated];
+
+    if (animated) {
+        // set new detail frame
+        CGRect animationFinishRect = [navigator detailCascadeFrame];
+        CGRect animationStartRect = animationFinishRect;
+        animationStartRect.origin.x += 20;
         
+        [detailView setFrame: animationStartRect];
+        
+        
+        [UIView animateWithDuration:0.2 animations:^ {
+            [detailView setFrame: animationFinishRect];
+            [detailView setAlpha: 1.0];
+        }];
+    } else {
+        // set new detail frame
+        [detailView setFrame: [navigator detailCascadeFrame]];
+    }
+    
+    // add view to super view
+    [self.view addSubview: detailView];
     
 }
 

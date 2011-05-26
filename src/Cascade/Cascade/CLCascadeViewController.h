@@ -31,7 +31,7 @@
 @property (nonatomic, assign, readonly) CLCascadeViewController* detailPositionViewController;
 
 - (id) initWithMasterPositionViewController:(CLViewController*)masterPositionViewController;
-- (void) pushCascadeViewController:(CLCascadeViewController *)viewController;
+- (void) pushCascadeViewController:(CLCascadeViewController *)viewController animated:(BOOL)animated;
 - (void) popDetailPositionViewController;
 - (void) popMasterAndDetailPositionViewController;
 

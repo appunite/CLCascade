@@ -9,7 +9,6 @@
 #import "CLViewController.h"
 #import "CLCascadeViewController.h"
 #import "CLCascadeNavigationController.h"
-#import "UIViewWithShadow.h"
 
 @implementation CLViewController
 
@@ -79,11 +78,11 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) pushDetailViewController:(CLViewController *)viewController {
+- (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated {
     if (_parentCascadeViewController != nil) {
         CLCascadeViewController* cascadeViewController = [[CLCascadeViewController alloc] 
                                                           initWithMasterPositionViewController:viewController];
-        [_parentCascadeViewController pushCascadeViewController: cascadeViewController];
+        [_parentCascadeViewController pushCascadeViewController:cascadeViewController animated:animated];
         [cascadeViewController release];
     }
 }

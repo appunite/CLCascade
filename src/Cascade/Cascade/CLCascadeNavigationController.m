@@ -8,6 +8,12 @@
 
 #import "CLCascadeNavigationController.h"
 
+@interface CLCascadeNavigationController (Private)
+@property (nonatomic, retain, readwrite) CLCascadeViewController* rootViewController;
+@property (nonatomic, retain, readwrite) CLCascadeViewController* lastCascadeViewController;
+@property (nonatomic, retain, readwrite) NSMutableArray* viewControllers;
+@end
+
 @implementation CLCascadeNavigationController
 
 #define kCascadeViewWidth 479.0f
@@ -71,13 +77,13 @@
 }
 */
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // set background color
+    [self.view setBackgroundColor: [UIColor clearColor]];
 }
-*/
 
 - (void)viewDidUnload
 {
@@ -92,11 +98,63 @@
 	return YES;
 }
 
-
-
-
 #pragma mark -
 #pragma mark Calss methods
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) adjustFrameAndContentAfterRotation {
+    // we need to set current interface orientation
+    UIInterfaceOrientation newOrientation = [UIApplication sharedApplication].statusBarOrientation;
+    [_rootViewController adjustFrameAndContentToInterfaceOrientation: newOrientation];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setRootViewController:(CLViewController*)viewControllerr animated:(BOOL)animated {
+    
+    // create and set root view controller
+    CLCascadeViewController* cascadeViewController = [[CLCascadeViewController alloc] initWithMasterPositionViewController: viewControllerr];
+    self.rootViewController = cascadeViewController;
+    [cascadeViewController release];
+    
+    // update contentSize
+    [(UIScrollView*)_rootViewController.view setContentSize: [self contentSizeRootViewController]];
+    
+    UIView* rootView = _rootViewController.view;
+
+    // rootViewController is at center when added
+    UIInterfaceOrientation interfaceOrientation = [UIApplication sharedApplication].statusBarOrientation;
+    
+    if ([rootView isKindOfClass: [UIScrollView class]] && (UIInterfaceOrientationIsLandscape(interfaceOrientation))) {
+        [(UIScrollView*)rootView setContentInset:UIEdgeInsetsMake(0.0, -([self singleCascadeContentSize].width/2) - 16, 0.0, 0.0)];
+    }
+
+    if (animated) {
+        // prepare for animation
+        CGRect stopAnimationViewFrame = [self frameRootViewController];
+        CGRect startAnimationRootViewFrame = [self frameRootViewController];
+        startAnimationRootViewFrame.origin.x = startAnimationRootViewFrame.size.width + (startAnimationRootViewFrame.size.width / 2);
+        [rootView setAlpha: 0.0];
+        [rootView setFrame: startAnimationRootViewFrame];
+                
+        // add view
+        [self.view addSubview: rootView];
+        
+        // commit animation
+        [UIView animateWithDuration:0.4 animations:^ {
+            [rootView setAlpha: 1.0];
+            [rootView setFrame: stopAnimationViewFrame];
+        }];
+        
+    } else {
+        // set frame
+        [rootView setFrame: [self frameRootViewController]];
+        [rootView setAlpha: 1.0];
+        // add view
+        [self.view addSubview: rootView];
+
+    }
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) addViewController:(CLViewController*)viewController {
@@ -320,106 +378,8 @@
     return CGRectZero;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) adjustFrameAndContentAfterRotation {
-    // we need to set current interface orientation
-    UIInterfaceOrientation newOrientation = [UIApplication sharedApplication].statusBarOrientation;
-    [_rootViewController adjustFrameAndContentToInterfaceOrientation: newOrientation];
-}
-
 #pragma mark -
 #pragma mark Getters & setters
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CLCascadeViewController*) rootViewController {
-    return _rootViewController;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setRootViewController:(CLCascadeViewController*)viewController {
-    if (viewController != _rootViewController) {
-
-        self.lastCascadeViewController = nil;
-        
-        [_rootViewController setCascadeNavigationController: nil];
-        // set delegate
-        [_rootViewController setDelegate: nil];
-        // root view hasn't parentCascadeViewController
-        [_rootViewController setParentCascadeViewController: nil];
-        
-        
-        for (CLViewController* viewController in _viewControllers) {
-            CLCascadeViewController* cc = [viewController parentCascadeViewController];
-
-            [cc.masterPositionViewController setParentCascadeViewController: nil];
-
-//            [cc release];
-//            [[viewController parentCascadeViewController] setDetailPositionViewController: nil];
-//            [[viewController ] release];
-//            [[viewController cascadeNavigationController] setParentViewController: nil];
-        }
-        
-//        [_viewControllers removeAllObjects];
-        
-//        // remove all details view controllers
-//        if (_rootViewController != nil) {
-//            [_rootViewController popDetailPositionViewController];
-//        }
-//
-//        [_viewControllers removeAllObjects];
-
-        // remove rootViewController view from navigator
-        [_rootViewController.view removeFromSuperview];
-//        [_rootViewController release];
-        // set up new rootViewController
-        _rootViewController = [viewController retain];
-        NSLog(@"_rootViewController: %i",  [_rootViewController retainCount]);
-        
-        // set up content navigator
-        [_rootViewController setCascadeNavigationController: self];
-        // root view hasn't parentCascadeViewController
-        [_rootViewController setParentCascadeViewController: nil];
-        
-        
-        // set last CascadeViewController
-        self.lastCascadeViewController = viewController;
-        
-        // add View controllers to stock array
-        [self addViewController: viewController.masterPositionViewController];
-        
-        // set background color
-        [self.view setBackgroundColor: [UIColor redColor]];
-        
-        // update contentSize
-        [(UIScrollView*)_rootViewController.view setContentSize: [self contentSizeRootViewController]];
-        
-        // prepare for animation
-        UIView* rootView = _rootViewController.view;
-        CGRect stopAnimationViewFrame = [self frameRootViewController];
-        CGRect startAnimationRootViewFrame = [self frameRootViewController];
-        startAnimationRootViewFrame.origin.x = startAnimationRootViewFrame.size.width + (startAnimationRootViewFrame.size.width / 2);
-        [rootView setAlpha: 0.0];
-        [rootView setFrame: startAnimationRootViewFrame];
-        
-        // rootViewController is at center when added
-        UIInterfaceOrientation interfaceOrientation = [UIApplication sharedApplication].statusBarOrientation;
-
-        if ([rootView isKindOfClass: [UIScrollView class]] && (UIInterfaceOrientationIsLandscape(interfaceOrientation))) {
-            [(UIScrollView*)rootView setContentInset:UIEdgeInsetsMake(0.0, -([self singleCascadeContentSize].width/2) - 16, 0.0, 0.0)];
-        }
-        
-        // add view
-        [self.view addSubview: rootView];
-        
-        // commit animation
-        [UIView animateWithDuration:0.4 animations:^ {
-            [rootView setAlpha: 1.0];
-            [rootView setFrame: stopAnimationViewFrame];
-        }];
-        NSLog(@"_rootViewController: %i",  [_rootViewController retainCount]);
-
-    }
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSMutableArray*) viewControllers {
@@ -431,8 +391,42 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setRootViewController:(CLCascadeViewController*)viewController {
+    if (_rootViewController != viewController) {
+        [_rootViewController release];
+        _rootViewController = [viewController retain];
+        // set up content navigator
+        [_rootViewController setCascadeNavigationController: self];
+        // root view hasn't parentCascadeViewController
+        [_rootViewController setParentCascadeViewController: nil];
+        // set last CascadeViewController
+        self.lastCascadeViewController = _rootViewController;
+        
+        //clean up
+        self.lastCascadeViewController = nil;
+        for (CLViewController* viewController in _viewControllers) {
+            CLCascadeViewController* cc = [viewController parentCascadeViewController];
+            
+            [cc.masterPositionViewController setParentCascadeViewController: nil];
+            
+        }
+
+        // add View controllers to stock array
+        [self addViewController: self.rootViewController.masterPositionViewController];
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setLastCascadeViewController:(CLCascadeViewController*)viewController {
+    if (_lastCascadeViewController != viewController) {
+        [_lastCascadeViewController release];
+        _lastCascadeViewController = [viewController retain];
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setViewControllers:(NSMutableArray*)array {
-    if (array != _viewControllers) {
+    if (_viewControllers != array) {
         [_viewControllers release];
         _viewControllers = [array retain];
     }
