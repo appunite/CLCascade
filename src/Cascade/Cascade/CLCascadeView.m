@@ -333,6 +333,8 @@ static const CGFloat kResistance = 0.15;
                     UIView* nextPage = [self loadPageAtIndex: index + 1];
                     // if prev page exist, that page is top page
                     if (nextPage != nil) {
+                        CGRect frame = CGRectMake(page.frame.origin.x + page.frame.size.width, 0.0, _pageWidth, self.bounds.size.height);
+                        [nextPage setFrame: frame];
                         return nextPage;
                     }
                 }
@@ -351,32 +353,13 @@ static const CGFloat kResistance = 0.15;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) topLeftVisiblePage {
-    // method don't work, return nil
-    return nil;
+    // get all visible pages, starting from top right view
+    NSArray* visiblePages = [self visiblePages];
     
-    NSInteger index = 0;
-    // check all pages
-    for (id item in _pages) {
-
-        // find first loaded view
-        if (item != [NSNull null]) {
-            UIView* page = (UIView*)item;
-            
-            // if view don't stick left band
-            if (page.frame.origin.x > 0) {
-                // load previous page if neede and if can
-                UIView* previousPage = [self loadPageAtIndex: index];
-                // if prev page exist, that page is top page
-                if (previousPage != nil) {
-                    return previousPage;
-                }
-            }
-            // else, page is top page
-            return page;
-        }
-        
-        // inc index
-        index++;
+    // if has any views
+    if ([visiblePages count] > 0) {
+        // last view in array is top left visible view
+        return [visiblePages lastObject];
     }
     
     return nil;
@@ -384,6 +367,61 @@ static const CGFloat kResistance = 0.15;
 
 
 #pragma mark Class methods
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated {
+    
+    CGRect newPageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
+    CGRect fromPageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
+    
+    if (fromPage == nil) {
+        [self popAllPagesAnimated: animated];
+    } else {
+        NSUInteger index = [_pages indexOfObject: fromPage];
+        NSAssert(index != NSNotFound, @"fromView == NSNotFound");
+        newPageFrame = fromPage.frame;
+        newPageFrame.origin.x = fromPageFrame.origin.x + fromPageFrame.size.width;
+    }
+    
+    // if not animated then just set frame
+    if (!animated) {
+        [newPage setFrame: newPageFrame];
+        [fromPage setFrame:fromPageFrame];
+        
+    } else { // set animaton
+        [newPage setAlpha: 0.0];
+        
+        CGRect newPageAnimationFrame = newPageFrame;
+        newPageAnimationFrame.origin.x += 150.0;
+        [newPage setFrame: newPageAnimationFrame];
+        
+        [UIView animateWithDuration:0.3 animations:^ {
+            [newPage setFrame: newPageFrame];
+            [newPage setAlpha:1.0];
+            
+            [fromPage setFrame:fromPageFrame];
+        }];
+    }
+    // add page to array of pages
+    [_pages addObject: newPage];
+    // send message to delegate
+    [self didAddPage:newPage animated:animated];
+    
+    // get new page index, (is last)
+    NSUInteger index = [_pages count]-1;
+    //send message to delegate
+    [self pageWillAppearAtIndex:index animated:animated];
+    // add subview
+    [self addSubview: newPage];
+    //send message to delegate
+    [self pageDidAppearAtIndex: index animated:animated];
+    
+    
+    _actualRightPageIndex = [_pages count] - 1;
+    _actualLeftPageIndex = (_actualRightPageIndex == 0) ? NSNotFound : _actualRightPageIndex - 1;     
+    
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) loadPageAtIndex:(NSInteger)index {
@@ -398,8 +436,15 @@ static const CGFloat kResistance = 0.15;
 
             // if got view from dataSorce
             if (view != nil) {
+                //preventive, set frame
+                CGRect pageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
+                [view setFrame: pageFrame];
+                
                 // replace in array of pages
                 [_pages replaceObjectAtIndex:index withObject:view];
+                
+                // add subview
+                [self insertSubview:view atIndex:index];
                 
                 // send delegate
                 [self didLoadPage:view];
@@ -456,11 +501,11 @@ static const CGFloat kResistance = 0.15;
     
         // get index of page in array of subviews
         NSUInteger viewIndex = [self.subviews indexOfObject: item];
-        if (viewIndex == NSNotFound) return;
+        if (viewIndex != NSNotFound) {
         
-        // remove view from superview
-        [[self.subviews objectAtIndex: viewIndex] removeFromSuperview];
-        
+            // remove view from superview
+            [[self.subviews objectAtIndex: viewIndex] removeFromSuperview];
+        }
     }
     
     // send delegate message
@@ -486,63 +531,12 @@ static const CGFloat kResistance = 0.15;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated {
-
-    CGRect newPageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
-    CGRect fromPageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
-    
-    if (fromPage == nil) {
-        [self popAllPagesAnimated: animated];
-    } else {
-        NSUInteger index = [_pages indexOfObject: fromPage];
-        NSAssert(index != NSNotFound, @"fromView == NSNotFound");
-        newPageFrame = fromPage.frame;
-        newPageFrame.origin.x = fromPageFrame.origin.x + fromPageFrame.size.width;
-    }
-    
-    // if not animated then just set frame
-    if (!animated) {
-        [newPage setFrame: newPageFrame];
-        [fromPage setFrame:fromPageFrame];
-        
-    } else { // set animaton
-        [newPage setAlpha: 0.0];
-        
-        CGRect newPageAnimationFrame = newPageFrame;
-        newPageAnimationFrame.origin.x += 150.0;
-        [newPage setFrame: newPageAnimationFrame];
-
-        [UIView animateWithDuration:0.3 animations:^ {
-            [newPage setFrame: newPageFrame];
-            [newPage setAlpha:1.0];
-            
-            [fromPage setFrame:fromPageFrame];
-        }];
-    }
-    // add page to array of pages
-    [_pages addObject: newPage];
-    // send message to delegate
-    [self didAddPage:newPage animated:animated];
-
-    // get new page index, (is last)
-    NSUInteger index = [_pages count]-1;
-    //send message to delegate
-    [self pageWillAppearAtIndex:index animated:animated];
-    // add subview
-    [self addSubview: newPage];
-    //send message to delegate
-    [self pageDidAppearAtIndex: index animated:animated];
-    
-    
-    _actualRightPageIndex = [_pages count] - 1;
-    _actualLeftPageIndex = (_actualRightPageIndex == 0) ? NSNotFound : _actualRightPageIndex - 1;     
-
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) unloadInvisiblePages {
+
     BOOL canUnload = YES;
+
+    // temp array with pages to unload
+    NSMutableArray* pagesToUnload = [[NSMutableArray alloc] init];
     
     // get array of visible pages
     NSArray* visiblePages = [self visiblePages];
@@ -552,19 +546,26 @@ static const CGFloat kResistance = 0.15;
         
         for (UIView* visiblePage in visiblePages) {
         
-            if (item == visiblePages) {
-                canUnload = NO;
+            if (item == visiblePage) {
+                canUnload = NO; break;
             }
         }
         
-        // if can, unload page
+        // if can, add to array - pages to unlaod
         if (canUnload) {
-            [self unloadPage: item];
+            [pagesToUnload addObject: item];
         } 
         
         // set flag to YES
         canUnload = YES;
     }
+
+    // unload pages
+    for (UIView* view in pagesToUnload) {
+        [self unloadPage: view];
+    }
+    
+    [pagesToUnload release];
     
 }
 
@@ -580,11 +581,12 @@ static const CGFloat kResistance = 0.15;
         // replace with null
         [_pages replaceObjectAtIndex:index withObject:[NSNull null]];
         
+        // remove from superview
+        [page removeFromSuperview];
+
         // send message to delegate
         [self didUnloadPage:page];
 
-        // remove from superview
-        [page removeFromSuperview];
     }    
 }
 

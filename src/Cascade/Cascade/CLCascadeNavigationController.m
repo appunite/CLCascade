@@ -132,7 +132,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didUnloadPage:(UIView*)page {
-    NSLog(@"didUnloadPage: %@", page);
+//    NSLog(@"didUnloadPage: %@", page);
     //todo: unload page in controller, set message viewDidUnload
 }
 
@@ -149,25 +149,25 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageWillAppearAtIndex:(NSInteger)index animated:(BOOL)animated {
-    NSLog(@"pageWillAppearAtIndex: %i", index);
+//    NSLog(@"pageWillAppearAtIndex: %i", index);
     [[_viewControllers objectAtIndex: index] viewWillAppear:animated];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index animated:(BOOL)animated {
-    NSLog(@"pageDidAppearAtIndex: %i", index);
+//    NSLog(@"pageDidAppearAtIndex: %i", index);
     [[_viewControllers objectAtIndex: index] viewDidAppear:animated];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageWillDisappearAtIndex:(NSInteger)index animated:(BOOL)animated {
-    NSLog(@"pageWillDisappearAtIndex: %i", index);
+//    NSLog(@"pageWillDisappearAtIndex: %i", index);
     [[_viewControllers objectAtIndex: index] viewWillDisappear:animated];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index animated:(BOOL)animated {
-    NSLog(@"pageDidDisappearAtIndex: %i", index);
+//    NSLog(@"pageDidDisappearAtIndex: %i", index);
     [[_viewControllers objectAtIndex: index] viewDidDisappear:animated];
 }
 
@@ -176,19 +176,44 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated {
-    [self.viewControllers removeAllObjects];
     [_cascadeView popAllPagesAnimated: animated];
+    [self.viewControllers removeAllObjects];
 
-    [self.viewControllers addObject: viewController];
     [self addViewController:viewController sender:nil animated:animated];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated {
     
+    // if in not sent from categoirs view
+    if (sender) {
+
+        // get index of sender
+        NSInteger indexOfSender = [_viewControllers indexOfObject:sender];
+        
+        // if sender is not last view controller
+        if (indexOfSender != [_viewControllers count] - 1) {
+            
+            // count of views to pop
+            NSInteger count = [_viewControllers count] - indexOfSender - 1;
+            
+            // pop views
+            for (NSInteger i = count; i>0; i--) {
+                NSInteger inx = indexOfSender + i;
+                [_cascadeView popPageAtIndex:inx animated:animated];
+            }
+            
+            // remove controllers
+            [_viewControllers removeObjectsInRange:NSMakeRange(indexOfSender + 1, count)];
+        }
+    }
+    
+    // set cascade navigator to view controller
     [viewController setCascadeNavigationController: self];
+    // add controller to array
     [self.viewControllers addObject: viewController];
 
+    // push view
     [_cascadeView pushPage:[viewController view] 
                   fromPage:[sender view] 
                   animated:animated];

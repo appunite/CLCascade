@@ -50,7 +50,7 @@ typedef enum {
 @property(nonatomic,readonly,getter=isDecelerating) BOOL decelerating;
 
 /*
- * You can change page width. Default is 479.0f
+ * You can change page width, default is 479.0f
  */
 @property(nonatomic) CGFloat pageWidth;
 
