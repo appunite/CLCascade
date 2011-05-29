@@ -80,6 +80,8 @@
 {
     [super viewDidLoad];
     // set new content view (tableView)
+    
+//    [self setOuterLeftShadow:[UIColor blackColor] width:15.0 alpha:0.45];
 }
 
 

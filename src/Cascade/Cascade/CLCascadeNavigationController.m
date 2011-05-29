@@ -38,7 +38,7 @@
     [super didReceiveMemoryWarning];
     
     // unload all invisible pages in cascadeView
-    [_cascadeView unloadInvisiblePages;]
+    [_cascadeView unloadInvisiblePages];
 }
 
 #pragma mark - View lifecycle
