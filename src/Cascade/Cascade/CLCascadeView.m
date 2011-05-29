@@ -19,6 +19,7 @@
 - (CGFloat) transition;
 - (UIView*) topLeftVisiblePage;
 - (UIView*) topRightVisiblePage;
+- (void) refreshPageHeight:(UIView*)height;
 @end
 
 @interface CLCascadeView (DelegateMethods)
@@ -67,6 +68,11 @@
 }
 
 - (void) layoutSubviews {
+    NSArray* visibleViews = [self visiblePages];
+
+    for (UIView* view in visibleViews) {
+        [self refreshPageHeight: view];
+    }
     
 }
 
@@ -203,6 +209,8 @@ static const CGFloat kResistance = 0.15;
         }
         
     }
+    
+    [self setNeedsLayout];
 }
 
 - (NSArray*) visiblePages {
@@ -212,6 +220,7 @@ static const CGFloat kResistance = 0.15;
     
     // if page exists (so, if _pages has any object)
     if (topPage) {
+
         // top index of top page
         NSUInteger topPageIndex = [_pages indexOfObject: topPage];
         
@@ -249,6 +258,16 @@ static const CGFloat kResistance = 0.15;
 
 - (BOOL) isFirstPage:(UIView*)page {
     return ([_pages indexOfObject: page] == 0);
+}
+
+- (void) refreshPageHeight:(UIView*)page {
+    CGFloat height = self.bounds.size.height;
+    CGRect frame = page.frame;
+    
+    if (frame.size.height != height) {
+        frame.size.height = height;
+        [page setFrame: frame];
+    }
 }
 
 - (UIView*) topRightVisiblePage {
