@@ -33,15 +33,19 @@
 - (void) pageDidDisappearAtIndex:(NSInteger)index animated:(BOOL)animated;
 @end
 
-#define DEFAULT_PAGE_WIDTH 479.0
+#define DEFAULT_PAGE_WIDTH 479.0f
 
 @implementation CLCascadeView
 
 @synthesize dataSource = _dataSource;
 @synthesize delegate = _delegate;
+@synthesize dragging = _dragging;
+@synthesize decelerating = _decelerating;
+@synthesize pageWidth = _pageWidth;
 
 #pragma mark Init & dealloc
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
     _dataSource = nil;
@@ -50,6 +54,7 @@
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)init {
     self = [super init];
     if (self) {
@@ -58,6 +63,8 @@
     return self;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -67,6 +74,8 @@
     return self;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) layoutSubviews {
     NSArray* visibleViews = [self visiblePages];
 
@@ -90,6 +99,8 @@ static const CGFloat kResistance = 0.15;
 
 #pragma mark Private
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setUpView {
     _pages = [[NSMutableArray alloc] init];
     
@@ -105,8 +116,14 @@ static const CGFloat kResistance = 0.15;
     _actualLeftPageIndex = NSNotFound; 
 
     _pageWidth = DEFAULT_PAGE_WIDTH;
+    
+    _cascadeViewFlags.decelerating = NO;
+    _cascadeViewFlags.dragging = NO;
+    
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) addPanGestureRecognizer:(UIView*)view {
     UIPanGestureRecognizer* panGesture = [[UIPanGestureRecognizer alloc] 
                                           initWithTarget:self 
@@ -115,30 +132,40 @@ static const CGFloat kResistance = 0.15;
     [panGesture release];    
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) panGesture:(UIPanGestureRecognizer*)gesture {
     _touchedPage = gesture.view;
 
     switch(gesture.state) {
         case UIGestureRecognizerStateChanged:
+            // get net touch point
             _newTouchPoint = [gesture locationInView: self];
-            
+            // update dragging direction
             [self updateDraggingDirecton];
-            
+            // update location of pages
             [self updateLocationOfPages: [self transition]];
             _lastTouchPoint = _newTouchPoint;
             
             break;
         case UIGestureRecognizerStateBegan:
-            // set initial offset
+            // set up points
             _startTouchPoint = [gesture locationInView: _touchedPage];
             _lastTouchPoint = [gesture locationInView: self];
-
+            // set flags
+            _cascadeViewFlags.dragging = YES;
+            _cascadeViewFlags.decelerating = NO;
+            
             break;
         case UIGestureRecognizerStateEnded:
+            // reset points
             _startTouchPoint = CGPointZero;
             _newTouchPoint = CGPointZero;
             _lastTouchPoint = CGPointZero;
+            // resete flags
             _directon = CLDraggingDirectionUnknow;
+            _cascadeViewFlags.dragging = NO;
+            _cascadeViewFlags.decelerating = YES;
             break;
         default:
             break;
@@ -146,20 +173,26 @@ static const CGFloat kResistance = 0.15;
     
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGFloat) transition {
     return _lastTouchPoint.x - _newTouchPoint.x;   
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) updateDraggingDirecton {
     CGFloat dx = [self transition];
     
-    if (dx == 0) {
+    if ((dx == 0) || (!_cascadeViewFlags.dragging)) {
         _directon = CLDraggingDirectionUnknow;
     } else {
         _directon = (dx > 0) ? CLDraggingDirectionLeft : CLDraggingDirectionRight;
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) updateLocationOfPages:(CGFloat)transition {
 
     if (_directon == CLDraggingDirectionUnknow) return;
@@ -207,12 +240,13 @@ static const CGFloat kResistance = 0.15;
             
             lastFrame = newFrame;
         }
-        
     }
     
     [self setNeedsLayout];
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSArray*) visiblePages {
 
     // get top visible left page
@@ -252,14 +286,20 @@ static const CGFloat kResistance = 0.15;
     
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) isLastPage:(UIView*)page {
     return ([_pages indexOfObject: page] == [_pages count] - 1);
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) isFirstPage:(UIView*)page {
     return ([_pages indexOfObject: page] == 0);
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) refreshPageHeight:(UIView*)page {
     CGFloat height = self.bounds.size.height;
     CGRect frame = page.frame;
@@ -270,6 +310,8 @@ static const CGFloat kResistance = 0.15;
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) topRightVisiblePage {
     
     NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
@@ -306,10 +348,11 @@ static const CGFloat kResistance = 0.15;
     return nil;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) topLeftVisiblePage {
-    // method not work, return nil
+    // method don't work, return nil
     return nil;
-    
     
     NSInteger index = 0;
     // check all pages
@@ -339,8 +382,10 @@ static const CGFloat kResistance = 0.15;
     return nil;
 }
 
+
 #pragma mark Class methods
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) loadPageAtIndex:(NSInteger)index {
     // check if index exist
     if ((index >= 0) && (index <= [_pages count]-1)) {
@@ -369,6 +414,8 @@ static const CGFloat kResistance = 0.15;
     return nil;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) unloadPageIfNeeded:(NSInteger)index {
 
     // get page at index
@@ -395,6 +442,8 @@ static const CGFloat kResistance = 0.15;
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popPageAtIndex:(NSInteger)index animated:(BOOL)animated {
 
     // get item at index
@@ -419,6 +468,8 @@ static const CGFloat kResistance = 0.15;
 
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popAllPagesAnimated:(BOOL)animated {
     
     id item;
@@ -433,6 +484,8 @@ static const CGFloat kResistance = 0.15;
     }    
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated {
 
     CGRect newPageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
@@ -486,6 +539,8 @@ static const CGFloat kResistance = 0.15;
 
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) unloadInvisiblePages {
     BOOL canUnload = YES;
     
@@ -513,6 +568,8 @@ static const CGFloat kResistance = 0.15;
     
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) unloadPage:(UIView*)page {
 
     // get index of page
@@ -531,9 +588,10 @@ static const CGFloat kResistance = 0.15;
     }    
 }
 
-#pragma mark -
+
 #pragma mark Delegate methods
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didLoadPage:(UIView*)page {
     // add pan gesture recognizer to new view
     [self addPanGestureRecognizer: page];
@@ -543,6 +601,8 @@ static const CGFloat kResistance = 0.15;
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didAddPage:(UIView*)page animated:(BOOL)animated {
     // add pan gesture recognizer to new view
     [self addPanGestureRecognizer: page];
@@ -552,40 +612,66 @@ static const CGFloat kResistance = 0.15;
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didPopPageAtIndex:(NSInteger)index {
     if ([_delegate respondsToSelector:@selector(cascadeView:didPopPageAtIndex:)]) {
         [_delegate cascadeView:self didPopPageAtIndex:index];
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didUnloadPage:(UIView*)page {
     if ([_delegate respondsToSelector:@selector(cascadeView:didUnloadPage:)]) {
         [_delegate cascadeView:self didUnloadPage:page];
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pageWillAppearAtIndex:(NSInteger)index animated:(BOOL)animated {
     if ([_delegate respondsToSelector:@selector(cascadeView:pageWillAppearAtIndex:animated:)]) {
         [_delegate cascadeView:self pageWillAppearAtIndex:index animated:animated];
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pageDidAppearAtIndex:(NSInteger)index animated:(BOOL)animated {
     if ([_delegate respondsToSelector:@selector(cascadeView:pageDidAppearAtIndex:animated:)]) {
         [_delegate cascadeView:self pageDidAppearAtIndex:index animated:animated];
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pageWillDisappearAtIndex:(NSInteger)index animated:(BOOL)animated {
     if ([_delegate respondsToSelector:@selector(cascadeView:pageWillDisappearAtIndex:animated:)]) {
         [_delegate cascadeView:self pageWillDisappearAtIndex:index animated:animated];
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pageDidDisappearAtIndex:(NSInteger)index animated:(BOOL)animated {
     if ([_delegate respondsToSelector:@selector(cascadeView:pageDidDisappearAtIndex:animated:)]) {
         [_delegate cascadeView:self pageDidDisappearAtIndex:index animated:animated];
     }
+}
+
+
+#pragma mark Getters
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL) dragging {
+    return _cascadeViewFlags.dragging;   
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL) decelerating {
+    return _cascadeViewFlags.decelerating;   
 }
 
 @end
