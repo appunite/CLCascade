@@ -37,7 +37,8 @@
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
-    // Release any cached data, images, etc that aren't in use.
+    // unload all invisible pages in cascadeView
+    [_cascadeView unloadInvisiblePages;]
 }
 
 #pragma mark - View lifecycle
