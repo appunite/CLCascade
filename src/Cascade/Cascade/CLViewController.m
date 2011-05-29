@@ -77,13 +77,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated {
-//    if (_parentCascadeViewController != nil) {
-//        CLCascadeViewController* cascadeViewController = [[CLCascadeViewController alloc] 
-//                                                          initWithMasterPositionViewController:viewController];
-//        [_parentCascadeViewController pushCascadeViewController:cascadeViewController animated:animated];
-//        [cascadeViewController release];
-//    }
-    
     [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
 }
 
