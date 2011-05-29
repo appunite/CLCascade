@@ -19,7 +19,7 @@
 - (CGFloat) transition;
 - (UIView*) topLeftVisiblePage;
 - (UIView*) topRightVisiblePage;
-- (void) refreshPageHeight:(UIView*)height;
+- (void) refreshPageHeight:(UIView*)page;
 @end
 
 @interface CLCascadeView (DelegateMethods)
