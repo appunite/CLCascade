@@ -12,19 +12,19 @@
 #import "CLSegmentedView.h"
 #import "UIViewController+CLSegmentedView.h"
 
-@class CLCascadeViewController;
 @class CLCascadeNavigationController;
 
 @interface CLViewController : UIViewController {
-    CLCascadeViewController* _parentCascadeViewController;
     CLCascadeNavigationController* _cascadeNavigationController;
     
     CAGradientLayer* _originShadow;
     CGFloat _shadowWidth;
+    
+    NSUInteger _viewOnStackIndex;
 }
 
-@property (nonatomic, retain) CLCascadeViewController* parentCascadeViewController;
 @property (nonatomic, retain) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
+@property (nonatomic, assign) NSUInteger viewOnStackIndex;
 
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated;
 - (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha;

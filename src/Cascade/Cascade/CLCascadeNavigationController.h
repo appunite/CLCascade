@@ -7,61 +7,48 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CLCascadeViewController.h"
-#import "CLCascadeNavigationView.h"
+
 #import "CLViewController.h"
+#import "CLCascadeView.h"
 
-@protocol CLCascadeNavigationControllerDelegate;
-
-@interface CLCascadeNavigationController : UIViewController {
-
-    CLCascadeViewController* _rootViewController;
-    CLCascadeViewController* _lastCascadeViewController;
-    
+@interface CLCascadeNavigationController : UIViewController <CLCascadeViewDataSource, CLCascadeViewDelegate> {
+    // array of all view controllers
     NSMutableArray* _viewControllers;
+
+    //
+    CLCascadeView* _cascadeView;
 }
-
-- (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated;
-
-/* 
- First in hierarchy CascadeViewController (opposite to lastCascadeViewController)
- */
-@property (nonatomic, retain, readonly) CLCascadeViewController* rootViewController;
-
-/* 
- Last in hierarchy CascadeViewController (opposite to rootViewController)
- */
-@property (nonatomic, retain, readwrite) CLCascadeViewController* lastCascadeViewController;
 
 /*
  List of CLViewControllers on stock.
  */
 @property (nonatomic, retain, readonly) NSMutableArray* viewControllers;
 
-- (CGRect) cascadeScrollableViewFrame;
-- (CGRect) cascadeContentNavigatorBounds;
 
-- (CGSize) singleCascadeContentSize;
-- (CGSize) doubleCascadeContentSize;
+/*
+ * Set and push root view controller
+ */
+- (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated;
 
-- (CGRect) masterCascadeFrame;
-- (CGRect) detailCascadeFrame;
 
-- (CGPoint) masterContentOffsetLeadToDetailView;
-- (CGPoint) detailContentOffsetAtShow;
+/*
+ * Push new view controller from sender.
+ * If sender is not last, then controller pop next controller and push new view from sender
+ */
 
-- (CGRect) frameRootViewController;
-- (CGSize) contentSizeRootViewController;
+- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated;
 
-- (void) addViewController:(CLViewController*)viewController;
-- (void) removeViewController:(CLViewController*)viewController;
-- (void) removeViewControllersStartingFrom:(CLViewController*)viewController;
 
-- (void) adjustFrameAndContentAfterRotation;
+/* 
+ First in hierarchy CascadeViewController (opposite to lastCascadeViewController)
+ */
+- (UIViewController*) rootViewController;
+
+
+/* 
+ Last in hierarchy CascadeViewController (opposite to rootViewController)
+ */
+- (UIViewController*)  lastCascadeViewController;
+
 
 @end
-
-//@protocol CLCascadeNavigationControllerDelegate <NSObject>
-//- (void) rootViewControllerMoveToMasterPosition;
-//- (void) rootViewControllerMoveToDetailPosition;
-//@end

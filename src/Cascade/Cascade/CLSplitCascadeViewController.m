@@ -85,7 +85,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
-    [self.cascadeNavigationController adjustFrameAndContentAfterRotation];
+
 }
 
 @end

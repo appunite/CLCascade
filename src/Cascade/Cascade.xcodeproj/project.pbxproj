@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20015596138F824E00FA91B2 /* CLCascadeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 20015594138F824E00FA91B2 /* CLCascadeView.h */; };
+		20015597138F824E00FA91B2 /* CLCascadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20015595138F824E00FA91B2 /* CLCascadeView.m */; };
+		20015598138F82FC00FA91B2 /* CLCascadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20015595138F824E00FA91B2 /* CLCascadeView.m */; };
 		200BF67F13747494005C23EF /* CLCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200BF67E13747494005C23EF /* CLCategoriesViewController.m */; };
 		200BF6821374751B005C23EF /* CLCascadeNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200BF6811374751B005C23EF /* CLCascadeNavigationController.m */; };
 		206ECD1C1375595200B8405F /* UIViewController+CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD1B1375595200B8405F /* UIViewController+CLSegmentedView.m */; };
-		206ECD5D137574E600B8405F /* CLCascadeNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD5C137574E600B8405F /* CLCascadeNavigationView.m */; };
 		206ECD60137589DB00B8405F /* CLCategoriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD5F137589DB00B8405F /* CLCategoriesView.m */; };
 		206ECD631375973D00B8405F /* CLCascadeEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD621375973C00B8405F /* CLCascadeEnums.m */; };
-		20A7E8D3138D73DF008B2969 /* CLCascadeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 20A7E8D1138D73DF008B2969 /* CLCascadeView.h */; };
-		20A7E8D4138D73DF008B2969 /* CLCascadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A7E8D2138D73DF008B2969 /* CLCascadeView.m */; };
 		20B0D97A1356518E008B1F7D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B0D9791356518E008B1F7D /* QuartzCore.framework */; };
 		20BB341E133FB8FF003EEB6E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20BB341D133FB8FF003EEB6E /* UIKit.framework */; };
 		20BB3420133FB8FF003EEB6E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20BB341F133FB8FF003EEB6E /* Foundation.framework */; };
@@ -26,10 +26,11 @@
 		20BB3434133FB900003EEB6E /* CLSplitCascadeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3433133FB900003EEB6E /* CLSplitCascadeViewController.m */; };
 		20BB3437133FB900003EEB6E /* CLSplitCascadeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20BB3435133FB900003EEB6E /* CLSplitCascadeViewController.xib */; };
 		20BB344A133FBAA4003EEB6E /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB343F133FBAA4003EEB6E /* CLScrollView.m */; };
-		20BB344C133FBAA4003EEB6E /* CLCascadeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3443133FBAA4003EEB6E /* CLCascadeViewController.m */; };
 		20BB344E133FBAA4003EEB6E /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3446133FBAA4003EEB6E /* CLViewController.m */; };
 		20BB3450133FBAA4003EEB6E /* CLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3449133FBAA4003EEB6E /* CLTableViewController.m */; };
 		20BB3453133FC07A003EEB6E /* CLSplitCascadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3452133FC07A003EEB6E /* CLSplitCascadeView.m */; };
+		20C837F3139108BF00B6C862 /* UIView+Sizes.h in Headers */ = {isa = PBXBuildFile; fileRef = 20C837F1139108BF00B6C862 /* UIView+Sizes.h */; };
+		20C837F4139108BF00B6C862 /* UIView+Sizes.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C837F2139108BF00B6C862 /* UIView+Sizes.m */; };
 		20D40381137C23BC000A75DD /* divider_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D40380137C23BC000A75DD /* divider_vertical.png */; };
 		20F2DBA9136494350076E80D /* CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F2DBA8136494350076E80D /* CLSegmentedView.m */; };
 		4C17F0E8137999E8003A11F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20BB341F133FB8FF003EEB6E /* Foundation.framework */; };
@@ -45,8 +46,6 @@
 		4C17F10C13799A27003A11F9 /* CLCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200BF67E13747494005C23EF /* CLCategoriesViewController.m */; };
 		4C17F10D13799A27003A11F9 /* CLCategoriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD5F137589DB00B8405F /* CLCategoriesView.m */; };
 		4C17F10E13799A27003A11F9 /* CLCascadeNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200BF6811374751B005C23EF /* CLCascadeNavigationController.m */; };
-		4C17F10F13799A27003A11F9 /* CLCascadeNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD5C137574E600B8405F /* CLCascadeNavigationView.m */; };
-		4C17F11013799A27003A11F9 /* CLCascadeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3443133FBAA4003EEB6E /* CLCascadeViewController.m */; };
 		4C17F11113799A27003A11F9 /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3446133FBAA4003EEB6E /* CLViewController.m */; };
 		4C17F11213799A27003A11F9 /* CLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3449133FBAA4003EEB6E /* CLTableViewController.m */; };
 		4C17F11313799A27003A11F9 /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB343F133FBAA4003EEB6E /* CLScrollView.m */; };
@@ -66,20 +65,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		20015594138F824E00FA91B2 /* CLCascadeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCascadeView.h; sourceTree = "<group>"; };
+		20015595138F824E00FA91B2 /* CLCascadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCascadeView.m; sourceTree = "<group>"; };
 		200BF67D13747493005C23EF /* CLCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCategoriesViewController.h; sourceTree = "<group>"; };
 		200BF67E13747494005C23EF /* CLCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCategoriesViewController.m; sourceTree = "<group>"; };
 		200BF6801374751B005C23EF /* CLCascadeNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCascadeNavigationController.h; sourceTree = "<group>"; };
 		200BF6811374751B005C23EF /* CLCascadeNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCascadeNavigationController.m; sourceTree = "<group>"; };
 		206ECD1A1375595200B8405F /* UIViewController+CLSegmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CLSegmentedView.h"; sourceTree = "<group>"; };
 		206ECD1B1375595200B8405F /* UIViewController+CLSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CLSegmentedView.m"; sourceTree = "<group>"; };
-		206ECD5B137574E500B8405F /* CLCascadeNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCascadeNavigationView.h; sourceTree = "<group>"; };
-		206ECD5C137574E600B8405F /* CLCascadeNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCascadeNavigationView.m; sourceTree = "<group>"; };
 		206ECD5E137589DB00B8405F /* CLCategoriesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCategoriesView.h; sourceTree = "<group>"; };
 		206ECD5F137589DB00B8405F /* CLCategoriesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCategoriesView.m; sourceTree = "<group>"; };
 		206ECD611375973C00B8405F /* CLCascadeEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCascadeEnums.h; sourceTree = "<group>"; };
 		206ECD621375973C00B8405F /* CLCascadeEnums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCascadeEnums.m; sourceTree = "<group>"; };
-		20A7E8D1138D73DF008B2969 /* CLCascadeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCascadeView.h; sourceTree = "<group>"; };
-		20A7E8D2138D73DF008B2969 /* CLCascadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCascadeView.m; sourceTree = "<group>"; };
 		20B0D9791356518E008B1F7D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		20BB3419133FB8FF003EEB6E /* Cascade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cascade.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20BB341D133FB8FF003EEB6E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -97,14 +94,14 @@
 		20BB3436133FB900003EEB6E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CLSplitCascadeViewController.xib; sourceTree = "<group>"; };
 		20BB343E133FBAA4003EEB6E /* CLScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLScrollView.h; sourceTree = "<group>"; };
 		20BB343F133FBAA4003EEB6E /* CLScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLScrollView.m; sourceTree = "<group>"; };
-		20BB3442133FBAA4003EEB6E /* CLCascadeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCascadeViewController.h; sourceTree = "<group>"; };
-		20BB3443133FBAA4003EEB6E /* CLCascadeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCascadeViewController.m; sourceTree = "<group>"; };
 		20BB3445133FBAA4003EEB6E /* CLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewController.h; sourceTree = "<group>"; };
 		20BB3446133FBAA4003EEB6E /* CLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController.m; sourceTree = "<group>"; };
 		20BB3448133FBAA4003EEB6E /* CLTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTableViewController.h; sourceTree = "<group>"; };
 		20BB3449133FBAA4003EEB6E /* CLTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTableViewController.m; sourceTree = "<group>"; };
 		20BB3451133FC07A003EEB6E /* CLSplitCascadeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSplitCascadeView.h; sourceTree = "<group>"; };
 		20BB3452133FC07A003EEB6E /* CLSplitCascadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSplitCascadeView.m; sourceTree = "<group>"; };
+		20C837F1139108BF00B6C862 /* UIView+Sizes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Sizes.h"; sourceTree = "<group>"; };
+		20C837F2139108BF00B6C862 /* UIView+Sizes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Sizes.m"; sourceTree = "<group>"; };
 		20D40380137C23BC000A75DD /* divider_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = divider_vertical.png; sourceTree = "<group>"; };
 		20F2DBA7136494350076E80D /* CLSegmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSegmentedView.h; sourceTree = "<group>"; };
 		20F2DBA8136494350076E80D /* CLSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSegmentedView.m; sourceTree = "<group>"; };
@@ -191,8 +188,8 @@
 			children = (
 				200BF6801374751B005C23EF /* CLCascadeNavigationController.h */,
 				200BF6811374751B005C23EF /* CLCascadeNavigationController.m */,
-				206ECD5B137574E500B8405F /* CLCascadeNavigationView.h */,
-				206ECD5C137574E600B8405F /* CLCascadeNavigationView.m */,
+				20015594138F824E00FA91B2 /* CLCascadeView.h */,
+				20015595138F824E00FA91B2 /* CLCascadeView.m */,
 			);
 			name = CLCascadeNavigationController;
 			sourceTree = "<group>";
@@ -200,6 +197,8 @@
 		205A69BD1363761500F6544D /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				20C837F1139108BF00B6C862 /* UIView+Sizes.h */,
+				20C837F2139108BF00B6C862 /* UIView+Sizes.m */,
 				20BB343E133FBAA4003EEB6E /* CLScrollView.h */,
 				20BB343F133FBAA4003EEB6E /* CLScrollView.m */,
 				20F2DBA7136494350076E80D /* CLSegmentedView.h */,
@@ -292,10 +291,6 @@
 		20F2DBC81364C9C80076E80D /* CLCascadeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				20BB3442133FBAA4003EEB6E /* CLCascadeViewController.h */,
-				20BB3443133FBAA4003EEB6E /* CLCascadeViewController.m */,
-				20A7E8D1138D73DF008B2969 /* CLCascadeView.h */,
-				20A7E8D2138D73DF008B2969 /* CLCascadeView.m */,
 			);
 			name = CLCascadeViewController;
 			sourceTree = "<group>";
@@ -343,7 +338,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20A7E8D3138D73DF008B2969 /* CLCascadeView.h in Headers */,
+				20015596138F824E00FA91B2 /* CLCascadeView.h in Headers */,
+				20C837F3139108BF00B6C862 /* UIView+Sizes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,11 +467,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20015598138F82FC00FA91B2 /* CLCascadeView.m in Sources */,
 				20BB342B133FB8FF003EEB6E /* main.m in Sources */,
 				20BB342E133FB900003EEB6E /* CascadeAppDelegate.m in Sources */,
 				20BB3434133FB900003EEB6E /* CLSplitCascadeViewController.m in Sources */,
 				20BB344A133FBAA4003EEB6E /* CLScrollView.m in Sources */,
-				20BB344C133FBAA4003EEB6E /* CLCascadeViewController.m in Sources */,
 				20BB344E133FBAA4003EEB6E /* CLViewController.m in Sources */,
 				20BB3450133FBAA4003EEB6E /* CLTableViewController.m in Sources */,
 				20BB3453133FC07A003EEB6E /* CLSplitCascadeView.m in Sources */,
@@ -483,7 +479,6 @@
 				200BF67F13747494005C23EF /* CLCategoriesViewController.m in Sources */,
 				200BF6821374751B005C23EF /* CLCascadeNavigationController.m in Sources */,
 				206ECD1C1375595200B8405F /* UIViewController+CLSegmentedView.m in Sources */,
-				206ECD5D137574E600B8405F /* CLCascadeNavigationView.m in Sources */,
 				206ECD60137589DB00B8405F /* CLCategoriesView.m in Sources */,
 				206ECD631375973D00B8405F /* CLCascadeEnums.m in Sources */,
 			);
@@ -498,15 +493,14 @@
 				4C17F10C13799A27003A11F9 /* CLCategoriesViewController.m in Sources */,
 				4C17F10D13799A27003A11F9 /* CLCategoriesView.m in Sources */,
 				4C17F10E13799A27003A11F9 /* CLCascadeNavigationController.m in Sources */,
-				4C17F10F13799A27003A11F9 /* CLCascadeNavigationView.m in Sources */,
-				4C17F11013799A27003A11F9 /* CLCascadeViewController.m in Sources */,
 				4C17F11113799A27003A11F9 /* CLViewController.m in Sources */,
 				4C17F11213799A27003A11F9 /* CLTableViewController.m in Sources */,
 				4C17F11313799A27003A11F9 /* CLScrollView.m in Sources */,
 				4C17F11413799A27003A11F9 /* CLSegmentedView.m in Sources */,
 				4C17F11513799A27003A11F9 /* UIViewController+CLSegmentedView.m in Sources */,
 				4C17F11613799A27003A11F9 /* CLCascadeEnums.m in Sources */,
-				20A7E8D4138D73DF008B2969 /* CLCascadeView.m in Sources */,
+				20015597138F824E00FA91B2 /* CLCascadeView.m in Sources */,
+				20C837F4139108BF00B6C862 /* UIView+Sizes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +570,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -591,7 +585,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -602,7 +596,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tadeusz Wojtaszek (R7VEB36U8D)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -612,6 +606,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "16C10C8D-6AB0-474A-8F89-A8E408DD34D5";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -621,7 +616,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tadeusz Wojtaszek (R7VEB36U8D)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cascade/Cascade-Prefix.pch";
@@ -630,6 +625,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "16C10C8D-6AB0-474A-8F89-A8E408DD34D5";
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

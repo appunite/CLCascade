@@ -90,11 +90,6 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) awakeFromNib {
-
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
     [_cascadeView release], _cascadeView = nil;
@@ -110,19 +105,27 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    
-//    CLSplitCascadeViewController* viewController = (CLSplitCascadeViewController*)[self viewController];
-    CLCascadeViewController* rootViewController = [_splitCascadeViewController.cascadeNavigationController rootViewController];
-    
-    if ([rootViewController currentScrollPosition] == CLCascadeViewScrollMasterPosition) {
 
-        if ((CGRectContainsPoint(_splitCascadeViewController.view.frame, point)) && (CGRectContainsPoint(_categoriesView.frame, point))) {
+    CLCascadeNavigationController* cascadeNavigationController = _splitCascadeViewController.cascadeNavigationController;
+    UIView* navigationView = [cascadeNavigationController view];
+
+    if (CGRectContainsPoint(_categoriesView.frame, point)) {
+        
+        UIView* rootView = [[cascadeNavigationController rootViewController] view];
+        CGRect rootViewRect = [rootView convertRect:rootView.bounds toView:self];
+
+        if ((rootView) && (CGRectContainsPoint(rootViewRect, point))) {
+            CGPoint newPoint = [self convertPoint:point toView:navigationView];
+            return [navigationView hitTest:newPoint withEvent:event];
+        } else {
             return [_categoriesView hitTest:point withEvent:event];
         }
+
+    } else {
+        CGPoint newPoint = [self convertPoint:point toView:navigationView];
+        return [navigationView hitTest:newPoint withEvent:event];
     }
-    
-    return [super hitTest:point withEvent:event];
-    
+        
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

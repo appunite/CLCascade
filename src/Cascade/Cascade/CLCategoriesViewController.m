@@ -7,7 +7,6 @@
 //
 
 #import "CLCategoriesViewController.h"
-#import "CLCascadeViewController.h"
 
 @implementation CLCategoriesViewController
 

@@ -7,18 +7,16 @@
 //
 
 #import "CLViewController.h"
-#import "CLCascadeViewController.h"
 #import "CLCascadeNavigationController.h"
 
 @implementation CLViewController
 
-@synthesize parentCascadeViewController = _parentCascadeViewController;
 @synthesize cascadeNavigationController = _cascadeNavigationController;
+@synthesize viewOnStackIndex = _viewOnStackIndex;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_parentCascadeViewController release], _parentCascadeViewController = nil;
     [_cascadeNavigationController release], _cascadeNavigationController = nil;
     [_originShadow release], _originShadow = nil;    
     [super dealloc];
@@ -79,12 +77,14 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated {
-    if (_parentCascadeViewController != nil) {
-        CLCascadeViewController* cascadeViewController = [[CLCascadeViewController alloc] 
-                                                          initWithMasterPositionViewController:viewController];
-        [_parentCascadeViewController pushCascadeViewController:cascadeViewController animated:animated];
-        [cascadeViewController release];
-    }
+//    if (_parentCascadeViewController != nil) {
+//        CLCascadeViewController* cascadeViewController = [[CLCascadeViewController alloc] 
+//                                                          initWithMasterPositionViewController:viewController];
+//        [_parentCascadeViewController pushCascadeViewController:cascadeViewController animated:animated];
+//        [cascadeViewController release];
+//    }
+    
+    [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
 }
 
 @end

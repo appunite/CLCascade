@@ -10,7 +10,6 @@
 #import "CLCascadeNavigationController.h"
 #import "CLCascadeEnums.h"
 #import "CLSplitCascadeViewController.h"
-#import "CLCascadeViewController.h"
 
 @interface CLSplitCascadeView : UIView {
     // views
@@ -59,7 +58,6 @@
  * Cascade content navigator - located on the right, view containing cascade view controllers
  */
 @property (nonatomic, retain) UIView* cascadeView;
-
 
 - (UIViewController*)viewController;
 
