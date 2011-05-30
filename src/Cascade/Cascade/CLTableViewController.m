@@ -146,13 +146,17 @@
     [viewController release];
 }
 
+
 #pragma mark -
 #pragma mark Getters
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UITableView*) tableView {
     return (UITableView*)[self.segmentedView contentView];
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setTableView:(UITableView *)newTableView {
     [self.segmentedView setContentView: newTableView];
 }

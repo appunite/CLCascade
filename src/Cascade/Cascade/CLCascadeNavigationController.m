@@ -149,14 +149,18 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index {
-    NSLog(@"pageDidAppearAtIndex: %i", index);
-//    [[_viewControllers objectAtIndex: index] viewDidAppear:animated];
+    UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
+    if ([controller respondsToSelector:@selector(pageDidAppear)]) {
+        [controller pageDidAppear];
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index {
-    NSLog(@"pageDidDisappearAtIndex: %i", index);
-//    [[_viewControllers objectAtIndex: index] viewDidDisappear:animated];
+    UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
+    if ([controller respondsToSelector:@selector(pageDidAppear)]) {
+        [controller pageDidAppear];
+    }
 }
 
 #pragma mark -

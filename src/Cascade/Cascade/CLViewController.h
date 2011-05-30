@@ -11,10 +11,11 @@
 
 #import "CLSegmentedView.h"
 #import "UIViewController+CLSegmentedView.h"
+#import "CLViewControllerDelegate.h"
 
 @class CLCascadeNavigationController;
 
-@interface CLViewController : UIViewController {
+@interface CLViewController : UIViewController <CLViewControllerDelegate> {
     CLCascadeNavigationController* _cascadeNavigationController;
     
     CAGradientLayer* _originShadow;

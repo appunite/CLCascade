@@ -14,6 +14,7 @@
 @synthesize cascadeNavigationController = _cascadeNavigationController;
 @synthesize viewOnStackIndex = _viewOnStackIndex;
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
@@ -21,6 +22,7 @@
     [_originShadow release], _originShadow = nil;    
     [super dealloc];
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)didReceiveMemoryWarning
@@ -40,6 +42,7 @@
     // Do any additional setup after loading the view from its nib.        
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)viewDidUnload
 {
@@ -47,6 +50,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -57,6 +61,7 @@
 
 #pragma mark -
 #pragma mark Class methods
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha {
@@ -75,9 +80,30 @@
     [(CLSegmentedView*)self.view setShadow:shadow withWidth:width];
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated {
     [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
+}
+
+
+#pragma mark CLViewControllerDelegate
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) pageDidAppear {
+    /*
+     * Called when page (view of this controller) will be unveiled by 
+     * another page or will slide in CascadeView bounds
+     */
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) pageDidDisappear {
+    /*
+     * Called when page (view of this controller) will be shadowed by 
+     * another page or will slide out CascadeView bounds
+     */
 }
 
 @end
