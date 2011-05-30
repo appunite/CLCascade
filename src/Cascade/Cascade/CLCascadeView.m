@@ -266,15 +266,28 @@ static const CGFloat kResistance = 0.15;
 
         // add top right visible page
         [array addObject:topPage];
+
+        // get index of topPage in array of subviews
+        NSInteger subviewIndex = [self.subviews indexOfObject:topPage] - 1;
         
         // load other pages if exists
         for (NSInteger i=1; i<=count; i++) {
+            // page index
+            NSInteger index = topPageIndex-i;
             // load page at index
-            UIView* page = [self loadPageAtIndex:topPageIndex-i];
+            UIView* page = [self loadPageAtIndex:index];
             // if page exist, add page to array
             if (page) {
+                // if the array of subviews don't reflect 
+                // the array of pages, send subview to back
+                if  (index > subviewIndex) {
+                    // set proper index of view
+                    [self sendSubviewToBack: page];
+                }
+                // add page to array of visible pages
                 [array addObject: page];
             }
+            subviewIndex--;
         }
         
         // return array of pages
@@ -332,9 +345,13 @@ static const CGFloat kResistance = 0.15;
                     // load previous page if neede and if can
                     UIView* nextPage = [self loadPageAtIndex: index + 1];
                     // if prev page exist, that page is top page
-                    if (nextPage != nil) {
+                    if (nextPage) {
+                        // set new frame, next to the right edge of previos page
                         CGRect frame = CGRectMake(page.frame.origin.x + page.frame.size.width, 0.0, _pageWidth, self.bounds.size.height);
                         [nextPage setFrame: frame];
+                        //
+                        [self bringSubviewToFront:nextPage];
+                        //retunr next page
                         return nextPage;
                     }
                 }
@@ -444,7 +461,7 @@ static const CGFloat kResistance = 0.15;
                 [_pages replaceObjectAtIndex:index withObject:view];
                 
                 // add subview
-                [self insertSubview:view atIndex:index];
+                [self addSubview: view];
                 
                 // send delegate
                 [self didLoadPage:view];
@@ -544,20 +561,23 @@ static const CGFloat kResistance = 0.15;
     // if visible page exist in array of pages then can't ubload
     for (id item in _pages) {
         
-        for (UIView* visiblePage in visiblePages) {
-        
-            if (item == visiblePage) {
-                canUnload = NO; break;
+        if (item != [NSNull null]) {
+
+            for (UIView* visiblePage in visiblePages) {
+                
+                if (item == visiblePage) {
+                    canUnload = NO; break;
+                }
             }
+            
+            // if can, add to array - pages to unlaod
+            if (canUnload) {
+                [pagesToUnload addObject: item];
+            } 
+            
+            // set flag to YES
+            canUnload = YES;
         }
-        
-        // if can, add to array - pages to unlaod
-        if (canUnload) {
-            [pagesToUnload addObject: item];
-        } 
-        
-        // set flag to YES
-        canUnload = YES;
     }
 
     // unload pages
@@ -572,7 +592,7 @@ static const CGFloat kResistance = 0.15;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) unloadPage:(UIView*)page {
-
+    
     // get index of page
     NSUInteger index = [_pages indexOfObject: page];
 
