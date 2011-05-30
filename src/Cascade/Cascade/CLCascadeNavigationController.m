@@ -138,37 +138,25 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didAddPage:(UIView*)page animated:(BOOL)animated {
-    NSLog(@"didAddPage: %@", page);
+//    NSLog(@"didAddPage: %@", page);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didPopPageAtIndex:(NSInteger)index {
-    NSLog(@"didAddPage: %i", index);
+//    NSLog(@"didAddPage: %i", index);
     // todo: delete controller
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) cascadeView:(CLCascadeView*)cascadeView pageWillAppearAtIndex:(NSInteger)index animated:(BOOL)animated {
-//    NSLog(@"pageWillAppearAtIndex: %i", index);
-    [[_viewControllers objectAtIndex: index] viewWillAppear:animated];
+- (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index {
+    NSLog(@"pageDidAppearAtIndex: %i", index);
+//    [[_viewControllers objectAtIndex: index] viewDidAppear:animated];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index animated:(BOOL)animated {
-//    NSLog(@"pageDidAppearAtIndex: %i", index);
-    [[_viewControllers objectAtIndex: index] viewDidAppear:animated];
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) cascadeView:(CLCascadeView*)cascadeView pageWillDisappearAtIndex:(NSInteger)index animated:(BOOL)animated {
-//    NSLog(@"pageWillDisappearAtIndex: %i", index);
-    [[_viewControllers objectAtIndex: index] viewWillDisappear:animated];
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index animated:(BOOL)animated {
-//    NSLog(@"pageDidDisappearAtIndex: %i", index);
-    [[_viewControllers objectAtIndex: index] viewDidDisappear:animated];
+- (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index {
+    NSLog(@"pageDidDisappearAtIndex: %i", index);
+//    [[_viewControllers objectAtIndex: index] viewDidDisappear:animated];
 }
 
 #pragma mark -

@@ -23,6 +23,9 @@ typedef enum {
 
     NSMutableArray* _pages;
     
+    // you need call visiblePages to refresh this ivar
+    NSMutableArray* _visiblePages;
+    
     CGFloat _pageWidth;
     
     NSInteger _actualRightPageIndex; 
@@ -81,9 +84,13 @@ typedef enum {
 - (void) cascadeView:(CLCascadeView*)cascadeView didAddPage:(UIView*)page animated:(BOOL)animated;
 - (void) cascadeView:(CLCascadeView*)cascadeView didPopPageAtIndex:(NSInteger)index;
 
-- (void) cascadeView:(CLCascadeView*)cascadeView pageWillAppearAtIndex:(NSInteger)index animated:(BOOL)animated;
-- (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index animated:(BOOL)animated;
-- (void) cascadeView:(CLCascadeView*)cascadeView pageWillDisappearAtIndex:(NSInteger)index animated:(BOOL)animated;
-- (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index animated:(BOOL)animated;
+/*
+ * Called when page will be unveiled by another page or will slide in CascadeView bounds
+ */
+- (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index;
+/*
+ * Called when page will be shadowed by another page or will slide out CascadeView bounds
+ */
+- (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index;
 
 @end

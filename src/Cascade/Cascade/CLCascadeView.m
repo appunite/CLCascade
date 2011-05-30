@@ -20,6 +20,8 @@
 - (UIView*) topLeftVisiblePage;
 - (UIView*) topRightVisiblePage;
 - (void) refreshPageHeight:(UIView*)page;
+- (void) sendDelegateMessageToHidingPages:(NSArray*)pages;
+- (void) sendDelegateMessageToShowUpPages:(NSArray*)pages;
 @end
 
 @interface CLCascadeView (DelegateMethods)
@@ -27,10 +29,8 @@
 - (void) didAddPage:(UIView*)page animated:(BOOL)animated;
 - (void) didPopPageAtIndex:(NSInteger)index;
 - (void) didUnloadPage:(UIView*)page;
-- (void) pageWillAppearAtIndex:(NSInteger)index animated:(BOOL)animated;
-- (void) pageDidAppearAtIndex:(NSInteger)index animated:(BOOL)animated;
-- (void) pageWillDisappearAtIndex:(NSInteger)index animated:(BOOL)animated;
-- (void) pageDidDisappearAtIndex:(NSInteger)index animated:(BOOL)animated;
+- (void) pageDidAppearAtIndex:(NSInteger)index;
+- (void) pageDidDisappearAtIndex:(NSInteger)index;
 @end
 
 #define DEFAULT_PAGE_WIDTH 479.0f
@@ -50,6 +50,9 @@
 {
     _dataSource = nil;
     _delegate = nil;
+    [_visiblePages release], _visiblePages = nil;
+    [_pages release], _pages = nil;
+
     [super dealloc];
 }
 
@@ -77,9 +80,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) layoutSubviews {
-    NSArray* visibleViews = [self visiblePages];
 
-    for (UIView* view in visibleViews) {
+    for (UIView* view in _visiblePages) {
         [self refreshPageHeight: view];
     }
     
@@ -103,6 +105,7 @@ static const CGFloat kResistance = 0.15;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setUpView {
     _pages = [[NSMutableArray alloc] init];
+    _visiblePages = [[NSMutableArray alloc] init];
     
     [self setAutoresizingMask:
      UIViewAutoresizingFlexibleLeftMargin | 
@@ -289,14 +292,74 @@ static const CGFloat kResistance = 0.15;
             }
             subviewIndex--;
         }
+        // if there is no any changes return _visiblePages
+        if ([_visiblePages isEqualToArray: array]) {
+            return _visiblePages;
+        }
+        
+        // send delegate message to pages that will appear or disappear
+        [self sendDelegateMessageToHidingPages: array];
+        [self sendDelegateMessageToShowUpPages: array];
+        
+        // if there are changes remove array and add visible pages to array
+        [_visiblePages removeAllObjects];
+        [_visiblePages addObjectsFromArray: array];
         
         // return array of pages
-        return array;
+        return _visiblePages;
     }
     
+    // there is no visible pages
+    [_visiblePages removeAllObjects];
     // if top page don't exist, return nil
-    return nil;
+    return _visiblePages;
     
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) sendDelegateMessageToHidingPages:(NSArray*)pages {
+    BOOL exisnt = NO;
+    // array of last visible pages
+    for (UIView* viewA in _visiblePages) {
+        
+        // array of current visible pages
+        for (UIView* viewB in pages) {
+            if ([viewA isEqual: viewB]) {
+                exisnt = YES; break;
+            }
+        }
+        
+        if (!exisnt) {
+            NSInteger index = [_pages indexOfObject: viewA];
+            [self pageDidDisappearAtIndex:index];
+        }
+        
+        exisnt = NO;
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) sendDelegateMessageToShowUpPages:(NSArray*)pages {
+    BOOL exisnt = NO;
+    // array of current visible pages
+    for (UIView* viewB in pages) {
+        
+        // array of last visible pages
+        for (UIView* viewA in _visiblePages) {
+            if ([viewA isEqual: viewB]) {
+                exisnt = YES; break;
+            }
+        }
+        
+        if (!exisnt) {
+            NSInteger index = [_pages indexOfObject: viewB];
+            [self pageDidAppearAtIndex:index];
+        }
+        
+        exisnt = NO;
+    }    
 }
 
 
@@ -426,12 +489,12 @@ static const CGFloat kResistance = 0.15;
     
     // get new page index, (is last)
     NSUInteger index = [_pages count]-1;
-    //send message to delegate
-    [self pageWillAppearAtIndex:index animated:animated];
+//    //send message to delegate
+//    [self pageWillAppearAtIndex:index animated:animated];
     // add subview
     [self addSubview: newPage];
-    //send message to delegate
-    [self pageDidAppearAtIndex: index animated:animated];
+//    //send message to delegate
+//    [self pageDidAppearAtIndex: index animated:animated];
     
     
     _actualRightPageIndex = [_pages count] - 1;
@@ -652,33 +715,17 @@ static const CGFloat kResistance = 0.15;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) pageWillAppearAtIndex:(NSInteger)index animated:(BOOL)animated {
-    if ([_delegate respondsToSelector:@selector(cascadeView:pageWillAppearAtIndex:animated:)]) {
-        [_delegate cascadeView:self pageWillAppearAtIndex:index animated:animated];
+- (void) pageDidAppearAtIndex:(NSInteger)index {
+    if ([_delegate respondsToSelector:@selector(cascadeView:pageDidAppearAtIndex:)]) {
+        [_delegate cascadeView:self pageDidAppearAtIndex:index];
     }
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) pageDidAppearAtIndex:(NSInteger)index animated:(BOOL)animated {
-    if ([_delegate respondsToSelector:@selector(cascadeView:pageDidAppearAtIndex:animated:)]) {
-        [_delegate cascadeView:self pageDidAppearAtIndex:index animated:animated];
-    }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) pageWillDisappearAtIndex:(NSInteger)index animated:(BOOL)animated {
-    if ([_delegate respondsToSelector:@selector(cascadeView:pageWillDisappearAtIndex:animated:)]) {
-        [_delegate cascadeView:self pageWillDisappearAtIndex:index animated:animated];
-    }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) pageDidDisappearAtIndex:(NSInteger)index animated:(BOOL)animated {
-    if ([_delegate respondsToSelector:@selector(cascadeView:pageDidDisappearAtIndex:animated:)]) {
-        [_delegate cascadeView:self pageDidDisappearAtIndex:index animated:animated];
+- (void) pageDidDisappearAtIndex:(NSInteger)index {
+    if ([_delegate respondsToSelector:@selector(cascadeView:pageDidDisappearAtIndex:)]) {
+        [_delegate cascadeView:self pageDidDisappearAtIndex:index];
     }
 }
 
