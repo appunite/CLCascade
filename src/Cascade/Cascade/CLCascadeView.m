@@ -115,9 +115,6 @@ static const CGFloat kResistance = 0.15;
      UIViewAutoresizingFlexibleWidth | 
      UIViewAutoresizingFlexibleHeight];
 
-    _actualRightPageIndex = NSNotFound; 
-    _actualLeftPageIndex = NSNotFound; 
-
     _pageWidth = DEFAULT_PAGE_WIDTH;
     
     _cascadeViewFlags.decelerating = NO;
@@ -399,10 +396,8 @@ static const CGFloat kResistance = 0.15;
         // find first loaded view
         if (item != [NSNull null]) {
             UIView* page = (UIView*)item;
-
             // if page intersect with content
             if (page.frame.origin.x < self.bounds.size.width) {
-            
                 // if view don't stick right band
                 if (page.frame.origin.x + page.frame.size.width < self.bounds.size.width) {
                     // load previous page if neede and if can
@@ -422,11 +417,9 @@ static const CGFloat kResistance = 0.15;
                 return page;
             }
         }
-        
         // dec index
         index--;
     }
-    
     return nil;
 }
 
@@ -450,6 +443,8 @@ static const CGFloat kResistance = 0.15;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated {
+    
+    [self visiblePages];
     
     CGRect newPageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
     CGRect fromPageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
@@ -475,31 +470,29 @@ static const CGFloat kResistance = 0.15;
         newPageAnimationFrame.origin.x += 150.0;
         [newPage setFrame: newPageAnimationFrame];
         
-        [UIView animateWithDuration:0.3 animations:^ {
-            [newPage setFrame: newPageFrame];
-            [newPage setAlpha:1.0];
-            
-            [fromPage setFrame:fromPageFrame];
-        }];
+        [UIView animateWithDuration:0.3 
+                         animations:^ {
+                             
+                             [newPage setFrame: newPageFrame];
+                             [newPage setAlpha:1.0];
+                             [fromPage setFrame:fromPageFrame];
+                             
+                         } 
+                         completion: ^(BOOL finished) {
+                             [self visiblePages];
+                         }
+         ];
     }
     // add page to array of pages
     [_pages addObject: newPage];
+    // add subview
+    [self addSubview: newPage];
     // send message to delegate
     [self didAddPage:newPage animated:animated];
     
-    // get new page index, (is last)
-    NSUInteger index = [_pages count]-1;
-//    //send message to delegate
-//    [self pageWillAppearAtIndex:index animated:animated];
-    // add subview
-    [self addSubview: newPage];
-//    //send message to delegate
-//    [self pageDidAppearAtIndex: index animated:animated];
-    
-    
-    _actualRightPageIndex = [_pages count] - 1;
-    _actualLeftPageIndex = (_actualRightPageIndex == 0) ? NSNotFound : _actualRightPageIndex - 1;     
-    
+    if (!animated) {
+        [self visiblePages];
+    }
 }
 
 
@@ -519,23 +512,20 @@ static const CGFloat kResistance = 0.15;
                 //preventive, set frame
                 CGRect pageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
                 [view setFrame: pageFrame];
-                
                 // replace in array of pages
                 [_pages replaceObjectAtIndex:index withObject:view];
-                
                 // add subview
                 [self addSubview: view];
-                
                 // send delegate
                 [self didLoadPage:view];
-                
+                // return loaded page
                 return view;
             }
         }
-        
+        // return page from array
         return item;
     }
-    
+    // nil, index out of range
     return nil;
 }
 

@@ -95,6 +95,7 @@
      * Called when page (view of this controller) will be unveiled by 
      * another page or will slide in CascadeView bounds
      */
+    NSLog(@"pageDidAppear");
 }
 
 
@@ -104,6 +105,7 @@
      * Called when page (view of this controller) will be shadowed by 
      * another page or will slide out CascadeView bounds
      */
+    NSLog(@"pageDidDisappear");
 }
 
 @end

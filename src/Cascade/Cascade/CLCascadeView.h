@@ -12,9 +12,9 @@
 @protocol CLCascadeViewDelegate;
 
 typedef enum {
-    CLDraggingDirectionLeft,
-    CLDraggingDirectionRight,
-    CLDraggingDirectionUnknow
+    CLDraggingDirectionRight    = -1,
+    CLDraggingDirectionUnknow   =  0,
+    CLDraggingDirectionLeft     =  1
 } CLDraggingDirection;
 
 @interface CLCascadeView : UIView {
@@ -28,9 +28,6 @@ typedef enum {
     
     CGFloat _pageWidth;
     
-    NSInteger _actualRightPageIndex; 
-    NSInteger _actualLeftPageIndex; 
-
     // dragging
     CGPoint _startTouchPoint;
     CGPoint _newTouchPoint;

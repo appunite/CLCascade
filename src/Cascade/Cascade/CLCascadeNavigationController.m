@@ -159,7 +159,7 @@
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index {
     UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
     if ([controller respondsToSelector:@selector(pageDidAppear)]) {
-        [controller pageDidAppear];
+        [controller pageDidDisappear];
     }
 }
 
