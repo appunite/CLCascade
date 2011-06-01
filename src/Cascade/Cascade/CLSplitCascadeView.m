@@ -136,7 +136,7 @@
     CGRect categoriesFrame = CGRectMake(0.0, 0.0, CATEGORIES_VIEW_WIDTH, bounds.size.height);
     _categoriesView.frame = categoriesFrame;
     
-    CGRect cascadeNavigationFrame = CGRectMake(CASCADE_NAVIGATION_VIEW_OFFSET, 0.0, bounds.size.width - CASCADE_NAVIGATION_VIEW_OFFSET, bounds.size.height);
+    CGRect cascadeNavigationFrame = bounds; //CGRectMake(CASCADE_NAVIGATION_VIEW_OFFSET, 0.0, bounds.size.width - CASCADE_NAVIGATION_VIEW_OFFSET, bounds.size.height);
     _cascadeView.frame = cascadeNavigationFrame;
 
     CGRect backgroundViewFrame = CGRectMake(CATEGORIES_VIEW_WIDTH, 0.0, bounds.size.width - CATEGORIES_VIEW_WIDTH, bounds.size.height);

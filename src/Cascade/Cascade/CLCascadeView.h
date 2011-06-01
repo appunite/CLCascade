@@ -26,7 +26,9 @@ typedef enum {
     // you need call visiblePages to refresh this ivar
     NSMutableArray* _visiblePages;
     
+    //
     CGFloat _pageWidth;
+    CGFloat _offset;
     
     // dragging
     CGPoint _startTouchPoint;

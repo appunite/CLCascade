@@ -34,6 +34,7 @@
 @end
 
 #define DEFAULT_PAGE_WIDTH 479.0f
+#define DEFAULT_OFFSET 66.0f
 
 @implementation CLCascadeView
 
@@ -116,6 +117,7 @@ static const CGFloat kResistance = 0.15;
      UIViewAutoresizingFlexibleHeight];
 
     _pageWidth = DEFAULT_PAGE_WIDTH;
+    _offset = DEFAULT_OFFSET;
     
     _cascadeViewFlags.decelerating = NO;
     _cascadeViewFlags.dragging = NO;
@@ -214,7 +216,7 @@ static const CGFloat kResistance = 0.15;
     while ((view = [enumerator nextObject])) {
         
         if (_directon == CLDraggingDirectionLeft) { //get new one on right
-            if (!(view.frame.origin.x <= 0)) {
+            if (!(view.frame.origin.x <= _offset)) {
                 CGRect newFrame = view.frame;
                 
                 if (CGRectEqualToRect(lastFrame, CGRectNull)) {
@@ -223,7 +225,7 @@ static const CGFloat kResistance = 0.15;
                     newOriginX = lastFrame.origin.x + lastFrame.size.width;
                 }
                 
-                newFrame.origin.x = MAX(0, newOriginX);
+                newFrame.origin.x = MAX(_offset, newOriginX);
                 [view setFrame: newFrame];
                 lastFrame = newFrame;
             }
@@ -234,7 +236,7 @@ static const CGFloat kResistance = 0.15;
             
             if (!CGRectIntersectsRect(lastFrame, view.frame) || [self isLastPage:view]) {
                 newOriginX = newFrame.origin.x - transition;
-                newFrame.origin.x = MAX(0, newOriginX);
+                newFrame.origin.x = MAX(_offset, newOriginX);
                 [view setFrame: newFrame];
             }
             
@@ -259,7 +261,7 @@ static const CGFloat kResistance = 0.15;
         NSUInteger topPageIndex = [_pages indexOfObject: topPage];
         
         // calcule how many other pagas can be visible
-        NSInteger count = ceil( topPage.frame.origin.x / _pageWidth );
+        NSInteger count = ceil( (topPage.frame.origin.x - _offset) / _pageWidth );
         
         // create array
         NSMutableArray* array = [[[NSMutableArray alloc] init] autorelease];
@@ -446,8 +448,8 @@ static const CGFloat kResistance = 0.15;
     
     [self visiblePages];
     
-    CGRect newPageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
-    CGRect fromPageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
+    CGRect newPageFrame = CGRectMake(_offset, 0.0, _pageWidth, self.bounds.size.height);
+    CGRect fromPageFrame = CGRectMake(_offset, 0.0, _pageWidth, self.bounds.size.height);
     
     if (fromPage == nil) {
         [self popAllPagesAnimated: animated];
@@ -510,7 +512,7 @@ static const CGFloat kResistance = 0.15;
             // if got view from dataSorce
             if (view != nil) {
                 //preventive, set frame
-                CGRect pageFrame = CGRectMake(0.0, 0.0, _pageWidth, self.bounds.size.height);
+                CGRect pageFrame = CGRectMake(_offset, 0.0, _pageWidth, self.bounds.size.height);
                 [view setFrame: pageFrame];
                 // replace in array of pages
                 [_pages replaceObjectAtIndex:index withObject:view];
