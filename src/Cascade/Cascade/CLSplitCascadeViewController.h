@@ -19,4 +19,7 @@
 @property (nonatomic, retain) IBOutlet CLCategoriesViewController* categoriesViewController;
 @property (nonatomic, retain) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
 
+- (void) setBackgroundView:(UIView*)backgroundView;
+- (void) setDividerImage:(UIImage*)image;
+
 @end

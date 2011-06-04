@@ -79,9 +79,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // set new content view (tableView)
-    
-//    [self setOuterLeftShadow:[UIColor blackColor] width:15.0 alpha:0.45];
 }
 
 
@@ -108,6 +105,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
+    //todo: return 0;
     return 1;
 }
 
@@ -116,6 +114,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    //todo: return 0;
     return 5;
 }
 
@@ -131,6 +130,7 @@
     }
     
     // Configure the cell...
+    //todo: return nil;
     cell.textLabel.text = @"text";
     return cell;
 }
@@ -141,6 +141,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //todo: do nothing
     CLTableViewController* viewController = [[CLTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
     [self pushDetailViewController:viewController animated:YES];
     [viewController release];

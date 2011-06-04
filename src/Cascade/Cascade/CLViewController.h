@@ -17,17 +17,18 @@
 
 @interface CLViewController : UIViewController <CLViewControllerDelegate> {
     CLCascadeNavigationController* _cascadeNavigationController;
-    
+
     CAGradientLayer* _originShadow;
-    CGFloat _shadowWidth;
-    
-    NSUInteger _viewOnStackIndex;
 }
 
 @property (nonatomic, retain) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
-@property (nonatomic, assign) NSUInteger viewOnStackIndex;
 
+// method used to push (animated) new UIViewController on Cascade stack
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated;
-- (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha;
+
+// Outer left shadow methods
+- (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha animated:(BOOL)animated;
+- (void) showShadow:(BOOL)animated;
+- (void) hideShadow:(BOOL)animated;
 
 @end

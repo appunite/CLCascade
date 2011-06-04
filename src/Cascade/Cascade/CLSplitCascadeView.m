@@ -20,41 +20,38 @@
 @synthesize categoriesView = _categoriesView;
 @synthesize cascadeView = _cascadeView;
 @synthesize backgroundView = _backgroundView;
-@synthesize horizontalDivider = _horizontalDivider;
-@synthesize showDivider = _showDivider;
+@synthesize verticalDividerImage = _verticalDividerImage;
 
 #define CATEGORIES_VIEW_WIDTH 289.0f
-#define CASCADE_NAVIGATION_VIEW_OFFSET 66.0f
-#define DEFAULT_DIVIDER_FILENAME @"divider_vertical.png"
 
 #pragma mark -
 #pragma mark Private
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setupView {
-    _showDivider = NO;    
+
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) addDivierView {
+    
+    if ((!_backgroundView) || (!_verticalDividerImage)) return;
     
     if (_dividerView) {
         [_dividerView removeFromSuperview];
         [_dividerView release], _dividerView = nil;
     }
-    
-    if (!_horizontalDivider) {
-        _horizontalDividerImage = [UIImage imageNamed: DEFAULT_DIVIDER_FILENAME];
-    }
-    
+        
     _dividerView = [[UIView alloc] init];
-    _dividerWidth = _horizontalDividerImage.size.width;
-    [_dividerView setBackgroundColor:[UIColor colorWithPatternImage: _horizontalDividerImage]];
+    _dividerWidth = _verticalDividerImage.size.width;
+    [_dividerView setBackgroundColor:[UIColor colorWithPatternImage: _verticalDividerImage]];
     
     [_backgroundView addSubview: _dividerView];
     [self setNeedsLayout];   
     
 }
+
 
 #pragma mark -
 #pragma mark Init & dealloc
@@ -69,6 +66,7 @@
     return self;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithFrame:(CGRect)frame
 {
@@ -80,6 +78,7 @@
     return self;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
@@ -89,6 +88,7 @@
     return self;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
@@ -97,11 +97,12 @@
     [_splitCascadeViewController release], _splitCascadeViewController = nil;
     [_cascadeNavigationController release], _cascadeNavigationController = nil;
     [_backgroundView release], _backgroundView = nil;
-    [_horizontalDividerImage release], _horizontalDividerImage = nil;
+    [_verticalDividerImage release], _verticalDividerImage = nil;
     [_dividerView release], _dividerView = nil;
 
     [super dealloc];
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
@@ -128,6 +129,7 @@
         
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) layoutSubviews {
     
@@ -136,7 +138,7 @@
     CGRect categoriesFrame = CGRectMake(0.0, 0.0, CATEGORIES_VIEW_WIDTH, bounds.size.height);
     _categoriesView.frame = categoriesFrame;
     
-    CGRect cascadeNavigationFrame = bounds; //CGRectMake(CASCADE_NAVIGATION_VIEW_OFFSET, 0.0, bounds.size.width - CASCADE_NAVIGATION_VIEW_OFFSET, bounds.size.height);
+    CGRect cascadeNavigationFrame = bounds;
     _cascadeView.frame = cascadeNavigationFrame;
 
     CGRect backgroundViewFrame = CGRectMake(CATEGORIES_VIEW_WIDTH, 0.0, bounds.size.width - CATEGORIES_VIEW_WIDTH, bounds.size.height);
@@ -146,22 +148,9 @@
     _dividerView.frame = dividerViewFrame;
 }
 
+
 #pragma mark -
 #pragma mark Setter
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)setShowDivider:(BOOL)flag {
-    _showDivider = flag;
-
-    if (_backgroundView) {
-        if (flag) {            
-            [self addDivierView];
-        } else {
-            [_dividerView removeFromSuperview];
-            [_dividerView release], _dividerView = nil;
-        }
-    }
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setCategoriesView:(UIView*) aView {
@@ -173,6 +162,7 @@
     }
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setCascadeView:(UIView*) aView {
     if (_cascadeView != aView) {
@@ -183,11 +173,15 @@
     }
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setBackgroundView:(UIView*) aView {
     if (_backgroundView != aView) {
         [_backgroundView release];
         _backgroundView = [aView retain];
+        
+        [_dividerView removeFromSuperview];
+        [_dividerView release], _dividerView = nil;
         
         if (_cascadeView == nil) {
             [self addSubview: _backgroundView];
@@ -196,30 +190,19 @@
             [self insertSubview:_backgroundView atIndex:index];
         }
 
-        if (_showDivider) {
-            [self addDivierView];
-        }
+        [self addDivierView];
     }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UIViewController*)viewController {
-    
-    static UIViewController* __viewController;
-    
-    if (__viewController == nil) {
-    
-        for (UIView* next = [self superview]; next; next = next.superview) {
-            UIResponder* nextResponder = [next nextResponder];
-            if ([nextResponder isKindOfClass:[UIViewController class]]) {
-                __viewController = (UIViewController*)nextResponder;
-                return __viewController;
-            }
-        }
+- (void) setVerticalDividerImage:(UIImage*) image {
+    if (_verticalDividerImage != image) {
+        [_verticalDividerImage release];
+        _verticalDividerImage = [image retain];
+        
+        [self addDivierView];
     }
-    
-    return __viewController;
 }
-
 
 @end

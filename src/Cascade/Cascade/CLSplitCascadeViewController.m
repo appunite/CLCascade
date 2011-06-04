@@ -14,6 +14,7 @@
 @synthesize cascadeNavigationController = _cascadeNavigationController;
 @synthesize categoriesViewController = _categoriesViewController;
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
@@ -23,6 +24,7 @@
     [super dealloc];
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)didReceiveMemoryWarning
 {
@@ -31,6 +33,7 @@
     
     // Release any cached data, images, etc that aren't in use.
 }
+
 
 #pragma mark - View lifecycle
 
@@ -59,12 +62,12 @@
     [view_ release];
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) viewDidLoad {
     [super viewDidLoad];
-//    [self.cascadeNavigator adjustFrameAndContentAfterRotation: UIInterfaceOrientationPortrait];        
-//    [self.categoriesView.tableView setBackgroundColor:[UIColor redColor]];
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)viewDidUnload
@@ -76,6 +79,7 @@
     self.categoriesViewController = nil;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -83,9 +87,20 @@
     return YES;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
 
+#pragma mark -
+#pragma mark Class methods
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setBackgroundView:(UIView*)backgroundView {
+    [(CLSplitCascadeView*)self.view setBackgroundView: backgroundView];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setDividerImage:(UIImage*)image {
+    [(CLSplitCascadeView*)self.view setVerticalDividerImage: image];
+    
 }
 
 @end

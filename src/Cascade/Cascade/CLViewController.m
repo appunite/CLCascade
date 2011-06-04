@@ -12,8 +12,6 @@
 @implementation CLViewController
 
 @synthesize cascadeNavigationController = _cascadeNavigationController;
-@synthesize viewOnStackIndex = _viewOnStackIndex;
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
@@ -56,7 +54,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-	return NO;
+	return YES;
 }
 
 #pragma mark -
@@ -64,20 +62,53 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha {
-    CAGradientLayer* shadow = [[[CAGradientLayer alloc] init] autorelease];
+- (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha animated:(BOOL)animated {
+    
+    _originShadow = [[[CAGradientLayer alloc] init] autorelease];
 
-    shadow.startPoint = CGPointMake(0, 0.5);
-    shadow.endPoint = CGPointMake(1.0, 0.5);
+    _originShadow.startPoint = CGPointMake(0, 0.5);
+    _originShadow.endPoint = CGPointMake(1.0, 0.5);
     CGRect newShadowFrame = CGRectMake(0, 0, width, self.view.frame.size.height);
     
-    shadow.frame = newShadowFrame;
-    shadow.colors = [NSArray arrayWithObjects: 
+    _originShadow.frame = newShadowFrame;
+    _originShadow.colors = [NSArray arrayWithObjects: 
                             (id)([[UIColor clearColor] colorWithAlphaComponent:0.0].CGColor), 
                             (id)([shadowColor colorWithAlphaComponent: alpha].CGColor), 
                             nil];
+    _originShadow.opacity = 0.0;
+    [(CLSegmentedView*)self.view setShadow:_originShadow withWidth:width];
     
-    [(CLSegmentedView*)self.view setShadow:shadow withWidth:width];
+    [self showShadow: animated];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) showShadow:(BOOL)animated {
+    if (!animated) {
+        [_originShadow setHidden: NO];
+    } else {
+        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        animation.fromValue = [NSNumber numberWithFloat:0.0];
+        animation.toValue = [NSNumber numberWithFloat:1.0];
+        animation.duration = 1.2;
+        _originShadow.opacity = 1.0;
+        [_originShadow addAnimation:animation forKey:@"opacityAnimation"];
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) hideShadow:(BOOL)animated {
+    if (!animated) {
+        [_originShadow setHidden: YES];
+    } else {
+        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        animation.fromValue = [NSNumber numberWithFloat:1.0];
+        animation.toValue = [NSNumber numberWithFloat:0.0];
+        animation.duration = 0.7;
+        _originShadow.opacity = 0.0;
+        [_originShadow addAnimation:animation forKey:@"opacityAnimation"];
+    }
 }
 
 
@@ -95,7 +126,8 @@
      * Called when page (view of this controller) will be unveiled by 
      * another page or will slide in CascadeView bounds
      */
-    NSLog(@"pageDidAppear");
+    
+    [self showShadow: YES];
 }
 
 
@@ -105,7 +137,8 @@
      * Called when page (view of this controller) will be shadowed by 
      * another page or will slide out CascadeView bounds
      */
-    NSLog(@"pageDidDisappear");
+    
+    [self hideShadow: YES];
 }
 
 @end

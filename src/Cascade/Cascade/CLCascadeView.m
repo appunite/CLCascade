@@ -22,6 +22,7 @@
 - (void) refreshPageHeight:(UIView*)page;
 - (void) sendDelegateMessageToHidingPages:(NSArray*)pages;
 - (void) sendDelegateMessageToShowUpPages:(NSArray*)pages;
+- (CGFloat) properPosisionForView:(UIView*)page direction:(CLDraggingDirection)direction;
 @end
 
 @interface CLCascadeView (DelegateMethods)
@@ -313,6 +314,36 @@ static const CGFloat kResistance = 0.15;
     // if top page don't exist, return nil
     return _visiblePages;
     
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CGFloat) properPosisionForView:(UIView*)page direction:(CLDraggingDirection)direction {
+    
+    // if we don't know direction, position stay the same
+    if (direction == CLDraggingDirectionUnknow) return page.frame.origin.x;
+    
+//    //how many pages can fit in view
+//    CGFloat pagesCount = ceil( (self.bounds.size.width - _offset) / _pageWidth );
+    
+    if (direction == CLDraggingDirectionLeft) { //get new one on right
+//        CGFloat pagesCountOnRight = ceil( (self.bounds.size.width - (page.frame.origin.x + page.frame.size.width)) / _pageWidth );
+
+        if ([self isLastPage: page]) {
+            return self.bounds.size.width - page.frame.size.width;
+        } else {
+            
+        }
+        
+    }
+    
+    if (direction == CLDraggingDirectionRight) { //get new one on left
+//        CGFloat pagesCountOnLeft = ceil( (page.frame.origin.x - _offset) / _pageWidth );
+        
+    }
+    
+    // position stay the same
+    return page.frame.origin.x;
 }
 
 

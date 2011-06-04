@@ -8,6 +8,20 @@
 
 #import "CLCascadeNavigationController.h"
 
+@interface UIViewController (ReadWrite)
+@property(nonatomic, assign, readwrite) UIViewController *parentViewController;
+@end
+
+//@implementation UIViewController
+//
+//- (void) setParentViewController:(UIViewController* )viewController {
+////    if (viewController != self.parentViewController) {
+////        self.parentViewController = 
+////    }
+//}
+//
+//@end
+
 @interface CLCascadeNavigationController (Private)
 @property (nonatomic, retain, readwrite) NSMutableArray* viewControllers;
 @end
@@ -202,6 +216,8 @@
     
     // set cascade navigator to view controller
     [viewController setCascadeNavigationController: self];
+    // set parrent view controller, if rootViewController, then nil
+    [viewController setParentViewController: sender];
     // add controller to array
     [self.viewControllers addObject: viewController];
 

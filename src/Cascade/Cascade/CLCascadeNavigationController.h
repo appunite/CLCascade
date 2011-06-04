@@ -16,7 +16,7 @@
     // array of all view controllers
     NSMutableArray* _viewControllers;
 
-    //
+    // view containing all views on stack
     CLCascadeView* _cascadeView;
 }
 
