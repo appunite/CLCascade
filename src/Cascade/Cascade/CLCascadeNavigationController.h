@@ -25,6 +25,17 @@
  */
 @property (nonatomic, retain, readonly) NSMutableArray* viewControllers;
 
+/*
+ * Offset of pages from left boarder. Default 66.0f
+ */
+@property(nonatomic) CGFloat offset;
+
+/*
+ * You can change page width, default (1024.0 - offset) / 2.0, so
+ * in landscape mode two pages fit properly
+ */
+@property(nonatomic) CGFloat pageWidth;
+
 
 /*
  * Set and push root view controller
