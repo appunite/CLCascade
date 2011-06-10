@@ -22,8 +22,9 @@
 - (void) refreshPageHeight:(UIView*)page;
 - (void) sendDelegateMessageToHidingPages:(NSArray*)pages;
 - (void) sendDelegateMessageToShowUpPages:(NSArray*)pages;
-- (CGFloat) properPosisionForView:(UIView*)page direction:(CLDraggingDirection)direction;
-- (void)animator:(NSTimer*)theTimer;
+- (void)orderViews:(BOOL)animated;
+- (UIView*)pageOnLeftFromView:(UIView*)view;
+- (UIView*)pageOnRightFromView:(UIView*)view;
 @end
 
 @interface CLCascadeView (DelegateMethods)
@@ -46,6 +47,7 @@
 @synthesize dragging = _dragging;
 @synthesize decelerating = _decelerating;
 @synthesize pageWidth = _pageWidth;
+@synthesize offset = _offset;
 
 #pragma mark Init & dealloc
 
@@ -154,14 +156,7 @@ static const CGFloat kResistance = 0.15;
             
             break;
         case UIGestureRecognizerStateBegan:
-            
-            [_animationStartTime release];
-            _animationStartTime = nil;
-            [_animationTimer invalidate];
-            _animationTimer = nil;
-            _moved = 0.0;
-            _sum = 0.0;
-            
+                        
             // set up points
             _startTouchPoint = [gesture locationInView: _touchedPage];
             _lastTouchPoint = [gesture locationInView: self];
@@ -171,28 +166,18 @@ static const CGFloat kResistance = 0.15;
             
             break;
         case UIGestureRecognizerStateEnded:
-            _flag = YES;
-            _lastPCT = 0.0;
             
-            UIView* topRightVisiblePage = [self topRightVisiblePage];
-            _transtionToMove = [self properPosisionForView:topRightVisiblePage direction:_directon];
-            _transtionToMove += (_directon == CLDraggingDirectionLeft) ? -OVERLOAD : OVERLOAD;
+            [self orderViews: YES];
             
-            _animationStartTime = [[NSDate date] retain];
-            _animationTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0/24.0 
-                                                                target:self 
-                                                              selector:@selector(animator:) 
-                                                              userInfo:nil 
-                                                               repeats:YES] retain];
+            // reset points
+            _startTouchPoint = CGPointZero;
+            _newTouchPoint = CGPointZero;
+            _lastTouchPoint = CGPointZero;
+            // resete flags
+            _direction = CLDraggingDirectionUnknow;
+            _cascadeViewFlags.dragging = NO;
+            _cascadeViewFlags.decelerating = YES;
             
-//            // reset points
-//            _startTouchPoint = CGPointZero;
-//            _newTouchPoint = CGPointZero;
-//            _lastTouchPoint = CGPointZero;
-//            // resete flags
-//            _directon = CLDraggingDirectionUnknow;
-//            _cascadeViewFlags.dragging = NO;
-//            _cascadeViewFlags.decelerating = YES;
             break;
         default:
             break;
@@ -200,74 +185,127 @@ static const CGFloat kResistance = 0.15;
     
 }
 
+- (void) orderViews:(BOOL)animated {
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CGFloat)tween:(NSTimeInterval)t b:(NSTimeInterval)b c:(NSTimeInterval)c d:(NSTimeInterval)d {
-    t = t/d-1;
-    return c*(t*t*t + 1) + b;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)animator:(NSTimer*)theTimer {
-    CGFloat _animationDuration = 4.8;
-    
-    NSTimeInterval kt = -[_animationStartTime timeIntervalSinceNow];
-    CGFloat pct = kt ? [self tween:kt b:0 c:kt d:_animationDuration]/kt : 0;
-
-    if (pct > 1.0) {
-        pct = 1.0;
+    if (_direction == CLDraggingDirectionUnknow) {
+        _direction = CLDraggingDirectionLeft;
     }
     
-    //    CGFloat mm = (_transtionToMove * pct) - _lastPCT;
-    //    
-    //    NSLog(@"%f", pct);
-    ////    NSLog(@"mm: %f moved: %f", mm, _moved);
-    //    
-    //    _sum = (mm - _moved) ;
-    //    if (_sum > 1.0) {
-    ////        NSLog(@"%f %f %f", _sum, _moved, mm);
-    //        [self updateLocationOfPages: ( ((_directon == CLDraggingDirectionRight) ? -1.0 : 1.0) * _sum )];
-    //        _sum = 0.0;
-    //        _moved = mm;
-    //
-    //    }
+    UIView* topView = [self topRightVisiblePage];
+    UIView* leftView = [self pageOnLeftFromView: topView];
     
-    
-    CGFloat mm = pct - _lastPCT;
-    NSLog(@"%f" , _transtionToMove * mm);
-    [self updateLocationOfPages: ( ((_directon == CLDraggingDirectionRight) ? -1.0 : 1.0) * _transtionToMove * mm )];
-    
-    _lastPCT = pct;
-    
-    if (pct == 1.0) {
-        [self layoutIfNeeded];
-        
-        [_animationStartTime release];
-        _animationStartTime = nil;
-        [_animationTimer invalidate];
-        _animationTimer = nil;
-        
-        if (_flag) {        
+    if (_direction == CLDraggingDirectionLeft) { //get new one on right
+       
+        if (topView.frame.origin.x + topView.frame.size.width < self.frame.size.width) {
             
-            _flag = NO;
-            _lastPCT = 0.0;
-//            if (_directon == CLDraggingDirectionLeft)  {
-//                _transtionToMove = -OVERLOAD;
-//            } else {
-//                _transtionToMove = -OVERLOAD;
-//            }
-//            
-//            _animationStartTime = [[NSDate date] retain];
-//            _animationTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0/35.0 
-//                                                                target:self 
-//                                                              selector:@selector(animator:) 
-//                                                              userInfo:nil 
-//                                                               repeats:YES] retain];
+            // cofnij
+            CGRect topRect = topView.frame;
+            topRect.origin.x += (self.frame.size.width - topView.frame.origin.x - _pageWidth);
+
+            if ([_pages count] == 1) {
+                topRect.origin.x = 289.0f;
+            }
+            
+            
+            [UIView animateWithDuration:0.8 delay:0.0 
+                                options:UIViewAnimationCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionOverrideInheritedCurve
+                             animations:^ {
+                                 topView.frame = topRect;
+                             }
+                             completion:^(BOOL finished) {
+                                 
+                             }];
+        } else {
+            // idz dalj i pociagnij nowa po prawej
+            CGRect leftRect = leftView.frame;
+            leftRect.origin.x = _offset;
+            
+            [UIView animateWithDuration:0.5 delay:0.01 
+                                options:UIViewAnimationCurveEaseOut
+                             animations:^ {
+                                 leftView.frame = leftRect;
+                             }
+                             completion:^(BOOL finished) {
+                                 
+                             }];
+            
+            CGRect topRect = topView.frame;
+            topRect.origin.x = leftRect.origin.x + leftRect.size.width;
+            
+            [UIView animateWithDuration:0.5 delay:0.0 
+                                options:UIViewAnimationCurveEaseOut
+                             animations:^ {
+                                 topView.frame = topRect;
+                             }
+                             completion:^(BOOL finished) {
+                                 [self visiblePages];
+                             }];
+            
+        }
+    } 
+
+    if (_direction == CLDraggingDirectionRight) { //get new one on left
+        if (([self isFirstPage: topView]) && ([_pages count] == 1)) {
+            CGRect topRect = topView.frame;
+            topRect.origin.x = self.frame.size.width - _pageWidth;
+            
+            if ([_pages count] == 1) {
+                topRect.origin.x = 289.0f;
+            }
+
+            [UIView animateWithDuration:0.5 delay:0.0 
+                                options:UIViewAnimationCurveEaseOut
+                             animations:^ {
+                                 topView.frame = topRect;
+                             }
+                             completion:^(BOOL finished) {
+                                 
+                             }];
+        } else {
+            
+            CGRect topRect = topView.frame;
+            topRect.origin.x = self.frame.size.width;
+            
+            
+            if ([self isFirstPage:topView]) {
+
+                UIView* rightView = [self pageOnRightFromView: topView];
+                
+                if (rightView) {
+                    leftView = topView;
+                    topView = rightView;
+                }
+                
+                topRect.origin.x = 289.0f + _pageWidth;
+            }
+
+            if ([self isFirstPage:leftView]) {
+                topRect.origin.x = 289.0f + _pageWidth;
+            }
+            
+            [UIView animateWithDuration:0.5 delay:0.0
+                                options:UIViewAnimationCurveEaseOut
+                             animations:^ {
+                                 topView.frame = topRect;
+                             }
+                             completion:^(BOOL finished) {
+                                 
+                             }];
+            
+            CGRect leftRect = leftView.frame;
+            leftRect.origin.x = topRect.origin.x - _pageWidth;
+            
+            [UIView animateWithDuration:0.5 delay:0.0
+                                options:UIViewAnimationCurveEaseOut
+                             animations:^ {
+                                 leftView.frame = leftRect;
+                             }
+                             completion:^(BOOL finished) {
+                                 [self visiblePages];
+                             }];
             
         }
     }
-    
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -281,9 +319,9 @@ static const CGFloat kResistance = 0.15;
     CGFloat dx = [self transition];
     
     if ((dx == 0) || (!_cascadeViewFlags.dragging)) {
-        _directon = CLDraggingDirectionUnknow;
+        _direction = CLDraggingDirectionUnknow;
     } else {
-        _directon = (dx > 0) ? CLDraggingDirectionLeft : CLDraggingDirectionRight;
+        _direction = (dx > 0) ? CLDraggingDirectionLeft : CLDraggingDirectionRight;
     }
 }
 
@@ -291,7 +329,7 @@ static const CGFloat kResistance = 0.15;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) updateLocationOfPages:(CGFloat)transition {
 
-    if (_directon == CLDraggingDirectionUnknow) return;
+    if (_direction == CLDraggingDirectionUnknow) return;
 
     NSArray* array = [self visiblePages];
 
@@ -300,16 +338,16 @@ static const CGFloat kResistance = 0.15;
     NSEnumerator* enumerator;
     UIView* view;    
 
-    if (_directon == CLDraggingDirectionLeft) {
+    if (_direction == CLDraggingDirectionLeft) {
         enumerator = [array reverseObjectEnumerator];
     }
-    if (_directon == CLDraggingDirectionRight) {
+    if (_direction == CLDraggingDirectionRight) {
         enumerator = [array objectEnumerator];
     }
     
     while ((view = [enumerator nextObject])) {
         
-        if (_directon == CLDraggingDirectionLeft) { //get new one on right
+        if (_direction == CLDraggingDirectionLeft) { //get new one on right
             if (!(view.frame.origin.x <= _offset)) {
                 CGRect newFrame = view.frame;
                 
@@ -325,7 +363,7 @@ static const CGFloat kResistance = 0.15;
             }
         }        
         
-        if (_directon == CLDraggingDirectionRight) { //get new one on left
+        if (_direction == CLDraggingDirectionRight) { //get new one on left
             CGRect newFrame = view.frame;
             
             if (!CGRectIntersectsRect(lastFrame, view.frame) || [self isLastPage:view]) {
@@ -410,37 +448,6 @@ static const CGFloat kResistance = 0.15;
 }
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CGFloat) properPosisionForView:(UIView*)page direction:(CLDraggingDirection)direction {
-    
-//    //how many pages can fit in view
-//    CGFloat pagesCount = ceil( (self.bounds.size.width - _offset) / _pageWidth );
-    
-    if (direction == CLDraggingDirectionLeft) { //get new one on right
-//        CGFloat pagesCountOnRight = ceil( (self.bounds.size.width - (page.frame.origin.x + page.frame.size.width)) / _pageWidth );
-
-        if ([self isLastPage: page]) {
-            return - (self.bounds.size.width - page.frame.origin.x - _pageWidth);// - 12;
-            
-        } else {
-            return _pageWidth - (self.bounds.size.width - page.frame.origin.x);// - 12;
-            
-        }
-    }
-    
-    if (direction == CLDraggingDirectionRight) { //get new one on left
-//        CGFloat pagesCountOnLeft = ceil( (page.frame.origin.x - _offset) / _pageWidth );
-
-        if ([self isFirstPage: page]) {
-            return - (_pageWidth - (self.bounds.size.width - page.frame.origin.x));
-        } else {
-            return (self.bounds.size.width - page.frame.origin.x);// + 12;
-        }
-    }
-    
-    // if we don't know direction, position stay the same
-    return 0;
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -552,6 +559,44 @@ static const CGFloat kResistance = 0.15;
     return nil;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView*)pageOnLeftFromView:(UIView*)view {
+
+    NSUInteger index = [_pages indexOfObject: view];
+    
+    if (index >= 1) {
+        index--;
+        id obj = [_pages objectAtIndex: index];
+
+        if (obj == [NSNull null]) {
+            obj = [self loadPageAtIndex: index];
+        }
+
+        return obj;
+    }
+    
+    return nil;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView*)pageOnRightFromView:(UIView*)view {
+
+    NSUInteger index = [_pages indexOfObject: view];
+    
+    if ([_pages count] > index + 1) {
+        index++;
+
+        id obj = [_pages objectAtIndex: index];
+        
+        if (obj == [NSNull null]) {
+            obj = [self loadPageAtIndex: index];
+        }
+        
+        return obj;
+    }
+    
+    return nil;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) topLeftVisiblePage {
@@ -574,7 +619,7 @@ static const CGFloat kResistance = 0.15;
     
     [self visiblePages];
     
-    CGRect newPageFrame = CGRectMake(_offset, 0.0, _pageWidth, self.bounds.size.height);
+    CGRect newPageFrame = CGRectMake(289.0f, 0.0, _pageWidth, self.bounds.size.height);
     CGRect fromPageFrame = CGRectMake(_offset, 0.0, _pageWidth, self.bounds.size.height);
     
     if (fromPage == nil) {
@@ -584,31 +629,43 @@ static const CGFloat kResistance = 0.15;
         newPageFrame = fromPage.frame;
         newPageFrame.origin.x = fromPageFrame.origin.x + fromPageFrame.size.width;
     }
-    
+
     // if not animated then just set frame
     if (!animated) {
         [newPage setFrame: newPageFrame];
         [fromPage setFrame:fromPageFrame];
         
     } else { // set animaton
-        [newPage setAlpha: 0.0];
+        [newPage setAlpha: 0.7];
         
         CGRect newPageAnimationFrame = newPageFrame;
-        newPageAnimationFrame.origin.x += 150.0;
+        newPageAnimationFrame.origin.x = self.frame.size.width;
         [newPage setFrame: newPageAnimationFrame];
         
-        [UIView animateWithDuration:0.3 
+        [UIView animateWithDuration:0.4 delay:(fromPage == nil) ? 0.15 : 0.0
+                            options:UIViewAnimationCurveEaseIn
                          animations:^ {
                              
                              [newPage setFrame: newPageFrame];
                              [newPage setAlpha:1.0];
+                             
+                         } 
+                         completion: ^(BOOL finished) {
+                             [self visiblePages];
+                         }
+        ];
+
+        [UIView animateWithDuration:0.4 delay:0.0
+                            options:UIViewAnimationCurveEaseIn
+                         animations:^ {
+                             
                              [fromPage setFrame:fromPageFrame];
                              
                          } 
                          completion: ^(BOOL finished) {
                              [self visiblePages];
                          }
-         ];
+        ];
     }
     // add page to array of pages
     [_pages addObject: newPage];

@@ -37,22 +37,13 @@ typedef enum {
     
     UIView* _touchedPage;
     
-    CLDraggingDirection _directon;
+    CLDraggingDirection _direction;
     
     struct {
         unsigned int dragging:1;
         unsigned int decelerating:1;
     } _cascadeViewFlags;
     
-    // animation
-    NSTimer* _animationTimer;
-    NSDate*  _animationStartTime;
-    CGFloat  _transtionToMove;
-    CGFloat _moved;
-    CGFloat _sum;
-    CGFloat _startP;
-    CGFloat _lastPCT;
-    BOOL _flag;
 }
 
 @property(nonatomic, assign) id<CLCascadeViewDelegate> delegate;
