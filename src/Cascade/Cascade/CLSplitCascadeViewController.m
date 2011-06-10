@@ -40,19 +40,19 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) loadView {
     NSString *nib = self.nibName;
-    NSBundle *bundle = self.nibBundle;
-    
-    if(!nib) nib = NSStringFromClass([self class]);
-    if(!bundle) bundle = [NSBundle mainBundle];
-    
-    NSString *path = [bundle pathForResource:nib ofType:@"nib"];
-    
-    if(path) {
-        self.view = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex: 0];
-        CLSplitCascadeView* view_ = (CLSplitCascadeView*)self.view;
-        [view_ setCategoriesView: self.categoriesViewController.view];
-        [view_ setCascadeView: self.cascadeNavigationController.view];
-        return;
+    if (nib) {
+        NSBundle *bundle = self.nibBundle;
+        if(!bundle) bundle = [NSBundle mainBundle];
+        
+        NSString *path = [bundle pathForResource:nib ofType:@"nib"];
+        
+        if(path) {
+            self.view = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex: 0];
+            CLSplitCascadeView* view_ = (CLSplitCascadeView*)self.view;
+            [view_ setCategoriesView: self.categoriesViewController.view];
+            [view_ setCascadeView: self.cascadeNavigationController.view];
+            return;
+        }
     }
     
     CLSplitCascadeView* view_ = [[CLSplitCascadeView alloc] init];
