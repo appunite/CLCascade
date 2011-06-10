@@ -43,6 +43,16 @@ typedef enum {
         unsigned int dragging:1;
         unsigned int decelerating:1;
     } _cascadeViewFlags;
+    
+    // animation
+    NSTimer* _animationTimer;
+    NSDate*  _animationStartTime;
+    CGFloat  _transtionToMove;
+    CGFloat _moved;
+    CGFloat _sum;
+    CGFloat _startP;
+    CGFloat _lastPCT;
+    BOOL _flag;
 }
 
 @property(nonatomic, assign) id<CLCascadeViewDelegate> delegate;
@@ -51,8 +61,15 @@ typedef enum {
 @property(nonatomic,readonly,getter=isDragging) BOOL dragging;    
 @property(nonatomic,readonly,getter=isDecelerating) BOOL decelerating;
 
+
 /*
- * You can change page width, default is 479.0f
+ * Offset of pages from left boarder. Default 66.0f
+ */
+@property(nonatomic) CGFloat offset;
+
+/*
+ * You can change page width, default (1024.0 - offset) / 2.0, so
+ * in landscape mode two pages fit properly
  */
 @property(nonatomic) CGFloat pageWidth;
 

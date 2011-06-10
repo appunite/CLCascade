@@ -23,6 +23,7 @@
 - (void) sendDelegateMessageToHidingPages:(NSArray*)pages;
 - (void) sendDelegateMessageToShowUpPages:(NSArray*)pages;
 - (CGFloat) properPosisionForView:(UIView*)page direction:(CLDraggingDirection)direction;
+- (void)animator:(NSTimer*)theTimer;
 @end
 
 @interface CLCascadeView (DelegateMethods)
@@ -36,6 +37,7 @@
 
 #define DEFAULT_PAGE_WIDTH 479.0f
 #define DEFAULT_OFFSET 66.0f
+#define OVERLOAD 0.0f
 
 @implementation CLCascadeView
 
@@ -117,8 +119,8 @@ static const CGFloat kResistance = 0.15;
      UIViewAutoresizingFlexibleWidth | 
      UIViewAutoresizingFlexibleHeight];
 
-    _pageWidth = DEFAULT_PAGE_WIDTH;
     _offset = DEFAULT_OFFSET;
+    _pageWidth = (1024.0 - _offset) / 2.0;
     
     _cascadeViewFlags.decelerating = NO;
     _cascadeViewFlags.dragging = NO;
@@ -152,6 +154,14 @@ static const CGFloat kResistance = 0.15;
             
             break;
         case UIGestureRecognizerStateBegan:
+            
+            [_animationStartTime release];
+            _animationStartTime = nil;
+            [_animationTimer invalidate];
+            _animationTimer = nil;
+            _moved = 0.0;
+            _sum = 0.0;
+            
             // set up points
             _startTouchPoint = [gesture locationInView: _touchedPage];
             _lastTouchPoint = [gesture locationInView: self];
@@ -161,14 +171,28 @@ static const CGFloat kResistance = 0.15;
             
             break;
         case UIGestureRecognizerStateEnded:
-            // reset points
-            _startTouchPoint = CGPointZero;
-            _newTouchPoint = CGPointZero;
-            _lastTouchPoint = CGPointZero;
-            // resete flags
-            _directon = CLDraggingDirectionUnknow;
-            _cascadeViewFlags.dragging = NO;
-            _cascadeViewFlags.decelerating = YES;
+            _flag = YES;
+            _lastPCT = 0.0;
+            
+            UIView* topRightVisiblePage = [self topRightVisiblePage];
+            _transtionToMove = [self properPosisionForView:topRightVisiblePage direction:_directon];
+            _transtionToMove += (_directon == CLDraggingDirectionLeft) ? -OVERLOAD : OVERLOAD;
+            
+            _animationStartTime = [[NSDate date] retain];
+            _animationTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0/24.0 
+                                                                target:self 
+                                                              selector:@selector(animator:) 
+                                                              userInfo:nil 
+                                                               repeats:YES] retain];
+            
+//            // reset points
+//            _startTouchPoint = CGPointZero;
+//            _newTouchPoint = CGPointZero;
+//            _lastTouchPoint = CGPointZero;
+//            // resete flags
+//            _directon = CLDraggingDirectionUnknow;
+//            _cascadeViewFlags.dragging = NO;
+//            _cascadeViewFlags.decelerating = YES;
             break;
         default:
             break;
@@ -176,6 +200,75 @@ static const CGFloat kResistance = 0.15;
     
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CGFloat)tween:(NSTimeInterval)t b:(NSTimeInterval)b c:(NSTimeInterval)c d:(NSTimeInterval)d {
+    t = t/d-1;
+    return c*(t*t*t + 1) + b;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)animator:(NSTimer*)theTimer {
+    CGFloat _animationDuration = 4.8;
+    
+    NSTimeInterval kt = -[_animationStartTime timeIntervalSinceNow];
+    CGFloat pct = kt ? [self tween:kt b:0 c:kt d:_animationDuration]/kt : 0;
+
+    if (pct > 1.0) {
+        pct = 1.0;
+    }
+    
+    //    CGFloat mm = (_transtionToMove * pct) - _lastPCT;
+    //    
+    //    NSLog(@"%f", pct);
+    ////    NSLog(@"mm: %f moved: %f", mm, _moved);
+    //    
+    //    _sum = (mm - _moved) ;
+    //    if (_sum > 1.0) {
+    ////        NSLog(@"%f %f %f", _sum, _moved, mm);
+    //        [self updateLocationOfPages: ( ((_directon == CLDraggingDirectionRight) ? -1.0 : 1.0) * _sum )];
+    //        _sum = 0.0;
+    //        _moved = mm;
+    //
+    //    }
+    
+    
+    CGFloat mm = pct - _lastPCT;
+    NSLog(@"%f" , _transtionToMove * mm);
+    [self updateLocationOfPages: ( ((_directon == CLDraggingDirectionRight) ? -1.0 : 1.0) * _transtionToMove * mm )];
+    
+    _lastPCT = pct;
+    
+    if (pct == 1.0) {
+        [self layoutIfNeeded];
+        
+        [_animationStartTime release];
+        _animationStartTime = nil;
+        [_animationTimer invalidate];
+        _animationTimer = nil;
+        
+        if (_flag) {        
+            
+            _flag = NO;
+            _lastPCT = 0.0;
+//            if (_directon == CLDraggingDirectionLeft)  {
+//                _transtionToMove = -OVERLOAD;
+//            } else {
+//                _transtionToMove = -OVERLOAD;
+//            }
+//            
+//            _animationStartTime = [[NSDate date] retain];
+//            _animationTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0/35.0 
+//                                                                target:self 
+//                                                              selector:@selector(animator:) 
+//                                                              userInfo:nil 
+//                                                               repeats:YES] retain];
+            
+        }
+    }
+    
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGFloat) transition {
@@ -320,9 +413,6 @@ static const CGFloat kResistance = 0.15;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGFloat) properPosisionForView:(UIView*)page direction:(CLDraggingDirection)direction {
     
-    // if we don't know direction, position stay the same
-    if (direction == CLDraggingDirectionUnknow) return page.frame.origin.x;
-    
 //    //how many pages can fit in view
 //    CGFloat pagesCount = ceil( (self.bounds.size.width - _offset) / _pageWidth );
     
@@ -330,20 +420,26 @@ static const CGFloat kResistance = 0.15;
 //        CGFloat pagesCountOnRight = ceil( (self.bounds.size.width - (page.frame.origin.x + page.frame.size.width)) / _pageWidth );
 
         if ([self isLastPage: page]) {
-            return self.bounds.size.width - page.frame.size.width;
+            return - (self.bounds.size.width - page.frame.origin.x - _pageWidth);// - 12;
+            
         } else {
+            return _pageWidth - (self.bounds.size.width - page.frame.origin.x);// - 12;
             
         }
-        
     }
     
     if (direction == CLDraggingDirectionRight) { //get new one on left
 //        CGFloat pagesCountOnLeft = ceil( (page.frame.origin.x - _offset) / _pageWidth );
-        
+
+        if ([self isFirstPage: page]) {
+            return - (_pageWidth - (self.bounds.size.width - page.frame.origin.x));
+        } else {
+            return (self.bounds.size.width - page.frame.origin.x);// + 12;
+        }
     }
     
-    // position stay the same
-    return page.frame.origin.x;
+    // if we don't know direction, position stay the same
+    return 0;
 }
 
 
@@ -471,7 +567,6 @@ static const CGFloat kResistance = 0.15;
     return nil;
 }
 
-
 #pragma mark Class methods
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -485,8 +580,7 @@ static const CGFloat kResistance = 0.15;
     if (fromPage == nil) {
         [self popAllPagesAnimated: animated];
     } else {
-        NSUInteger index = [_pages indexOfObject: fromPage];
-        NSAssert(index != NSNotFound, @"fromView == NSNotFound");
+        NSAssert([_pages indexOfObject: fromPage] != NSNotFound, @"fromView == NSNotFound");
         newPageFrame = fromPage.frame;
         newPageFrame.origin.x = fromPageFrame.origin.x + fromPageFrame.size.width;
     }

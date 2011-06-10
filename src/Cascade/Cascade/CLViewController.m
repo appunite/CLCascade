@@ -17,7 +17,7 @@
 - (void)dealloc
 {
     [_cascadeNavigationController release], _cascadeNavigationController = nil;
-    [_originShadow release], _originShadow = nil;    
+//    [_originShadow release], _originShadow = nil;    
     [super dealloc];
 }
 
@@ -127,7 +127,7 @@
      * another page or will slide in CascadeView bounds
      */
     
-    [self showShadow: YES];
+    [self showShadow: NO];
 }
 
 
@@ -138,7 +138,7 @@
      * another page or will slide out CascadeView bounds
      */
     
-    [self hideShadow: YES];
+    [self hideShadow: NO];
 }
 
 @end
