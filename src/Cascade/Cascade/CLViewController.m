@@ -84,6 +84,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) showShadow:(BOOL)animated {
+//    if (![_originShadow isHidden]) return;
+    
     if (!animated) {
         [_originShadow setHidden: NO];
     } else {
@@ -99,6 +101,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) hideShadow:(BOOL)animated {
+//    if ([_originShadow isHidden]) return;
+
     if (!animated) {
         [_originShadow setHidden: YES];
     } else {
@@ -117,6 +121,10 @@
     [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL) isOnStack {
+    return [_cascadeNavigationController isOnStack: self];
+}
 
 #pragma mark CLViewControllerDelegate
 
@@ -126,6 +134,7 @@
      * Called when page (view of this controller) will be unveiled by 
      * another page or will slide in CascadeView bounds
      */
+    
     
     [self showShadow: NO];
 }
@@ -137,8 +146,15 @@
      * Called when page (view of this controller) will be shadowed by 
      * another page or will slide out CascadeView bounds
      */
-    
+
     [self hideShadow: NO];
+//    if ([self isOnStack]) {
+//        UIViewController* parentViewController = [self parentViewController];
+//        
+//        if ([parentViewController isKindOfClass:[CLViewController class]]) {
+//            [(CLViewController*)parentViewController hideShadow: NO];
+//        }
+//    }
 }
 
 @end

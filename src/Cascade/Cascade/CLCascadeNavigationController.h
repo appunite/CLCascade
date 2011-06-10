@@ -51,5 +51,6 @@
  */
 - (UIViewController*)  lastCascadeViewController;
 
+- (BOOL) isOnStack:(UIViewController*)viewController;
 
 @end

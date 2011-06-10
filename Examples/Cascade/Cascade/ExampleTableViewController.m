@@ -36,7 +36,7 @@
     [super viewDidLoad];
 
     // add shadow
-    [self setOuterLeftShadow:[UIColor colorWithRed:0.208 green:0.165 blue:0.118 alpha:1.0] width:80.0 alpha:0.35 animated:YES];
+    [self setOuterLeftShadow:[UIColor colorWithRed:0.208 green:0.165 blue:0.118 alpha:1.0] width:40.0 alpha:0.35 animated:YES];
     
     
     // add header view

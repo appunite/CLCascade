@@ -75,6 +75,8 @@ typedef enum {
 - (void) unloadPage:(UIView*)page;
 - (void) unloadInvisiblePages;
 
+- (BOOL) isOnStack:(UIView*)view;
+
 @end
 
 @protocol CLCascadeViewDataSource <NSObject>

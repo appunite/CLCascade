@@ -12,16 +12,6 @@
 @property(nonatomic, assign, readwrite) UIViewController *parentViewController;
 @end
 
-//@implementation UIViewController
-//
-//- (void) setParentViewController:(UIViewController* )viewController {
-////    if (viewController != self.parentViewController) {
-////        self.parentViewController = 
-////    }
-//}
-//
-//@end
-
 @interface CLCascadeNavigationController (Private)
 @property (nonatomic, retain, readwrite) NSMutableArray* viewControllers;
 @end
@@ -179,6 +169,7 @@
     }
 }
 
+
 #pragma mark -
 #pragma mark Calss methods
 
@@ -189,6 +180,7 @@
 
     [self addViewController:viewController sender:nil animated:animated];
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated {
@@ -228,4 +220,12 @@
                   fromPage:[sender view] 
                   animated:animated];
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL) isOnStack:(UIViewController*)viewController {
+    UIView* view = [viewController view];
+    return [_cascadeView isOnStack: view];
+}
+
 @end
