@@ -28,7 +28,7 @@
 {
     self = [super init];
     if (self) {
-        [self setupViews];
+//        [self setupViews];
     }
     return self;
 }
@@ -38,7 +38,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setupViews];
+//        [self setupViews];
     }
     return self;
 }
@@ -59,10 +59,13 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setupViews {
     
-    if (!_contentView) {
-        _contentView = [[UIView alloc] initWithFrame: self.bounds];
-        [self addSubview: _contentView];
-    }
+//    [self.layer setCornerRadius: 40.0];
+//    [self.layer setMasksToBounds:YES];
+    
+//    if (!_contentView) {
+//        _contentView = [[UIView alloc] initWithFrame: self.bounds];
+//        [self addSubview: _contentView];
+//    }
     
     [_headerView setAutoresizingMask:
      UIViewAutoresizingFlexibleLeftMargin | 
@@ -81,7 +84,6 @@
      UIViewAutoresizingFlexibleTopMargin | 
      UIViewAutoresizingFlexibleWidth | 
      UIViewAutoresizingFlexibleHeight];
-    
 }
 
 
@@ -93,18 +95,21 @@
     if (_contentView != contentView) {
         [_contentView removeFromSuperview];
         [_contentView release];
-        
+
         _contentView = [contentView retain];
-        [_contentView setAutoresizingMask:
-         UIViewAutoresizingFlexibleLeftMargin | 
-         UIViewAutoresizingFlexibleRightMargin | 
-         UIViewAutoresizingFlexibleBottomMargin | 
-         UIViewAutoresizingFlexibleTopMargin | 
-         UIViewAutoresizingFlexibleWidth | 
-         UIViewAutoresizingFlexibleHeight];
-        
-        [self addSubview: _contentView];
-        [self setNeedsLayout];
+
+        if (_contentView) {
+            [_contentView setAutoresizingMask:
+             UIViewAutoresizingFlexibleLeftMargin | 
+             UIViewAutoresizingFlexibleRightMargin | 
+             UIViewAutoresizingFlexibleBottomMargin | 
+             UIViewAutoresizingFlexibleTopMargin | 
+             UIViewAutoresizingFlexibleWidth | 
+             UIViewAutoresizingFlexibleHeight];
+            
+            [self addSubview: _contentView];
+            [self setNeedsLayout];
+        }
     }
 }
 
@@ -117,32 +122,18 @@
         [_headerView release];
         
         _headerView = [headerView retain];
-        [_headerView setAutoresizingMask:
-         UIViewAutoresizingFlexibleLeftMargin | 
-         UIViewAutoresizingFlexibleRightMargin | 
-         UIViewAutoresizingFlexibleTopMargin];
-        
-        [self addSubview: _headerView];
-        [self setNeedsLayout];
+
+        if (_headerView) {
+            [_headerView setAutoresizingMask:
+             UIViewAutoresizingFlexibleLeftMargin | 
+             UIViewAutoresizingFlexibleRightMargin | 
+             UIViewAutoresizingFlexibleTopMargin];
+            
+            [self addSubview: _headerView];
+            [self setNeedsLayout];
+        }
     }
 }
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setShadow:(CAGradientLayer*)shadow {
-
-    if (_shadow != shadow) {
-        [_shadow removeFromSuperlayer];
-        [_shadow release];
-        _shadow = [shadow retain];
-
-        [self setClipsToBounds: NO];
-
-		[self.layer insertSublayer:_shadow atIndex:0];
-        [self setNeedsLayout];
-    }
-}
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setFooterView:(UIView*)footerView {
@@ -152,16 +143,32 @@
         [_footerView release];
         
         _footerView = [footerView retain];
-        [_footerView setAutoresizingMask:
-         UIViewAutoresizingFlexibleLeftMargin | 
-         UIViewAutoresizingFlexibleRightMargin | 
-         UIViewAutoresizingFlexibleBottomMargin];
-        
-        [self addSubview: _footerView];
-        [self setNeedsLayout];
+        if (_footerView) {
+            [_footerView setAutoresizingMask:
+             UIViewAutoresizingFlexibleLeftMargin | 
+             UIViewAutoresizingFlexibleRightMargin | 
+             UIViewAutoresizingFlexibleBottomMargin];
+            
+            [self addSubview: _footerView];
+            [self setNeedsLayout];
+        }
     }
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setShadow:(CAGradientLayer*)shadow {
+    
+    if (_shadow != shadow) {
+        [_shadow removeFromSuperlayer];
+        [_shadow release];
+        _shadow = [shadow retain];
+        
+        [self setClipsToBounds: NO];
+        
+		[self.layer insertSublayer:_shadow atIndex:0];
+        [self setNeedsLayout];
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setShadow:(CAGradientLayer*)shadow withWidth:(CGFloat)with {
@@ -198,7 +205,7 @@
     }
     
     [_contentView setFrame: CGRectMake(0.0, headerHeight, viewWidth, viewHeight - headerHeight - footerHeight)];
-    
+
     if (_shadow) {
 
         [CATransaction begin];

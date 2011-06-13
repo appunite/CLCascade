@@ -67,7 +67,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) contentView {
-    if (![self.view isKindOfClass:[CLSegmentedView class]]) return nil;
+    if (![self.view isKindOfClass:[CLSegmentedView class]]) return self.view;
 
     CLSegmentedView* view_ = (CLSegmentedView*)self.view;
     return view_.contentView;

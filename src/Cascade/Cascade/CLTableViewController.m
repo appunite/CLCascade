@@ -26,8 +26,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    self.tableView = nil;
-    self.view = nil;
+//    self.tableView = nil;
+//    self.view = nil;
     [super dealloc];
 }
 

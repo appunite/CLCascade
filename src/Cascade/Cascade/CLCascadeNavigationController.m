@@ -152,13 +152,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didLoadPage:(UIView*)page {
-    NSLog(@"didLoadPage: %@", page);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didUnloadPage:(UIView*)page {
-//    NSLog(@"didUnloadPage: %@", page);
-    //todo: unload page in controller, set message viewDidUnload
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,8 +167,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didPopPageAtIndex:(NSInteger)index {
-//    NSLog(@"didAddPage: %i", index);
-    // todo: delete controller
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -196,9 +194,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated {
+    // pop all pages
     [_cascadeView popAllPagesAnimated: animated];
+    // remove all controllers
     [self.viewControllers removeAllObjects];
 
+    // add root view controller
     [self addViewController:viewController sender:nil animated:animated];
 }
 
@@ -227,7 +228,7 @@
             // remove controllers
             [_viewControllers removeObjectsInRange:NSMakeRange(indexOfSender + 1, count)];
         }
-    }
+    } 
     
     // set cascade navigator to view controller
     [viewController setCascadeNavigationController: self];

@@ -219,22 +219,14 @@ static const CGFloat kResistance = 0.15;
             // idz dalj i pociagnij nowa po prawej
             CGRect leftRect = leftView.frame;
             leftRect.origin.x = _offset;
-            
-            [UIView animateWithDuration:0.5 delay:0.01 
-                                options:UIViewAnimationCurveEaseOut
-                             animations:^ {
-                                 leftView.frame = leftRect;
-                             }
-                             completion:^(BOOL finished) {
-                                 
-                             }];
-            
+                        
             CGRect topRect = topView.frame;
             topRect.origin.x = leftRect.origin.x + leftRect.size.width;
             
             [UIView animateWithDuration:0.5 delay:0.0 
                                 options:UIViewAnimationCurveEaseOut
                              animations:^ {
+                                 leftView.frame = leftRect;
                                  topView.frame = topRect;
                              }
                              completion:^(BOOL finished) {
@@ -283,15 +275,6 @@ static const CGFloat kResistance = 0.15;
                 topRect.origin.x = 289.0f + _pageWidth;
             }
             
-            [UIView animateWithDuration:0.5 delay:0.0
-                                options:UIViewAnimationCurveEaseOut
-                             animations:^ {
-                                 topView.frame = topRect;
-                             }
-                             completion:^(BOOL finished) {
-                                 
-                             }];
-            
             CGRect leftRect = leftView.frame;
             leftRect.origin.x = topRect.origin.x - _pageWidth;
             
@@ -299,6 +282,7 @@ static const CGFloat kResistance = 0.15;
                                 options:UIViewAnimationCurveEaseOut
                              animations:^ {
                                  leftView.frame = leftRect;
+                                 topView.frame = topRect;
                              }
                              completion:^(BOOL finished) {
                                  [self visiblePages];
