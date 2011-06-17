@@ -63,7 +63,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha animated:(BOOL)animated {
-    return;
     
     if (!_originShadow) {
         _originShadow = [[CAGradientLayer alloc] init];
