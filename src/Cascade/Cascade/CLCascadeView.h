@@ -62,7 +62,7 @@ typedef enum {
  * You can change page width, default (1024.0 - offset) / 2.0, so
  * in landscape mode two pages fit properly
  */
-@property(nonatomic) CGFloat pageWidth;
+@property(nonatomic, readonly) CGFloat pageWidth;
 
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated;
 

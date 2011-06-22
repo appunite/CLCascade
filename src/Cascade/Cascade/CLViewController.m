@@ -17,7 +17,7 @@
 - (void)dealloc
 {
     [_cascadeNavigationController release], _cascadeNavigationController = nil;
-    [_originShadow release], _originShadow = nil;    
+//    [_originShadow release], _originShadow = nil;    
     [super dealloc];
 }
 
@@ -63,9 +63,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha animated:(BOOL)animated {
-    
+
     if (!_originShadow) {
-        _originShadow = [[CAGradientLayer alloc] init];
+        _originShadow = [[[CAGradientLayer alloc] init] autorelease];
     }
     
     _originShadow.startPoint = CGPointMake(0, 0.5);
@@ -87,7 +87,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) showShadow:(BOOL)animated {
 //    if (![_originShadow isHidden]) return;
-    
+
     if (!animated) {
         [_originShadow setHidden: NO];
     } else {

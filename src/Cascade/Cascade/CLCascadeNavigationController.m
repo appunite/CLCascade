@@ -19,7 +19,7 @@
 @implementation CLCascadeNavigationController
 
 @synthesize viewControllers = _viewControllers;
-@synthesize offset, pageWidth;
+@synthesize offset;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -106,11 +106,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGFloat) pageWidth {
     return _cascadeView.pageWidth;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setPageWidth:(CGFloat)newWidth {
-    [_cascadeView setPageWidth:newWidth];
 }
 
 #pragma mark -

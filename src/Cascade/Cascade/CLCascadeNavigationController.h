@@ -31,13 +31,6 @@
 @property(nonatomic) CGFloat offset;
 
 /*
- * You can change page width, default (1024.0 - offset) / 2.0, so
- * in landscape mode two pages fit properly
- */
-@property(nonatomic) CGFloat pageWidth;
-
-
-/*
  * Set and push root view controller
  */
 - (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated;

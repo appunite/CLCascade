@@ -15,6 +15,9 @@
 - (void) updateLocationOfPages:(CGFloat)transition;
 - (BOOL) isLastPage:(UIView*)page;
 - (BOOL) isFirstPage:(UIView*)page;
+- (BOOL) isCompletelyVisible:(UIView*)page;
+- (UIView*) nextPage:(UIView*)page;
+- (UIView*) previousPage:(UIView*)page;
 - (NSArray*) visiblePages;
 - (CGFloat) transition;
 - (UIView*) topLeftVisiblePage;
@@ -36,8 +39,7 @@
 - (void) pageDidDisappearAtIndex:(NSInteger)index;
 @end
 
-#define DEFAULT_PAGE_WIDTH 479.0f
-#define DEFAULT_OFFSET 66.0f
+#define DEFAULT_OFFSET 58.0f
 #define OVERLOAD 0.0f
 
 @implementation CLCascadeView
@@ -121,11 +123,10 @@ static const CGFloat kResistance = 0.15;
      UIViewAutoresizingFlexibleWidth | 
      UIViewAutoresizingFlexibleHeight];
 
-    _offset = DEFAULT_OFFSET;
-    _pageWidth = (1024.0 - _offset) / 2.0;
-    
     _cascadeViewFlags.decelerating = NO;
     _cascadeViewFlags.dragging = NO;
+
+    self.offset = DEFAULT_OFFSET;
     
 }
 
@@ -194,6 +195,8 @@ static const CGFloat kResistance = 0.15;
     UIView* topView = [self topRightVisiblePage];
     UIView* leftView = [self pageOnLeftFromView: topView];
     
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
     if (_direction == CLDraggingDirectionLeft) { //get new one on right
        
         if (topView.frame.origin.x + topView.frame.size.width < self.frame.size.width) {
@@ -203,12 +206,12 @@ static const CGFloat kResistance = 0.15;
             topRect.origin.x += (self.frame.size.width - topView.frame.origin.x - _pageWidth);
 
             if ([_pages count] == 1) {
-                topRect.origin.x = 289.0f;
+                topRect.origin.x = 768.0f - _pageWidth;
             }
             
             
-            [UIView animateWithDuration:0.8 delay:0.0 
-                                options:UIViewAnimationCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionOverrideInheritedCurve
+            [UIView animateWithDuration:0.3 delay:0.0 
+                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowAnimatedContent
                              animations:^ {
                                  topView.frame = topRect;
                              }
@@ -216,15 +219,23 @@ static const CGFloat kResistance = 0.15;
                                  
                              }];
         } else {
-            // idz dalj i pociagnij nowa po prawej
-            CGRect leftRect = leftView.frame;
-            leftRect.origin.x = _offset;
-                        
-            CGRect topRect = topView.frame;
-            topRect.origin.x = leftRect.origin.x + leftRect.size.width;
             
-            [UIView animateWithDuration:0.5 delay:0.0 
-                                options:UIViewAnimationCurveEaseOut
+            CGRect leftRect = leftView.frame;
+            CGRect topRect = topView.frame;
+
+            if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
+                // idz dalj i pociagnij nowa po prawej
+                leftRect.origin.x = _offset;
+                topRect.origin.x = self.frame.size.width - self.pageWidth;
+                
+            } else {
+                // idz dalj i pociagnij nowa po prawej
+                leftRect.origin.x = _offset;
+                topRect.origin.x = leftRect.origin.x + leftRect.size.width;
+            }
+        
+            [UIView animateWithDuration:0.3 delay:0.0 
+                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowAnimatedContent
                              animations:^ {
                                  leftView.frame = leftRect;
                                  topView.frame = topRect;
@@ -232,7 +243,6 @@ static const CGFloat kResistance = 0.15;
                              completion:^(BOOL finished) {
                                  [self visiblePages];
                              }];
-            
         }
     } 
 
@@ -242,11 +252,11 @@ static const CGFloat kResistance = 0.15;
             topRect.origin.x = self.frame.size.width - _pageWidth;
             
             if ([_pages count] == 1) {
-                topRect.origin.x = 289.0f;
+                topRect.origin.x = 768.0f - _pageWidth;
             }
 
-            [UIView animateWithDuration:0.5 delay:0.0 
-                                options:UIViewAnimationCurveEaseOut
+            [UIView animateWithDuration:0.3 delay:0.0 
+                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowAnimatedContent
                              animations:^ {
                                  topView.frame = topRect;
                              }
@@ -268,18 +278,18 @@ static const CGFloat kResistance = 0.15;
                     topView = rightView;
                 }
                 
-                topRect.origin.x = 289.0f + _pageWidth;
+                topRect.origin.x = 768.0f;
             }
 
             if ([self isFirstPage:leftView]) {
-                topRect.origin.x = 289.0f + _pageWidth;
+                topRect.origin.x = 768.0f;
             }
             
             CGRect leftRect = leftView.frame;
             leftRect.origin.x = topRect.origin.x - _pageWidth;
             
-            [UIView animateWithDuration:0.5 delay:0.0
-                                options:UIViewAnimationCurveEaseOut
+            [UIView animateWithDuration:0.3 delay:0.0
+                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowAnimatedContent
                              animations:^ {
                                  leftView.frame = leftRect;
                                  topView.frame = topRect;
@@ -342,6 +352,7 @@ static const CGFloat kResistance = 0.15;
                 }
                 
                 newFrame.origin.x = MAX(_offset, newOriginX);
+
                 [view setFrame: newFrame];
                 lastFrame = newFrame;
             }
@@ -366,7 +377,8 @@ static const CGFloat kResistance = 0.15;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSArray*) visiblePages {
-
+//    return _pages;
+    
     // get top visible left page
     UIView* topPage = [self topRightVisiblePage];
     
@@ -432,8 +444,6 @@ static const CGFloat kResistance = 0.15;
 }
 
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) sendDelegateMessageToHidingPages:(NSArray*)pages {
     BOOL exisnt = NO;
@@ -491,6 +501,39 @@ static const CGFloat kResistance = 0.15;
     return ([_pages indexOfObject: page] == 0);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL) isCompletelyVisible:(UIView*)page {
+    CGRect frame = page.frame;
+    
+    if (frame.origin.x < self.frame.size.width) {
+        
+    }
+    
+    return NO;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView*) nextPage:(UIView*)page {
+    
+    NSUInteger index = [_pages indexOfObject: page];
+    
+    if (index != [_pages count] - 1) {
+        return [_pages objectAtIndex: index + 1];
+    }
+    
+    return nil;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView*) previousPage:(UIView*)page {
+    NSUInteger index = [_pages indexOfObject: page];
+    
+    if (index != 0) {
+        return [_pages objectAtIndex: index - 1];
+    }
+    
+    return nil;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) refreshPageHeight:(UIView*)page {
@@ -602,16 +645,26 @@ static const CGFloat kResistance = 0.15;
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated {
     
     [self visiblePages];
+
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+
+//    UIView* firstPage = [_pages objectAtIndex:<#(NSUInteger)#>];
     
-    CGRect newPageFrame = CGRectMake(289.0f, 0.0, _pageWidth, self.bounds.size.height);
     CGRect fromPageFrame = CGRectMake(_offset, 0.0, _pageWidth, self.bounds.size.height);
+    CGRect newPageFrame = CGRectMake(768.0f - _pageWidth, 0.0, _pageWidth, self.bounds.size.height);
     
     if (fromPage == nil) {
         [self popAllPagesAnimated: animated];
     } else {
         NSAssert([_pages indexOfObject: fromPage] != NSNotFound, @"fromView == NSNotFound");
-        newPageFrame = fromPage.frame;
-        newPageFrame.origin.x = fromPageFrame.origin.x + fromPageFrame.size.width;
+
+        if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
+            newPageFrame = fromPage.frame;
+            newPageFrame.origin.x = self.frame.size.width - self.pageWidth;
+        } else {
+            newPageFrame = fromPage.frame;
+            newPageFrame.origin.x = fromPageFrame.origin.x + fromPageFrame.size.width;
+        }
     }
 
     // if not animated then just set frame
@@ -620,29 +673,17 @@ static const CGFloat kResistance = 0.15;
         [fromPage setFrame:fromPageFrame];
         
     } else { // set animaton
-        [newPage setAlpha: 0.7];
+//        [newPage setAlpha: 0.7];
         
         CGRect newPageAnimationFrame = newPageFrame;
         newPageAnimationFrame.origin.x = self.frame.size.width;
         [newPage setFrame: newPageAnimationFrame];
         
-        [UIView animateWithDuration:0.4 delay:(fromPage == nil) ? 0.15 : 0.0
-                            options:UIViewAnimationCurveEaseIn
-                         animations:^ {
-                             
-                             [newPage setFrame: newPageFrame];
-                             [newPage setAlpha:1.0];
-                             
-                         } 
-                         completion: ^(BOOL finished) {
-                             [self visiblePages];
-                         }
-        ];
-
         [UIView animateWithDuration:0.4 delay:0.0
                             options:UIViewAnimationCurveEaseIn
                          animations:^ {
                              
+                             [newPage setFrame: newPageFrame];
                              [fromPage setFrame:fromPageFrame];
                              
                          } 
@@ -904,6 +945,14 @@ static const CGFloat kResistance = 0.15;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) decelerating {
     return _cascadeViewFlags.decelerating;   
+}
+
+#pragma mark Setters
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setOffset:(CGFloat)newOffset {
+    _offset = newOffset;
+    _pageWidth = (1024.0 - _offset) / 2.0;
 }
 
 @end

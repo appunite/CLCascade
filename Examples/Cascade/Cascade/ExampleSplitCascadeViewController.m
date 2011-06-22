@@ -44,7 +44,7 @@
     [self setDividerImage: divider];
     
     // change offset
-    [self.cascadeNavigationController setOffset: 120.0];
+    [self.cascadeNavigationController setOffset: 58.0f];
 }
 
 @end
