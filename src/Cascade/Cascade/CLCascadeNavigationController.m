@@ -12,10 +12,6 @@
 @property(nonatomic, assign, readwrite) UIViewController *parentViewController;
 @end
 
-@interface CLCascadeNavigationController (Private)
-@property (nonatomic, retain, readwrite) NSMutableArray* viewControllers;
-@end
-
 @implementation CLCascadeNavigationController
 
 @synthesize viewControllers = _viewControllers;
@@ -65,6 +61,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [_cascadeView removeFromSuperview];
+    [_cascadeView release], _cascadeView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -74,7 +72,7 @@
 }
 
 #pragma mark -
-#pragma mark Getters & Setters
+#pragma mark Setters
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSMutableArray*) viewControllers {
@@ -86,11 +84,8 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setViewControllers:(NSMutableArray*)array {
-    if (_viewControllers != array) {
-        [_viewControllers release];
-        _viewControllers = [array retain];
-    }
+- (CGFloat) pageWidth {
+    return _cascadeView.pageWidth;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,14 +93,12 @@
     return _cascadeView.offset;
 }
 
+#pragma mark -
+#pragma mark Setters
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setOffset:(CGFloat)newOffset {
     [_cascadeView setOffset: newOffset];
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CGFloat) pageWidth {
-    return _cascadeView.pageWidth;
 }
 
 #pragma mark -
@@ -219,6 +212,15 @@
                 NSInteger inx = indexOfSender + i;
                 [_cascadeView popPageAtIndex:inx animated:animated];
             }
+            
+            
+//            NSLog(@"QQ: %i %i", indexOfSender + 1, count);
+//
+//            for (NSInteger i = count; i>0; i--) {
+//                NSInteger inx = indexOfSender + i;
+//                UIViewController* ccv = [_viewControllers objectAtIndex:inx];
+//                NSLog(@"%p %i", ccv, [ccv retainCount]);
+//            }
             
             // remove controllers
             [_viewControllers removeObjectsInRange:NSMakeRange(indexOfSender + 1, count)];

@@ -28,64 +28,10 @@
 {
     self = [super init];
     if (self) {
-//        [self setupViews];
+
     }
     return self;
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-//        [self setupViews];
-    }
-    return self;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (id)initWithCoder:(NSCoder *)coder {
-    self = [super initWithCoder:coder];
-    if (self) {
-//        [self setupViews];
-    }
-    return self;
-}
-
-
-#pragma mark -
-#pragma mark Private
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setupViews {
-    
-//    [self.layer setCornerRadius: 40.0];
-//    [self.layer setMasksToBounds:YES];
-    
-//    if (!_contentView) {
-//        _contentView = [[UIView alloc] initWithFrame: self.bounds];
-//        [self addSubview: _contentView];
-//    }
-    
-    [_headerView setAutoresizingMask:
-     UIViewAutoresizingFlexibleLeftMargin | 
-     UIViewAutoresizingFlexibleRightMargin | 
-     UIViewAutoresizingFlexibleTopMargin];
-    
-    [_footerView setAutoresizingMask:
-     UIViewAutoresizingFlexibleLeftMargin | 
-     UIViewAutoresizingFlexibleRightMargin | 
-     UIViewAutoresizingFlexibleBottomMargin];
-    
-    [_contentView setAutoresizingMask:
-     UIViewAutoresizingFlexibleLeftMargin | 
-     UIViewAutoresizingFlexibleRightMargin | 
-     UIViewAutoresizingFlexibleBottomMargin | 
-     UIViewAutoresizingFlexibleTopMargin | 
-     UIViewAutoresizingFlexibleWidth | 
-     UIViewAutoresizingFlexibleHeight];
-}
-
 
 #pragma mark -
 #pragma mark Setters
@@ -226,6 +172,7 @@
     [_footerView release], _footerView = nil;
     [_headerView release], _headerView = nil;
     [_contentView release], _contentView = nil;
+    [_shadow release], _shadow = nil;
     [super dealloc];
 }
 

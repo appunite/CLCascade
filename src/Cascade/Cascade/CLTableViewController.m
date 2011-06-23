@@ -26,8 +26,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-//    self.tableView = nil;
-//    self.view = nil;
     [super dealloc];
 }
 
@@ -67,7 +65,7 @@
     [tableView_ setDirectionalLockEnabled: YES];
     [tableView_ setDelegate: self];
     [tableView_ setDataSource: self];
-    [view_ setContentView: tableView_];
+    [self setTableView: tableView_];
     [tableView_ release];
     
     // set clear background color
@@ -161,12 +159,5 @@
 - (void) setTableView:(UITableView *)newTableView {
     [self.segmentedView setContentView: newTableView];
 }
-
-//#pragma mark -
-//#pragma mark Class methods
-//
-//- (CLSegmentedView*) segmentedView {
-//    return (CLSegmentedView*)self.view;
-//}
 
 @end

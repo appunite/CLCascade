@@ -9,6 +9,8 @@
 #import "CLViewController.h"
 #import "CLCascadeNavigationController.h"
 
+#define SHOW_SHADOW YES
+
 @implementation CLViewController
 
 @synthesize cascadeNavigationController = _cascadeNavigationController;
@@ -63,7 +65,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha animated:(BOOL)animated {
-
+    if (!SHOW_SHADOW) return;
+    
     if (!_originShadow) {
         _originShadow = [[[CAGradientLayer alloc] init] autorelease];
     }
