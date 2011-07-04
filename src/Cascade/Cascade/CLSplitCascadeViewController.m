@@ -18,8 +18,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_cascadeNavigationController release], _cascadeNavigationController = nil;
-    [_categoriesViewController release], _categoriesViewController = nil;
+	self.categoriesViewController = nil;
+	self.cascadeNavigationController = nil;
     
     [super dealloc];
 }

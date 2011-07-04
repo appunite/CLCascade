@@ -28,6 +28,10 @@
 {
     self = [super init];
     if (self) {
+		_headerView = nil;
+		_footerView = nil;
+		_contentView = nil;
+		_shadow = nil;
 //        [self setupViews];
     }
     return self;
@@ -38,6 +42,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+		_headerView = nil;
+		_footerView = nil;
+		_contentView = nil;
+		_shadow = nil;
+
 //        [self setupViews];
     }
     return self;
@@ -93,8 +102,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setContentView:(UIView*)contentView {
     if (_contentView != contentView) {
-        [_contentView removeFromSuperview];
-        [_contentView release];
+		if (_contentView) {
+			[_contentView removeFromSuperview];
+			[_contentView release];
+		}
 
         _contentView = [contentView retain];
 
@@ -118,8 +129,10 @@
 - (void) setHeaderView:(UIView*)headerView {
     
     if (_headerView != headerView) {
-        [_headerView removeFromSuperview];
-        [_headerView release];
+		if (_headerView) {
+			[_headerView removeFromSuperview];
+			[_headerView release];
+		}
         
         _headerView = [headerView retain];
 
@@ -139,8 +152,10 @@
 - (void) setFooterView:(UIView*)footerView {
     
     if (_footerView != footerView) {
-        [_footerView removeFromSuperview];
-        [_footerView release];
+		if (_footerView) {
+			[_footerView removeFromSuperview];
+			[_footerView release];
+		}
         
         _footerView = [footerView retain];
         if (_footerView) {
@@ -159,8 +174,11 @@
 - (void) setShadow:(CAGradientLayer*)shadow {
     
     if (_shadow != shadow) {
-        [_shadow removeFromSuperlayer];
-        [_shadow release];
+		if (_shadow) {
+			[_shadow removeFromSuperlayer];
+			[_shadow release];
+		}
+		
         _shadow = [shadow retain];
         
         [self setClipsToBounds: NO];
@@ -171,9 +189,9 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setShadow:(CAGradientLayer*)shadow withWidth:(CGFloat)with {
+- (void) setShadow:(CAGradientLayer*)newShadow withWidth:(CGFloat)with {
     _shadowWidth = with;
-    self.shadow = shadow;
+    self.shadow = newShadow;
 }
 
 
@@ -223,9 +241,22 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_footerView release], _footerView = nil;
-    [_headerView release], _headerView = nil;
-    [_contentView release], _contentView = nil;
+    if (_footerView) {
+		[_footerView removeFromSuperview];
+		[_footerView release], _footerView = nil;
+	}
+    if (_headerView) {
+		[_headerView removeFromSuperview];
+		[_headerView release], _headerView = nil;
+	}
+    if (_contentView) {
+		[_contentView removeFromSuperview];
+		[_contentView release], _contentView = nil;
+	}
+	if (_shadow) {
+		[_shadow removeFromSuperlayer];
+		[_shadow release], _shadow = nil;
+	}
     [super dealloc];
 }
 

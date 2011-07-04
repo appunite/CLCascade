@@ -12,12 +12,27 @@
 @implementation CLViewController
 
 @synthesize cascadeNavigationController = _cascadeNavigationController;
+@dynamic segmentedView;
+@dynamic headerView;
+@dynamic footerView;
+@dynamic contentView;
+
+- (id)init
+{
+	if ((self = [super init])) {
+		_originShadow = nil;
+	}
+	return self;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_cascadeNavigationController release], _cascadeNavigationController = nil;
-    [_originShadow release], _originShadow = nil;    
+    if (_originShadow)
+		[_originShadow release], _originShadow = nil;    
+
+	self.cascadeNavigationController = nil;
+	
     [super dealloc];
 }
 
@@ -46,7 +61,11 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+	
+    if (_originShadow)
+		[_originShadow release], _originShadow = nil;    
+	
+	self.cascadeNavigationController = nil;
 }
 
 
@@ -55,6 +74,66 @@
 {
     // Return YES for supported orientations
 	return YES;
+}
+
+#pragma mark -
+#pragma mark CLSegmentedView methods
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) loadView {
+    NSString *nib = self.nibName;
+	
+    if (nib) {
+        NSBundle *bundle = self.nibBundle;
+        if(!bundle) bundle = [NSBundle mainBundle];
+        
+        NSString *path = [bundle pathForResource:nib ofType:@"nib"];
+        
+        if(path) {
+            self.view = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex: 0];
+            return;
+        }
+    }
+
+	// If there isn't a nib for this view controller, we're assuming it's for a segmented view
+    CLSegmentedView* view_ = [[CLSegmentedView alloc] init];
+    self.view = view_;
+    [view_ release];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CLSegmentedView*) segmentedView {
+    return (CLSegmentedView*)self.view;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView*) headerView {
+	
+    if (![self.view isKindOfClass:[CLSegmentedView class]]) return nil;
+    
+    CLSegmentedView* view_ = (CLSegmentedView*)self.view;
+    return view_.headerView;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView*) footerView {
+	
+    if (![self.view isKindOfClass:[CLSegmentedView class]]) return nil;
+    
+    CLSegmentedView* view_ = (CLSegmentedView*)self.view;
+    return view_.footerView;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView*) contentView {
+    if (![self.view isKindOfClass:[CLSegmentedView class]]) return self.view;
+	
+    CLSegmentedView* view_ = (CLSegmentedView*)self.view;
+    return view_.contentView;
 }
 
 #pragma mark -
@@ -78,7 +157,8 @@
                             (id)([shadowColor colorWithAlphaComponent: alpha].CGColor), 
                             nil];
     _originShadow.opacity = 0.0;
-    [(CLSegmentedView*)self.view setShadow:_originShadow withWidth:width];
+	if ([self.view isKindOfClass:[CLSegmentedView class]])
+		[(CLSegmentedView*)self.view setShadow:_originShadow withWidth:width];
     
     [self showShadow: animated];
 }

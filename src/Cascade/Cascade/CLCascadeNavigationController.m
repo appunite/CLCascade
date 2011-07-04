@@ -173,7 +173,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index {
     UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
-    if ([controller respondsToSelector:@selector(pageDidAppear)]) {
+    if (controller && [controller respondsToSelector:@selector(pageDidAppear)]) {
         [controller pageDidAppear];
     }
 }
@@ -183,7 +183,7 @@
     if (index > [_viewControllers count] - 1) return;
     
     UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
-    if ([controller respondsToSelector:@selector(pageDidAppear)]) {
+    if (controller && [controller respondsToSelector:@selector(pageDidAppear)]) {
         [controller pageDidDisappear];
     }
 }
@@ -196,6 +196,9 @@
 - (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated {
     // pop all pages
     [_cascadeView popAllPagesAnimated: animated];
+	
+#warning GREG
+	// ---- Since we're setting the parentViewController for each of those controllers, illegally, should we set it to nil here???
     // remove all controllers
     [self.viewControllers removeAllObjects];
 
@@ -225,15 +228,28 @@
                 [_cascadeView popPageAtIndex:inx animated:animated];
             }
             
-            // remove controllers
-            [_viewControllers removeObjectsInRange:NSMakeRange(indexOfSender + 1, count)];
+			// Since we're setting the parentViewController of these on push, we need to set it to nil, otherwise crash on dealloc
+
+			NSArray *toRemove = [_viewControllers subarrayWithRange:NSMakeRange(indexOfSender + 1, count)];
+			for (UIViewController *controller in [toRemove reverseObjectEnumerator]) {
+				[controller setParentViewController: nil];
+				[_viewControllers removeObject:controller];
+			}
+
         }
     } 
     
     // set cascade navigator to view controller
     [viewController setCascadeNavigationController: self];
-    // set parrent view controller, if rootViewController, then nil
+	
+	// ----- THIS IS INCREDIBLY DANGEROUS ------- 
+	// UIViewController assumes that no one is screwing around with this property ... its a big issue during dealloc
+	// Moreover, this will break when running iOS 5 .. where I think you tell the sender to addChildViewController, not the other way around
+	// Shouldn't *this* controller be the parentViewController anyway???
+	
+    // set parrent view controller, if rootViewController, then nil 
     [viewController setParentViewController: sender];
+	
     // add controller to array
     [self.viewControllers addObject: viewController];
 

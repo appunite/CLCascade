@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CLViewController.h"
-#import "UIViewController+CLSegmentedView.h"
 
 @interface CLTableViewController : CLViewController <UITableViewDataSource, UITableViewDelegate> {
     UITableViewStyle _tableViewStyle;
