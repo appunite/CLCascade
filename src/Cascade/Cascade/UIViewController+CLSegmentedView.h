@@ -11,10 +11,10 @@
 
 @interface UIViewController (UIViewController_CLSegmentedView)
 
-@property (nonatomic, retain, readonly) UIView* headerView;
-@property (nonatomic, retain, readonly) UIView* footerView;
-@property (nonatomic, retain, readonly) UIView* contentView;
+@property (nonatomic, readonly) UIView* headerView;
+@property (nonatomic, readonly) UIView* footerView;
+@property (nonatomic, readonly) UIView* contentView;
 
-@property (nonatomic, retain) CLSegmentedView* segmentedView;
+@property (nonatomic, readonly) CLSegmentedView* segmentedView;
 
 @end
