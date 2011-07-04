@@ -14,6 +14,7 @@
 
 }
 
+@property (nonatomic) BOOL wideView;	// Used for testing variable view widths
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet CLSplitCascadeViewController *viewController;
 

@@ -7,6 +7,7 @@
 //
 
 #import "CLCascadeView.h"
+#import "CLCascadeEnums.h"
 
 @interface CLCascadeView (Private)
 - (void) setUpView;
@@ -86,7 +87,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) layoutSubviews {
-
+	
+	// this is necessary because layoutSubviews is called on rotation changes.
+	[self visiblePages];
+	
     for (UIView* view in _visiblePages) {
         [self refreshPageHeight: view];
     }
@@ -185,6 +189,7 @@ static const CGFloat kResistance = 0.15;
     
 }
 
+// This gets called after a gesture dragging motion ended
 - (void) orderViews:(BOOL)animated {
 
     if (_direction == CLDraggingDirectionUnknow) {
@@ -194,33 +199,44 @@ static const CGFloat kResistance = 0.15;
     UIView* topView = [self topRightVisiblePage];
     UIView* leftView = [self pageOnLeftFromView: topView];
     
-    if (_direction == CLDraggingDirectionLeft) { //get new one on right
+	CGFloat height = CGRectGetHeight(self.bounds);
+
+	//dragging a view to the left, get the new one on right
+    if (_direction == CLDraggingDirectionLeft) { 
        
+		// If the top right view fits entirely within our overall cascade view width
         if (topView.frame.origin.x + topView.frame.size.width < self.frame.size.width) {
             
             // cofnij
             CGRect topRect = topView.frame;
-            topRect.origin.x += (self.frame.size.width - topView.frame.origin.x - _pageWidth);
+			topRect.size.height = height;
 
             if ([_pages count] == 1) {
-                topRect.origin.x = 289.0f;
-            }
-            
-            
+                topRect.origin.x = CATEGORIES_VIEW_WIDTH;
+            } else {
+				topRect.origin.x += (self.frame.size.width - topView.frame.origin.x - CGRectGetWidth(topRect));
+			}
+			
             [UIView animateWithDuration:0.8 delay:0.0 
                                 options:UIViewAnimationCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionOverrideInheritedCurve
                              animations:^ {
                                  topView.frame = topRect;
                              }
                              completion:^(BOOL finished) {
-                                 
+								 [self layoutSubviews];
                              }];
-        } else {
+        } else { 
+			// the top right view doesn't fit within our cascade view frame
+			
             // idz dalj i pociagnij nowa po prawej
             CGRect leftRect = leftView.frame;
             leftRect.origin.x = _offset;
+			leftRect.size.height = height;
                         
             CGRect topRect = topView.frame;
+			topRect.size.height = height;
+			
+			// snap it to the right edge boundary of the LEFT view.
             topRect.origin.x = leftRect.origin.x + leftRect.size.width;
             
             [UIView animateWithDuration:0.5 delay:0.0 
@@ -230,34 +246,29 @@ static const CGFloat kResistance = 0.15;
                                  topView.frame = topRect;
                              }
                              completion:^(BOOL finished) {
-                                 [self visiblePages];
+								 [self layoutSubviews];
                              }];
             
         }
     } 
 
-    if (_direction == CLDraggingDirectionRight) { //get new one on left
+	// we have dragged the view to the right, exposing the view underneath
+    if (_direction == CLDraggingDirectionRight) { 
         if (([self isFirstPage: topView]) && ([_pages count] == 1)) {
             CGRect topRect = topView.frame;
-            topRect.origin.x = self.frame.size.width - _pageWidth;
-            
-            if ([_pages count] == 1) {
-                topRect.origin.x = 289.0f;
-            }
-
+			topRect.origin.x = CATEGORIES_VIEW_WIDTH;
+			topRect.size.height = height;
+			
             [UIView animateWithDuration:0.5 delay:0.0 
                                 options:UIViewAnimationCurveEaseOut
                              animations:^ {
                                  topView.frame = topRect;
                              }
                              completion:^(BOOL finished) {
-                                 
+								 [self layoutSubviews];
                              }];
         } else {
-            
-            CGRect topRect = topView.frame;
-            topRect.origin.x = self.frame.size.width;
-            
+			// if we're dragging "open" a view that's early in the stack, lets adjust our math to shift the views that come later on
             
             if ([self isFirstPage:topView]) {
 
@@ -267,16 +278,37 @@ static const CGFloat kResistance = 0.15;
                     leftView = topView;
                     topView = rightView;
                 }
-                
-                topRect.origin.x = 289.0f + _pageWidth;
+			}
+			
+			CGRect leftRect = leftView.frame;
+			leftRect.size.height = height;
+			
+			CGRect topRect = topView.frame;
+            topRect.origin.x = self.frame.size.width;	
+			topRect.size.height = height;
+			
+			NSAssert(leftView, @"Left View is nil!");
+			
+			if ([self isFirstPage:leftView]) {
+				leftRect.origin.x = CATEGORIES_VIEW_WIDTH;
             }
-
-            if ([self isFirstPage:leftView]) {
-                topRect.origin.x = 289.0f + _pageWidth;
-            }
+			else {
+				// there's more views to the left of the left view
+				UIView *veryLeft = [self pageOnLeftFromView:leftView];
+				if (veryLeft) {
+					leftRect.origin.x = veryLeft.frame.origin.x + CGRectGetWidth(veryLeft.frame);
+					[self refreshPageHeight:veryLeft];
+				}
+				//leftRect.origin.x = topRect.origin.x - _pageWidth; // the old way of doing it
+			}
+			
+			
+			if (topView) {
+				// We're fully exposing the "left" view, so move the "top" view to the edge of the "left" view boundary
+				topRect.origin.x = leftRect.origin.x + CGRectGetWidth(leftView.frame);
+				//topRect.origin.x = CATEGORIES_VIEW_WIDTH + _pageWidth; // the old way of doing it
+			}
             
-            CGRect leftRect = leftView.frame;
-            leftRect.origin.x = topRect.origin.x - _pageWidth;
             
             [UIView animateWithDuration:0.5 delay:0.0
                                 options:UIViewAnimationCurveEaseOut
@@ -285,7 +317,7 @@ static const CGFloat kResistance = 0.15;
                                  topView.frame = topRect;
                              }
                              completion:^(BOOL finished) {
-                                 [self visiblePages];
+								 [self layoutSubviews];
                              }];
             
         }
@@ -311,17 +343,22 @@ static const CGFloat kResistance = 0.15;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+// this gets called *during* the dragging motion
 - (void) updateLocationOfPages:(CGFloat)transition {
-
     if (_direction == CLDraggingDirectionUnknow) return;
-
-    NSArray* array = [self visiblePages];
-
+	
+	//#warning GREG
+	// *really* ??? we recalculate this array *while* animating????
+    //NSArray* array = [self visiblePages];
+	
+	NSArray* array = _visiblePages;
+	
     NSInteger newOriginX = 0;
     CGRect lastFrame = CGRectNull;
     NSEnumerator* enumerator;
     UIView* view;    
-
+	
     if (_direction == CLDraggingDirectionLeft) {
         enumerator = [array reverseObjectEnumerator];
     }
@@ -329,12 +366,14 @@ static const CGFloat kResistance = 0.15;
         enumerator = [array objectEnumerator];
     }
     
+	CGFloat height = CGRectGetHeight(self.bounds);
+
     while ((view = [enumerator nextObject])) {
         
         if (_direction == CLDraggingDirectionLeft) { //get new one on right
             if (!(view.frame.origin.x <= _offset)) {
                 CGRect newFrame = view.frame;
-                
+
                 if (CGRectEqualToRect(lastFrame, CGRectNull)) {
                     newOriginX = newFrame.origin.x - transition;
                 } else {
@@ -342,6 +381,8 @@ static const CGFloat kResistance = 0.15;
                 }
                 
                 newFrame.origin.x = MAX(_offset, newOriginX);
+				newFrame.size.height = height;
+				
                 [view setFrame: newFrame];
                 lastFrame = newFrame;
             }
@@ -349,12 +390,13 @@ static const CGFloat kResistance = 0.15;
         
         if (_direction == CLDraggingDirectionRight) { //get new one on left
             CGRect newFrame = view.frame;
-            
+			newFrame.size.height = height;
+
             if (!CGRectIntersectsRect(lastFrame, view.frame) || [self isLastPage:view]) {
                 newOriginX = newFrame.origin.x - transition;
                 newFrame.origin.x = MAX(_offset, newOriginX);
-                [view setFrame: newFrame];
             }
+			[view setFrame: newFrame];
             
             lastFrame = newFrame;
         }
@@ -363,28 +405,36 @@ static const CGFloat kResistance = 0.15;
     [self setNeedsLayout];
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSArray*) visiblePages {
 
+- (NSArray*) visiblePages {
+	
     // get top visible left page
     UIView* topPage = [self topRightVisiblePage];
     
     // if page exists (so, if _pages has any object)
     if (topPage) {
-
-        // top index of top page
+		        
+		// top index of top page
         NSUInteger topPageIndex = [_pages indexOfObject: topPage];
-        
-        // calcule how many other pagas can be visible
-        NSInteger count = ceil( (topPage.frame.origin.x - _offset) / _pageWidth );
-        
+
+        // calculate the number of existing pages that can be visible at this time
+        //NSInteger count = ceil( (topPage.frame.origin.x - _offset) / _pageWidth );	// the old way
+				
+		NSInteger count = 1; // we want at least one to show (the top page)
+		
+		BOOL landscape = CGRectGetWidth(self.bounds) > 800;
+		if (landscape && [_pages count] > 1)
+			count = 2;
+		else
+			count = 1;
+		
         // create array
         NSMutableArray* array = [[[NSMutableArray alloc] init] autorelease];
-
+		
         // add top right visible page
         [array addObject:topPage];
-
+		
         // get index of topPage in array of subviews
         NSInteger subviewIndex = [self.subviews indexOfObject:topPage] - 1;
         
@@ -407,6 +457,7 @@ static const CGFloat kResistance = 0.15;
             }
             subviewIndex--;
         }
+
         // if there is no any changes return _visiblePages
         if ([_visiblePages isEqualToArray: array]) {
             return _visiblePages;
@@ -430,7 +481,6 @@ static const CGFloat kResistance = 0.15;
     return _visiblePages;
     
 }
-
 
 
 
@@ -471,6 +521,8 @@ static const CGFloat kResistance = 0.15;
         }
         
         if (!exisnt) {
+			[self refreshPageHeight:viewB];
+			
             NSInteger index = [_pages indexOfObject: viewB];
             [self pageDidAppearAtIndex:index];
         }
@@ -494,12 +546,12 @@ static const CGFloat kResistance = 0.15;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) refreshPageHeight:(UIView*)page {
-    CGFloat height = self.bounds.size.height;
-    CGRect frame = page.frame;
+    CGFloat height = CGRectGetHeight(self.bounds);
+    CGRect newFrame = page.frame;
     
-    if (frame.size.height != height) {
-        frame.size.height = height;
-        [page setFrame: frame];
+    if (newFrame.size.height != height) {
+        newFrame.size.height = height;
+        [page setFrame: newFrame];
     }
 }
 
@@ -516,20 +568,27 @@ static const CGFloat kResistance = 0.15;
         // find first loaded view
         if (item != [NSNull null]) {
             UIView* page = (UIView*)item;
-            // if page intersect with content
-            if (page.frame.origin.x < self.bounds.size.width) {
+			
+            // if page intersects with content
+            if (page.frame.origin.x < CGRectGetWidth(self.bounds)) {
+				
                 // if view don't stick right band
-                if (page.frame.origin.x + page.frame.size.width < self.bounds.size.width) {
-                    // load previous page if neede and if can
+                if ((page.frame.origin.x + CGRectGetWidth(page.frame)) < CGRectGetWidth(self.bounds)) {
+					
+                    // load previous page if needed and if we can
                     UIView* nextPage = [self loadPageAtIndex: index + 1];
+					
                     // if prev page exist, that page is top page
                     if (nextPage) {
-                        // set new frame, next to the right edge of previos page
-                        CGRect frame = CGRectMake(page.frame.origin.x + page.frame.size.width, 0.0, _pageWidth, self.bounds.size.height);
-                        [nextPage setFrame: frame];
+                        CGRect nextFrame = CGRectMake(page.frame.origin.x + CGRectGetWidth(page.frame), 0.0, _pageWidth, CGRectGetHeight(self.bounds));
+						if (NO == CGRectIsEmpty(nextPage.frame)) {
+							nextFrame.size.width = CGRectGetWidth(nextPage.frame);
+						}
+                        // set new frame, next to the right edge of previous page
+                        [nextPage setFrame: nextFrame];
                         //
                         [self bringSubviewToFront:nextPage];
-                        //retunr next page
+
                         return nextPage;
                     }
                 }
@@ -599,57 +658,79 @@ static const CGFloat kResistance = 0.15;
 #pragma mark Class methods
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated {
-    
+	
     [self visiblePages];
-    
-    CGRect newPageFrame = CGRectMake(289.0f, 0.0, _pageWidth, self.bounds.size.height);
-    CGRect fromPageFrame = CGRectMake(_offset, 0.0, _pageWidth, self.bounds.size.height);
-    
+	
+	CGFloat height = CGRectGetHeight(self.bounds);
+		
+    CGRect fromPageFrame = CGRectMake(_offset, 0.0, _pageWidth, height);
+	
+	if (fromPage && NO == CGRectIsEmpty(fromPage.frame)) {
+		fromPageFrame.size.width = CGRectGetWidth(fromPage.frame);
+	}
+	
+	CGRect newPageFrame = CGRectMake(CATEGORIES_VIEW_WIDTH, 0.0, _pageWidth, height);
+	
+	if (newPage && NO == CGRectIsEmpty(newPage.frame)) {
+		newPageFrame.size.width = CGRectGetWidth(newPage.frame);
+	}
+	
+	
     if (fromPage == nil) {
         [self popAllPagesAnimated: animated];
     } else {
         NSAssert([_pages indexOfObject: fromPage] != NSNotFound, @"fromView == NSNotFound");
-        newPageFrame = fromPage.frame;
-        newPageFrame.origin.x = fromPageFrame.origin.x + fromPageFrame.size.width;
+		
+		CGFloat maxX = CGRectGetWidth(self.frame);
+		CGFloat fromWidthX = fromPageFrame.origin.x + CGRectGetWidth(fromPageFrame);
+		
+		// if we have room for both views in this orientation ...
+		if ((fromWidthX + CGRectGetWidth(newPageFrame)) < maxX) {
+			newPageFrame.origin.x = fromPageFrame.origin.x + CGRectGetWidth(fromPageFrame);
+		} else {
+			// if we don't have room for both
+			newPageFrame.origin.x = fromPageFrame.origin.x + _offset;
+		}
     }
-
+	
     // if not animated then just set frame
     if (!animated) {
         [newPage setFrame: newPageFrame];
         [fromPage setFrame:fromPageFrame];
-        
+		
     } else { // set animaton
         [newPage setAlpha: 0.7];
-        
+		
         CGRect newPageAnimationFrame = newPageFrame;
         newPageAnimationFrame.origin.x = self.frame.size.width;
         [newPage setFrame: newPageAnimationFrame];
-        
+		
         [UIView animateWithDuration:0.4 delay:(fromPage == nil) ? 0.15 : 0.0
                             options:UIViewAnimationCurveEaseIn
                          animations:^ {
-                             
+							 
                              [newPage setFrame: newPageFrame];
                              [newPage setAlpha:1.0];
-                             
+							 
                          } 
                          completion: ^(BOOL finished) {
-                             [self visiblePages];
+                             [self layoutSubviews];
                          }
-        ];
-
+		 ];
+		
         [UIView animateWithDuration:0.4 delay:0.0
                             options:UIViewAnimationCurveEaseIn
                          animations:^ {
-                             
+							 
                              [fromPage setFrame:fromPageFrame];
-                             
+							 
                          } 
                          completion: ^(BOOL finished) {
-                             [self visiblePages];
+                             [self layoutSubviews];
                          }
-        ];
+		 ];
     }
     // add page to array of pages
     [_pages addObject: newPage];
@@ -657,7 +738,7 @@ static const CGFloat kResistance = 0.15;
     [self addSubview: newPage];
     // send message to delegate
     [self didAddPage:newPage animated:animated];
-    
+	
     if (!animated) {
         [self visiblePages];
     }
@@ -678,7 +759,10 @@ static const CGFloat kResistance = 0.15;
             // if got view from dataSorce
             if (view != nil) {
                 //preventive, set frame
-                CGRect pageFrame = CGRectMake(_offset, 0.0, _pageWidth, self.bounds.size.height);
+                CGRect pageFrame = CGRectMake(_offset, 0.0, _pageWidth, CGRectGetHeight(self.bounds));
+				if (NO == CGRectIsEmpty(view.frame)) {
+					pageFrame.size.width = view.frame.size.width;
+				}
                 [view setFrame: pageFrame];
                 // replace in array of pages
                 [_pages replaceObjectAtIndex:index withObject:view];
@@ -844,7 +928,7 @@ static const CGFloat kResistance = 0.15;
     // add pan gesture recognizer to new view
     [self addPanGestureRecognizer: page];
 
-    if ([_delegate respondsToSelector:@selector(cascadeView:didLoadPage:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(cascadeView:didLoadPage:)]) {
         [_delegate cascadeView:self didLoadPage:page];
     }
 }
@@ -855,7 +939,7 @@ static const CGFloat kResistance = 0.15;
     // add pan gesture recognizer to new view
     [self addPanGestureRecognizer: page];
 
-    if ([_delegate respondsToSelector:@selector(cascadeView:didAddPage:animated:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(cascadeView:didAddPage:animated:)]) {
         [_delegate cascadeView:self didAddPage:page animated:YES];
     }
 }
@@ -863,7 +947,7 @@ static const CGFloat kResistance = 0.15;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didPopPageAtIndex:(NSInteger)index {
-    if ([_delegate respondsToSelector:@selector(cascadeView:didPopPageAtIndex:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(cascadeView:didPopPageAtIndex:)]) {
         [_delegate cascadeView:self didPopPageAtIndex:index];
     }
 }
@@ -871,7 +955,7 @@ static const CGFloat kResistance = 0.15;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didUnloadPage:(UIView*)page {
-    if ([_delegate respondsToSelector:@selector(cascadeView:didUnloadPage:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(cascadeView:didUnloadPage:)]) {
         [_delegate cascadeView:self didUnloadPage:page];
     }
 }
@@ -879,7 +963,7 @@ static const CGFloat kResistance = 0.15;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pageDidAppearAtIndex:(NSInteger)index {
-    if ([_delegate respondsToSelector:@selector(cascadeView:pageDidAppearAtIndex:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(cascadeView:pageDidAppearAtIndex:)]) {
         [_delegate cascadeView:self pageDidAppearAtIndex:index];
     }
 }
@@ -887,7 +971,7 @@ static const CGFloat kResistance = 0.15;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pageDidDisappearAtIndex:(NSInteger)index {
-    if ([_delegate respondsToSelector:@selector(cascadeView:pageDidDisappearAtIndex:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(cascadeView:pageDidDisappearAtIndex:)]) {
         [_delegate cascadeView:self pageDidDisappearAtIndex:index];
     }
 }

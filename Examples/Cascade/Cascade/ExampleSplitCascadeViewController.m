@@ -43,8 +43,11 @@
     UIImage* divider = [UIImage imageNamed:@"divider_vertical.png"];
     [self setDividerImage: divider];
     
-    // change offset
-    [self.cascadeNavigationController setOffset: 120.0];
+	// change the standard offset for pushed views
+    [self.cascadeNavigationController setOffset: 80.f];
+	
+    // change the default page width (if the view's frame isn't already set)
+	[self.cascadeNavigationController setPageWidth:320.f];
 }
 
 @end

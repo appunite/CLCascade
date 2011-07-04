@@ -16,7 +16,6 @@
 @dynamic footerView;
 @dynamic contentView;
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) loadView {
     NSString *nib = self.nibName;
@@ -33,6 +32,7 @@
         }
     }
     
+	// If there isn't a nib for this view controller, we're assuming it's for a segmented view
     CLSegmentedView* view_ = [[CLSegmentedView alloc] init];
     self.view = view_;
     [view_ release];

@@ -7,7 +7,8 @@
 //
 
 #import "ExampleTableViewController.h"
-
+#import "UIColor+Random.h"
+#import "CascadeAppDelegate.h"
 
 @implementation ExampleTableViewController
 
@@ -34,16 +35,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+		
     // add shadow
     [self setOuterLeftShadow:[UIColor colorWithRed:0.208 green:0.165 blue:0.118 alpha:1.0] width:40.0 alpha:0.35 animated:YES];
-    
-    
+        
     // add header view
     UIImageView* header = [[UIImageView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.bounds.size.width, 45.0)];
     [header setImage: [UIImage imageNamed:@"ToolBar_479x45.png"]];
     [self.segmentedView setHeaderView: header];
     [header release];
+	
+	// sets a random color for the background, to clarify which views we are dragging and pushing
+	self.tableView.backgroundColor = [UIColor randomColor];
+
 }
 
 
@@ -104,7 +108,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ExampleTableViewController* viewController = [[ExampleTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
+	
+	// The following alternates the view width, creating a wide or a narrow view to test dragging and pushing
+	CascadeAppDelegate *appDel = [[UIApplication sharedApplication] delegate];
+	if (appDel.wideView) {
+		CGRect viewSize = viewController.view.frame;
+		viewSize.size.width = 600.f;
+		viewSize.size.height = 600.f;
+		viewController.view.frame = viewSize;
+	}
+	appDel.wideView = !appDel.wideView;
+	
     [self pushDetailViewController:viewController animated:YES];
+	viewController.tableView.backgroundColor = [UIColor randomColor];
+	[viewController.view setNeedsDisplay];
     [viewController release];
 }
 

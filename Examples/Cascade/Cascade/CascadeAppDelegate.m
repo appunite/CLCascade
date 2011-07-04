@@ -13,13 +13,15 @@
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
+@synthesize wideView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    
+	wideView = YES;
+
     return YES;
 }
 
