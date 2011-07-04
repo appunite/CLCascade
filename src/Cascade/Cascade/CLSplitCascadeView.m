@@ -22,8 +22,6 @@
 @synthesize backgroundView = _backgroundView;
 @synthesize verticalDividerImage = _verticalDividerImage;
 
-#define CATEGORIES_VIEW_WIDTH 289.0f
-
 #pragma mark -
 #pragma mark Private
 

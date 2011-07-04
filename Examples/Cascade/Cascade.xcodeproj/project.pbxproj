@@ -43,6 +43,7 @@
 		207EA4DE13992C6300A8200F /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 207EA4D213992C6300A8200F /* CLViewController.m */; };
 		207EA4E413992C6A00A8200F /* UIViewController+CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 207EA4E213992C6A00A8200F /* UIViewController+CLSegmentedView.m */; };
 		207EA4EC13992CE100A8200F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 207EA4EB13992CE100A8200F /* QuartzCore.framework */; };
+		37CB0D8713C183BE006D04F7 /* UIColor+Random.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CB0D8613C183BE006D04F7 /* UIColor+Random.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,8 @@
 		207EA4E113992C6A00A8200F /* UIViewController+CLSegmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CLSegmentedView.h"; path = "../../src/Cascade/Cascade/UIViewController+CLSegmentedView.h"; sourceTree = "<group>"; };
 		207EA4E213992C6A00A8200F /* UIViewController+CLSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CLSegmentedView.m"; path = "../../src/Cascade/Cascade/UIViewController+CLSegmentedView.m"; sourceTree = "<group>"; };
 		207EA4EB13992CE100A8200F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		37CB0D8513C183BE006D04F7 /* UIColor+Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Random.h"; sourceTree = "<group>"; };
+		37CB0D8613C183BE006D04F7 /* UIColor+Random.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Random.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +197,8 @@
 		207EA49A13992C0400A8200F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				37CB0D8513C183BE006D04F7 /* UIColor+Random.h */,
+				37CB0D8613C183BE006D04F7 /* UIColor+Random.m */,
 				207EA4A213992C0400A8200F /* CascadeAppDelegate.h */,
 				207EA4A313992C0400A8200F /* CascadeAppDelegate.m */,
 				201A2D0613992DB900EFAE15 /* InfoPlist.strings */,
@@ -324,6 +329,7 @@
 				201A2D28139931B900EFAE15 /* ExampleCategoriesViewController.m in Sources */,
 				201A2D371399348300EFAE15 /* ExampleTableViewController.m in Sources */,
 				201A2D901399522A00EFAE15 /* ExampleSplitCascadeViewController.m in Sources */,
+				37CB0D8713C183BE006D04F7 /* UIColor+Random.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -217,7 +217,7 @@
         if (indexOfSender != [_viewControllers count] - 1) {
             
             // count of views to pop
-            NSInteger count = [_viewControllers count] - indexOfSender - 1;
+            NSInteger count = ([_viewControllers count] - indexOfSender) - 1;
             
             // pop views
             for (NSInteger i = count; i>0; i--) {

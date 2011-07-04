@@ -11,3 +11,5 @@ typedef enum {
 	CLCascadeViewScrollMasterPosition = 0,
 	CLCascadeViewScrollDetailPosition = 1
 } CLCascadeViewScrollPositions;
+
+#define CATEGORIES_VIEW_WIDTH 289.0f
