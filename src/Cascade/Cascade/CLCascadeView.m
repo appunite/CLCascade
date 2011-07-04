@@ -773,19 +773,20 @@ static const CGFloat kResistance = 0.15;
     // get item at index
     id item = [_pages objectAtIndex:index];
     
-    // remove page from array of pages
-    [_pages removeObjectAtIndex: index];
-
     if (item != [NSNull null]) {
     
-        // get index of page in array of subviews
-        NSUInteger viewIndex = [self.subviews indexOfObject: item];
-        if (viewIndex != NSNotFound) {
-        
-            // remove view from superview
-            [[self.subviews objectAtIndex: viewIndex] removeFromSuperview];
-        }
+        [item removeFromSuperview];
+//        // get index of page in array of subviews
+//        NSUInteger viewIndex = [self.subviews indexOfObject: item];
+//        if (viewIndex != NSNotFound) {
+//        
+//            // remove view from superview
+//            [[self.subviews objectAtIndex: viewIndex] removeFromSuperview];
+//        }
     }
+
+    // remove page from array of pages
+    [_pages removeObjectAtIndex: index];
     
     // send delegate message
     [self didPopPageAtIndex: index];

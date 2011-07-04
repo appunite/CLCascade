@@ -163,7 +163,7 @@
 			name = CLCategories;
 			sourceTree = "<group>";
 		};
-		205A69BA136375AB00F6544D /* CustomViewControllers */ = {
+		205A69BA136375AB00F6544D /* CLCustomViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				20BB3445133FBAA4003EEB6E /* CLViewController.h */,
@@ -172,7 +172,7 @@
 				20BB3448133FBAA4003EEB6E /* CLTableViewController.h */,
 				20BB3449133FBAA4003EEB6E /* CLTableViewController.m */,
 			);
-			name = CustomViewControllers;
+			name = CLCustomViewControllers;
 			sourceTree = "<group>";
 		};
 		205A69BB136375CA00F6544D /* CLCascadeNavigationController */ = {
@@ -260,7 +260,7 @@
 				205A69B71363756F00F6544D /* CLSplitViewController */,
 				205A69B91363758A00F6544D /* CLCategories */,
 				205A69BB136375CA00F6544D /* CLCascadeNavigationController */,
-				205A69BA136375AB00F6544D /* CustomViewControllers */,
+				205A69BA136375AB00F6544D /* CLCustomViewControllers */,
 				205A69BD1363761500F6544D /* Other */,
 			);
 			name = Cascade;

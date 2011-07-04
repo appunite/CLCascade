@@ -62,7 +62,6 @@
     [view_ release];
     
     UITableView* tableView_ = [[UITableView alloc] initWithFrame:CGRectZero style:_tableViewStyle];
-    [tableView_ setDirectionalLockEnabled: YES];
     [tableView_ setDelegate: self];
     [tableView_ setDataSource: self];
     [self setTableView: tableView_];
@@ -104,7 +103,7 @@
 {
     // Return the number of sections.
     //todo: return 0;
-    return 1;
+    return 0;
 }
 
 
@@ -113,7 +112,7 @@
 {
     // Return the number of rows in the section.
     //todo: return 0;
-    return 5;
+    return 0;
 }
 
 
@@ -127,9 +126,6 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    // Configure the cell...
-    //todo: return nil;
-    cell.textLabel.text = @"text";
     return cell;
 }
 
@@ -139,12 +135,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //todo: do nothing
-    CLTableViewController* viewController = [[CLTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
-    [self pushDetailViewController:viewController animated:YES];
-    [viewController release];
-}
 
+}
 
 #pragma mark -
 #pragma mark Getters
@@ -157,6 +149,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setTableView:(UITableView *)newTableView {
+    [newTableView setDirectionalLockEnabled: YES];
     [self.segmentedView setContentView: newTableView];
 }
 

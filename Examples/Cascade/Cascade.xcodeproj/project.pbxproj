@@ -209,30 +209,70 @@
 		207EA4BB13992C5300A8200F /* CLCascade */ = {
 			isa = PBXGroup;
 			children = (
+				20BA720213C1F2B000CDE622 /* CLSplitViewController */,
+				20BA720413C1F2C400CDE622 /* CLCategories */,
+				20BA720513C1F2E300CDE622 /* CLCascadeNavigationController */,
+				20BA720613C1F2FC00CDE622 /* CLCustomViewControllers */,
+				20BA720713C1F31100CDE622 /* Other */,
+			);
+			name = CLCascade;
+			sourceTree = "<group>";
+		};
+		20BA720213C1F2B000CDE622 /* CLSplitViewController */ = {
+			isa = PBXGroup;
+			children = (
 				207EA4CD13992C6300A8200F /* CLSplitCascadeViewController.h */,
 				207EA4CE13992C6300A8200F /* CLSplitCascadeViewController.m */,
 				207EA4CB13992C6300A8200F /* CLSplitCascadeView.h */,
 				207EA4CC13992C6300A8200F /* CLSplitCascadeView.m */,
-				207EA4BF13992C6300A8200F /* CLCascadeNavigationController.h */,
-				207EA4C013992C6300A8200F /* CLCascadeNavigationController.m */,
-				207EA4C113992C6300A8200F /* CLCascadeView.h */,
-				207EA4C213992C6300A8200F /* CLCascadeView.m */,
+			);
+			name = CLSplitViewController;
+			sourceTree = "<group>";
+		};
+		20BA720413C1F2C400CDE622 /* CLCategories */ = {
+			isa = PBXGroup;
+			children = (
 				207EA4C513992C6300A8200F /* CLCategoriesViewController.h */,
 				207EA4C613992C6300A8200F /* CLCategoriesViewController.m */,
 				207EA4C313992C6300A8200F /* CLCategoriesView.h */,
 				207EA4C413992C6300A8200F /* CLCategoriesView.m */,
-				207EA4C913992C6300A8200F /* CLSegmentedView.h */,
-				207EA4CA13992C6300A8200F /* CLSegmentedView.m */,
+			);
+			name = CLCategories;
+			sourceTree = "<group>";
+		};
+		20BA720513C1F2E300CDE622 /* CLCascadeNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				207EA4BF13992C6300A8200F /* CLCascadeNavigationController.h */,
+				207EA4C013992C6300A8200F /* CLCascadeNavigationController.m */,
+				207EA4C113992C6300A8200F /* CLCascadeView.h */,
+				207EA4C213992C6300A8200F /* CLCascadeView.m */,
+			);
+			name = CLCascadeNavigationController;
+			sourceTree = "<group>";
+		};
+		20BA720613C1F2FC00CDE622 /* CLCustomViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				207EA4D313992C6300A8200F /* CLViewControllerDelegate.h */,
 				207EA4D113992C6300A8200F /* CLViewController.h */,
 				207EA4D213992C6300A8200F /* CLViewController.m */,
-				207EA4D313992C6300A8200F /* CLViewControllerDelegate.h */,
 				207EA4CF13992C6300A8200F /* CLTableViewController.h */,
 				207EA4D013992C6300A8200F /* CLTableViewController.m */,
+			);
+			name = CLCustomViewControllers;
+			sourceTree = "<group>";
+		};
+		20BA720713C1F31100CDE622 /* Other */ = {
+			isa = PBXGroup;
+			children = (
 				207EA4BD13992C6300A8200F /* CLCascadeEnums.h */,
+				207EA4C913992C6300A8200F /* CLSegmentedView.h */,
+				207EA4CA13992C6300A8200F /* CLSegmentedView.m */,
 				207EA4E113992C6A00A8200F /* UIViewController+CLSegmentedView.h */,
 				207EA4E213992C6A00A8200F /* UIViewController+CLSegmentedView.m */,
 			);
-			name = CLCascade;
+			name = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

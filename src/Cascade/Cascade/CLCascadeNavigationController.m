@@ -185,8 +185,7 @@
     // pop all pages
     [_cascadeView popAllPagesAnimated: animated];
     // remove all controllers
-    [self.viewControllers removeAllObjects];
-
+    [_viewControllers removeAllObjects];
     // add root view controller
     [self addViewController:viewController sender:nil animated:animated];
 }
