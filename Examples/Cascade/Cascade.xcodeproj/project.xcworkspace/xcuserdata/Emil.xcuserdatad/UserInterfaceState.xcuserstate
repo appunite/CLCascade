@@ -5122,19 +5122,19 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>220</integer>
+					<integer>247</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>221</integer>
+					<integer>248</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>222</integer>
+					<integer>249</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>223</integer>
+					<integer>250</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -5157,8 +5157,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>330545128.37130898</real>
-		<string>{84, 966}</string>
+		<real>331570110.54119098</real>
+		<string>{0, 1050}</string>
 		<string>{519, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -5531,11 +5531,11 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>247</integer>
+					<integer>248</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>248</integer>
+					<integer>247</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -5554,8 +5554,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>331570082.71765703</real>
-		<string>{871, 1504}</string>
+		<string>{99861, 1552}</string>
+		<real>331570119.03707498</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6991,7 +6991,7 @@
 			</dict>
 		</dict>
 		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/Examples/Cascade/Cascade.xcodeproj/</string>
-		<real>331570082.71742398</real>
+		<real>331570124.24123299</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7742,7 +7742,7 @@
 				<integer>593</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.h</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7760,7 +7760,7 @@
 				<integer>595</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/Examples/Cascade/Cascade.xcodeproj/project.pbxproj</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7778,7 +7778,7 @@
 				<integer>597</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/Examples/Cascade/Cascade.xcodeproj/project.pbxproj</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7796,7 +7796,7 @@
 				<integer>599</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.m</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7814,7 +7814,7 @@
 				<integer>601</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.m</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesView.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7832,7 +7832,7 @@
 				<integer>603</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.h</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7850,7 +7850,7 @@
 				<integer>605</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeView.m</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCategoriesViewController.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7868,7 +7868,7 @@
 				<integer>607</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeViewController.m</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLSplitCascadeView.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10147,7 +10147,7 @@
 				<integer>814</integer>
 			</dict>
 		</dict>
-		<real>331570082.71963298</real>
+		<real>331570124.24401402</real>
 		<dict>
 			<key>$class</key>
 			<dict>
