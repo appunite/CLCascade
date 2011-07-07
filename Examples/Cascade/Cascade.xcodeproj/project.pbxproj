@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		200131C413C383AC00AC369E /* CLCascadeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 200131C313C383AC00AC369E /* CLCascadeScrollView.m */; };
 		201A2D0813992DB900EFAE15 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 201A2D0613992DB900EFAE15 /* InfoPlist.strings */; };
 		201A2D0C13992DCD00EFAE15 /* CLSplitCascadeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 201A2D0A13992DCD00EFAE15 /* CLSplitCascadeViewController.xib */; };
 		201A2D0F13992EF800EFAE15 /* Categories_header_view_289x89.png in Resources */ = {isa = PBXBuildFile; fileRef = 201A2D0E13992EF800EFAE15 /* Categories_header_view_289x89.png */; };
@@ -46,6 +47,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		200131C213C383AC00AC369E /* CLCascadeScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCascadeScrollView.h; path = ../../src/Cascade/Cascade/CLCascadeScrollView.h; sourceTree = "<group>"; };
+		200131C313C383AC00AC369E /* CLCascadeScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCascadeScrollView.m; path = ../../src/Cascade/Cascade/CLCascadeScrollView.m; sourceTree = "<group>"; };
 		201A2D0713992DB900EFAE15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		201A2D0B13992DCD00EFAE15 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CLSplitCascadeViewController.xib; sourceTree = "<group>"; };
 		201A2D0E13992EF800EFAE15 /* Categories_header_view_289x89.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Categories_header_view_289x89.png; sourceTree = "<group>"; };
@@ -247,6 +250,8 @@
 				207EA4C013992C6300A8200F /* CLCascadeNavigationController.m */,
 				207EA4C113992C6300A8200F /* CLCascadeView.h */,
 				207EA4C213992C6300A8200F /* CLCascadeView.m */,
+				200131C213C383AC00AC369E /* CLCascadeScrollView.h */,
+				200131C313C383AC00AC369E /* CLCascadeScrollView.m */,
 			);
 			name = CLCascadeNavigationController;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 				201A2D28139931B900EFAE15 /* ExampleCategoriesViewController.m in Sources */,
 				201A2D371399348300EFAE15 /* ExampleTableViewController.m in Sources */,
 				201A2D901399522A00EFAE15 /* ExampleSplitCascadeViewController.m in Sources */,
+				200131C413C383AC00AC369E /* CLCascadeScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

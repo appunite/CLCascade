@@ -112,7 +112,7 @@
 
     if (CGRectContainsPoint(_categoriesView.frame, point)) {
         
-        UIView* rootView = [[cascadeNavigationController rootViewController] view];
+        UIView* rootView = [[cascadeNavigationController firstVisibleViewController] view];
         CGRect rootViewRect = [rootView convertRect:rootView.bounds toView:self];
 
         if ((rootView) && (CGRectContainsPoint(rootViewRect, point))) {

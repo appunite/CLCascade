@@ -31,7 +31,5 @@
 - (void) showShadow:(BOOL)animated;
 - (void) hideShadow:(BOOL)animated;
 
-//
-- (BOOL) isOnStack;
 
 @end

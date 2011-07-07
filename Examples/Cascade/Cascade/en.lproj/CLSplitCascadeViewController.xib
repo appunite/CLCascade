@@ -2,22 +2,23 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">10J869</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1864</string>
-		<string key="IBDocument.AppKitVersion">1038.35</string>
+		<string key="IBDocument.SystemVersion">10K540</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1881</string>
+		<string key="IBDocument.AppKitVersion">1038.36</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">865</string>
+			<string key="NS.object.0">876</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUIButton</string>
-			<string>IBUIViewController</string>
-			<string>IBUITableView</string>
 			<string>IBUIView</string>
 			<string>IBUIImageView</string>
+			<string>IBUIViewController</string>
 			<string>IBProxyObject</string>
+			<string>IBUITableView</string>
+			<string>IBUIScrollView</string>
+			<string>IBUIButton</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -40,19 +41,14 @@
 			<object class="IBUIView" id="766721923">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
-				<string key="NSFrame">{{0, 20}, {1024, 748}}</string>
+				<string key="NSFrame">{{0, 20}, {768, 1004}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwIDAAA</bytes>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
 					<int key="IBUIStatusBarStyle">2</int>
-				</object>
-				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
-					<int key="IBUIInterfaceOrientation">3</int>
-					<int key="interfaceOrientation">3</int>
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
@@ -72,7 +68,6 @@
 									<int key="NSvFlags">274</int>
 									<string key="NSFrameSize">{768, 51}</string>
 									<reference key="NSSuperview" ref="475169215"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="356173536"/>
 									<bool key="IBUIUserInteractionEnabled">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -86,7 +81,6 @@
 									<int key="NSvFlags">292</int>
 									<string key="NSFrame">{{7, 6}, {48, 40}}</string>
 									<reference key="NSSuperview" ref="475169215"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="1042500559"/>
 									<int key="IBUIContentMode">4</int>
 									<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -99,7 +93,6 @@
 							</object>
 							<string key="NSFrameSize">{768, 51}</string>
 							<reference key="NSSuperview" ref="119964394"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="336554139"/>
 							<object class="NSColor" key="IBUIBackgroundColor" id="867678146">
 								<int key="NSColorSpace">3</int>
@@ -112,7 +105,6 @@
 							<int key="NSvFlags">274</int>
 							<string key="NSFrame">{{0, 51}, {768, 913}}</string>
 							<reference key="NSSuperview" ref="119964394"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="873183391"/>
 							<object class="NSColor" key="IBUIBackgroundColor" id="1047135195">
 								<int key="NSColorSpace">3</int>
@@ -138,7 +130,6 @@
 									<int key="NSvFlags">274</int>
 									<string key="NSFrameSize">{768, 40}</string>
 									<reference key="NSSuperview" ref="873183391"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="528194823"/>
 									<bool key="IBUIUserInteractionEnabled">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -149,7 +140,6 @@
 									<int key="NSvFlags">292</int>
 									<string key="NSFrame">{{6, 9}, {40, 25}}</string>
 									<reference key="NSSuperview" ref="873183391"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="765454087"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -189,7 +179,6 @@
 									<int key="NSvFlags">289</int>
 									<string key="NSFrame">{{721, 9}, {40, 25}}</string>
 									<reference key="NSSuperview" ref="873183391"/>
-									<reference key="NSWindow"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<int key="IBUIContentHorizontalAlignment">0</int>
@@ -214,7 +203,6 @@
 							</object>
 							<string key="NSFrame">{{0, 964}, {768, 40}}</string>
 							<reference key="NSSuperview" ref="119964394"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="519979304"/>
 							<reference key="IBUIBackgroundColor" ref="867678146"/>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -222,7 +210,6 @@
 					</object>
 					<string key="NSFrame">{{0, 20}, {768, 1004}}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="475169215"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
@@ -247,9 +234,20 @@
 				<object class="IBUIView" key="IBUIView" id="908254303">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">274</int>
+					<object class="NSMutableArray" key="NSSubviews">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="IBUIScrollView" id="950584221">
+							<reference key="NSNextResponder" ref="908254303"/>
+							<int key="NSvFlags">274</int>
+							<string key="NSFrameSize">{768, 1004}</string>
+							<reference key="NSSuperview" ref="908254303"/>
+							<bool key="IBUIClipsSubviews">YES</bool>
+							<bool key="IBUIMultipleTouchEnabled">YES</bool>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						</object>
+					</object>
 					<string key="NSFrame">{{0, 20}, {768, 1004}}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="IBUIBackgroundColor" ref="867678146"/>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				</object>
@@ -402,6 +400,10 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
 						<reference key="object" ref="908254303"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="950584221"/>
+						</object>
 						<reference key="parent" ref="99964543"/>
 						<string key="objectName">Cascade Navigator View</string>
 					</object>
@@ -468,6 +470,11 @@
 						<reference key="object" ref="765454087"/>
 						<reference key="parent" ref="873183391"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">70</int>
+						<reference key="object" ref="950584221"/>
+						<reference key="parent" ref="908254303"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -497,6 +504,7 @@
 					<string>68.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>69.IBPluginDependency</string>
 					<string>69.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
+					<string>70.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -523,6 +531,7 @@
 					<real value="1"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<real value="1"/>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -537,186 +546,9 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">69</int>
+			<int key="maxID">70</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">CLCascadeNavigationController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CLCascadeNavigationController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CLCategoriesView</string>
-					<string key="superclassName">CLSegmentedView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CLCategoriesView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CLCategoriesViewController</string>
-					<string key="superclassName">CLTableViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CLCategoriesViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CLSegmentedView</string>
-					<string key="superclassName">UIView</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>contentView</string>
-							<string>footerView</string>
-							<string>headerView</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIView</string>
-							<string>UIView</string>
-							<string>UIView</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>contentView</string>
-							<string>footerView</string>
-							<string>headerView</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">contentView</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">footerView</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">headerView</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CLSegmentedView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CLSplitCascadeView</string>
-					<string key="superclassName">UIView</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">splitCascadeViewController</string>
-						<string key="NS.object.0">CLSplitCascadeViewController</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">splitCascadeViewController</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">splitCascadeViewController</string>
-							<string key="candidateClassName">CLSplitCascadeViewController</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CLSplitCascadeView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CLSplitCascadeViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>cascadeNavigationController</string>
-							<string>categoriesViewController</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>CLCascadeNavigationController</string>
-							<string>CLCategoriesViewController</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>cascadeNavigationController</string>
-							<string>categoriesViewController</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">cascadeNavigationController</string>
-								<string key="candidateClassName">CLCascadeNavigationController</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">categoriesViewController</string>
-								<string key="candidateClassName">CLCategoriesViewController</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CLSplitCascadeViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CLTableViewController</string>
-					<string key="superclassName">CLViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CLTableViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CLViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">cascadeNavigationController</string>
-						<string key="NS.object.0">CLCascadeNavigationController</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">cascadeNavigationController</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">cascadeNavigationController</string>
-							<string key="candidateClassName">CLCascadeNavigationController</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CLViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">ExampleCategoriesViewController</string>
-					<string key="superclassName">CLCategoriesViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ExampleCategoriesViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">ExampleSplitCascadeViewController</string>
-					<string key="superclassName">CLSplitCascadeViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ExampleSplitCascadeViewController.h</string>
-					</object>
-				</object>
-			</object>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
@@ -746,6 +578,6 @@
 				<string>{20, 24}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">865</string>
+		<string key="IBCocoaTouchPluginVersion">876</string>
 	</data>
 </archive>

@@ -9,25 +9,26 @@
 #import "CLCascadeView.h"
 
 @interface CLCascadeView (Private)
-- (void) setUpView;
-- (void) updateDraggingDirecton;
-- (void) addPanGestureRecognizer:(UIView*)page;
-- (void) updateLocationOfPages:(CGFloat)transition;
-- (BOOL) isLastPage:(UIView*)page;
-- (BOOL) isFirstPage:(UIView*)page;
-- (BOOL) isCompletelyVisible:(UIView*)page;
-- (UIView*) nextPage:(UIView*)page;
-- (UIView*) previousPage:(UIView*)page;
 - (NSArray*) visiblePages;
-- (CGFloat) transition;
-- (UIView*) topLeftVisiblePage;
-- (UIView*) topRightVisiblePage;
-- (void) refreshPageHeight:(UIView*)page;
-- (void) sendDelegateMessageToHidingPages:(NSArray*)pages;
-- (void) sendDelegateMessageToShowUpPages:(NSArray*)pages;
-- (void)orderViews:(BOOL)animated;
-- (UIView*)pageOnLeftFromView:(UIView*)view;
-- (UIView*)pageOnRightFromView:(UIView*)view;
+- (NSArray*) pagesOnStock;
+
+- (UIView*) previousPage:(UIView*)page;
+- (UIView*) nextPage:(UIView*)page;
+- (UIView*) firstPageOnStock;
+
+- (BOOL) pageExistAtIndex:(NSInteger)index;
+- (void) unloadInvisiblePagesOnStock;
+
+- (CGSize) calculateContentSize:(UIInterfaceOrientation)interfaceOrientation;
+- (UIEdgeInsets) calculateEdgeInset:(UIInterfaceOrientation)interfaceOrientation;
+- (void) setProperContentSize;
+- (void) setProperContentSize:(UIInterfaceOrientation)interfaceOrientation;
+- (void) setProperEdgeInset:(BOOL)animated;
+- (void) setProperEdgeInset:(BOOL)animated forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+
+- (void) unloadPage:(UIView*)page remove:(BOOL)remove;
+
+- (NSInteger) indexOfFirstVisiblePage;
 @end
 
 @interface CLCascadeView (DelegateMethods)
@@ -39,641 +40,106 @@
 - (void) pageDidDisappearAtIndex:(NSInteger)index;
 @end
 
-#define DEFAULT_OFFSET 58.0f
+#define DEFAULT_LEFT_INSET 58.0f
 #define OVERLOAD 0.0f
 
 @implementation CLCascadeView
 
-@synthesize dataSource = _dataSource;
-@synthesize delegate = _delegate;
-@synthesize dragging = _dragging;
-@synthesize decelerating = _decelerating;
+@synthesize leftInset = _leftInset; 
 @synthesize pageWidth = _pageWidth;
-@synthesize offset = _offset;
+@synthesize delegate = _delegate;
+@synthesize dataSource = _dataSource;
 
+#pragma mark -
 #pragma mark Init & dealloc
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    _dataSource = nil;
     _delegate = nil;
-    [_visiblePages release], _visiblePages = nil;
+    _dataSource = nil;    
+    [_scrollView release], _scrollView = nil;
     [_pages release], _pages = nil;
-
     [super dealloc];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (id)init {
-    self = [super init];
-    if (self) {
-        [self setUpView];
-    }
-    return self;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setUpView];
+        _pages = [[NSMutableArray alloc] init];
+//        CGRect rect = self.bounds;
+        
+        _scrollView = [[UIScrollView alloc] initWithFrame: self.bounds];
+        [_scrollView setDelegate: self];
+        [_scrollView setDecelerationRate: UIScrollViewDecelerationRateFast];
+        [_scrollView setScrollsToTop: NO];
+        [_scrollView setBounces: YES];
+        [_scrollView setAlwaysBounceVertical: NO];
+        [_scrollView setAlwaysBounceHorizontal: YES];
+        [_scrollView setDirectionalLockEnabled: YES];
+//        [_scrollView setShowsVerticalScrollIndicator: NO];
+//        [_scrollView setShowsHorizontalScrollIndicator: NO];
+
+        [_scrollView setAutoresizingMask:
+         UIViewAutoresizingFlexibleLeftMargin | 
+         UIViewAutoresizingFlexibleRightMargin | 
+         UIViewAutoresizingFlexibleBottomMargin | 
+         UIViewAutoresizingFlexibleTopMargin | 
+         UIViewAutoresizingFlexibleWidth | 
+         UIViewAutoresizingFlexibleHeight];
+        [self addSubview: _scrollView];
+
+//        [_scrollView setBackgroundColor:[UIColor redColor]];
+//        [_scrollView setPagingEnabled:YES];
+        
+        [self setAutoresizingMask:
+         UIViewAutoresizingFlexibleLeftMargin | 
+         UIViewAutoresizingFlexibleRightMargin | 
+         UIViewAutoresizingFlexibleBottomMargin | 
+         UIViewAutoresizingFlexibleTopMargin | 
+         UIViewAutoresizingFlexibleWidth | 
+         UIViewAutoresizingFlexibleHeight];
+        
+        self.leftInset = DEFAULT_LEFT_INSET;
     }
     return self;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) layoutSubviews {
-
-    for (UIView* view in _visiblePages) {
-        [self refreshPageHeight: view];
-    }
-    
-}
-
-
-static const CGFloat kResistance = 0.15;
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CGFloat)resist:(CGFloat)x1 to:(CGFloat)x2 max:(CGFloat)max {
-    // The closer we get to the maximum, the less we are allowed to increment
-    CGFloat rl = (1 - (fabs(x2) / max)) * kResistance;
-    if (rl < 0) rl = 0;
-    if (rl > 1) rl = 1;
-    return x1 + ((x2 - x1) * rl);
-}
-
-#pragma mark Private
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setUpView {
-    _pages = [[NSMutableArray alloc] init];
-    _visiblePages = [[NSMutableArray alloc] init];
-    
-    [self setAutoresizingMask:
-     UIViewAutoresizingFlexibleLeftMargin | 
-     UIViewAutoresizingFlexibleRightMargin | 
-     UIViewAutoresizingFlexibleBottomMargin | 
-     UIViewAutoresizingFlexibleTopMargin | 
-     UIViewAutoresizingFlexibleWidth | 
-     UIViewAutoresizingFlexibleHeight];
-
-    _cascadeViewFlags.decelerating = NO;
-    _cascadeViewFlags.dragging = NO;
-
-    self.offset = DEFAULT_OFFSET;
-    
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addPanGestureRecognizer:(UIView*)view {
-    UIPanGestureRecognizer* panGesture = [[UIPanGestureRecognizer alloc] 
-                                          initWithTarget:self 
-                                          action:@selector(panGesture:)];
-    [view addGestureRecognizer: panGesture];
-    [panGesture release];    
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) panGesture:(UIPanGestureRecognizer*)gesture {
-    _touchedPage = gesture.view;
-
-    switch(gesture.state) {
-        case UIGestureRecognizerStateChanged:
-            // get net touch point
-            _newTouchPoint = [gesture locationInView: self];
-            // update dragging direction
-            [self updateDraggingDirecton];
-            // update location of pages
-            [self updateLocationOfPages: [self transition]];
-            _lastTouchPoint = _newTouchPoint;
-            
-            break;
-        case UIGestureRecognizerStateBegan:
-                        
-            // set up points
-            _startTouchPoint = [gesture locationInView: _touchedPage];
-            _lastTouchPoint = [gesture locationInView: self];
-            // set flags
-            _cascadeViewFlags.dragging = YES;
-            _cascadeViewFlags.decelerating = NO;
-            
-            break;
-        case UIGestureRecognizerStateEnded:
-            
-            [self orderViews: YES];
-            
-            // reset points
-            _startTouchPoint = CGPointZero;
-            _newTouchPoint = CGPointZero;
-            _lastTouchPoint = CGPointZero;
-            // resete flags
-            _direction = CLDraggingDirectionUnknow;
-            _cascadeViewFlags.dragging = NO;
-            _cascadeViewFlags.decelerating = YES;
-            
-            break;
-        default:
-            break;
-    }
-    
-}
-
-- (void) orderViews:(BOOL)animated {
-
-    if (_direction == CLDraggingDirectionUnknow) {
-        _direction = CLDraggingDirectionLeft;
-    }
-    
-    UIView* topView = [self topRightVisiblePage];
-    UIView* leftView = [self pageOnLeftFromView: topView];
-    
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    
-    if (_direction == CLDraggingDirectionLeft) { //get new one on right
-       
-        if (topView.frame.origin.x + topView.frame.size.width < self.frame.size.width) {
-            
-            // cofnij
-            CGRect topRect = topView.frame;
-            topRect.origin.x += (self.frame.size.width - topView.frame.origin.x - _pageWidth);
-
-            if ([_pages count] == 1) {
-                topRect.origin.x = 768.0f - _pageWidth;
-            }
-            
-            
-            [UIView animateWithDuration:0.3 delay:0.0 
-                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowAnimatedContent
-                             animations:^ {
-                                 topView.frame = topRect;
-                             }
-                             completion:^(BOOL finished) {
-                                 
-                             }];
-        } else {
-            
-            CGRect leftRect = leftView.frame;
-            CGRect topRect = topView.frame;
-
-            if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
-                // idz dalj i pociagnij nowa po prawej
-                leftRect.origin.x = _offset;
-                topRect.origin.x = self.frame.size.width - self.pageWidth;
-                
-            } else {
-                // idz dalj i pociagnij nowa po prawej
-                leftRect.origin.x = _offset;
-                topRect.origin.x = leftRect.origin.x + leftRect.size.width;
-            }
-        
-            [UIView animateWithDuration:0.3 delay:0.0 
-                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowAnimatedContent
-                             animations:^ {
-                                 leftView.frame = leftRect;
-                                 topView.frame = topRect;
-                             }
-                             completion:^(BOOL finished) {
-                                 [self visiblePages];
-                             }];
-        }
-    } 
-
-    if (_direction == CLDraggingDirectionRight) { //get new one on left
-        if (([self isFirstPage: topView]) && ([_pages count] == 1)) {
-            CGRect topRect = topView.frame;
-            topRect.origin.x = self.frame.size.width - _pageWidth;
-            
-            if ([_pages count] == 1) {
-                topRect.origin.x = 768.0f - _pageWidth;
-            }
-
-            [UIView animateWithDuration:0.3 delay:0.0 
-                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowAnimatedContent
-                             animations:^ {
-                                 topView.frame = topRect;
-                             }
-                             completion:^(BOOL finished) {
-                                 
-                             }];
-        } else {
-            
-            CGRect topRect = topView.frame;
-            topRect.origin.x = self.frame.size.width;
-            
-            
-            if ([self isFirstPage:topView]) {
-
-                UIView* rightView = [self pageOnRightFromView: topView];
-                
-                if (rightView) {
-                    leftView = topView;
-                    topView = rightView;
-                }
-                
-                topRect.origin.x = 768.0f;
-            }
-
-            if ([self isFirstPage:leftView]) {
-                topRect.origin.x = 768.0f;
-            }
-            
-            CGRect leftRect = leftView.frame;
-            leftRect.origin.x = topRect.origin.x - _pageWidth;
-            
-            [UIView animateWithDuration:0.3 delay:0.0
-                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowAnimatedContent
-                             animations:^ {
-                                 leftView.frame = leftRect;
-                                 topView.frame = topRect;
-                             }
-                             completion:^(BOOL finished) {
-                                 [self visiblePages];
-                             }];
-            
-        }
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CGFloat) transition {
-    return _lastTouchPoint.x - _newTouchPoint.x;   
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) updateDraggingDirecton {
-    CGFloat dx = [self transition];
-    
-    if ((dx == 0) || (!_cascadeViewFlags.dragging)) {
-        _direction = CLDraggingDirectionUnknow;
-    } else {
-        _direction = (dx > 0) ? CLDraggingDirectionLeft : CLDraggingDirectionRight;
-    }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) updateLocationOfPages:(CGFloat)transition {
-
-    if (_direction == CLDraggingDirectionUnknow) return;
-
-    NSArray* array = [self visiblePages];
-
-    NSInteger newOriginX = 0;
-    CGRect lastFrame = CGRectNull;
-    NSEnumerator* enumerator;
-    UIView* view;    
-
-    if (_direction == CLDraggingDirectionLeft) {
-        enumerator = [array reverseObjectEnumerator];
-    }
-    if (_direction == CLDraggingDirectionRight) {
-        enumerator = [array objectEnumerator];
-    }
-    
-    while ((view = [enumerator nextObject])) {
-        
-        if (_direction == CLDraggingDirectionLeft) { //get new one on right
-            if (!(view.frame.origin.x <= _offset)) {
-                CGRect newFrame = view.frame;
-                
-                if (CGRectEqualToRect(lastFrame, CGRectNull)) {
-                    newOriginX = newFrame.origin.x - transition;
-                } else {
-                    newOriginX = lastFrame.origin.x + lastFrame.size.width;
-                }
-                
-                newFrame.origin.x = MAX(_offset, newOriginX);
-
-                [view setFrame: newFrame];
-                lastFrame = newFrame;
-            }
-        }        
-        
-        if (_direction == CLDraggingDirectionRight) { //get new one on left
-            CGRect newFrame = view.frame;
-            
-            if (!CGRectIntersectsRect(lastFrame, view.frame) || [self isLastPage:view]) {
-                newOriginX = newFrame.origin.x - transition;
-                newFrame.origin.x = MAX(_offset, newOriginX);
-                [view setFrame: newFrame];
-            }
-            
-            lastFrame = newFrame;
-        }
-    }
-    
-    [self setNeedsLayout];
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSArray*) visiblePages {
-//    return _pages;
-    
-    // get top visible left page
-    UIView* topPage = [self topRightVisiblePage];
-    
-    // if page exists (so, if _pages has any object)
-    if (topPage) {
-
-        // top index of top page
-        NSUInteger topPageIndex = [_pages indexOfObject: topPage];
-        
-        // calcule how many other pagas can be visible
-        NSInteger count = ceil( (topPage.frame.origin.x - _offset) / _pageWidth );
-        
-        // create array
-        NSMutableArray* array = [[[NSMutableArray alloc] init] autorelease];
-
-        // add top right visible page
-        [array addObject:topPage];
-
-        // get index of topPage in array of subviews
-        NSInteger subviewIndex = [self.subviews indexOfObject:topPage] - 1;
-        
-        // load other pages if exists
-        for (NSInteger i=1; i<=count; i++) {
-            // page index
-            NSInteger index = topPageIndex-i;
-            // load page at index
-            UIView* page = [self loadPageAtIndex:index];
-            // if page exist, add page to array
-            if (page) {
-                // if the array of subviews don't reflect 
-                // the array of pages, send subview to back
-                if  (index > subviewIndex) {
-                    // set proper index of view
-                    [self sendSubviewToBack: page];
-                }
-                // add page to array of visible pages
-                [array addObject: page];
-            }
-            subviewIndex--;
-        }
-        // if there is no any changes return _visiblePages
-        if ([_visiblePages isEqualToArray: array]) {
-            return _visiblePages;
-        }
-        
-        // send delegate message to pages that will appear or disappear
-        [self sendDelegateMessageToHidingPages: array];
-        [self sendDelegateMessageToShowUpPages: array];
-        
-        // if there are changes remove array and add visible pages to array
-        [_visiblePages removeAllObjects];
-        [_visiblePages addObjectsFromArray: array];
-        
-        // return array of pages
-        return _visiblePages;
-    }
-    
-    // there is no visible pages
-    [_visiblePages removeAllObjects];
-    // if top page don't exist, return nil
-    return _visiblePages;
-    
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) sendDelegateMessageToHidingPages:(NSArray*)pages {
-    BOOL exisnt = NO;
-    // array of last visible pages
-    for (UIView* viewA in _visiblePages) {
-        
-        // array of current visible pages
-        for (UIView* viewB in pages) {
-            if ([viewA isEqual: viewB]) {
-                exisnt = YES; break;
-            }
-        }
-        
-        if (!exisnt) {
-            NSInteger index = [_pages indexOfObject: viewA];
-            [self pageDidDisappearAtIndex:index];
-        }
-        
-        exisnt = NO;
-    }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) sendDelegateMessageToShowUpPages:(NSArray*)pages {
-    BOOL exisnt = NO;
-    // array of current visible pages
-    for (UIView* viewB in pages) {
-        
-        // array of last visible pages
-        for (UIView* viewA in _visiblePages) {
-            if ([viewA isEqual: viewB]) {
-                exisnt = YES; break;
-            }
-        }
-        
-        if (!exisnt) {
-            NSInteger index = [_pages indexOfObject: viewB];
-            [self pageDidAppearAtIndex:index];
-        }
-        
-        exisnt = NO;
-    }    
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL) isLastPage:(UIView*)page {
-    return ([_pages indexOfObject: page] == [_pages count] - 1);
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL) isFirstPage:(UIView*)page {
-    return ([_pages indexOfObject: page] == 0);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL) isCompletelyVisible:(UIView*)page {
-    CGRect frame = page.frame;
-    
-    if (frame.origin.x < self.frame.size.width) {
-        
-    }
-    
-    return NO;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UIView*) nextPage:(UIView*)page {
-    
-    NSUInteger index = [_pages indexOfObject: page];
-    
-    if (index != [_pages count] - 1) {
-        return [_pages objectAtIndex: index + 1];
-    }
-    
-    return nil;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UIView*) previousPage:(UIView*)page {
-    NSUInteger index = [_pages indexOfObject: page];
-    
-    if (index != 0) {
-        return [_pages objectAtIndex: index - 1];
-    }
-    
-    return nil;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) refreshPageHeight:(UIView*)page {
-    CGFloat height = self.bounds.size.height;
-    CGRect frame = page.frame;
-    
-    if (frame.size.height != height) {
-        frame.size.height = height;
-        [page setFrame: frame];
-    }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UIView*) topRightVisiblePage {
-    
-    NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
-    NSInteger index = [_pages count] - 1;
-    id item;
-    
-    while ((item = [enumerator nextObject])) {
-        
-        // find first loaded view
-        if (item != [NSNull null]) {
-            UIView* page = (UIView*)item;
-            // if page intersect with content
-            if (page.frame.origin.x < self.bounds.size.width) {
-                // if view don't stick right band
-                if (page.frame.origin.x + page.frame.size.width < self.bounds.size.width) {
-                    // load previous page if neede and if can
-                    UIView* nextPage = [self loadPageAtIndex: index + 1];
-                    // if prev page exist, that page is top page
-                    if (nextPage) {
-                        // set new frame, next to the right edge of previos page
-                        CGRect frame = CGRectMake(page.frame.origin.x + page.frame.size.width, 0.0, _pageWidth, self.bounds.size.height);
-                        [nextPage setFrame: frame];
-                        //
-                        [self bringSubviewToFront:nextPage];
-                        //retunr next page
-                        return nextPage;
-                    }
-                }
-                // else, page is top page
-                return page;
-            }
-        }
-        // dec index
-        index--;
-    }
-    return nil;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UIView*)pageOnLeftFromView:(UIView*)view {
-
-    NSUInteger index = [_pages indexOfObject: view];
-    
-    if (index >= 1) {
-        index--;
-        id obj = [_pages objectAtIndex: index];
-
-        if (obj == [NSNull null]) {
-            obj = [self loadPageAtIndex: index];
-        }
-
-        return obj;
-    }
-    
-    return nil;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UIView*)pageOnRightFromView:(UIView*)view {
-
-    NSUInteger index = [_pages indexOfObject: view];
-    
-    if ([_pages count] > index + 1) {
-        index++;
-
-        id obj = [_pages objectAtIndex: index];
-        
-        if (obj == [NSNull null]) {
-            obj = [self loadPageAtIndex: index];
-        }
-        
-        return obj;
-    }
-    
-    return nil;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UIView*) topLeftVisiblePage {
-    // get all visible pages, starting from top right view
-    NSArray* visiblePages = [self visiblePages];
-    
-    // if has any views
-    if ([visiblePages count] > 0) {
-        // last view in array is top left visible view
-        return [visiblePages lastObject];
-    }
-    
-    return nil;
-}
-
+#pragma mark -
 #pragma mark Class methods
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated {
     
-    [self visiblePages];
-
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-
-//    UIView* firstPage = [_pages objectAtIndex:<#(NSUInteger)#>];
-    
-    CGRect fromPageFrame = CGRectMake(_offset, 0.0, _pageWidth, self.bounds.size.height);
-    CGRect newPageFrame = CGRectMake(768.0f - _pageWidth, 0.0, _pageWidth, self.bounds.size.height);
+    CGRect newPageFrame = CGRectZero;
     
     if (fromPage == nil) {
         [self popAllPagesAnimated: animated];
+        newPageFrame = CGRectMake(0.0f, 0.0f, _pageWidth, _scrollView.frame.size.height);
     } else {
-        NSAssert([_pages indexOfObject: fromPage] != NSNotFound, @"fromView == NSNotFound");
-
-        if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
-            newPageFrame = fromPage.frame;
-            newPageFrame.origin.x = self.frame.size.width - self.pageWidth;
-        } else {
-            newPageFrame = fromPage.frame;
-            newPageFrame.origin.x = fromPageFrame.origin.x + fromPageFrame.size.width;
-        }
+        newPageFrame = CGRectMake(CGRectGetMaxX(fromPage.frame), 0.0f, fromPage.frame.size.width, fromPage.frame.size.height);
     }
+
 
     // if not animated then just set frame
     if (!animated) {
         [newPage setFrame: newPageFrame];
-        [fromPage setFrame:fromPageFrame];
         
+        // add page to array of pages
+        [_pages addObject: newPage];
+        // update content size
+        [self setProperContentSize];
+        // update edge inset
+        [self setProperEdgeInset: NO];
+        // add subview
+        [_scrollView addSubview: newPage];
+        // send message to delegate
+        [self didAddPage:newPage animated:animated];
+
     } else { // set animaton
-//        [newPage setAlpha: 0.7];
+        //        [newPage setAlpha: 0.7];
         
         CGRect newPageAnimationFrame = newPageFrame;
         newPageAnimationFrame.origin.x = self.frame.size.width;
@@ -684,47 +150,104 @@ static const CGFloat kResistance = 0.15;
                          animations:^ {
                              
                              [newPage setFrame: newPageFrame];
-                             [fromPage setFrame:fromPageFrame];
                              
                          } 
                          completion: ^(BOOL finished) {
-                             [self visiblePages];
+                             
+                             // add page to array of pages
+                             [_pages addObject: newPage];
+                             // update content size
+                             [self setProperContentSize];
+                             // update edge inset
+                             [self setProperEdgeInset: NO];
+                             // add subview
+                             [_scrollView addSubview: newPage];
+                             // send message to delegate
+                             [self didAddPage:newPage animated:animated];
+                             
                          }
-        ];
+         ];
     }
-    // add page to array of pages
-    [_pages addObject: newPage];
-    // add subview
-    [self addSubview: newPage];
-    // send message to delegate
-    [self didAddPage:newPage animated:animated];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) popPageAtIndex:(NSInteger)index animated:(BOOL)animated {
+    // get item at index
+    __block id item = [_pages objectAtIndex:index];
     
-    if (!animated) {
-        [self visiblePages];
+    // check if page is unloaded
+    if (item != [NSNull null]) {
+
+        if (animated) {
+            // animate pop
+            [UIView animateWithDuration:0.4f 
+                             animations:^ {
+                                 [item setAlpha: 0.0f];
+                             }
+                             completion:^(BOOL finished) {
+                                 // unload page
+                                 [self unloadPage:item];
+                                 // remove page from array
+                                 [_pages removeObjectAtIndex: index];
+                                 // update content size
+                                 [self setProperContentSize];
+                                 // update edge inset
+                                 [self setProperEdgeInset: NO];
+                                 // send delegate message
+                                 [self didPopPageAtIndex: index];
+                             }];
+        
+        } else {
+            // unload and remove page
+            [self unloadPage:item remove:YES];
+            // update content size
+            [self setProperContentSize];
+            // update edge inset
+            [self setProperEdgeInset: NO];
+            // send delegate message
+            [self didPopPageAtIndex: index];
+        }
     }
+
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) popAllPagesAnimated:(BOOL)animated {
+    id item = nil;
+    NSUInteger index = [_pages count] - 1;
+    // pop page from back
+    NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
+    // enumarate pages
+    while ((item = [enumerator nextObject])) {
+        // pop page at index
+        [self popPageAtIndex:index animated:NO];
+        index--;
+    }    
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) loadPageAtIndex:(NSInteger)index {
     // check if index exist
-    if ((index >= 0) && (index <= [_pages count]-1)) {
+    if ([self pageExistAtIndex: index]) {
         id item = [_pages objectAtIndex:index];
-
+        
         // if item at index is null
         if (item == [NSNull null]) {
             // get page from dataSource
             UIView* view = [_dataSource cascadeView:self pageAtIndex:index];
-
+            
             // if got view from dataSorce
             if (view != nil) {
                 //preventive, set frame
-                CGRect pageFrame = CGRectMake(_offset, 0.0, _pageWidth, self.bounds.size.height);
+                CGRect pageFrame = CGRectMake(index * _pageWidth, 0.0f, _pageWidth, _scrollView.frame.size.height);
                 [view setFrame: pageFrame];
                 // replace in array of pages
                 [_pages replaceObjectAtIndex:index withObject:view];
                 // add subview
-                [self addSubview: view];
+                [_scrollView insertSubview:view atIndex:0];
                 // send delegate
                 [self didLoadPage:view];
                 // return loaded page
@@ -741,7 +264,6 @@ static const CGFloat kResistance = 0.15;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) unloadPageIfNeeded:(NSInteger)index {
-
     // get page at index
     id item = [_pages objectAtIndex: index];
     
@@ -768,81 +290,42 @@ static const CGFloat kResistance = 0.15;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) popPageAtIndex:(NSInteger)index animated:(BOOL)animated {
-
-    // get item at index
-    id item = [_pages objectAtIndex:index];
-    
-    if (item != [NSNull null]) {
-    
-        [item removeFromSuperview];
-//        // get index of page in array of subviews
-//        NSUInteger viewIndex = [self.subviews indexOfObject: item];
-//        if (viewIndex != NSNotFound) {
-//        
-//            // remove view from superview
-//            [[self.subviews objectAtIndex: viewIndex] removeFromSuperview];
-//        }
-    }
-
-    // remove page from array of pages
-    [_pages removeObjectAtIndex: index];
-    
-    // send delegate message
-    [self didPopPageAtIndex: index];
-
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) popAllPagesAnimated:(BOOL)animated {
-    
-    id item;
-    NSUInteger index = [_pages count] - 1;
-    // pop page from back
-    NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
-
-    while ((item = [enumerator nextObject])) {
-        // pop page at index
-        [self popPageAtIndex:index animated:animated];
-        index--;
-    }    
+- (void) unloadPage:(UIView*)page {
+    [self unloadPage:page remove:NO];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) unloadInvisiblePages {
-
+    
     BOOL canUnload = YES;
-
+    
     // temp array with pages to unload
     NSMutableArray* pagesToUnload = [[NSMutableArray alloc] init];
     
     // get array of visible pages
     NSArray* visiblePages = [self visiblePages];
-
+    
     // if visible page exist in array of pages then can't ubload
     for (id item in _pages) {
         
         if (item != [NSNull null]) {
-
+            
             for (UIView* visiblePage in visiblePages) {
                 
                 if (item == visiblePage) {
                     canUnload = NO; break;
                 }
             }
-            
             // if can, add to array - pages to unlaod
             if (canUnload) {
                 [pagesToUnload addObject: item];
             } 
-            
             // set flag to YES
             canUnload = YES;
         }
     }
-
+    
     // unload pages
     for (UIView* view in pagesToUnload) {
         [self unloadPage: view];
@@ -854,38 +337,335 @@ static const CGFloat kResistance = 0.15;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) unloadPage:(UIView*)page {
+- (void) updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
+    [self setProperContentSize];
+    [self setProperEdgeInset: YES];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSInteger) indexOfFirstVisibleView:(BOOL)loadIfNeeded {
+    // calculate first visible page
+    NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
+
+    if ([self pageExistAtIndex: firstVisiblePageIndex]) {
+        
+        if (loadIfNeeded) {
+            // get first visible page
+            id item = [_pages objectAtIndex: firstVisiblePageIndex];
+            
+            // chceck if is loaded, and load if needed
+            if (item == [NSNull null]) {
+                [self loadPageAtIndex: firstVisiblePageIndex];
+            }
+        }        
+        
+        return firstVisiblePageIndex;
+    } 
     
+    return NSNotFound;
+}
+
+
+#pragma mark -
+#pragma mark Private methods
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSInteger) indexOfFirstVisiblePage {
+    // calculate first visible page
+    CGFloat contentOffset = _scrollView.contentOffset.x;// + _scrollView.contentInset.left;
+    NSInteger index = floor((contentOffset + _leftInset) / _pageWidth);
+    
+    return (index < 0) ? 0 : index;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSArray*) visiblePages {
+
+    // calculate first visible page and visible page count
+    NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
+    NSInteger visiblePagesCount = ceil(_scrollView.bounds.size.width / _pageWidth);
+   
+    // create array
+    NSMutableArray* array = [NSMutableArray array];
+    
+    for (NSInteger i=firstVisiblePageIndex; i<=visiblePagesCount; i++) {
+
+        // check if page index is in bounds 
+        if ([self pageExistAtIndex: i]) {
+            // get page at index
+            id item = [_pages objectAtIndex: i];
+            
+            // if page is not load, then load
+            if (item == [NSNull null]) {
+                item = [self loadPageAtIndex: i];
+            }
+            
+            // add page to array if could load
+            if (item) {
+                [array addObject: item];
+            }
+        }
+    }
+    
+    // return array of visible pages
+    return array;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSArray*) pagesOnStock {
+
+    // clalculate first visible page index
+    NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
+    
+    // create array
+    NSMutableArray* array = [NSMutableArray array];
+    
+    for (NSInteger i=0; i<=firstVisiblePageIndex; i++) {
+        
+        // check if page index is in bounds 
+        if ([self pageExistAtIndex: i]) {
+            // get page at index
+            id item = [_pages objectAtIndex: i];
+            
+            // adds all parties, even if they are represented by [NSNull null]
+            [array addObject: item];
+        }
+    }
+    
+    // return array of visible pages
+    return array;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView*) nextPage:(UIView*)page {
+    
+    NSUInteger index = [_pages indexOfObject: page];
+    
+    if (index != [_pages count] - 1) {
+        return [_pages objectAtIndex: index + 1];
+    }
+    
+    return nil;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView*) previousPage:(UIView*)page {
+    NSUInteger index = [_pages indexOfObject: page];
+    
+    if (index != 0) {
+        return [_pages objectAtIndex: index - 1];
+    }
+    
+    return nil;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL) pageExistAtIndex:(NSInteger)index {
+    return (([_pages count] > 0) &&
+            (index >= 0) && 
+            (index <= [_pages count] - 1));
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CGSize) calculateContentSize:(UIInterfaceOrientation)interfaceOrientation {
+//    CGSize size = CGSizeMake([_pages count] * _pageWidth, UIInterfaceOrientationIsPortrait(interfaceOrientation) ? self.bounds.size.height : self.bounds.size.height);
+//    NSLog(@"size: %f %f", size.width, size.height);
+    return CGSizeMake([_pages count] * _pageWidth, UIInterfaceOrientationIsPortrait(interfaceOrientation) ? self.bounds.size.height : self.bounds.size.height);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setProperContentSize { 
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    [self setProperContentSize: orientation];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setProperContentSize:(UIInterfaceOrientation)interfaceOrientation {
+    _scrollView.contentSize = [self calculateContentSize:interfaceOrientation];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIEdgeInsets) calculateEdgeInset:(UIInterfaceOrientation)interfaceOrientation {
+
+    CGFloat leftInset = 0.0f;
+    
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+        leftInset = self.bounds.size.width/2 - _pageWidth/2;
+    } else {
+        leftInset = self.bounds.size.width - _pageWidth;
+    }
+
+    NSLog(@"inset: %f", leftInset);
+    
+    return UIEdgeInsetsMake(0.0f, leftInset, 0.0f, 0.0f);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setProperEdgeInset:(BOOL)animated forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if (animated) {
+        [UIView animateWithDuration:0.4 animations:^ {
+            _scrollView.contentInset = [self calculateEdgeInset:interfaceOrientation];   
+        }];
+    } else {
+        _scrollView.contentInset = [self calculateEdgeInset:interfaceOrientation];   
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setProperEdgeInset:(BOOL)animated {
+    UIInterfaceOrientation interfaceOrienation = [[UIApplication sharedApplication] statusBarOrientation];
+    [self setProperEdgeInset:animated forInterfaceOrientation:interfaceOrienation];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) unloadInvisiblePagesOnStock {
+    // get pages on stock
+    NSArray* array = [self pagesOnStock];
+    
+    // enumerate all pages on stock
+    for (id item in array) {
+        
+        // get index of item
+        NSInteger index = [array indexOfObject: item];
+        
+        // if item is not null and is not last page (first visible page on stock)
+        if ((item != [NSNull null]) && (index != [array count] -1)) {
+            // unload page
+            [self unloadPage:item];
+        }
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView*) firstPageOnStock {
+    // calculate first visible page
+    NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
+
+    // get first visible page
+    id item = [_pages objectAtIndex: firstVisiblePageIndex];
+    
+    // chceck if is loaded, and load if needed
+    if (item == [NSNull null]) {
+        return [self loadPageAtIndex: firstVisiblePageIndex];
+    }
+    // return page
+    return item;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) unloadPage:(UIView*)page remove:(BOOL)remove {
     // get index of page
     NSUInteger index = [_pages indexOfObject: page];
-
+    
     // if page exist
     if (index != NSNotFound) {
-        // replace with null
-        [_pages replaceObjectAtIndex:index withObject:[NSNull null]];
-        
         // remove from superview
         [page removeFromSuperview];
-
+        
         // send message to delegate
-        [self didUnloadPage:page];
+        [self didUnloadPage:page];        
 
+        // check if remove
+        if (remove) {
+            // remove from array
+            [_pages removeObject: page];
+        } else {
+            // replace with null
+            [_pages replaceObjectAtIndex:index withObject:[NSNull null]];
+        }
     }    
 }
 
 
+#pragma mark -
+#pragma mark UIScrollView delegates methods
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL) isOnStack:(UIView*)view {
-    return (view.frame.origin.x <= _offset);
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+
+    // calculate first visible page
+    NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
+        
+    for (NSInteger i=0; i<=firstVisiblePageIndex; i++) {
+        
+        // check if page index is in bounds 
+        if ([self pageExistAtIndex: i]) {
+            // get page at index
+            id item = [_pages objectAtIndex: i];
+
+            if (i == firstVisiblePageIndex) {
+                
+                if (item == [NSNull null]) {
+                    item = [self loadPageAtIndex: i];
+                }
+
+                CGFloat contentOffset = _scrollView.contentOffset.x;
+                
+                if ((i == 0) && (contentOffset + _leftInset <= 0)) {
+                    return;
+                }
+
+                UIView* view = (UIView*)item;
+                
+                CGRect rect = [view frame];
+                rect.origin.x = contentOffset + _leftInset;
+                [view setFrame: rect];
+                                
+            } else {
+                if (item != [NSNull null]) {
+                    [self unloadPage: item];
+                }
+                
+            }
+        }
+    }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+}
+
+
+#pragma mark -
 #pragma mark Delegate methods
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didLoadPage:(UIView*)page {
-    // add pan gesture recognizer to new view
-    [self addPanGestureRecognizer: page];
-
     if ([_delegate respondsToSelector:@selector(cascadeView:didLoadPage:)]) {
         [_delegate cascadeView:self didLoadPage:page];
     }
@@ -894,9 +674,6 @@ static const CGFloat kResistance = 0.15;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) didAddPage:(UIView*)page animated:(BOOL)animated {
-    // add pan gesture recognizer to new view
-    [self addPanGestureRecognizer: page];
-
     if ([_delegate respondsToSelector:@selector(cascadeView:didAddPage:animated:)]) {
         [_delegate cascadeView:self didAddPage:page animated:YES];
     }
@@ -935,25 +712,17 @@ static const CGFloat kResistance = 0.15;
 }
 
 
-#pragma mark Getters
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL) dragging {
-    return _cascadeViewFlags.dragging;   
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL) decelerating {
-    return _cascadeViewFlags.decelerating;   
-}
-
+#pragma mark -
 #pragma mark Setters
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setOffset:(CGFloat)newOffset {
-    _offset = newOffset;
-    _pageWidth = (1024.0 - _offset) / 2.0;
+- (void) setLeftInset:(CGFloat)newLeftInset {
+    CGFloat width = [UIScreen mainScreen].bounds.size.height;
+    
+    _leftInset = newLeftInset;
+    _pageWidth = (width - _leftInset) / 2.0f;
+    
+    [self setProperEdgeInset: NO];
 }
 
 @end

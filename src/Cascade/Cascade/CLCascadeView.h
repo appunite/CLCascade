@@ -17,49 +17,34 @@ typedef enum {
     CLDraggingDirectionLeft     =  1
 } CLDraggingDirection;
 
-@interface CLCascadeView : UIView {
+@interface CLCascadeView : UIView <UIScrollViewDelegate> {
+    // delegate and dataSource
     id<CLCascadeViewDelegate> _delegate;
     id<CLCascadeViewDataSource> _dataSource;
 
-    NSMutableArray* _pages;
+    // scroll view
+    UIScrollView* _scrollView;
     
-    // you need call visiblePages to refresh this ivar
-    NSMutableArray* _visiblePages;
+    // contain all pages, if page is unloaded then page is respresented as [NSNull null]
+    NSMutableArray* _pages;
     
     //
     CGFloat _pageWidth;
-    CGFloat _offset;
-    
-    // dragging
-    CGPoint _startTouchPoint;
-    CGPoint _newTouchPoint;
-    CGPoint _lastTouchPoint;
-    
-    UIView* _touchedPage;
+    CGFloat _leftInset;
     
     CLDraggingDirection _direction;
-    
-    struct {
-        unsigned int dragging:1;
-        unsigned int decelerating:1;
-    } _cascadeViewFlags;
-    
 }
 
 @property(nonatomic, assign) id<CLCascadeViewDelegate> delegate;
 @property(nonatomic, assign) id<CLCascadeViewDataSource> dataSource;
 
-@property(nonatomic,readonly,getter=isDragging) BOOL dragging;    
-@property(nonatomic,readonly,getter=isDecelerating) BOOL decelerating;
-
-
 /*
- * Offset of pages from left boarder. Default 66.0f
+ * Left inset of pages from left boarder. Default 66.0f
  */
-@property(nonatomic) CGFloat offset;
+@property(nonatomic) CGFloat leftInset;
 
 /*
- * You can change page width, default (1024.0 - offset) / 2.0, so
+ * You can change page width, default (1024.0 - leftInset) / 2.0, so
  * in landscape mode two pages fit properly
  */
 @property(nonatomic, readonly) CGFloat pageWidth;
@@ -71,12 +56,16 @@ typedef enum {
 
 - (UIView*) loadPageAtIndex:(NSInteger)index;
 
+// unload page if is loaded (replabe by)
 - (void) unloadPageIfNeeded:(NSInteger)index;
+// unload page, by remove from superView and replace by [NSNull null]
 - (void) unloadPage:(UIView*)page;
+// unload pages which are not visible
 - (void) unloadInvisiblePages;
 
-- (BOOL) isOnStack:(UIView*)view;
+- (NSInteger) indexOfFirstVisibleView:(BOOL)loadIfNeeded;
 
+- (void) updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration;
 @end
 
 @protocol CLCascadeViewDataSource <NSObject>

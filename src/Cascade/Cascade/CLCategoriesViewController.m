@@ -75,7 +75,6 @@
 	return YES;
 }
 
-
 #pragma mark - 
 #pragma mark Table view data source - Categories
 
@@ -83,14 +82,14 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,9 +101,7 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
-    // Configure the cell...
-    cell.textLabel.text = @"text";
+
     return cell;
 }
 
@@ -112,9 +109,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CLTableViewController* rootTableViewController = [[CLTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
-    [self.cascadeNavigationController setRootViewController:rootTableViewController animated:YES];
-    [rootTableViewController release];
 
 }
 

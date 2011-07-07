@@ -54,6 +54,15 @@
     CLSegmentedView* view_ = [[CLSegmentedView alloc] init];
     self.view = view_;
     [view_ release];
+    
+    [view_ setAutoresizingMask:
+     UIViewAutoresizingFlexibleLeftMargin | 
+     UIViewAutoresizingFlexibleRightMargin | 
+     UIViewAutoresizingFlexibleBottomMargin | 
+     UIViewAutoresizingFlexibleTopMargin |
+     UIViewAutoresizingFlexibleWidth | 
+     UIViewAutoresizingFlexibleHeight];
+
 }
 
 
@@ -148,10 +157,6 @@
     [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL) isOnStack {
-    return [_cascadeNavigationController isOnStack: self];
-}
 
 #pragma mark CLViewControllerDelegate
 

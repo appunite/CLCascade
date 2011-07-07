@@ -15,7 +15,7 @@
 @implementation CLCascadeNavigationController
 
 @synthesize viewControllers = _viewControllers;
-@synthesize offset;
+@synthesize leftInset;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -71,6 +71,10 @@
 	return YES;
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
+    [_cascadeView updateContentLayoutToInterfaceOrientation:interfaceOrientation duration:duration];
+}
+
 #pragma mark -
 #pragma mark Setters
 
@@ -83,23 +87,27 @@
     return _viewControllers;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGFloat) pageWidth {
     return _cascadeView.pageWidth;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CGFloat) offset {
-    return _cascadeView.offset;
+- (CGFloat) leftInset {
+    return _cascadeView.leftInset;
 }
+
 
 #pragma mark -
 #pragma mark Setters
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setOffset:(CGFloat)newOffset {
-    [_cascadeView setOffset: newOffset];
+- (void) setLeftInset:(CGFloat)newLeftInset {
+    [_cascadeView setLeftInset: newLeftInset];
 }
+
 
 #pragma mark -
 #pragma marl test
@@ -112,6 +120,7 @@
     return nil;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIViewController*) lastCascadeViewController {
     if ([_viewControllers count] > 0) {
@@ -122,6 +131,7 @@
     return nil;
 }
 
+
 #pragma mark -
 #pragma marl CLCascadeViewDataSource
 
@@ -130,10 +140,12 @@
     return [[_viewControllers objectAtIndex:index] view];    
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger) numberOfPagesInCascadeView:(CLCascadeView*)cascadeView {
     return [_viewControllers count];
 }
+
 
 #pragma mark -
 #pragma marl CLCascadeViewDelegate
@@ -143,20 +155,24 @@
 
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didUnloadPage:(UIView*)page {
 
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didAddPage:(UIView*)page animated:(BOOL)animated {
-//    NSLog(@"didAddPage: %@", page);
+
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didPopPageAtIndex:(NSInteger)index {
 
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index {
@@ -165,6 +181,7 @@
         [controller pageDidAppear];
     }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index {
@@ -241,9 +258,16 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL) isOnStack:(UIViewController*)viewController {
-    UIView* view = [viewController view];
-    return [_cascadeView isOnStack: view];
+- (UIViewController*) firstVisibleViewController {
+    NSInteger index = [_cascadeView indexOfFirstVisibleView: YES];
+
+    if (index != NSNotFound) {
+        return [_viewControllers objectAtIndex: index];
+    }
+    
+    return nil;
 }
 
+
 @end
+
