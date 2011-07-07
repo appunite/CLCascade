@@ -357,7 +357,7 @@ static const CGFloat kResistance = 0.15;
     NSInteger newOriginX = 0;
     CGRect lastFrame = CGRectNull;
     NSEnumerator* enumerator;
-    UIView* view;    
+    UIView* view = nil;    
 	
     if (_direction == CLDraggingDirectionLeft) {
         enumerator = [array reverseObjectEnumerator];
@@ -839,12 +839,11 @@ static const CGFloat kResistance = 0.15;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popAllPagesAnimated:(BOOL)animated {
     
-    id item;
     NSUInteger index = [_pages count] - 1;
     // pop page from back
     NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
 
-    while ((item = [enumerator nextObject])) {
+    while ([enumerator nextObject]) {
         // pop page at index
         [self popPageAtIndex:index animated:animated];
         index--;

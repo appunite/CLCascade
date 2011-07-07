@@ -39,6 +39,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) loadView {
+	BOOL nibLoaded = NO;
+	
+	CLSplitCascadeView* view_ = nil;
     NSString *nib = self.nibName;
     if (nib) {
         NSBundle *bundle = self.nibBundle;
@@ -48,20 +51,24 @@
         
         if(path) {
             self.view = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex: 0];
-            CLSplitCascadeView* view_ = (CLSplitCascadeView*)self.view;
-            [view_ setCategoriesView: self.categoriesViewController.view];
-            [view_ setCascadeView: self.cascadeNavigationController.view];
-            return;
+            view_ = (CLSplitCascadeView*)self.view;
+			nibLoaded = YES;
         }
     }
     
-    CLSplitCascadeView* view_ = [[CLSplitCascadeView alloc] init];
-    self.view = view_;
-    [view_ setCategoriesView: self.categoriesViewController.view];
-    [view_ setCascadeView: self.cascadeNavigationController.view];
-    [view_ release];
-}
+    if (!nibLoaded) {
+		view_ = [[CLSplitCascadeView alloc] init];
+		self.view = view_;
+	}
+	
+	if (self.categoriesViewController)
+		[view_ setCategoriesView: self.categoriesViewController.view];
+	if (self.cascadeNavigationController)
+		[view_ setCascadeView: self.cascadeNavigationController.view];
 
+	if (!nibLoaded)
+		[view_ release];
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) viewDidLoad {
@@ -101,6 +108,33 @@
 - (void) setDividerImage:(UIImage*)image {
     [(CLSplitCascadeView*)self.view setVerticalDividerImage: image];
     
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)setCategoriesViewController:(CLCategoriesViewController *)newCatControl {
+	if (_categoriesViewController) {
+		[_categoriesViewController release], _categoriesViewController = nil;
+	}
+	_categoriesViewController = [newCatControl retain];
+	
+	if (_categoriesViewController) {
+		CLSplitCascadeView* view_ = (CLSplitCascadeView*)self.view;
+		[view_ setCategoriesView: _categoriesViewController.view];
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)setCascadeNavigationController:(CLCascadeNavigationController *)newNavControl {
+	if (_cascadeNavigationController) {
+		[_cascadeNavigationController release], _cascadeNavigationController = nil;
+	}
+	_cascadeNavigationController = [newNavControl retain];
+	
+	if (_cascadeNavigationController) {
+		CLSplitCascadeView* view_ = (CLSplitCascadeView*)self.view;
+		[view_ setCascadeView: _cascadeNavigationController.view];
+	}
 }
 
 @end

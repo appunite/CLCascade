@@ -239,8 +239,10 @@
         }
     } 
     
+#warning GREG fix this for UINavigationController
     // set cascade navigator to view controller
-    [viewController setCascadeNavigationController: self];
+	if ([viewController respondsToSelector:@selector(setCascadeNavigationController:)])
+		[viewController setCascadeNavigationController: self];
 	
 	// ----- THIS IS INCREDIBLY DANGEROUS ------- 
 	// UIViewController assumes that no one is screwing around with this property ... its a big issue during dealloc
