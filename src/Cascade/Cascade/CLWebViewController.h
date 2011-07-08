@@ -9,7 +9,7 @@
 #import "CLViewController.h"
 
 @interface CLWebViewController : CLViewController {
-    UIWebView* _webView;
+
 }
 
 @property (nonatomic, retain) UIWebView* webView;
