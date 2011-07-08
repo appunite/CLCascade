@@ -69,30 +69,38 @@
     self = [super initWithFrame:frame];
     if (self) {
         _pages = [[NSMutableArray alloc] init];
-//        CGRect rect = self.bounds;
+        //        CGRect rect = self.bounds;
         
-        _scrollView = [[UIScrollView alloc] initWithFrame: self.bounds];
+        
+        self.leftInset = DEFAULT_LEFT_INSET;
+        
+        _scrollView = [[UIScrollView alloc] init];
         [_scrollView setDelegate: self];
         [_scrollView setDecelerationRate: UIScrollViewDecelerationRateFast];
         [_scrollView setScrollsToTop: NO];
         [_scrollView setBounces: YES];
+        [_scrollView setPagingEnabled: YES];
+        [_scrollView setClipsToBounds: NO];
         [_scrollView setAlwaysBounceVertical: NO];
         [_scrollView setAlwaysBounceHorizontal: YES];
-        [_scrollView setDirectionalLockEnabled: YES];
-//        [_scrollView setShowsVerticalScrollIndicator: NO];
-//        [_scrollView setShowsHorizontalScrollIndicator: NO];
-
+        [_scrollView setDirectionalLockEnabled: NO];
+        
+        [_scrollView setDelaysContentTouches:NO];
+        [_scrollView setMultipleTouchEnabled:NO];
+        //        [_scrollView setShowsVerticalScrollIndicator: NO];
+        //        [_scrollView setShowsHorizontalScrollIndicator: NO];
+        
         [_scrollView setAutoresizingMask:
-         UIViewAutoresizingFlexibleLeftMargin | 
-         UIViewAutoresizingFlexibleRightMargin | 
+         //         UIViewAutoresizingFlexibleLeftMargin | 
+         //         UIViewAutoresizingFlexibleRightMargin | 
          UIViewAutoresizingFlexibleBottomMargin | 
          UIViewAutoresizingFlexibleTopMargin | 
-         UIViewAutoresizingFlexibleWidth | 
          UIViewAutoresizingFlexibleHeight];
+        //         UIViewAutoresizingFlexibleWidth];
         [self addSubview: _scrollView];
-
-//        [_scrollView setBackgroundColor:[UIColor redColor]];
-//        [_scrollView setPagingEnabled:YES];
+        
+        [_scrollView setBackgroundColor:[UIColor redColor]];
+        //        [_scrollView setPagingEnabled:YES];
         
         [self setAutoresizingMask:
          UIViewAutoresizingFlexibleLeftMargin | 
@@ -101,10 +109,28 @@
          UIViewAutoresizingFlexibleTopMargin | 
          UIViewAutoresizingFlexibleWidth | 
          UIViewAutoresizingFlexibleHeight];
-        
-        self.leftInset = DEFAULT_LEFT_INSET;
     }
     return self;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    
+    for (id item in _pages) {
+        
+        if (item != [NSNull null]) {
+            
+            UIView* page = (UIView*)item;
+            CGRect rect = [_scrollView convertRect:page.frame toView:self];
+            
+            if (CGRectContainsPoint(rect, point)) {
+                CGPoint newPoint = [self convertPoint:point toView:page];
+                return [page hitTest:newPoint withEvent:event];
+            }
+        }
+    }
+    
+    return [super hitTest:point withEvent:event];
 }
 
 #pragma mark -
@@ -121,8 +147,8 @@
     } else {
         newPageFrame = CGRectMake(CGRectGetMaxX(fromPage.frame), 0.0f, fromPage.frame.size.width, fromPage.frame.size.height);
     }
-
-
+    
+    
     // if not animated then just set frame
     if (!animated) {
         [newPage setFrame: newPageFrame];
@@ -137,7 +163,7 @@
         [_scrollView addSubview: newPage];
         // send message to delegate
         [self didAddPage:newPage animated:animated];
-
+        
     } else { // set animaton
         //        [newPage setAlpha: 0.7];
         
@@ -178,7 +204,7 @@
     
     // check if page is unloaded
     if (item != [NSNull null]) {
-
+        
         if (animated) {
             // animate pop
             [UIView animateWithDuration:0.4f 
@@ -197,7 +223,7 @@
                                  // send delegate message
                                  [self didPopPageAtIndex: index];
                              }];
-        
+            
         } else {
             // unload and remove page
             [self unloadPage:item remove:YES];
@@ -209,7 +235,7 @@
             [self didPopPageAtIndex: index];
         }
     }
-
+    
 }
 
 
@@ -327,9 +353,10 @@
     }
     
     // unload pages
-    for (UIView* view in pagesToUnload) {
-        [self unloadPage: view];
-    }
+    // check if page contain in array of visible pages
+    [pagesToUnload enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [self unloadPage: obj];
+    }];
     
     [pagesToUnload release];
     
@@ -347,7 +374,7 @@
 - (NSInteger) indexOfFirstVisibleView:(BOOL)loadIfNeeded {
     // calculate first visible page
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
-
+    
     if ([self pageExistAtIndex: firstVisiblePageIndex]) {
         
         if (loadIfNeeded) {
@@ -374,7 +401,7 @@
 - (NSInteger) indexOfFirstVisiblePage {
     // calculate first visible page
     CGFloat contentOffset = _scrollView.contentOffset.x;// + _scrollView.contentInset.left;
-    NSInteger index = floor((contentOffset + _leftInset) / _pageWidth);
+    NSInteger index = floor((contentOffset) / _pageWidth);
     
     return (index < 0) ? 0 : index;
 }
@@ -382,16 +409,16 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSArray*) visiblePages {
-
+    
     // calculate first visible page and visible page count
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
     NSInteger visiblePagesCount = ceil(_scrollView.bounds.size.width / _pageWidth);
-   
+    
     // create array
     NSMutableArray* array = [NSMutableArray array];
     
     for (NSInteger i=firstVisiblePageIndex; i<=visiblePagesCount; i++) {
-
+        
         // check if page index is in bounds 
         if ([self pageExistAtIndex: i]) {
             // get page at index
@@ -416,7 +443,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSArray*) pagesOnStock {
-
+    
     // clalculate first visible page index
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
     
@@ -475,15 +502,22 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGSize) calculateContentSize:(UIInterfaceOrientation)interfaceOrientation {
-//    CGSize size = CGSizeMake([_pages count] * _pageWidth, UIInterfaceOrientationIsPortrait(interfaceOrientation) ? self.bounds.size.height : self.bounds.size.height);
-//    NSLog(@"size: %f %f", size.width, size.height);
-    return CGSizeMake([_pages count] * _pageWidth, UIInterfaceOrientationIsPortrait(interfaceOrientation) ? self.bounds.size.height : self.bounds.size.height);
+    //    CGSize size = CGSizeMake([_pages count] * _pageWidth, UIInterfaceOrientationIsPortrait(interfaceOrientation) ? self.bounds.size.height : self.bounds.size.height);
+    //    NSLog(@"size: %f %f", size.width, size.height);
+    
+    CGFloat width = 0.0f;
+    
+    width = [_pages count] * _pageWidth - _pageWidth;
+    
+    return CGSizeMake(width, UIInterfaceOrientationIsPortrait(interfaceOrientation) ? self.bounds.size.height : self.bounds.size.height);
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setProperContentSize { 
+    // get current interface orientation
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    // set proper content size
     [self setProperContentSize: orientation];
 }
 
@@ -496,23 +530,25 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIEdgeInsets) calculateEdgeInset:(UIInterfaceOrientation)interfaceOrientation {
-
+    
     CGFloat leftInset = 0.0f;
     
+    //left inset depends on interface orientation
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
         leftInset = self.bounds.size.width/2 - _pageWidth/2;
     } else {
         leftInset = self.bounds.size.width - _pageWidth;
     }
-
-    NSLog(@"inset: %f", leftInset);
     
+    NSLog(@"inset: %f", leftInset);
+    // return edge inset
     return UIEdgeInsetsMake(0.0f, leftInset, 0.0f, 0.0f);
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setProperEdgeInset:(BOOL)animated forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // check if animated, change content inset
     if (animated) {
         [UIView animateWithDuration:0.4 animations:^ {
             _scrollView.contentInset = [self calculateEdgeInset:interfaceOrientation];   
@@ -525,7 +561,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setProperEdgeInset:(BOOL)animated {
+    // get current interface orientation
     UIInterfaceOrientation interfaceOrienation = [[UIApplication sharedApplication] statusBarOrientation];
+    // set proper edge inset for orientation
     [self setProperEdgeInset:animated forInterfaceOrientation:interfaceOrienation];
 }
 
@@ -535,18 +573,17 @@
     // get pages on stock
     NSArray* array = [self pagesOnStock];
     
+    // get lat index of array
+    __block NSUInteger lastIndex = [array count] -1;
+    
     // enumerate all pages on stock
-    for (id item in array) {
-        
-        // get index of item
-        NSInteger index = [array indexOfObject: item];
-        
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         // if item is not null and is not last page (first visible page on stock)
-        if ((item != [NSNull null]) && (index != [array count] -1)) {
+        if ((obj != [NSNull null]) && (idx != lastIndex)) {
             // unload page
-            [self unloadPage:item];
+            [self unloadPage:obj];
         }
-    }
+    }];
 }
 
 
@@ -554,7 +591,7 @@
 - (UIView*) firstPageOnStock {
     // calculate first visible page
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
-
+    
     // get first visible page
     id item = [_pages objectAtIndex: firstVisiblePageIndex];
     
@@ -579,7 +616,7 @@
         
         // send message to delegate
         [self didUnloadPage:page];        
-
+        
         // check if remove
         if (remove) {
             // remove from array
@@ -597,35 +634,35 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-
+    
     // calculate first visible page
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
-        
+    
     for (NSInteger i=0; i<=firstVisiblePageIndex; i++) {
         
         // check if page index is in bounds 
         if ([self pageExistAtIndex: i]) {
             // get page at index
             id item = [_pages objectAtIndex: i];
-
+            
             if (i == firstVisiblePageIndex) {
                 
                 if (item == [NSNull null]) {
                     item = [self loadPageAtIndex: i];
                 }
-
+                
                 CGFloat contentOffset = _scrollView.contentOffset.x;
                 
-                if ((i == 0) && (contentOffset + _leftInset <= 0)) {
+                if ((i == 0) && (contentOffset <= 0)) {
                     return;
                 }
-
+                
                 UIView* view = (UIView*)item;
                 
                 CGRect rect = [view frame];
-                rect.origin.x = contentOffset + _leftInset;
+                rect.origin.x = contentOffset;
                 [view setFrame: rect];
-                                
+                
             } else {
                 if (item != [NSNull null]) {
                     [self unloadPage: item];
@@ -721,6 +758,8 @@
     
     _leftInset = newLeftInset;
     _pageWidth = (width - _leftInset) / 2.0f;
+    
+    _scrollView.frame = CGRectMake(_leftInset, 0.0, _pageWidth, self.frame.size.height);
     
     [self setProperEdgeInset: NO];
 }
