@@ -7,6 +7,7 @@
 //
 
 #import "CLCascadeView.h"
+#import "CLSegmentedView.h"
 
 @interface CLCascadeView (Private)
 - (NSArray*) visiblePages;
@@ -19,6 +20,7 @@
 - (BOOL) pageExistAtIndex:(NSInteger)index;
 - (void) unloadInvisiblePagesOnStock;
 
+- (CGFloat) calculatePageWidth:(UIView*)view;
 - (CGSize) calculateContentSize:(UIInterfaceOrientation)interfaceOrientation;
 - (UIEdgeInsets) calculateEdgeInset:(UIInterfaceOrientation)interfaceOrientation;
 - (void) setProperContentSize;
@@ -49,6 +51,7 @@
 @synthesize pageWidth = _pageWidth;
 @synthesize delegate = _delegate;
 @synthesize dataSource = _dataSource;
+@synthesize widerPageWidth = _widerPageWidth;
 
 #pragma mark -
 #pragma mark Init & dealloc
@@ -69,9 +72,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _pages = [[NSMutableArray alloc] init];
-        //        CGRect rect = self.bounds;
-        
-        
+
         self.leftInset = DEFAULT_LEFT_INSET;
         
         _scrollView = [[UIScrollView alloc] init];
@@ -89,6 +90,7 @@
         [_scrollView setMultipleTouchEnabled:NO];
         //        [_scrollView setShowsVerticalScrollIndicator: NO];
         //        [_scrollView setShowsHorizontalScrollIndicator: NO];
+          [_scrollView setBackgroundColor:[UIColor redColor]];
         
         [_scrollView setAutoresizingMask:
          //         UIViewAutoresizingFlexibleLeftMargin | 
@@ -99,8 +101,6 @@
         //         UIViewAutoresizingFlexibleWidth];
         [self addSubview: _scrollView];
         
-        [_scrollView setBackgroundColor:[UIColor redColor]];
-        //        [_scrollView setPagingEnabled:YES];
         
         [self setAutoresizingMask:
          UIViewAutoresizingFlexibleLeftMargin | 
@@ -242,6 +242,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popAllPagesAnimated:(BOOL)animated {
     id item = nil;
+    // index of last page
     NSUInteger index = [_pages count] - 1;
     // pop page from back
     NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
@@ -532,17 +533,19 @@
 - (UIEdgeInsets) calculateEdgeInset:(UIInterfaceOrientation)interfaceOrientation {
     
     CGFloat leftInset = 0.0f;
+    CGFloat rightInset = 0.0f;
     
     //left inset depends on interface orientation
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
         leftInset = self.bounds.size.width/2 - _pageWidth/2;
     } else {
-        leftInset = self.bounds.size.width - _pageWidth;
+        leftInset = self.bounds.size.width - _pageWidth - _leftInset;
+        rightInset = 2 * _pageWidth + _leftInset - self.bounds.size.width;
     }
     
     NSLog(@"inset: %f", leftInset);
     // return edge inset
-    return UIEdgeInsetsMake(0.0f, leftInset, 0.0f, 0.0f);
+    return UIEdgeInsetsMake(0.0f, leftInset, 0.0f, rightInset);
 }
 
 
@@ -626,6 +629,19 @@
             [_pages replaceObjectAtIndex:index withObject:[NSNull null]];
         }
     }    
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CGFloat) calculatePageWidth:(UIView*)view {
+    CLViewSize size = [(CLSegmentedView*)view viewSize];
+    CGFloat width = _pageWidth;
+    
+    if (size == CLViewSizeWider) {
+        width = 1.5 * _pageWidth;
+    }
+    
+    return width;
 }
 
 

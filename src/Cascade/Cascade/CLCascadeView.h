@@ -22,16 +22,17 @@
     // contain all pages, if page is unloaded then page is respresented as [NSNull null]
     NSMutableArray* _pages;
     
-    //
-    CGFloat _pageWidth;
+    //sizes
     CGFloat _leftInset;
+    CGFloat _pageWidth;
+    CGFloat _widerPageWidth;
 }
 
 @property(nonatomic, assign) id<CLCascadeViewDelegate> delegate;
 @property(nonatomic, assign) id<CLCascadeViewDataSource> dataSource;
 
 /*
- * Left inset of pages from left boarder. Default 66.0f
+ * Left inset of pages from left boarder. Default 58.0f
  */
 @property(nonatomic) CGFloat leftInset;
 
@@ -40,6 +41,8 @@
  * in landscape mode two pages fit properly
  */
 @property(nonatomic, readonly) CGFloat pageWidth;
+
+@property(nonatomic, assign) CGFloat widerPageWidth;
 
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated;
 
