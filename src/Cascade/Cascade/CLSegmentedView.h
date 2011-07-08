@@ -18,7 +18,7 @@
     CAGradientLayer* _shadow;
     CGFloat _shadowWidth;
     
-    CLViewStyle _viewStyle;
+    CLViewSize _viewSize;
 }
 
 /*
@@ -49,7 +49,7 @@
 /*
  * Style of view
  */
-@property (nonatomic, assign) CLViewStyle viewStyle;
+@property (nonatomic, assign) CLViewSize viewSize;
 
 /* 
  * To set content view.

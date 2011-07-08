@@ -7,6 +7,6 @@
 //
 
 typedef enum {
-    CLViewStyleNormal   = 0,
-    CLViewStyleWider    = 1
-} CLViewStyle;
+    CLViewSizeNormal   = 0,
+    CLViewSizeWider    = 1
+} CLViewSize;

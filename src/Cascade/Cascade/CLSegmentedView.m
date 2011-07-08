@@ -20,7 +20,7 @@
 @synthesize contentView = _contentView;
 @synthesize shadow = _shadow;
 @synthesize shadowWidth = _shadowWidth;
-@synthesize viewStyle = _viewStyle;
+@synthesize viewSize = _viewSize;
 
 #pragma mark - Init & dealloc
 

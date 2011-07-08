@@ -208,7 +208,7 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender style:(CLViewStyle)style animated:(BOOL)animated {
+- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender size:(CLViewSize)size animated:(BOOL)animated {
     
     // if in not sent from categoirs view
     if (sender) {
@@ -247,7 +247,7 @@
     // set parrent view controller, if rootViewController, then nil
     [viewController setParentViewController: sender];
     // set view style
-    [viewController setViewStyle: style];
+    [viewController setViewSize: size];
     // add controller to array
     [self.viewControllers addObject: viewController];
 
@@ -259,7 +259,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated {
-    [self addViewController:viewController sender:sender style:CLViewStyleNormal animated:animated];
+    [self addViewController:viewController sender:sender size:CLViewSizeNormal animated:animated];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

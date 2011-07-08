@@ -14,7 +14,7 @@
 @implementation CLViewController
 
 @synthesize cascadeNavigationController = _cascadeNavigationController;
-@synthesize viewStyle = _viewStyle;
+@synthesize viewSize = _viewSize;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
@@ -64,7 +64,7 @@
      UIViewAutoresizingFlexibleWidth | 
      UIViewAutoresizingFlexibleHeight];
 
-    self.viewStyle = CLViewStyleNormal;
+    self.viewSize = CLViewSizeNormal;
 }
 
 
@@ -156,7 +156,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated {
-    [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
+    [self pushDetailViewController:viewController size:CLViewSizeNormal animated:animated];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) pushDetailViewController:(CLViewController *)viewController size:(CLViewSize)size animated:(BOOL)animated {
+    [self.cascadeNavigationController addViewController:viewController sender:self size:size animated:animated];
 }
 
 

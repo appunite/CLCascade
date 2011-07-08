@@ -40,7 +40,7 @@
  * Push new view controller from sender with proper style.
  * If sender is not last, then controller pop next controller and push new view from sender
  */
-- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender style:(CLViewStyle)style animated:(BOOL)animated;
+- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender size:(CLViewSize)size animated:(BOOL)animated;
 
 /*
  * Send addViewController:sender:style:animated: with style CLViewStyleNormal
