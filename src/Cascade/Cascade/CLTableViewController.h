@@ -17,5 +17,6 @@
 @property (nonatomic, retain) UITableView *tableView;
 
 - (id) initWithTableViewStyle:(UITableViewStyle)style;
+- (id) initWithTableViewStyle:(UITableViewStyle)style size:(CLViewSize)size;
 
 @end

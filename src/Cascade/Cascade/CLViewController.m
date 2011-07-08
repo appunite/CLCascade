@@ -16,6 +16,44 @@
 @synthesize cascadeNavigationController = _cascadeNavigationController;
 @synthesize viewSize = _viewSize;
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) init {
+    self = [super init];
+    if (self) {
+        _viewSize = CLViewSizeNormal;
+    }
+    return self;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _viewSize = CLViewSizeNormal;
+    }
+    return self;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithSize:(CLViewSize)size {
+    self = [super init];
+    if (self) {
+        _viewSize = size;
+    }
+    return self;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil size:(CLViewSize)size {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _viewSize = size;
+    }
+    return self;
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
@@ -52,7 +90,7 @@
         }
     }
     
-    CLSegmentedView* view_ = [[CLSegmentedView alloc] init];
+    CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: _viewSize];
     self.view = view_;
     [view_ release];
     
@@ -63,8 +101,6 @@
      UIViewAutoresizingFlexibleTopMargin |
      UIViewAutoresizingFlexibleWidth | 
      UIViewAutoresizingFlexibleHeight];
-
-    self.viewSize = CLViewSizeNormal;
 }
 
 
@@ -92,9 +128,9 @@
 	return YES;
 }
 
+
 #pragma mark -
 #pragma mark Class methods
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha animated:(BOOL)animated {
@@ -156,13 +192,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated {
-    [self pushDetailViewController:viewController size:CLViewSizeNormal animated:animated];
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) pushDetailViewController:(CLViewController *)viewController size:(CLViewSize)size animated:(BOOL)animated {
-    [self.cascadeNavigationController addViewController:viewController sender:self size:size animated:animated];
+    [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
 }
 
 

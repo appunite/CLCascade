@@ -14,9 +14,20 @@
 @dynamic tableView;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (id) initWithTableViewStyle:(UITableViewStyle)style
-{
+- (id) initWithTableViewStyle:(UITableViewStyle)style {
     self = [super init];
+    if (self) {
+        _viewSize = CLViewSizeNormal;
+        _tableViewStyle = style;
+    }
+    return self;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithTableViewStyle:(UITableViewStyle)style size:(CLViewSize)size;
+{
+    self = [super initWithSize: size];
     if (self) {
         _tableViewStyle = style;
     }
@@ -61,7 +72,7 @@
     }
     
     // create SegmentedView
-    CLSegmentedView* view_ = [[CLSegmentedView alloc] init];
+    CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: _viewSize];
     self.view = view_;
     [view_ release];
     

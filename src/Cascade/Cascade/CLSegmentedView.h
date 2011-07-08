@@ -49,7 +49,9 @@
 /*
  * Style of view
  */
-@property (nonatomic, assign) CLViewSize viewSize;
+@property (nonatomic, assign, readonly) CLViewSize viewSize;
+
+- (id) initWithSize:(CLViewSize)size;
 
 /* 
  * To set content view.

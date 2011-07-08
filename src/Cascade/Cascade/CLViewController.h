@@ -24,12 +24,14 @@
     CLViewSize _viewSize;
 }
 
+- (id) initWithSize:(CLViewSize)size;
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil size:(CLViewSize)size;
+
 @property (nonatomic, retain) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
-@property (nonatomic, assign) CLViewSize viewSize;
+@property (nonatomic, assign, readonly) CLViewSize viewSize;
 
 // method used to push (animated) new UIViewController on Cascade stack
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated;
-- (void) pushDetailViewController:(CLViewController *)viewController size:(CLViewSize)size animated:(BOOL)animated;
 
 // Outer left shadow methods
 - (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha animated:(BOOL)animated;

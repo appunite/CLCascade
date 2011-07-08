@@ -37,13 +37,8 @@
 - (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated;
 
 /*
- * Push new view controller from sender with proper style.
+ * Push new view controller from sender.
  * If sender is not last, then controller pop next controller and push new view from sender
- */
-- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender size:(CLViewSize)size animated:(BOOL)animated;
-
-/*
- * Send addViewController:sender:style:animated: with style CLViewStyleNormal
  */
 - (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated;
 
