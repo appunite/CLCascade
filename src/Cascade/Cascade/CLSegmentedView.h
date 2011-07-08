@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-
+#import "CLCascadeEnums.h"
 
 @interface CLSegmentedView : UIView {
     UIView* _headerView;
@@ -17,6 +17,8 @@
 
     CAGradientLayer* _shadow;
     CGFloat _shadowWidth;
+    
+    CLViewStyle _viewStyle;
 }
 
 /*
@@ -43,6 +45,11 @@
  * The width of the shadow
  */
 @property (nonatomic, assign) CGFloat shadowWidth;
+
+/*
+ * Style of view
+ */
+@property (nonatomic, assign) CLViewStyle viewStyle;
 
 /* 
  * To set content view.

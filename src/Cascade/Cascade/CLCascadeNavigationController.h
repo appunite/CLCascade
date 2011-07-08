@@ -11,6 +11,7 @@
 #import "CLViewController.h"
 #import "CLCascadeView.h"
 #import "CLViewControllerDelegate.h"
+#import "CLCascadeEnums.h"
 
 @interface CLCascadeNavigationController : UIViewController <CLCascadeViewDataSource, CLCascadeViewDelegate> {
     // array of all view controllers
@@ -36,8 +37,13 @@
 - (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated;
 
 /*
- * Push new view controller from sender.
+ * Push new view controller from sender with proper style.
  * If sender is not last, then controller pop next controller and push new view from sender
+ */
+- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender style:(CLViewStyle)style animated:(BOOL)animated;
+
+/*
+ * Send addViewController:sender:style:animated: with style CLViewStyleNormal
  */
 - (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated;
 

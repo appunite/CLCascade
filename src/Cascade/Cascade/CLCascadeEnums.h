@@ -7,7 +7,6 @@
 //
 
 typedef enum {
-	CLCascadeViewScrollUnknowPosition = NSNotFound,
-	CLCascadeViewScrollMasterPosition = 0,
-	CLCascadeViewScrollDetailPosition = 1
-} CLCascadeViewScrollPositions;
+    CLViewStyleNormal   = 0,
+    CLViewStyleWider    = 1
+} CLViewStyle;

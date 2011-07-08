@@ -12,6 +12,7 @@
 #import "CLSegmentedView.h"
 #import "UIViewController+CLSegmentedView.h"
 #import "CLViewControllerDelegate.h"
+#import "CLCascadeEnums.h"
 
 @class CLCascadeNavigationController;
 
@@ -19,9 +20,12 @@
     CLCascadeNavigationController* _cascadeNavigationController;
 
     CAGradientLayer* _originShadow;
+    
+    CLViewStyle _viewStyle;
 }
 
 @property (nonatomic, retain) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
+@property (nonatomic, assign) CLViewStyle viewStyle;
 
 // method used to push (animated) new UIViewController on Cascade stack
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated;

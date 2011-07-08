@@ -207,9 +207,8 @@
     [self addViewController:viewController sender:nil animated:animated];
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated {
+- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender style:(CLViewStyle)style animated:(BOOL)animated {
     
     // if in not sent from categoirs view
     if (sender) {
@@ -247,6 +246,8 @@
     [viewController setCascadeNavigationController: self];
     // set parrent view controller, if rootViewController, then nil
     [viewController setParentViewController: sender];
+    // set view style
+    [viewController setViewStyle: style];
     // add controller to array
     [self.viewControllers addObject: viewController];
 
@@ -256,6 +257,10 @@
                   animated:animated];
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated {
+    [self addViewController:viewController sender:sender style:CLViewStyleNormal animated:animated];
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIViewController*) firstVisibleViewController {

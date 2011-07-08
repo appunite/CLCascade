@@ -11,12 +11,6 @@
 @protocol CLCascadeViewDataSource;
 @protocol CLCascadeViewDelegate;
 
-typedef enum {
-    CLDraggingDirectionRight    = -1,
-    CLDraggingDirectionUnknow   =  0,
-    CLDraggingDirectionLeft     =  1
-} CLDraggingDirection;
-
 @interface CLCascadeView : UIView <UIScrollViewDelegate> {
     // delegate and dataSource
     id<CLCascadeViewDelegate> _delegate;
@@ -31,8 +25,6 @@ typedef enum {
     //
     CGFloat _pageWidth;
     CGFloat _leftInset;
-    
-    CLDraggingDirection _direction;
 }
 
 @property(nonatomic, assign) id<CLCascadeViewDelegate> delegate;

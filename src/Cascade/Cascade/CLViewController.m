@@ -14,6 +14,7 @@
 @implementation CLViewController
 
 @synthesize cascadeNavigationController = _cascadeNavigationController;
+@synthesize viewStyle = _viewStyle;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
@@ -63,6 +64,7 @@
      UIViewAutoresizingFlexibleWidth | 
      UIViewAutoresizingFlexibleHeight];
 
+    self.viewStyle = CLViewStyleNormal;
 }
 
 
@@ -180,13 +182,6 @@
      */
 
     [self hideShadow: NO];
-//    if ([self isOnStack]) {
-//        UIViewController* parentViewController = [self parentViewController];
-//        
-//        if ([parentViewController isKindOfClass:[CLViewController class]]) {
-//            [(CLViewController*)parentViewController hideShadow: NO];
-//        }
-//    }
 }
 
 @end
