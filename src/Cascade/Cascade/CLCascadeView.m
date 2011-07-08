@@ -40,9 +40,13 @@
 - (void) didUnloadPage:(UIView*)page;
 - (void) pageDidAppearAtIndex:(NSInteger)index;
 - (void) pageDidDisappearAtIndex:(NSInteger)index;
+- (void) didStartPullingToDetachPages;
+- (void) didPullToDetachPages;
+- (void) didCancelPullToDetachPages;
 @end
 
 #define DEFAULT_LEFT_INSET 58.0f
+#define PULL_TO_DETACH_FACTOR 0.20f
 #define OVERLOAD 0.0f
 
 @implementation CLCascadeView
@@ -52,6 +56,7 @@
 @synthesize delegate = _delegate;
 @synthesize dataSource = _dataSource;
 @synthesize widerPageWidth = _widerPageWidth;
+@synthesize pullToDetachPages = _pullToDetachPages;
 
 #pragma mark -
 #pragma mark Init & dealloc
@@ -74,6 +79,7 @@
         _pages = [[NSMutableArray alloc] init];
 
         self.leftInset = DEFAULT_LEFT_INSET;
+        self.pullToDetachPages = YES;
         
         _scrollView = [[UIScrollView alloc] init];
         [_scrollView setDelegate: self];
@@ -109,6 +115,8 @@
          UIViewAutoresizingFlexibleTopMargin | 
          UIViewAutoresizingFlexibleWidth | 
          UIViewAutoresizingFlexibleHeight];
+        
+        _flags.willDetachPages = NO;
     }
     return self;
 }
@@ -651,6 +659,18 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    CGFloat realContentOffsetX = _scrollView.contentOffset.x + _scrollView.contentInset.left;
+    
+    if (!_flags.isDetachPages) {
+        if ((!_flags.willDetachPages) && (realContentOffsetX < - _scrollView.frame.size.width * PULL_TO_DETACH_FACTOR)) {
+            [self didStartPullingToDetachPages];
+        }
+        
+        if ((_flags.willDetachPages) && (realContentOffsetX > - _scrollView.frame.size.width * PULL_TO_DETACH_FACTOR)) {
+            [self didCancelPullToDetachPages];
+        }
+    }
+    
     // calculate first visible page
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
     
@@ -698,7 +718,15 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    
+    CGFloat realContentOffsetX = _scrollView.contentOffset.x + _scrollView.contentInset.left;
+
+    if ((_flags.willDetachPages) && (realContentOffsetX < - _scrollView.frame.size.width * PULL_TO_DETACH_FACTOR)) {
+        [self didPullToDetachPages];
+    }
+
+    if ((_flags.willDetachPages) && (realContentOffsetX > - _scrollView.frame.size.width * PULL_TO_DETACH_FACTOR)) {
+        [self didCancelPullToDetachPages];
+    }
 }
 
 
@@ -710,7 +738,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
+    if (_flags.isDetachPages) _flags.isDetachPages = NO;
 }
 
 
@@ -761,6 +789,34 @@
 - (void) pageDidDisappearAtIndex:(NSInteger)index {
     if ([_delegate respondsToSelector:@selector(cascadeView:pageDidDisappearAtIndex:)]) {
         [_delegate cascadeView:self pageDidDisappearAtIndex:index];
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) didStartPullingToDetachPages {
+    _flags.willDetachPages = YES;
+    if ([_delegate respondsToSelector:@selector(cascadeViewDidStartPullingToDetachPages:)]) {
+        [_delegate cascadeViewDidStartPullingToDetachPages:self];
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) didPullToDetachPages {
+    _flags.willDetachPages = NO;
+    _flags.isDetachPages = YES;
+    if ([_delegate respondsToSelector:@selector(cascadeViewDidPullToDetachPages:)]) {
+        [_delegate cascadeViewDidPullToDetachPages:self];
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) didCancelPullToDetachPages {
+    _flags.willDetachPages = NO;
+    if ([_delegate respondsToSelector:@selector(cascadeViewDidCancelPullToDetachPages:)]) {
+        [_delegate cascadeViewDidCancelPullToDetachPages:self];
     }
 }
 

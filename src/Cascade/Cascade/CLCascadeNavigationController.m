@@ -194,6 +194,23 @@
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) cascadeViewDidStartPullingToDetachPages:(CLCascadeView*)cascadeView {
+    NSLog(@"cascadeViewDidStartPullingToDetachPages");
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) cascadeViewDidPullToDetachPages:(CLCascadeView*)cascadeView {
+    NSLog(@"cascadeViewDidPullToDetachPages");
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) cascadeViewDidCancelPullToDetachPages:(CLCascadeView*)cascadeView {
+    NSLog(@"cascadeViewDidCancelPullToDetachPages");
+}
+
 #pragma mark -
 #pragma mark Calss methods
 

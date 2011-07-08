@@ -26,6 +26,15 @@
     CGFloat _leftInset;
     CGFloat _pageWidth;
     CGFloat _widerPageWidth;
+
+    BOOL _pullToDetachPages;
+
+@private
+    struct {
+        unsigned int willDetachPages:1;
+        unsigned int isDetachPages:1;
+    } _flags;
+
 }
 
 @property(nonatomic, assign) id<CLCascadeViewDelegate> delegate;
@@ -43,6 +52,7 @@
 @property(nonatomic, readonly) CGFloat pageWidth;
 
 @property(nonatomic, assign) CGFloat widerPageWidth;
+@property(nonatomic, assign) BOOL pullToDetachPages;
 
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated;
 
@@ -85,5 +95,11 @@
  * Called when page will be shadowed by another page or will slide out CascadeView bounds
  */
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index;
+
+/*
+ */
+- (void) cascadeViewDidStartPullingToDetachPages:(CLCascadeView*)cascadeView;
+- (void) cascadeViewDidPullToDetachPages:(CLCascadeView*)cascadeView;
+- (void) cascadeViewDidCancelPullToDetachPages:(CLCascadeView*)cascadeView;
 
 @end

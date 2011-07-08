@@ -4,30 +4,16 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
-         filePath = "/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeView.m"
-         timestampString = "331847068.678627"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "359"
-         endingLineNumber = "359"
-         landmarkName = "-unloadInvisiblePages"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeView.m"
-         timestampString = "331847637.509898"
+         timestampString = "331857090.952199"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "543"
-         endingLineNumber = "543"
+         startingLineNumber = "550"
+         endingLineNumber = "550"
          landmarkName = "-calculateEdgeInset:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -37,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeView.m"
-         timestampString = "331847939.538691"
+         timestampString = "331857090.952199"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "535"
-         endingLineNumber = "535"
+         startingLineNumber = "542"
+         endingLineNumber = "542"
          landmarkName = "-calculateEdgeInset:"
          landmarkType = "5">
       </FileBreakpoint>
