@@ -147,61 +147,27 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated {
     
-    CGRect newPageFrame = CGRectZero;
+    CGRect newPageFrame = CGRectMake(CGRectGetMaxX(fromPage.frame), 0.0f, fromPage.frame.size.width, fromPage.frame.size.height);
     
     if (fromPage == nil) {
         [self popAllPagesAnimated: animated];
         newPageFrame = CGRectMake(0.0f, 0.0f, _pageWidth, _scrollView.frame.size.height);
-    } else {
-        newPageFrame = CGRectMake(CGRectGetMaxX(fromPage.frame), 0.0f, fromPage.frame.size.width, fromPage.frame.size.height);
     }
     
-    
-    // if not animated then just set frame
-    if (!animated) {
-        [newPage setFrame: newPageFrame];
-        
-        // add page to array of pages
-        [_pages addObject: newPage];
-        // update content size
-        [self setProperContentSize];
-        // update edge inset
-        [self setProperEdgeInset: NO];
-        // add subview
-        [_scrollView addSubview: newPage];
-        // send message to delegate
-        [self didAddPage:newPage animated:animated];
-        
-    } else { // set animaton
-        //        [newPage setAlpha: 0.7];
-        
-        CGRect newPageAnimationFrame = newPageFrame;
-        newPageAnimationFrame.origin.x = self.frame.size.width;
-        [newPage setFrame: newPageAnimationFrame];
-        
-        [UIView animateWithDuration:0.4 delay:0.0
-                            options:UIViewAnimationCurveEaseIn
-                         animations:^ {
-                             
-                             [newPage setFrame: newPageFrame];
-                             
-                         } 
-                         completion: ^(BOOL finished) {
-                             
-                             // add page to array of pages
-                             [_pages addObject: newPage];
-                             // update content size
-                             [self setProperContentSize];
-                             // update edge inset
-                             [self setProperEdgeInset: NO];
-                             // add subview
-                             [_scrollView addSubview: newPage];
-                             // send message to delegate
-                             [self didAddPage:newPage animated:animated];
-                             
-                         }
-         ];
-    }
+    // set new page frame
+    [newPage setFrame: newPageFrame];
+    // add page to array of pages
+    [_pages addObject: newPage];
+    // update content size
+    [self setProperContentSize];
+    // update edge inset
+    [self setProperEdgeInset: NO];
+    // add subview
+    [_scrollView addSubview: newPage];
+    // send message to delegate
+    [self didAddPage:newPage animated:animated];
+    // scroll to new page frame
+    [_scrollView setContentOffset:CGPointMake(CGRectGetMaxX(fromPage.frame) - _scrollView.contentInset.left, 0.0f) animated:animated];
 }
 
 
