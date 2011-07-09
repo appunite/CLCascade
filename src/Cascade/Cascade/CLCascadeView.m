@@ -27,6 +27,7 @@
 - (void) setProperContentSize:(UIInterfaceOrientation)interfaceOrientation;
 - (void) setProperEdgeInset:(BOOL)animated;
 - (void) setProperEdgeInset:(BOOL)animated forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+- (void) setPageHeightForLodedPages:(UIInterfaceOrientation)interfaceOrientation;
 
 - (void) unloadPage:(UIView*)page remove:(BOOL)remove;
 
@@ -340,8 +341,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
-    [self setProperContentSize];
-    [self setProperEdgeInset: YES];
+    // set proper content size
+    [self setProperContentSize: interfaceOrientation];
+    // set proper edge inset
+    [self setProperEdgeInset:YES forInterfaceOrientation:interfaceOrientation];
+    // recalculate pages height
+    [self setPageHeightForLodedPages: interfaceOrientation];
 }
 
 
@@ -618,6 +623,19 @@
     return width;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setPageHeightForLodedPages:(UIInterfaceOrientation)interfaceOrientation {
+
+    [_pages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (obj != [NSNull null]) {
+            UIView* view = (UIView*)obj;
+            CGRect rect = view.frame;
+            rect.size.height = UIInterfaceOrientationIsLandscape(interfaceOrientation) ? self.bounds.size.width : self.bounds.size.height;
+            [view setFrame:rect];
+        }
+    }];
+}
 
 #pragma mark -
 #pragma mark UIScrollView delegates methods

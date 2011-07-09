@@ -271,7 +271,7 @@
 				<integer>24</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeView.h</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -289,7 +289,7 @@
 				<integer>26</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.m</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -307,7 +307,7 @@
 				<integer>28</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/Examples/Cascade/Cascade/main.m</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeView.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -325,7 +325,7 @@
 				<integer>30</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeNavigationController.m</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -343,7 +343,7 @@
 				<integer>32</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLTableViewController.m</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/Examples/Cascade/Cascade/main.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -361,7 +361,7 @@
 				<integer>34</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.h</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLTableViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -379,7 +379,7 @@
 				<integer>36</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/Examples/Cascade/Cascade/ExampleWebViewController.h</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLViewController.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -397,7 +397,7 @@
 				<integer>38</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/Examples/Cascade/Cascade/ExampleTableViewController.h</string>
+		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/Examples/Cascade/Cascade/ExampleWebViewController.h</string>
 		<dict>
 			<key>$classes</key>
 			<array>
@@ -5270,7 +5270,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>331938443.29805398</real>
+		<real>331939573.17348301</real>
 		<string>{3707, 787}</string>
 		<dict>
 			<key>$class</key>
@@ -5603,9 +5603,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>331938400.30227101</real>
-		<string>{820, 905}</string>
-		<string>{1199, 8}</string>
+		<real>331939449.17267001</real>
+		<string>{1289, 1368}</string>
+		<string>{1937, 41}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6595,9 +6595,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>331938443.29781002</real>
-		<string>{25849, 1502}</string>
-		<string>{23150, 0}</string>
+		<real>331939573.17331201</real>
+		<string>{11009, 1223}</string>
+		<string>{11971, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6690,8 +6690,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>331938424.48694098</real>
-		<string>{140, 824}</string>
+		<real>331938688.93681097</real>
+		<string>{0, 1068}</string>
 		<string>{691, 18}</string>
 		<dict>
 			<key>$class</key>
@@ -6892,19 +6892,19 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>286</integer>
+					<integer>299</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>287</integer>
+					<integer>300</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>288</integer>
+					<integer>301</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>289</integer>
+					<integer>302</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -6927,8 +6927,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>331857040.37139601</real>
-		<string>{0, 1273}</string>
+		<real>331939120.65130299</real>
+		<string>{97, 1301}</string>
 		<string>{569, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -8199,7 +8199,7 @@
 			</array>
 		</dict>
 		<string>{0, 1201}</string>
-		<real>331938443.29825997</real>
+		<real>331939573.17360801</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10670,7 +10670,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>331938443.29903603</real>
+		<real>331939573.17426503</real>
 		<string>{3707, 787}</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
@@ -12181,7 +12181,7 @@
 				<integer>937</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>331938288.98310202</real>
+			<real>331939484.07845902</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -12192,7 +12192,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 23:04</string>
+		<string>Today at 23:24</string>
 		<integer>234</integer>
 		<dict>
 			<key>$class</key>
@@ -13373,7 +13373,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>331938443.30268902</real>
+		<real>331939573.17790997</real>
 		<string>{3707, 787}</string>
 		<dict>
 			<key>$class</key>
@@ -18006,7 +18006,7 @@
 		<string>IDEBatchFindNavigatorSelectedRowIndexes</string>
 		<string>IDEBatchFindNavigatorFindMode</string>
 		<string>IDEBatchFindNavigatorCollapsedGroups</string>
-		<string>clearcol</string>
+		<string>recalculteHeightOfLodedPages</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -18369,7 +18369,7 @@
 		</dict>
 		<string>Cascade</string>
 		<string>CLCascadeNavigationController</string>
-		<string>CLCascadeView.h</string>
+		<string>CLCascadeView.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -18809,11 +18809,11 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1375</integer>
+					<integer>1374</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1391</integer>
+					<integer>1390</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -18833,7 +18833,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>292</integer>
+					<integer>722</integer>
 				</dict>
 			</array>
 		</dict>
@@ -18856,7 +18856,7 @@
 			<key>rootLayoutTreeNode</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>1373</integer>
+				<integer>1372</integer>
 			</dict>
 		</dict>
 		<dict>
@@ -18882,7 +18882,7 @@
 			<key>parent</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>1373</integer>
+				<integer>1372</integer>
 			</dict>
 		</dict>
 		<dict>
@@ -18894,7 +18894,7 @@
 			<key>DocumentLocation</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>1371</integer>
+				<integer>1370</integer>
 			</dict>
 			<key>DomainIdentifier</key>
 			<dict>
@@ -18926,6 +18926,10 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
+					<integer>1365</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
 					<integer>1366</integer>
 				</dict>
 				<dict>
@@ -18935,10 +18939,6 @@
 				<dict>
 					<key>CF$UID</key>
 					<integer>1368</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
-					<integer>1369</integer>
 				</dict>
 			</array>
 		</dict>
@@ -18951,10 +18951,9 @@
 			<key>Identifier</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>1365</integer>
+				<integer>1335</integer>
 			</dict>
 		</dict>
-		<string>CLCascadeView.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -19000,7 +18999,7 @@
 			<key>Identifier</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>1370</integer>
+				<integer>1369</integer>
 			</dict>
 		</dict>
 		<string>Cascade</string>
@@ -19013,7 +19012,7 @@
 			<key>documentURL</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>1372</integer>
+				<integer>1371</integer>
 			</dict>
 			<key>timestamp</key>
 			<dict>
@@ -19039,7 +19038,7 @@
 			<key>children</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>1374</integer>
+				<integer>1373</integer>
 			</dict>
 			<key>contentType</key>
 			<integer>0</integer>
@@ -19111,11 +19110,11 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1376</integer>
+					<integer>1375</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1377</integer>
+					<integer>1376</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -19123,11 +19122,11 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1379</integer>
+					<integer>1378</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1385</integer>
+					<integer>1384</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19166,7 +19165,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1378</integer>
+					<integer>1377</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -19199,7 +19198,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1380</integer>
+					<integer>1379</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19213,11 +19212,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1381</integer>
+					<integer>1380</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1383</integer>
+					<integer>1382</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19246,7 +19245,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1382</integer>
+					<integer>1381</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19276,7 +19275,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1384</integer>
+					<integer>1383</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19298,7 +19297,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1386</integer>
+					<integer>1385</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19312,11 +19311,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1387</integer>
+					<integer>1386</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1389</integer>
+					<integer>1388</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19345,7 +19344,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1388</integer>
+					<integer>1387</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19375,7 +19374,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1390</integer>
+					<integer>1389</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19397,7 +19396,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1392</integer>
+					<integer>1391</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19418,7 +19417,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1393</integer>
+					<integer>1392</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19447,7 +19446,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1394</integer>
+					<integer>1393</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -19469,7 +19468,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1395</integer>
+					<integer>1394</integer>
 				</dict>
 			</array>
 		</dict>
@@ -19518,19 +19517,19 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1396</integer>
+					<integer>1395</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1404</integer>
+					<integer>1403</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1365</integer>
+					<integer>1407</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1365</integer>
+					<integer>1335</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -19551,7 +19550,7 @@
 			<key>DocumentLocation</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>1371</integer>
+				<integer>1370</integer>
 			</dict>
 			<key>DomainIdentifier</key>
 			<dict>
@@ -19561,7 +19560,7 @@
 			<key>IdentifierPath</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>1397</integer>
+				<integer>1396</integer>
 			</dict>
 			<key>IndexOfDocumentIdentifier</key>
 			<dict>
@@ -19579,6 +19578,10 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
+					<integer>1397</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
 					<integer>1398</integer>
 				</dict>
 				<dict>
@@ -19593,10 +19596,6 @@
 					<key>CF$UID</key>
 					<integer>1401</integer>
 				</dict>
-				<dict>
-					<key>CF$UID</key>
-					<integer>1402</integer>
-				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -19608,7 +19607,7 @@
 			<key>Identifier</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>1365</integer>
+				<integer>1335</integer>
 			</dict>
 		</dict>
 		<dict>
@@ -19656,7 +19655,7 @@
 			<key>Identifier</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>1403</integer>
+				<integer>1402</integer>
 			</dict>
 		</dict>
 		<string>Cascade</string>
@@ -19689,11 +19688,11 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1405</integer>
+					<integer>1404</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1406</integer>
+					<integer>1405</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -19701,13 +19700,14 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1407</integer>
+					<integer>1406</integer>
 				</dict>
 			</array>
 		</dict>
-		<real>331938443.30203003</real>
-		<string>{25849, 1502}</string>
-		<string>{23150, 0}</string>
+		<real>331939573.17728102</real>
+		<string>{11009, 1223}</string>
+		<string>{11971, 0}</string>
+		<string>-updateContentLayoutToInterfaceOrientation:duration:</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -19740,7 +19740,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {1020, 610}}</string>
+		<string>{{0, 0}, {1020, 473}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
