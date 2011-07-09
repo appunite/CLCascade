@@ -103,8 +103,7 @@
     }
     
     // Configure the cell...
-    cell.textLabel.text = @"text";
-    
+    cell.textLabel.text = [NSString stringWithFormat:@"Category: %i", indexPath.row];
     
     return cell;
 }

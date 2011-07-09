@@ -47,7 +47,7 @@
 @property (nonatomic, assign) CGFloat shadowWidth;
 
 /*
- * Style of view
+ * Size of view
  */
 @property (nonatomic, assign, readonly) CLViewSize viewSize;
 

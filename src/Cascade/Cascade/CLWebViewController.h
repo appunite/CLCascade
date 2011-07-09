@@ -8,10 +8,20 @@
 
 #import "CLViewController.h"
 
-@interface CLWebViewController : CLViewController {
+@interface CLWebViewController : CLViewController <UIWebViewDelegate> {
 
 }
 
 @property (nonatomic, retain) UIWebView* webView;
+
+/*
+ * This method fire loadRequest in webView.
+ */
+- (void) loadRequest;
+
+/*
+ * Override this method to change webView load request
+ */
+- (NSURLRequest*) request;
 
 @end

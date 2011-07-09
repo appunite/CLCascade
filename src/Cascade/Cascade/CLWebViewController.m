@@ -13,11 +13,21 @@
 @dynamic webView;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) init {
+    self = [super init];
+    if (self) {
+        _viewSize = CLViewSizeWider;
+    }
+    return self;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        _viewSize = CLViewSizeWider;
     }
     return self;
 }
@@ -42,11 +52,15 @@
     // create web view
     UIWebView* webView_ = [[UIWebView alloc] init];
     // set up webView
+    [webView_ setDelegate:self];
     [webView_ setScalesPageToFit: YES];
     [webView_ setDataDetectorTypes: UIDataDetectorTypeAll];
     // set contentView of CLSegmentedView
     [self setWebView: webView_];
     [webView_ release];
+    
+    // load request
+    [self loadRequest];
 }
 
 
@@ -60,19 +74,15 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    // if is not loading then load www.google.com
-    if (![self.webView isLoading]) {
-        //create default request
-        NSURL* url = [NSURL URLWithString: @"http://www.google.com"];
-        NSURLRequest* request = [NSURLRequest requestWithURL:url 
-                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy 
-                                             timeoutInterval:30.0];
-        [self.webView loadRequest: request];
-    }
-}
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//    
+//    // if is not loading then load www.google.com
+//    if (![self.webView isLoading]) {
+//        //create default request
+//        [self.webView loadRequest: [self request]];
+//    }
+//}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,6 +91,46 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+
+#pragma mark -
+#pragma mark Class methods
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) loadRequest {
+    [self.webView loadRequest: [self request]];    
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSURLRequest*) request {
+    NSURL* url = [NSURL URLWithString: @"http://www.google.com"];
+    return [NSURLRequest requestWithURL:url 
+                            cachePolicy:NSURLRequestUseProtocolCachePolicy 
+                        timeoutInterval:30.0];
+}
+
+
+#pragma mark -
+#pragma mark WebViewDelegate
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    return YES;
+}
+
 
 #pragma mark -
 #pragma mark Getters

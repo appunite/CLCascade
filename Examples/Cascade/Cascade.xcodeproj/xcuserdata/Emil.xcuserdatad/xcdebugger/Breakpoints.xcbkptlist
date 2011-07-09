@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeView.m"
-         timestampString = "331857090.952199"
+         timestampString = "331858265.493668"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "550"
-         endingLineNumber = "550"
+         startingLineNumber = "517"
+         endingLineNumber = "517"
          landmarkName = "-calculateEdgeInset:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeView.m"
-         timestampString = "331857090.952199"
+         timestampString = "331858265.493668"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "542"
-         endingLineNumber = "542"
+         startingLineNumber = "509"
+         endingLineNumber = "509"
          landmarkName = "-calculateEdgeInset:"
          landmarkType = "5">
       </FileBreakpoint>

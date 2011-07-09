@@ -167,7 +167,7 @@
     // send message to delegate
     [self didAddPage:newPage animated:animated];
     // scroll to new page frame
-    [_scrollView setContentOffset:CGPointMake(CGRectGetMaxX(fromPage.frame) - _scrollView.contentInset.left, 0.0f) animated:animated];
+    //[_scrollView setContentOffset:CGPointMake(CGRectGetMaxX(fromPage.frame) - _scrollView.contentInset.left, 0.0f) animated:animated];
 }
 
 
@@ -627,7 +627,7 @@
     
     CGFloat realContentOffsetX = _scrollView.contentOffset.x + _scrollView.contentInset.left;
     
-    if (!_flags.isDetachPages) {
+    if ((_pullToDetachPages) && (!_flags.isDetachPages)) {
         if ((!_flags.willDetachPages) && (realContentOffsetX < - _scrollView.frame.size.width * PULL_TO_DETACH_FACTOR)) {
             [self didStartPullingToDetachPages];
         }
@@ -684,6 +684,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!_pullToDetachPages) return;
+    
     CGFloat realContentOffsetX = _scrollView.contentOffset.x + _scrollView.contentInset.left;
 
     if ((_flags.willDetachPages) && (realContentOffsetX < - _scrollView.frame.size.width * PULL_TO_DETACH_FACTOR)) {
