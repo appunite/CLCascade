@@ -10,6 +10,14 @@
 
 @implementation CLCategoriesViewController
 
+- (id) initWithNavigationController:(CLCascadeNavigationController*)viewController {
+    self = [super init];
+    if (self) {
+        self.cascadeNavigationController = viewController;
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -47,6 +55,7 @@
         
         if(path) {
             self.view = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex: 0];
+            [self.view setBackgroundColor: [UIColor clearColor]];
             return;
         }
     }
@@ -54,6 +63,17 @@
     CLCategoriesView* view_ = [[CLCategoriesView alloc] init]; 
     self.view = view_;
     [view_ release];
+    
+    UITableView* tableView_ = [[UITableView alloc] initWithFrame:CGRectZero style:_tableViewStyle];
+    [tableView_ setDelegate: self];
+    [tableView_ setDataSource: self];
+    [self setTableView: tableView_];
+    [tableView_ release];
+    
+    // set clear background color
+    [view_ setBackgroundColor: [UIColor clearColor]];
+    
+
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

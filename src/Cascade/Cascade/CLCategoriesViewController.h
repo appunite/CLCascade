@@ -15,5 +15,6 @@
 
 }
 
+- (id) initWithNavigationController:(CLCascadeNavigationController*)viewController;
 
 @end

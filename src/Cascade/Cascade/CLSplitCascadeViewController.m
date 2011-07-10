@@ -108,4 +108,28 @@
     
 }
 
+
+#pragma mark -
+#pragma mark Setters 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setCategoriesViewController:(CLCategoriesViewController *)viewController {
+    if (viewController != _categoriesViewController) {
+        [_categoriesViewController release];
+        _categoriesViewController = [viewController retain];
+        [(CLSplitCascadeView*)self.view setCategoriesView: viewController.view];
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setCascadeNavigationController:(CLCascadeNavigationController *)viewController {
+    if (viewController != _cascadeNavigationController) {
+        [_cascadeNavigationController release];
+        _cascadeNavigationController = [viewController retain];
+        [(CLSplitCascadeView*)self.view setCascadeView: viewController.view];
+    }
+}
+
+
 @end
