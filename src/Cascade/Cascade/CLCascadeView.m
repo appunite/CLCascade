@@ -84,7 +84,8 @@
         self.widerLeftInset = DEFAULT_WIDER_LEFT_INSET;
         self.pullToDetachPages = YES;
         
-        _scrollView = [[UIScrollView alloc] init];
+        CGRect rect = CGRectMake(_leftInset, 0.0f, _pageWidth, frame.size.height);
+        _scrollView = [[UIScrollView alloc] initWithFrame: rect];
         [_scrollView setDelegate: self];
         [_scrollView setDecelerationRate: UIScrollViewDecelerationRateFast];
         [_scrollView setScrollsToTop: NO];
@@ -97,9 +98,8 @@
         
         [_scrollView setDelaysContentTouches:NO];
         [_scrollView setMultipleTouchEnabled:NO];
-        //        [_scrollView setShowsVerticalScrollIndicator: NO];
-        //        [_scrollView setShowsHorizontalScrollIndicator: NO];
-          [_scrollView setBackgroundColor:[UIColor redColor]];
+        [_scrollView setShowsVerticalScrollIndicator: NO];
+        [_scrollView setShowsHorizontalScrollIndicator: NO];
         
         [_scrollView setAutoresizingMask:
          //         UIViewAutoresizingFlexibleLeftMargin | 
@@ -525,6 +525,15 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setProperEdgeInset:(BOOL)animated {
+    // get current interface orientation
+    UIInterfaceOrientation interfaceOrienation = [[UIApplication sharedApplication] statusBarOrientation];
+    // set proper edge inset for orientation
+    [self setProperEdgeInset:animated forInterfaceOrientation:interfaceOrienation];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setProperEdgeInset:(BOOL)animated forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // check if animated, change content inset
     if (animated) {
@@ -553,15 +562,6 @@
     
     // return edge inset
     return UIEdgeInsetsMake(0.0f, leftInset, 0.0f, rightInset);
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setProperEdgeInset:(BOOL)animated {
-    // get current interface orientation
-    UIInterfaceOrientation interfaceOrienation = [[UIApplication sharedApplication] statusBarOrientation];
-    // set proper edge inset for orientation
-    [self setProperEdgeInset:animated forInterfaceOrientation:interfaceOrienation];
 }
 
 

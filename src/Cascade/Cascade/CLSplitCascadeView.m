@@ -94,8 +94,6 @@
 {
     [_cascadeView release], _cascadeView = nil;
     [_categoriesView release], _categoriesView = nil;
-    [_splitCascadeViewController release], _splitCascadeViewController = nil;
-    [_cascadeNavigationController release], _cascadeNavigationController = nil;
     [_backgroundView release], _backgroundView = nil;
     [_verticalDividerImage release], _verticalDividerImage = nil;
     [_dividerView release], _dividerView = nil;
@@ -146,6 +144,7 @@
 
     CGRect dividerViewFrame = CGRectMake(0.0, 0.0, _dividerWidth, bounds.size.height);
     _dividerView.frame = dividerViewFrame;
+
 }
 
 
@@ -159,6 +158,7 @@
         _categoriesView = [aView retain];
         
         [self addSubview: _categoriesView];
+        [self bringSubviewToFront: _cascadeView];
     }
 }
 
@@ -168,8 +168,9 @@
     if (_cascadeView != aView) {
         [_cascadeView release];
         _cascadeView = [aView retain];
-        
+                
         [self addSubview: _cascadeView];
+        [self bringSubviewToFront: _cascadeView];
     }
 }
 
