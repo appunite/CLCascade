@@ -126,22 +126,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		20161E89139A164F001DFBCE /* Example classes */ = {
-			isa = PBXGroup;
-			children = (
-				201A2D26139931B900EFAE15 /* ExampleCategoriesViewController.h */,
-				201A2D27139931B900EFAE15 /* ExampleCategoriesViewController.m */,
-				209E09A013C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib */,
-				201A2D351399348300EFAE15 /* ExampleTableViewController.h */,
-				201A2D361399348300EFAE15 /* ExampleTableViewController.m */,
-				209E098E13C8F95300BCFFD0 /* ExampleWebViewController.h */,
-				209E098F13C8F95300BCFFD0 /* ExampleWebViewController.m */,
-				201A2D8E1399522900EFAE15 /* ExampleSplitCascadeViewController.h */,
-				201A2D8F1399522900EFAE15 /* ExampleSplitCascadeViewController.m */,
-			);
-			name = "Example classes";
-			sourceTree = "<group>";
-		};
 		201A2D0D13992EF800EFAE15 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,9 +178,15 @@
 		207EA49913992C0400A8200F /* Cascade */ = {
 			isa = PBXGroup;
 			children = (
-				201A2D0A13992DCD00EFAE15 /* CLSplitCascadeViewController.xib */,
-				207EA4A513992C0400A8200F /* MainWindow.xib */,
-				20161E89139A164F001DFBCE /* Example classes */,
+				201A2D26139931B900EFAE15 /* ExampleCategoriesViewController.h */,
+				201A2D27139931B900EFAE15 /* ExampleCategoriesViewController.m */,
+				209E09A013C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib */,
+				201A2D351399348300EFAE15 /* ExampleTableViewController.h */,
+				201A2D361399348300EFAE15 /* ExampleTableViewController.m */,
+				209E098E13C8F95300BCFFD0 /* ExampleWebViewController.h */,
+				209E098F13C8F95300BCFFD0 /* ExampleWebViewController.m */,
+				201A2D8E1399522900EFAE15 /* ExampleSplitCascadeViewController.h */,
+				201A2D8F1399522900EFAE15 /* ExampleSplitCascadeViewController.m */,
 				207EA49A13992C0400A8200F /* Supporting Files */,
 			);
 			path = Cascade;
@@ -205,6 +195,8 @@
 		207EA49A13992C0400A8200F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				201A2D0A13992DCD00EFAE15 /* CLSplitCascadeViewController.xib */,
+				207EA4A513992C0400A8200F /* MainWindow.xib */,
 				207EA4A213992C0400A8200F /* CascadeAppDelegate.h */,
 				207EA4A313992C0400A8200F /* CascadeAppDelegate.m */,
 				201A2D0613992DB900EFAE15 /* InfoPlist.strings */,
