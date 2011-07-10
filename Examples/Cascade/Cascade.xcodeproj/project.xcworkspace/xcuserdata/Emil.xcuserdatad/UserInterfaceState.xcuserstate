@@ -754,7 +754,7 @@
 			</dict>
 		</dict>
 		<string>file://localhost/Users/Emil/Documents/Projects/Cascade/Examples/Cascade/Cascade.xcodeproj/</string>
-		<real>332026016.17956197</real>
+		<real>332026086.06181699</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2275,10 +2275,10 @@
 			</array>
 		</dict>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>PrimaryDocumentTimestamp</string>
-		<string>{0, 712}</string>
-		<real>332026016.17978698</real>
+		<string>PrimaryDocumentVisibleCharacterRange</string>
+		<real>332026086.06204897</real>
+		<string>{14594, 693}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2293,11 +2293,11 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>185</integer>
+					<integer>186</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>186</integer>
+					<integer>185</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
@@ -5122,7 +5122,7 @@
 				<integer>431</integer>
 			</dict>
 		</dict>
-		<real>332026016.18188202</real>
+		<real>332026086.06428099</real>
 		<dict>
 			<key>$class</key>
 			<dict>
