@@ -184,15 +184,15 @@
         // scroll to new page frame
         if (!_flags.hasWiderPage) {
             if (UIInterfaceOrientationIsPortrait(interfaceOrienation)) {
-                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _scrollView.contentInset.left, 0.0f) animated:animated];
+                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _leftInset, 0.0f) animated:animated];
             } else {
                 [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _pageWidth, 0.0f) animated:animated];
             }
         } else {
             if (UIInterfaceOrientationIsPortrait(interfaceOrienation)) {
-                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _scrollView.contentInset.left, 0.0f) animated:animated];
+                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _widerLeftInset + _leftInset, 0.0f) animated:animated];
             } else {
-                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _pageWidth + ([self widerPageWidth]), 0.0f) animated:animated];
+                [_scrollView setContentOffset:CGPointMake(index * _pageWidth + _pageWidth  - ([self widerPageWidth]) - _leftInset + _widerLeftInset, 0.0f) animated:animated];
             }
         }
     }
