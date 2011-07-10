@@ -20,6 +20,7 @@
 @synthesize contentView = _contentView;
 @synthesize shadow = _shadow;
 @synthesize shadowWidth = _shadowWidth;
+@synthesize viewSize = _viewSize;
 
 #pragma mark - Init & dealloc
 
@@ -28,10 +29,21 @@
 {
     self = [super init];
     if (self) {
-
+        _viewSize = CLViewSizeNormal;
     }
     return self;
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithSize:(CLViewSize)size {
+    self = [super init];
+    if (self) {
+        _viewSize = size;
+    }
+    return self;
+}
+
 
 #pragma mark -
 #pragma mark Setters

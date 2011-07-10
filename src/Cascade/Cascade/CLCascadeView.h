@@ -11,58 +11,52 @@
 @protocol CLCascadeViewDataSource;
 @protocol CLCascadeViewDelegate;
 
-typedef enum {
-    CLDraggingDirectionRight    = -1,
-    CLDraggingDirectionUnknow   =  0,
-    CLDraggingDirectionLeft     =  1
-} CLDraggingDirection;
-
-@interface CLCascadeView : UIView {
+@interface CLCascadeView : UIView <UIScrollViewDelegate> {
+    // delegate and dataSource
     id<CLCascadeViewDelegate> _delegate;
     id<CLCascadeViewDataSource> _dataSource;
 
+    // scroll view
+    UIScrollView* _scrollView;
+    
+    // contain all pages, if page is unloaded then page is respresented as [NSNull null]
     NSMutableArray* _pages;
     
-    // you need call visiblePages to refresh this ivar
-    NSMutableArray* _visiblePages;
-    
-    //
+    //sizes
     CGFloat _pageWidth;
-    CGFloat _offset;
-    
-    // dragging
-    CGPoint _startTouchPoint;
-    CGPoint _newTouchPoint;
-    CGPoint _lastTouchPoint;
-    
-    UIView* _touchedPage;
-    
-    CLDraggingDirection _direction;
-    
+    CGFloat _leftInset;
+    CGFloat _widerLeftInset;
+
+    BOOL _pullToDetachPages;
+
+@private
     struct {
-        unsigned int dragging:1;
-        unsigned int decelerating:1;
-    } _cascadeViewFlags;
-    
+        unsigned int willDetachPages:1;
+        unsigned int isDetachPages:1;
+        unsigned int hasWiderPage:1;
+    } _flags;
+
 }
 
 @property(nonatomic, assign) id<CLCascadeViewDelegate> delegate;
 @property(nonatomic, assign) id<CLCascadeViewDataSource> dataSource;
 
-@property(nonatomic,readonly,getter=isDragging) BOOL dragging;    
-@property(nonatomic,readonly,getter=isDecelerating) BOOL decelerating;
-
+/*
+ * Left inset of normal page from left boarder. Default 58.0f
+ * If you change this property, width of page will change
+ */
+@property(nonatomic) CGFloat leftInset;
 
 /*
- * Offset of pages from left boarder. Default 66.0f
+ * Left inset of wider page from left boarder. Default 220.0f
  */
-@property(nonatomic) CGFloat offset;
+@property(nonatomic) CGFloat widerLeftInset;
 
 /*
- * You can change page width, default (1024.0 - offset) / 2.0, so
- * in landscape mode two pages fit properly
+ * If YES, then pull to detach pages is enabled, default YES
  */
-@property(nonatomic, readonly) CGFloat pageWidth;
+@property(nonatomic, assign) BOOL pullToDetachPages;
+
 
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated;
 
@@ -71,12 +65,16 @@ typedef enum {
 
 - (UIView*) loadPageAtIndex:(NSInteger)index;
 
+// unload page if is loaded (replabe by)
 - (void) unloadPageIfNeeded:(NSInteger)index;
+// unload page, by remove from superView and replace by [NSNull null]
 - (void) unloadPage:(UIView*)page;
+// unload pages which are not visible
 - (void) unloadInvisiblePages;
 
-- (BOOL) isOnStack:(UIView*)view;
+- (NSInteger) indexOfFirstVisibleView:(BOOL)loadIfNeeded;
 
+- (void) updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration;
 @end
 
 @protocol CLCascadeViewDataSource <NSObject>
@@ -101,5 +99,11 @@ typedef enum {
  * Called when page will be shadowed by another page or will slide out CascadeView bounds
  */
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index;
+
+/*
+ */
+- (void) cascadeViewDidStartPullingToDetachPages:(CLCascadeView*)cascadeView;
+- (void) cascadeViewDidPullToDetachPages:(CLCascadeView*)cascadeView;
+- (void) cascadeViewDidCancelPullToDetachPages:(CLCascadeView*)cascadeView;
 
 @end

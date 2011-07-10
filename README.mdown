@@ -26,7 +26,6 @@ development of the project, this is what we want to do in near future:
 
  * build a framework on top of CLCascade
  * some bugfixes that we found during testing the CLCascade
- * code some sample projects
  * write documentation
 
 Authors

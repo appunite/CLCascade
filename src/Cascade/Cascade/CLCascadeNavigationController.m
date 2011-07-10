@@ -15,7 +15,7 @@
 @implementation CLCascadeNavigationController
 
 @synthesize viewControllers = _viewControllers;
-@synthesize offset;
+@synthesize leftInset, widerLeftInset;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -71,8 +71,12 @@
 	return YES;
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
+    [_cascadeView updateContentLayoutToInterfaceOrientation:interfaceOrientation duration:duration];
+}
+
 #pragma mark -
-#pragma mark Setters
+#pragma mark Setters & getters
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSMutableArray*) viewControllers {
@@ -83,23 +87,27 @@
     return _viewControllers;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CGFloat) pageWidth {
-    return _cascadeView.pageWidth;
+- (CGFloat) widerLeftInset {
+    return _cascadeView.widerLeftInset;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CGFloat) offset {
-    return _cascadeView.offset;
+- (void) setWiderLeftInset:(CGFloat)inset {
+    [_cascadeView setWiderLeftInset: inset];    
 }
-
-#pragma mark -
-#pragma mark Setters
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setOffset:(CGFloat)newOffset {
-    [_cascadeView setOffset: newOffset];
+- (CGFloat) leftInset {
+    return _cascadeView.leftInset;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setLeftInset:(CGFloat)inset {
+    [_cascadeView setLeftInset: inset];
+}
+
 
 #pragma mark -
 #pragma marl test
@@ -112,6 +120,7 @@
     return nil;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIViewController*) lastCascadeViewController {
     if ([_viewControllers count] > 0) {
@@ -122,6 +131,7 @@
     return nil;
 }
 
+
 #pragma mark -
 #pragma marl CLCascadeViewDataSource
 
@@ -130,10 +140,12 @@
     return [[_viewControllers objectAtIndex:index] view];    
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger) numberOfPagesInCascadeView:(CLCascadeView*)cascadeView {
     return [_viewControllers count];
 }
+
 
 #pragma mark -
 #pragma marl CLCascadeViewDelegate
@@ -143,20 +155,24 @@
 
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didUnloadPage:(UIView*)page {
 
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didAddPage:(UIView*)page animated:(BOOL)animated {
-//    NSLog(@"didAddPage: %@", page);
+
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didPopPageAtIndex:(NSInteger)index {
 
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index {
@@ -165,6 +181,7 @@
         [controller pageDidAppear];
     }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index {
@@ -176,6 +193,23 @@
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) cascadeViewDidStartPullingToDetachPages:(CLCascadeView*)cascadeView {
+    NSLog(@"cascadeViewDidStartPullingToDetachPages");
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) cascadeViewDidPullToDetachPages:(CLCascadeView*)cascadeView {
+    NSLog(@"cascadeViewDidPullToDetachPages");
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) cascadeViewDidCancelPullToDetachPages:(CLCascadeView*)cascadeView {
+    NSLog(@"cascadeViewDidCancelPullToDetachPages");
+}
 
 #pragma mark -
 #pragma mark Calss methods
@@ -189,7 +223,6 @@
     // add root view controller
     [self addViewController:viewController sender:nil animated:animated];
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated {
@@ -239,11 +272,17 @@
                   animated:animated];
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL) isOnStack:(UIViewController*)viewController {
-    UIView* view = [viewController view];
-    return [_cascadeView isOnStack: view];
+- (UIViewController*) firstVisibleViewController {
+    NSInteger index = [_cascadeView indexOfFirstVisibleView: YES];
+
+    if (index != NSNotFound) {
+        return [_viewControllers objectAtIndex: index];
+    }
+    
+    return nil;
 }
 
+
 @end
+

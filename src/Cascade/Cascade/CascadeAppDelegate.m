@@ -9,6 +9,9 @@
 #import "CascadeAppDelegate.h"
 #import "CLSplitCascadeViewController.h"
 
+#import "CLCategoriesViewController.h"
+#import "CLCascadeNavigationController.h"
+
 @implementation CascadeAppDelegate
 
 @synthesize window = _window;
@@ -16,6 +19,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    CLCascadeNavigationController* cascadeNavigationController = [[CLCascadeNavigationController alloc] init];
+    CLCategoriesViewController* categoriesViewController = [[CLCategoriesViewController alloc] initWithNavigationController: cascadeNavigationController];
+    
+    [self.viewController setCascadeNavigationController: cascadeNavigationController];
+    [self.viewController setCategoriesViewController: categoriesViewController];
+    
+    [categoriesViewController release];
+    [cascadeNavigationController release];
+    
     // Override point for customization after application launch.
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];

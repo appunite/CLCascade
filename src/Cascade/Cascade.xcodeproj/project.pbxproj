@@ -16,6 +16,8 @@
 		206ECD60137589DB00B8405F /* CLCategoriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD5F137589DB00B8405F /* CLCategoriesView.m */; };
 		208B99061393EF0F0042165A /* CLViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B99051393EF0F0042165A /* CLViewControllerDelegate.h */; };
 		20B0D97A1356518E008B1F7D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B0D9791356518E008B1F7D /* QuartzCore.framework */; };
+		20BA828C13C6D8A900CBFCD3 /* CLWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 20BA828A13C6D8A900CBFCD3 /* CLWebViewController.h */; };
+		20BA828D13C6D8A900CBFCD3 /* CLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BA828B13C6D8A900CBFCD3 /* CLWebViewController.m */; };
 		20BB341E133FB8FF003EEB6E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20BB341D133FB8FF003EEB6E /* UIKit.framework */; };
 		20BB3420133FB8FF003EEB6E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20BB341F133FB8FF003EEB6E /* Foundation.framework */; };
 		20BB3422133FB8FF003EEB6E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20BB3421133FB8FF003EEB6E /* CoreGraphics.framework */; };
@@ -73,6 +75,8 @@
 		206ECD611375973C00B8405F /* CLCascadeEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCascadeEnums.h; sourceTree = "<group>"; };
 		208B99051393EF0F0042165A /* CLViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewControllerDelegate.h; sourceTree = "<group>"; };
 		20B0D9791356518E008B1F7D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		20BA828A13C6D8A900CBFCD3 /* CLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebViewController.h; sourceTree = "<group>"; };
+		20BA828B13C6D8A900CBFCD3 /* CLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebViewController.m; sourceTree = "<group>"; };
 		20BB3419133FB8FF003EEB6E /* Cascade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cascade.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20BB341D133FB8FF003EEB6E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		20BB341F133FB8FF003EEB6E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -166,11 +170,13 @@
 		205A69BA136375AB00F6544D /* CLCustomViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				208B99051393EF0F0042165A /* CLViewControllerDelegate.h */,
 				20BB3445133FBAA4003EEB6E /* CLViewController.h */,
 				20BB3446133FBAA4003EEB6E /* CLViewController.m */,
-				208B99051393EF0F0042165A /* CLViewControllerDelegate.h */,
 				20BB3448133FBAA4003EEB6E /* CLTableViewController.h */,
 				20BB3449133FBAA4003EEB6E /* CLTableViewController.m */,
+				20BA828A13C6D8A900CBFCD3 /* CLWebViewController.h */,
+				20BA828B13C6D8A900CBFCD3 /* CLWebViewController.m */,
 			);
 			name = CLCustomViewControllers;
 			sourceTree = "<group>";
@@ -319,6 +325,7 @@
 			files = (
 				20015596138F824E00FA91B2 /* CLCascadeView.h in Headers */,
 				208B99061393EF0F0042165A /* CLViewControllerDelegate.h in Headers */,
+				20BA828C13C6D8A900CBFCD3 /* CLWebViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +482,7 @@
 				4C17F11413799A27003A11F9 /* CLSegmentedView.m in Sources */,
 				4C17F11513799A27003A11F9 /* UIViewController+CLSegmentedView.m in Sources */,
 				20015597138F824E00FA91B2 /* CLCascadeView.m in Sources */,
+				20BA828D13C6D8A900CBFCD3 /* CLWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

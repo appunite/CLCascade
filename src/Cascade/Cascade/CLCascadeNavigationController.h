@@ -11,6 +11,7 @@
 #import "CLViewController.h"
 #import "CLCascadeView.h"
 #import "CLViewControllerDelegate.h"
+#import "CLCascadeEnums.h"
 
 @interface CLCascadeNavigationController : UIViewController <CLCascadeViewDataSource, CLCascadeViewDelegate> {
     // array of all view controllers
@@ -26,35 +27,40 @@
 @property (nonatomic, retain, readonly) NSMutableArray* viewControllers;
 
 /*
- * Offset of pages from left boarder. Default 66.0f
+ * Left inset of normal size pages from left boarder
  */
-@property(nonatomic) CGFloat offset;
+@property(nonatomic) CGFloat leftInset;
+
+/*
+ * Left inset of wider size page from left boarder. Default 220.0f
+ */
+@property(nonatomic) CGFloat widerLeftInset;
 
 /*
  * Set and push root view controller
  */
 - (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated;
 
-
 /*
  * Push new view controller from sender.
  * If sender is not last, then controller pop next controller and push new view from sender
  */
-
 - (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated;
-
 
 /* 
  First in hierarchy CascadeViewController (opposite to lastCascadeViewController)
  */
 - (UIViewController*) rootViewController;
 
-
 /* 
  Last in hierarchy CascadeViewController (opposite to rootViewController)
  */
 - (UIViewController*)  lastCascadeViewController;
 
-- (BOOL) isOnStack:(UIViewController*)viewController;
+/* 
+ Return first visible view controller (load if needed)
+ */
+- (UIViewController*) firstVisibleViewController;
+
 
 @end

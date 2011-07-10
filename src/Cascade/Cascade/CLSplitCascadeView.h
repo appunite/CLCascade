@@ -15,11 +15,7 @@
     // views
     UIView* _categoriesView;
     UIView* _cascadeView;
- 
-    //controllers
-    CLCascadeNavigationController* _cascadeNavigationController;
-    CLSplitCascadeViewController* _splitCascadeViewController;
-    
+     
     // background
     UIView*     _backgroundView;
 

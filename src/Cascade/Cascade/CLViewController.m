@@ -14,6 +14,45 @@
 @implementation CLViewController
 
 @synthesize cascadeNavigationController = _cascadeNavigationController;
+@synthesize viewSize = _viewSize;
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) init {
+    self = [super init];
+    if (self) {
+        _viewSize = CLViewSizeNormal;
+    }
+    return self;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _viewSize = CLViewSizeNormal;
+    }
+    return self;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithSize:(CLViewSize)size {
+    self = [super init];
+    if (self) {
+        _viewSize = size;
+    }
+    return self;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil size:(CLViewSize)size {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _viewSize = size;
+    }
+    return self;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
@@ -51,9 +90,17 @@
         }
     }
     
-    CLSegmentedView* view_ = [[CLSegmentedView alloc] init];
+    CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: _viewSize];
     self.view = view_;
     [view_ release];
+    
+    [view_ setAutoresizingMask:
+     UIViewAutoresizingFlexibleLeftMargin | 
+     UIViewAutoresizingFlexibleRightMargin | 
+     UIViewAutoresizingFlexibleBottomMargin | 
+     UIViewAutoresizingFlexibleTopMargin |
+     UIViewAutoresizingFlexibleWidth | 
+     UIViewAutoresizingFlexibleHeight];
 }
 
 
@@ -81,9 +128,9 @@
 	return YES;
 }
 
+
 #pragma mark -
 #pragma mark Class methods
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha animated:(BOOL)animated {
@@ -145,13 +192,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated {
+    NSAssert(_viewSize != CLViewSizeWider, @"assert: %@ <%p>", NSStringFromClass([self class]), self);
     [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (BOOL) isOnStack {
-    return [_cascadeNavigationController isOnStack: self];
-}
 
 #pragma mark CLViewControllerDelegate
 
@@ -175,13 +219,6 @@
      */
 
     [self hideShadow: NO];
-//    if ([self isOnStack]) {
-//        UIViewController* parentViewController = [self parentViewController];
-//        
-//        if ([parentViewController isKindOfClass:[CLViewController class]]) {
-//            [(CLViewController*)parentViewController hideShadow: NO];
-//        }
-//    }
 }
 
 @end

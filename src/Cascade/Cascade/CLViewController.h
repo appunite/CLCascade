@@ -12,6 +12,7 @@
 #import "CLSegmentedView.h"
 #import "UIViewController+CLSegmentedView.h"
 #import "CLViewControllerDelegate.h"
+#import "CLCascadeEnums.h"
 
 @class CLCascadeNavigationController;
 
@@ -19,9 +20,15 @@
     CLCascadeNavigationController* _cascadeNavigationController;
 
     CAGradientLayer* _originShadow;
+    
+    CLViewSize _viewSize;
 }
 
+- (id) initWithSize:(CLViewSize)size;
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil size:(CLViewSize)size;
+
 @property (nonatomic, retain) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
+@property (nonatomic, assign, readonly) CLViewSize viewSize;
 
 // method used to push (animated) new UIViewController on Cascade stack
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated;
@@ -31,7 +38,5 @@
 - (void) showShadow:(BOOL)animated;
 - (void) hideShadow:(BOOL)animated;
 
-//
-- (BOOL) isOnStack;
 
 @end

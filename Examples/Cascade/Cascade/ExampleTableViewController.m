@@ -7,7 +7,7 @@
 //
 
 #import "ExampleTableViewController.h"
-
+#import "ExampleWebViewController.h"
 
 @implementation ExampleTableViewController
 
@@ -37,7 +37,6 @@
 
     // add shadow
     [self setOuterLeftShadow:[UIColor colorWithRed:0.208 green:0.165 blue:0.118 alpha:1.0] width:40.0 alpha:0.35 animated:YES];
-    
     
     // add header view
     UIImageView* header = [[UIImageView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.bounds.size.width, 45.0)];
@@ -93,7 +92,12 @@
     }
     
     // Configure the cell...
-    cell.textLabel.text = @"text";
+
+    if (indexPath.row%2 == 0) {
+        cell.textLabel.text = @"New Table View";
+    } else {
+        cell.textLabel.text = @"New Web View";
+    }    
     return cell;
 }
 
@@ -103,7 +107,14 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ExampleTableViewController* viewController = [[ExampleTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
+    CLViewController* viewController = nil;
+    
+    if (indexPath.row%2 == 0) {
+        viewController = [[ExampleTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
+    } else {
+        viewController = [[ExampleWebViewController alloc] init];
+    } 
+    
     [self pushDetailViewController:viewController animated:YES];
     [viewController release];
 }

@@ -14,20 +14,33 @@
 @dynamic tableView;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (id) initWithTableViewStyle:(UITableViewStyle)style
-{
+- (id) initWithTableViewStyle:(UITableViewStyle)style {
     self = [super init];
+    if (self) {
+        _viewSize = CLViewSizeNormal;
+        _tableViewStyle = style;
+    }
+    return self;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithTableViewStyle:(UITableViewStyle)style size:(CLViewSize)size;
+{
+    self = [super initWithSize: size];
     if (self) {
         _tableViewStyle = style;
     }
     return self;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
     [super dealloc];
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)didReceiveMemoryWarning
@@ -38,6 +51,8 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+
+#pragma mark 
 #pragma mark - View lifecycle
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,7 +72,7 @@
     }
     
     // create SegmentedView
-    CLSegmentedView* view_ = [[CLSegmentedView alloc] init];
+    CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: _viewSize];
     self.view = view_;
     [view_ release];
     
@@ -71,6 +86,7 @@
     [view_ setBackgroundColor: [UIColor clearColor]];
 
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)viewDidLoad
@@ -96,7 +112,8 @@
 }
 
 
-#pragma mark - Table view data source
+#pragma mark - 
+#pragma mark Table view data source
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -130,6 +147,7 @@
 }
 
 
+#pragma mark -
 #pragma mark - Table view delegate
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -146,6 +164,8 @@
     return (UITableView*)[self.segmentedView contentView];
 }
 
+#pragma mark -
+#pragma mark Setters
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setTableView:(UITableView *)newTableView {

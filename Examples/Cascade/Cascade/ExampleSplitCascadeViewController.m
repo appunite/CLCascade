@@ -1,5 +1,5 @@
 //
-//  ExampleSplitCascadeViewController.m
+//  
 //  Cascade
 //
 //  Created by Emil Wojtaszek on 11-06-03.
@@ -27,6 +27,14 @@
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+	return YES;
+}
+
+
 #pragma mark - View lifecycle
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,8 +51,10 @@
     UIImage* divider = [UIImage imageNamed:@"divider_vertical.png"];
     [self setDividerImage: divider];
     
-    // change offset
-    [self.cascadeNavigationController setOffset: 58.0f];
+    // change offsets
+    [self.cascadeNavigationController setLeftInset: 58.0f];
+    [self.cascadeNavigationController setWiderLeftInset: 210.0f];
 }
+
 
 @end

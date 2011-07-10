@@ -87,6 +87,11 @@
     return YES;
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
+    if ([_cascadeNavigationController respondsToSelector:@selector(willAnimateRotationToInterfaceOrientation:duration:)]) {
+        [_cascadeNavigationController willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:duration];
+    }
+}
 
 #pragma mark -
 #pragma mark Class methods
@@ -102,5 +107,29 @@
     [(CLSplitCascadeView*)self.view setVerticalDividerImage: image];
     
 }
+
+
+#pragma mark -
+#pragma mark Setters 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setCategoriesViewController:(CLCategoriesViewController *)viewController {
+    if (viewController != _categoriesViewController) {
+        [_categoriesViewController release];
+        _categoriesViewController = [viewController retain];
+        [(CLSplitCascadeView*)self.view setCategoriesView: viewController.view];
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setCascadeNavigationController:(CLCascadeNavigationController *)viewController {
+    if (viewController != _cascadeNavigationController) {
+        [_cascadeNavigationController release];
+        _cascadeNavigationController = [viewController retain];
+        [(CLSplitCascadeView*)self.view setCascadeView: viewController.view];
+    }
+}
+
 
 @end
