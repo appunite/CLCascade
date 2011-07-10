@@ -25,7 +25,7 @@
     //sizes
     CGFloat _leftInset;
     CGFloat _pageWidth;
-    CGFloat _widerPageWidth;
+    CGFloat _widerLeftInset;
 
     BOOL _pullToDetachPages;
 
@@ -33,6 +33,7 @@
     struct {
         unsigned int willDetachPages:1;
         unsigned int isDetachPages:1;
+        unsigned int hasWiderPage:1;
     } _flags;
 
 }
@@ -41,9 +42,14 @@
 @property(nonatomic, assign) id<CLCascadeViewDataSource> dataSource;
 
 /*
- * Left inset of pages from left boarder. Default 58.0f
+ * Left inset of normal page from left boarder. Default 58.0f
  */
 @property(nonatomic) CGFloat leftInset;
+
+/*
+ * Left inset of wider page from left boarder. Default 80.0f
+ */
+@property(nonatomic) CGFloat widerLeftInset;
 
 /*
  * You can change page width, default (1024.0 - leftInset) / 2.0, so
@@ -51,7 +57,7 @@
  */
 @property(nonatomic, readonly) CGFloat pageWidth;
 
-@property(nonatomic, assign) CGFloat widerPageWidth;
+//@property(nonatomic, readonly) CGFloat widerPageWidth;
 @property(nonatomic, assign) BOOL pullToDetachPages;
 
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated;
