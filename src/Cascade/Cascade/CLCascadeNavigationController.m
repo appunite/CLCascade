@@ -15,7 +15,7 @@
 @implementation CLCascadeNavigationController
 
 @synthesize viewControllers = _viewControllers;
-@synthesize leftInset;
+@synthesize leftInset, widerLeftInset;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,7 +76,7 @@
 }
 
 #pragma mark -
-#pragma mark Setters
+#pragma mark Setters & getters
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSMutableArray*) viewControllers {
@@ -89,23 +89,23 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CGFloat) pageWidth {
-    return _cascadeView.pageWidth;
+- (CGFloat) widerLeftInset {
+    return _cascadeView.widerLeftInset;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setWiderLeftInset:(CGFloat)inset {
+    [_cascadeView setWiderLeftInset: inset];    
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGFloat) leftInset {
     return _cascadeView.leftInset;
 }
 
-
-#pragma mark -
-#pragma mark Setters
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setLeftInset:(CGFloat)newLeftInset {
-    [_cascadeView setLeftInset: newLeftInset];
+- (void) setLeftInset:(CGFloat)inset {
+    [_cascadeView setLeftInset: inset];
 }
 
 

@@ -23,8 +23,8 @@
     NSMutableArray* _pages;
     
     //sizes
-    CGFloat _leftInset;
     CGFloat _pageWidth;
+    CGFloat _leftInset;
     CGFloat _widerLeftInset;
 
     BOOL _pullToDetachPages;
@@ -43,22 +43,20 @@
 
 /*
  * Left inset of normal page from left boarder. Default 58.0f
+ * If you change this property, width of page will change
  */
 @property(nonatomic) CGFloat leftInset;
 
 /*
- * Left inset of wider page from left boarder. Default 80.0f
+ * Left inset of wider page from left boarder. Default 220.0f
  */
 @property(nonatomic) CGFloat widerLeftInset;
 
 /*
- * You can change page width, default (1024.0 - leftInset) / 2.0, so
- * in landscape mode two pages fit properly
+ * If YES, then pull to detach pages is enabled, default YES
  */
-@property(nonatomic, readonly) CGFloat pageWidth;
-
-//@property(nonatomic, readonly) CGFloat widerPageWidth;
 @property(nonatomic, assign) BOOL pullToDetachPages;
+
 
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated;
 

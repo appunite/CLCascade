@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeView.m"
-         timestampString = "332002770.868977"
+         timestampString = "332016696.008747"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "631"
-         endingLineNumber = "631"
+         startingLineNumber = "642"
+         endingLineNumber = "642"
          landmarkName = "-calculatePageSize:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeView.m"
-         timestampString = "332002770.868977"
+         timestampString = "332016696.008747"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "359"
-         endingLineNumber = "359"
+         startingLineNumber = "370"
+         endingLineNumber = "370"
          landmarkName = "-updateContentLayoutToInterfaceOrientation:duration:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -37,26 +37,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeView.m"
-         timestampString = "332002770.868977"
+         timestampString = "332016696.008747"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "520"
-         endingLineNumber = "520"
+         startingLineNumber = "531"
+         endingLineNumber = "531"
          landmarkName = "-calculateContentSize:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
-         filePath = "/Users/Emil/Documents/Projects/CLCascade/src/Cascade/Cascade/CLCascadeView.m"
-         timestampString = "332002770.868977"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
-         landmarkName = "-hitTest:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -9,6 +9,18 @@
 #import "CLCascadeView.h"
 #import "CLSegmentedView.h"
 
+@interface CLCascadeView (DelegateMethods)
+- (void) didLoadPage:(UIView*)page;
+- (void) didAddPage:(UIView*)page animated:(BOOL)animated;
+- (void) didPopPageAtIndex:(NSInteger)index;
+- (void) didUnloadPage:(UIView*)page;
+- (void) pageDidAppearAtIndex:(NSInteger)index;
+- (void) pageDidDisappearAtIndex:(NSInteger)index;
+- (void) didStartPullingToDetachPages;
+- (void) didPullToDetachPages;
+- (void) didCancelPullToDetachPages;
+@end
+
 @interface CLCascadeView (Private)
 - (NSArray*) visiblePages;
 - (NSArray*) pagesOnStock;
@@ -32,29 +44,17 @@
 - (void) unloadPage:(UIView*)page remove:(BOOL)remove;
 
 - (NSInteger) indexOfFirstVisiblePage;
-@end
+- (CGFloat) widerPageWidth;
 
-@interface CLCascadeView (DelegateMethods)
-- (void) didLoadPage:(UIView*)page;
-- (void) didAddPage:(UIView*)page animated:(BOOL)animated;
-- (void) didPopPageAtIndex:(NSInteger)index;
-- (void) didUnloadPage:(UIView*)page;
-- (void) pageDidAppearAtIndex:(NSInteger)index;
-- (void) pageDidDisappearAtIndex:(NSInteger)index;
-- (void) didStartPullingToDetachPages;
-- (void) didPullToDetachPages;
-- (void) didCancelPullToDetachPages;
 @end
 
 #define DEFAULT_LEFT_INSET 58.0f
 #define DEFAULT_WIDER_LEFT_INSET 220.0f
 #define PULL_TO_DETACH_FACTOR 0.20f
-#define OVERLOAD 0.0f
 
 @implementation CLCascadeView
 
 @synthesize leftInset = _leftInset; 
-@synthesize pageWidth = _pageWidth;
 @synthesize delegate = _delegate;
 @synthesize dataSource = _dataSource;
 @synthesize widerLeftInset = _widerLeftInset;
@@ -80,6 +80,10 @@
     if (self) {
         _pages = [[NSMutableArray alloc] init];
 
+        _flags.willDetachPages = NO;
+        _flags.isDetachPages = NO;
+        _flags.hasWiderPage = NO;
+
         self.leftInset = DEFAULT_LEFT_INSET;
         self.widerLeftInset = DEFAULT_WIDER_LEFT_INSET;
         self.pullToDetachPages = YES;
@@ -95,22 +99,17 @@
         [_scrollView setAlwaysBounceVertical: NO];
         [_scrollView setAlwaysBounceHorizontal: YES];
         [_scrollView setDirectionalLockEnabled: NO];
-        
         [_scrollView setDelaysContentTouches:NO];
         [_scrollView setMultipleTouchEnabled:NO];
         [_scrollView setShowsVerticalScrollIndicator: NO];
         [_scrollView setShowsHorizontalScrollIndicator: NO];
         
         [_scrollView setAutoresizingMask:
-         //         UIViewAutoresizingFlexibleLeftMargin | 
-         //         UIViewAutoresizingFlexibleRightMargin | 
          UIViewAutoresizingFlexibleBottomMargin | 
          UIViewAutoresizingFlexibleTopMargin | 
          UIViewAutoresizingFlexibleHeight];
-        //         UIViewAutoresizingFlexibleWidth];
         [self addSubview: _scrollView];
-        
-        
+                
         [self setAutoresizingMask:
          UIViewAutoresizingFlexibleLeftMargin | 
          UIViewAutoresizingFlexibleRightMargin | 
@@ -118,10 +117,6 @@
          UIViewAutoresizingFlexibleTopMargin | 
          UIViewAutoresizingFlexibleWidth | 
          UIViewAutoresizingFlexibleHeight];
-        
-        _flags.willDetachPages = NO;
-        _flags.isDetachPages = NO;
-        _flags.hasWiderPage = NO;
     }
     return self;
 }
@@ -130,9 +125,7 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     
     id item = nil;
-//    // index of last page
-//    NSUInteger index = [_pages count] - 1;
-    // 
+    // create enumerator
     NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
     // enumarate pages
     while ((item = [enumerator nextObject])) {
@@ -183,8 +176,26 @@
     [_scrollView addSubview: newPage];
     // send message to delegate
     [self didAddPage:newPage animated:animated];
-    // scroll to new page frame
-    //[_scrollView setContentOffset:CGPointMake(CGRectGetMaxX(fromPage.frame) - _scrollView.contentInset.left, 0.0f) animated:animated];
+
+    NSInteger index = [_pages count] -1;
+    UIInterfaceOrientation interfaceOrienation = [[UIApplication sharedApplication] statusBarOrientation];
+
+    if (index > 0) {
+        // scroll to new page frame
+        if (!_flags.hasWiderPage) {
+            if (UIInterfaceOrientationIsPortrait(interfaceOrienation)) {
+                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _scrollView.contentInset.left, 0.0f) animated:animated];
+            } else {
+                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _pageWidth, 0.0f) animated:animated];
+            }
+        } else {
+            if (UIInterfaceOrientationIsPortrait(interfaceOrienation)) {
+                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _scrollView.contentInset.left, 0.0f) animated:animated];
+            } else {
+                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _pageWidth + ([self widerPageWidth]), 0.0f) animated:animated];
+            }
+        }
+    }
 }
 
 
@@ -517,7 +528,7 @@
     if (!_flags.hasWiderPage) {
         width = ([_pages count] -1) * _pageWidth;
     } else {
-        width = ([_pages count] -1) * _pageWidth + ((self.frame.size.width - _widerLeftInset) - _pageWidth);
+        width = ([_pages count] -1) * _pageWidth + ([self widerPageWidth] - _pageWidth);
     }
     
     return CGSizeMake(width, UIInterfaceOrientationIsPortrait(interfaceOrientation) ? self.bounds.size.height : self.bounds.size.height);
@@ -554,7 +565,7 @@
     
     //left inset depends on interface orientation
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
-        leftInset = self.bounds.size.width/2 - _pageWidth/2;
+        leftInset = self.bounds.size.width/2 - _pageWidth/2 - _leftInset;
     } else {
         leftInset = self.bounds.size.width - _pageWidth - _leftInset;
         rightInset = 2 * _pageWidth + _leftInset - self.bounds.size.width;
@@ -633,7 +644,7 @@
     CGFloat width = _pageWidth;
     
     if (size == CLViewSizeWider) {
-        width = self.frame.size.width - _widerLeftInset;
+        width = [self widerPageWidth];
     }
 
     return CGSizeMake(width, height);
@@ -652,6 +663,13 @@
         }
     }];
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CGFloat) widerPageWidth {
+    return self.frame.size.width - _widerLeftInset;
+}
+
 
 #pragma mark -
 #pragma mark UIScrollView delegates methods

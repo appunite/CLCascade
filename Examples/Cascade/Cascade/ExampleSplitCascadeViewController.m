@@ -51,8 +51,9 @@
     UIImage* divider = [UIImage imageNamed:@"divider_vertical.png"];
     [self setDividerImage: divider];
     
-    // change offset
+    // change offsets
     [self.cascadeNavigationController setLeftInset: 58.0f];
+    [self.cascadeNavigationController setWiderLeftInset: 210.0f];
 }
 
 
