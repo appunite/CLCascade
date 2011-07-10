@@ -467,7 +467,7 @@
 			</dict>
 		</dict>
 		<string>file://localhost/Users/Emil/Documents/Projects/CLCascade/Examples/Cascade/Cascade.xcodeproj/</string>
-		<real>332022680.75894898</real>
+		<real>332022733.07321298</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -1370,7 +1370,7 @@
 			</array>
 		</dict>
 		<string>CodeFolds</string>
-		<real>332022680.75878602</real>
+		<real>332022733.07281399</real>
 		<string>{7596, 1506}</string>
 		<dict>
 			<key>$class</key>
@@ -1510,8 +1510,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>332022680.75913101</real>
-		<string>{0, 712}</string>
+		<real>332022727.97697997</real>
+		<string>{9080, 693}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2859,7 +2859,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>332022680.78916001</real>
+		<real>332022733.07934499</real>
 		<string>{7596, 1506}</string>
 		<dict>
 			<key>$class</key>
@@ -4921,7 +4921,7 @@
 				<integer>399</integer>
 			</dict>
 		</dict>
-		<real>332022680.78274602</real>
+		<real>332022733.07703203</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5956,7 +5956,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>332022680.78775197</real>
+		<real>332022733.07799798</real>
 		<string>{9600, 2112}</string>
 		<dict>
 			<key>$class</key>
