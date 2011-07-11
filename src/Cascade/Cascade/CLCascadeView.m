@@ -184,7 +184,7 @@
         // scroll to new page frame
         if (!_flags.hasWiderPage) {
             if (UIInterfaceOrientationIsPortrait(interfaceOrienation)) {
-                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _leftInset, 0.0f) animated:animated];
+                [_scrollView setContentOffset:CGPointMake(index * _pageWidth - (self.bounds.size.width - _pageWidth - _leftInset), 0.0f) animated:animated];
             } else {
                 [_scrollView setContentOffset:CGPointMake(index * _pageWidth - _pageWidth, 0.0f) animated:animated];
             }
