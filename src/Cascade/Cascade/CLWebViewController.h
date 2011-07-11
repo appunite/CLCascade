@@ -9,7 +9,7 @@
 #import "CLViewController.h"
 
 @interface CLWebViewController : CLViewController <UIWebViewDelegate> {
-
+    UIActivityIndicatorView* _activityIndicatorView;
 }
 
 @property (nonatomic, retain) UIWebView* webView;

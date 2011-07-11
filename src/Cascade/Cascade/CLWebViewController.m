@@ -42,7 +42,10 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-
+- (void)dealloc {
+    [_activityIndicatorView release], _activityIndicatorView = nil;
+    [super dealloc];
+}
 #pragma mark - View lifecycle
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,15 +119,20 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-
+    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
+    [_activityIndicatorView setCenter: CGPointMake(self.webView.frame.size.width/2, self.webView.frame.size.height/2)];
+    [_activityIndicatorView startAnimating];
+    [self.webView addSubview: _activityIndicatorView];
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-
+    [_activityIndicatorView removeFromSuperview];
+    [_activityIndicatorView release], _activityIndicatorView = nil;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-
+    [_activityIndicatorView removeFromSuperview];
+    [_activityIndicatorView release], _activityIndicatorView = nil;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
