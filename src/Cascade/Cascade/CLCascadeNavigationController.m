@@ -50,6 +50,8 @@
     // set background color
     [self.view setBackgroundColor: [UIColor clearColor]];
 
+    _viewControllers = [[NSMutableArray alloc] init];
+
     _cascadeView = [[CLCascadeView alloc] initWithFrame:self.view.bounds];
     _cascadeView.delegate = self;
     _cascadeView.dataSource = self;
@@ -75,18 +77,9 @@
     [_cascadeView updateContentLayoutToInterfaceOrientation:interfaceOrientation duration:duration];
 }
 
+
 #pragma mark -
 #pragma mark Setters & getters
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSMutableArray*) viewControllers {
-    if (_viewControllers == nil) {
-        _viewControllers = [[NSMutableArray alloc] init];
-    }
-    
-    return _viewControllers;
-}
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGFloat) widerLeftInset {
@@ -238,24 +231,13 @@
             
             // count of views to pop
             NSInteger count = [_viewControllers count] - indexOfSender - 1;
-            
-            // pop views
+
+            // pop views and remove from _viewControllers
             for (NSInteger i = count; i>0; i--) {
                 NSInteger inx = indexOfSender + i;
-                [_cascadeView popPageAtIndex:inx animated:animated];
+                [_cascadeView popPageAtIndex:inx animated:NO];
+                [_viewControllers removeLastObject];
             }
-            
-            
-//            NSLog(@"QQ: %i %i", indexOfSender + 1, count);
-//
-//            for (NSInteger i = count; i>0; i--) {
-//                NSInteger inx = indexOfSender + i;
-//                UIViewController* ccv = [_viewControllers objectAtIndex:inx];
-//                NSLog(@"%p %i", ccv, [ccv retainCount]);
-//            }
-            
-            // remove controllers
-            [_viewControllers removeObjectsInRange:NSMakeRange(indexOfSender + 1, count)];
         }
     } 
     

@@ -192,7 +192,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated {
-    NSAssert(_viewSize != CLViewSizeWider, @"assert: %@ <%p>", NSStringFromClass([self class]), self);
+    NSAssert(_viewSize != CLViewSizeWider, @"Assert: You can't push a new view from a view which size is CLViewSizeWider.", nil);
     [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
 }
 

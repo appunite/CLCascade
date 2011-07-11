@@ -241,13 +241,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popAllPagesAnimated:(BOOL)animated {
-    id item = nil;
     // index of last page
     NSUInteger index = [_pages count] - 1;
     // pop page from back
     NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
     // enumarate pages
-    while ((item = [enumerator nextObject])) {
+    while ([enumerator nextObject]) {
         // pop page at index
         [self popPageAtIndex:index animated:NO];
         index--;
