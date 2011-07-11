@@ -6,3 +6,7 @@ xcuserdata
 *.mode1v3
 *.pbxuser
 build
+Breakpoints.xcbkptlist
+Cascade.xcscheme
+CLCascade.xcscheme
+xcschememanagement.plist
