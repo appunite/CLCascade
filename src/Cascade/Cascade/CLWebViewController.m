@@ -52,6 +52,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _firstLoad = YES;
+    
     // create web view
     UIWebView* webView_ = [[UIWebView alloc] init];
     // set up webView
@@ -77,18 +79,6 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-//    
-//    // if is not loading then load www.google.com
-//    if (![self.webView isLoading]) {
-//        //create default request
-//        [self.webView loadRequest: [self request]];
-//    }
-//}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -101,16 +91,16 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) loadRequest {
-    [self.webView loadRequest: [self request]];    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[self requestURL] 
+                                             cachePolicy:NSURLRequestUseProtocolCachePolicy 
+                                         timeoutInterval:30.0];
+    [self.webView loadRequest: request];    
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSURLRequest*) request {
-    NSURL* url = [NSURL URLWithString: @"http://www.google.com"];
-    return [NSURLRequest requestWithURL:url 
-                            cachePolicy:NSURLRequestUseProtocolCachePolicy 
-                        timeoutInterval:30.0];
+- (NSURL*) requestURL {
+    return [NSURL URLWithString: @"http://www.google.com"];
 }
 
 
@@ -119,20 +109,28 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
-    [_activityIndicatorView setCenter: CGPointMake(self.webView.frame.size.width/2, self.webView.frame.size.height/2)];
-    [_activityIndicatorView startAnimating];
-    [self.webView addSubview: _activityIndicatorView];
+    if (_firstLoad) {
+
+        _firstLoad = NO;
+        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
+        [_activityIndicatorView setCenter: CGPointMake(self.webView.frame.size.width/2, self.webView.frame.size.height/2)];
+        [_activityIndicatorView startAnimating];
+        [self.webView addSubview: _activityIndicatorView];
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [_activityIndicatorView removeFromSuperview];
-    [_activityIndicatorView release], _activityIndicatorView = nil;
+    if (_activityIndicatorView) {
+        [_activityIndicatorView removeFromSuperview];
+        [_activityIndicatorView release], _activityIndicatorView = nil;
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [_activityIndicatorView removeFromSuperview];
-    [_activityIndicatorView release], _activityIndicatorView = nil;
+    if (_activityIndicatorView) {
+        [_activityIndicatorView removeFromSuperview];
+        [_activityIndicatorView release], _activityIndicatorView = nil;
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
