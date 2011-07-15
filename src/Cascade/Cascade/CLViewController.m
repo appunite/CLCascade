@@ -58,6 +58,7 @@
 - (void)dealloc
 {
     [_cascadeNavigationController release], _cascadeNavigationController = nil;
+    if (_originShadow) [_originShadow release], _originShadow = nil;
 //    [_originShadow release], _originShadow = nil;    
     [super dealloc];
 }
@@ -118,6 +119,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
+    if (_originShadow) [_originShadow release], _originShadow = nil;
 }
 
 
@@ -137,7 +140,7 @@
     if (!SHOW_SHADOW) return;
     
     if (!_originShadow) {
-        _originShadow = [[[CAGradientLayer alloc] init] autorelease];
+        _originShadow = [[CAGradientLayer alloc] init];
     }
     
     _originShadow.startPoint = CGPointMake(0, 0.5);
