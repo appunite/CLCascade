@@ -271,8 +271,18 @@
                 [view setFrame: pageFrame];
                 // replace in array of pages
                 [_pages replaceObjectAtIndex:index withObject:view];
-                // add subview
-                [_scrollView insertSubview:view atIndex:0];
+
+                // calculete direction of movement (if move left add view at index 0 else add at last position)
+                if ((_scrollView.contentOffset.x + _scrollView.contentInset.left) > index * _pageWidth) {
+                    // add subview
+                    [_scrollView insertSubview:view atIndex:0];
+                }
+                else {
+                    // add subview
+                    [_scrollView addSubview:view];
+                }
+                
+                
                 // send delegate
                 [self didLoadPage:view];
                 // return loaded page
