@@ -10,6 +10,7 @@
 
 @interface CLWebViewController : CLViewController <UIWebViewDelegate> {
     UIActivityIndicatorView* _activityIndicatorView;
+    BOOL _firstLoad;
 }
 
 @property (nonatomic, retain) UIWebView* webView;
@@ -20,8 +21,8 @@
 - (void) loadRequest;
 
 /*
- * Override this method to change webView load request
+ * Override this method to change webView load request URL
  */
-- (NSURLRequest*) request;
+- (NSURL*) requestURL;
 
 @end
