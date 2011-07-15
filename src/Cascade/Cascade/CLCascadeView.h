@@ -65,10 +65,6 @@
 
 - (UIView*) loadPageAtIndex:(NSInteger)index;
 
-// unload page if is loaded (replabe by)
-- (void) unloadPageIfNeeded:(NSInteger)index;
-// unload page, by remove from superView and replace by [NSNull null]
-- (void) unloadPage:(UIView*)page;
 // unload pages which are not visible
 - (void) unloadInvisiblePages;
 

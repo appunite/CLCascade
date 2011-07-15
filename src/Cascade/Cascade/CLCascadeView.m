@@ -27,6 +27,7 @@
 
 - (BOOL) pageExistAtIndex:(NSInteger)index;
 - (void) unloadInvisiblePagesOnStock;
+- (void) unloadPageIfNeeded:(NSInteger)index;
 
 - (CGSize) calculatePageSize:(UIView*)view;
 - (CGSize) calculateContentSize:(UIInterfaceOrientation)interfaceOrientation;
@@ -38,8 +39,10 @@
 - (void) setProperSizesForLodedPages:(UIInterfaceOrientation)interfaceOrientation;
 
 - (void) unloadPage:(UIView*)page remove:(BOOL)remove;
+- (void) loadBoundaryPagesIfNeeded;
 
 - (NSInteger) indexOfFirstVisiblePage;
+- (NSInteger) visiblePagesCount;
 - (CGFloat) widerPageWidth;
 
 @end
@@ -285,45 +288,12 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) unloadPageIfNeeded:(NSInteger)index {
-    // get page at index
-    id item = [_pages objectAtIndex: index];
-    
-    // if page is unloaded, do nothing
-    if (item == [NSNull null]) return;
-    
-    // load all visible pages
-    NSArray* visiblePages = [self visiblePages];
-    BOOL pageIsVisible = NO;
-    
-    // check if page contain in array of visible pages
-    for (UIView* page in visiblePages) {
-        NSUInteger pageIndex = [_pages indexOfObject: page];
-        if (pageIndex != NSNotFound) {
-            pageIsVisible = YES; break;
-        }
-    }
-    
-    // if page don't contain in array of visible pages, then unloadPage
-    if (!pageIsVisible) {
-        [self unloadPage: item];
-    }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) unloadPage:(UIView*)page {
-    [self unloadPage:page remove:NO];
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) unloadInvisiblePages {
     
     BOOL canUnload = YES;
     
     // temp array with pages to unload
-    NSMutableArray* pagesToUnload = [[NSMutableArray alloc] init];
+    NSMutableArray* pagesToUnload = [NSMutableArray array];
     
     // get array of visible pages
     NSArray* visiblePages = [self visiblePages];
@@ -351,10 +321,8 @@
     // unload pages
     // check if page contain in array of visible pages
     [pagesToUnload enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self unloadPage: obj];
+        [self unloadPage:obj remove:NO];
     }];
-    
-    [pagesToUnload release];
     
 }
 
@@ -367,6 +335,36 @@
     [self setProperEdgeInset:YES forInterfaceOrientation:interfaceOrientation];
     // recalculate pages height and width
     [self setProperSizesForLodedPages: interfaceOrientation];
+}
+
+
+#pragma mark -
+#pragma mark Private methods
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) unloadPageIfNeeded:(NSInteger)index {
+    // get page at index
+    id item = [_pages objectAtIndex: index];
+    
+    // if page is unloaded, do nothing
+    if (item == [NSNull null]) return;
+    
+    // load all visible pages
+    NSArray* visiblePages = [self visiblePages];
+    BOOL pageIsVisible = NO;
+    
+    // check if page contain in array of visible pages
+    for (UIView* page in visiblePages) {
+        NSUInteger pageIndex = [_pages indexOfObject: page];
+        if (pageIndex != NSNotFound) {
+            pageIsVisible = YES; break;
+        }
+    }
+    
+    // if page don't contain in array of visible pages, then unloadPage
+    if (!pageIsVisible) {
+        [self unloadPage:item remove:NO];
+    }
 }
 
 
@@ -394,8 +392,11 @@
 }
 
 
-#pragma mark -
-#pragma mark Private methods
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSInteger) visiblePagesCount {
+    return ceil((self.frame.size.width - _leftInset) / _pageWidth);   
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger) indexOfFirstVisiblePage {
@@ -412,22 +413,19 @@
     
     // calculate first visible page and visible page count
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
-    NSInteger visiblePagesCount = ceil(_scrollView.bounds.size.width / _pageWidth);
+    NSInteger visiblePagesCount = [self visiblePagesCount];
+    
+    NSLog(@"%i %@", visiblePagesCount, _pages);
     
     // create array
     NSMutableArray* array = [NSMutableArray array];
     
-    for (NSInteger i=firstVisiblePageIndex; i<=visiblePagesCount; i++) {
+    for (NSInteger i=firstVisiblePageIndex; i<=visiblePagesCount + firstVisiblePageIndex - 1; i++) {
         
         // check if page index is in bounds 
         if ([self pageExistAtIndex: i]) {
             // get page at index
             id item = [_pages objectAtIndex: i];
-            
-            // if page is not load, then load
-            if (item == [NSNull null]) {
-                item = [self loadPageAtIndex: i];
-            }
             
             // add page to array if could load
             if (item) {
@@ -438,6 +436,37 @@
     
     // return array of visible pages
     return array;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) loadBoundaryPagesIfNeeded {
+    id item = nil;
+    
+    // calculate first visible page
+    NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
+    // get first visible page
+    item = [_pages objectAtIndex: firstVisiblePageIndex];
+    
+    // load if needed
+    if (item == [NSNull null]) {
+        [self loadPageAtIndex: firstVisiblePageIndex];
+    }
+
+    // calculate visible pages count and last visible page
+    NSInteger visiblePagesCount = [self visiblePagesCount];
+    NSInteger lastVisiblePageIndex = MIN([_pages count]-1, firstVisiblePageIndex + visiblePagesCount);
+
+    // check if first page is last page    
+    if (lastVisiblePageIndex != firstVisiblePageIndex) {
+        // get last visible page
+        item = [_pages objectAtIndex: lastVisiblePageIndex];
+        
+        // load if needed
+        if (item == [NSNull null]) {
+            [self loadPageAtIndex: lastVisiblePageIndex];
+        }
+    }
 }
 
 
@@ -559,7 +588,7 @@
         // if item is not null and is not last page (first visible page on stock)
         if ((obj != [NSNull null]) && (idx != lastIndex)) {
             // unload page
-            [self unloadPage:obj];
+            [self unloadPage:obj remove:NO];
         }
     }];
 }
@@ -678,12 +707,14 @@
                 
             } else {
                 if (item != [NSNull null]) {
-                    [self unloadPage: item];
+                    [self unloadPage:item remove:NO];
                 }
                 
             }
         }
     }
+
+    [self loadBoundaryPagesIfNeeded];    
 }
 
 
