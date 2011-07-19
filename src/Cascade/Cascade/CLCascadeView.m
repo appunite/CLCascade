@@ -753,6 +753,15 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     
+    NSInteger secondVisiblePageIndex = [self indexOfFirstVisiblePage] + 1;
+
+    if ([self pageExistAtIndex: secondVisiblePageIndex]) {
+        UIView* page = [_pages objectAtIndex: secondVisiblePageIndex];
+        
+        CGRect rect = [page frame];
+        rect.origin.x = _pageWidth * secondVisiblePageIndex;
+        [page setFrame: rect];
+    }
 }
 
 
