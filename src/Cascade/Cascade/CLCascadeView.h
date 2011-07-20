@@ -36,6 +36,8 @@
         unsigned int hasWiderPage:1;
     } _flags;
 
+    NSInteger _indexOfFirstVisiblePage;
+    NSInteger _indexOfLastVisiblePage;
 }
 
 @property(nonatomic, assign) id<CLCascadeViewDelegate> delegate;

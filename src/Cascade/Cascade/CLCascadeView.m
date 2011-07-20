@@ -85,7 +85,10 @@
         self.leftInset = DEFAULT_LEFT_INSET;
         self.widerLeftInset = DEFAULT_WIDER_LEFT_INSET;
         self.pullToDetachPages = YES;
-        
+
+        _indexOfFirstVisiblePage = -1;
+        _indexOfLastVisiblePage = -1;
+
         CGRect rect = CGRectMake(_leftInset, 0.0f, _pageWidth, frame.size.height);
         _scrollView = [[UIScrollView alloc] initWithFrame: rect];
         [_scrollView setDelegate: self];
@@ -413,7 +416,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger) visiblePagesCount {
-    return ceil((self.frame.size.width - _leftInset) / _pageWidth);   
+    NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
+    return ceil((_scrollView.contentOffset.x - firstVisiblePageIndex * _pageWidth + _pageWidth - _scrollView.contentInset.right) / _pageWidth);
 }
 
 
@@ -422,7 +426,7 @@
     // calculate first visible page
     CGFloat contentOffset = _scrollView.contentOffset.x;// + _scrollView.contentInset.left;
     NSInteger index = floor((contentOffset) / _pageWidth);
-    
+
     return (index < 0) ? 0 : index;
 }
 
@@ -433,9 +437,7 @@
     // calculate first visible page and visible page count
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
     NSInteger visiblePagesCount = [self visiblePagesCount];
-    
-    NSLog(@"%i %@", visiblePagesCount, _pages);
-    
+
     // create array
     NSMutableArray* array = [NSMutableArray array];
     
@@ -683,6 +685,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    // operations connected with Pull To Detach Pages action
     CGFloat realContentOffsetX = _scrollView.contentOffset.x + _scrollView.contentInset.left;
     
     if ((_pullToDetachPages) && (!_flags.isDetachPages)) {
@@ -694,10 +697,35 @@
             [self didCancelPullToDetachPages];
         }
     }
-    
+
+    // operations connected with Page Did Appear/Disappear delegate metgods
+
     // calculate first visible page
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
     
+    if (_indexOfFirstVisiblePage > firstVisiblePageIndex) {
+        [self pageDidAppearAtIndex: firstVisiblePageIndex];
+        _indexOfFirstVisiblePage = firstVisiblePageIndex;
+    }
+    else if (_indexOfFirstVisiblePage < firstVisiblePageIndex) {
+        [self pageDidDisappearAtIndex: _indexOfFirstVisiblePage];
+        _indexOfFirstVisiblePage = firstVisiblePageIndex;
+    }
+    
+    // calculate last visible page
+    NSInteger lastVisiblePageIndex = [self indexOfLastVisibleView: NO];
+    
+    if (_indexOfLastVisiblePage < lastVisiblePageIndex) {
+        [self pageDidAppearAtIndex: lastVisiblePageIndex];
+        _indexOfLastVisiblePage = lastVisiblePageIndex;
+    }
+    else if (_indexOfLastVisiblePage > lastVisiblePageIndex) {
+        [self pageDidDisappearAtIndex: _indexOfLastVisiblePage];
+        _indexOfLastVisiblePage = lastVisiblePageIndex;
+    }
+
+
+    // operations connected with blocking pages on stock
     for (NSInteger i=0; i<=firstVisiblePageIndex; i++) {
         
         // check if page index is in bounds 
@@ -731,8 +759,8 @@
             }
         }
     }
-
-    [self loadBoundaryPagesIfNeeded];    
+        
+//    [self loadBoundaryPagesIfNeeded];    
 }
 
 
@@ -816,17 +844,25 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pageDidAppearAtIndex:(NSInteger)index {
+    if (![self pageExistAtIndex: index]) return;
+
     if ([_delegate respondsToSelector:@selector(cascadeView:pageDidAppearAtIndex:)]) {
         [_delegate cascadeView:self pageDidAppearAtIndex:index];
     }
+    
+    NSLog(@"Appear %i", index);
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pageDidDisappearAtIndex:(NSInteger)index {
+    if (![self pageExistAtIndex: index]) return;
+
     if ([_delegate respondsToSelector:@selector(cascadeView:pageDidDisappearAtIndex:)]) {
         [_delegate cascadeView:self pageDidDisappearAtIndex:index];
     }
+
+    NSLog(@"Disappear %i", index);
 }
 
 
