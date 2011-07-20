@@ -12,6 +12,10 @@
 @property(nonatomic, assign, readwrite) UIViewController *parentViewController;
 @end
 
+@interface CLCascadeNavigationController (Private)
+- (void) addViewRoundedCorners;
+@end
+
 @implementation CLCascadeNavigationController
 
 @synthesize viewControllers = _viewControllers;
@@ -173,6 +177,8 @@
     if ([controller respondsToSelector:@selector(pageDidAppear)]) {
         [controller pageDidAppear];
     }
+    
+    [self addViewRoundedCorners];
 }
 
 
@@ -184,6 +190,8 @@
     if ([controller respondsToSelector:@selector(pageDidAppear)]) {
         [controller pageDidDisappear];
     }
+
+    [self addViewRoundedCorners];
 }
 
 
@@ -265,6 +273,67 @@
     return nil;
 }
 
+
+#pragma mark -
+#pragma mark Private
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) addViewRoundedCorners {
+
+    // unload all rounded corners
+    for (id item in [_cascadeView visiblePages]) {
+        if (item != [NSNull null]) {
+            if ([item isKindOfClass:[CLSegmentedView class]]) {
+                CLSegmentedView* view = (CLSegmentedView*)item;
+                
+                if ([view showRoundedCorners]) {
+                    [view setShowRoundedCorners: NO];
+                    [view setNeedsDisplay];
+                }
+            }
+        }
+    }
+
+    UIViewController* viewController = nil;
+
+    // get index of first visible page
+    NSInteger indexOfFirstVisiblePage = [_cascadeView indexOfFirstVisibleView: NO];
+    
+    if (indexOfFirstVisiblePage != NSNotFound) {
+        viewController = [_viewControllers objectAtIndex: indexOfFirstVisiblePage];
+
+        if ([viewController isKindOfClass: [CLViewController class]]) {
+            CLViewController* firstVisibleController = (CLViewController*)viewController;
+            
+            if ([firstVisibleController showRoundedCorners]) {
+                CLSegmentedView* view = (CLSegmentedView*)firstVisibleController.view;
+                [view setShowRoundedCorners: YES];
+                [view setRectCorner: UIRectCornerTopLeft | UIRectCornerBottomLeft];
+                [view setNeedsDisplay];
+            }
+        }
+    }
+
+
+    // get index of last visible page
+    NSInteger indexOfLastVisiblePage = [_cascadeView indexOfLastVisibleView: NO];
+    
+    if ((indexOfLastVisiblePage == [_viewControllers count] -1) && (indexOfLastVisiblePage != NSNotFound) ) {
+        viewController = [_viewControllers objectAtIndex: indexOfLastVisiblePage];
+        
+        if ([viewController isKindOfClass: [CLViewController class]]) {
+            CLViewController* firstVisibleController = (CLViewController*)viewController;
+            
+            if ([firstVisibleController showRoundedCorners]) {
+                CLSegmentedView* view = (CLSegmentedView*)firstVisibleController.view;
+                [view setShowRoundedCorners: YES];
+                [view setRectCorner: UIRectCornerTopRight | UIRectCornerBottomRight];
+                [view setNeedsDisplay];
+            }
+        }
+    }
+
+}
 
 @end
 

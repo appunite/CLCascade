@@ -22,6 +22,8 @@
     CAGradientLayer* _originShadow;
     
     CLViewSize _viewSize;
+    
+    BOOL _roundedCorners;
 }
 
 - (id) initWithSize:(CLViewSize)size;
@@ -29,6 +31,7 @@
 
 @property (nonatomic, retain) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
 @property (nonatomic, assign, readonly) CLViewSize viewSize;
+@property (nonatomic, assign) BOOL showRoundedCorners;
 
 // method used to push (animated) new UIViewController on Cascade stack
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated;

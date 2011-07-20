@@ -19,6 +19,9 @@
     CGFloat _shadowWidth;
     
     CLViewSize _viewSize;
+
+    BOOL _showRoundedCorners;
+    UIRectCorner _rectCorner;
 }
 
 /*
@@ -45,6 +48,16 @@
  * The width of the shadow
  */
 @property (nonatomic, assign) CGFloat shadowWidth;
+
+/*
+ * Set YES if you want rounded corners. Default NO.
+ */
+@property (nonatomic, assign) BOOL showRoundedCorners;
+
+/*
+ * Type of rect corners. Default UIRectCornerAllCorners.
+ */
+@property (nonatomic, assign) UIRectCorner rectCorner;
 
 /*
  * Size of view

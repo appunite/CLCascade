@@ -22,7 +22,6 @@
 @end
 
 @interface CLCascadeView (Private)
-- (NSArray*) visiblePages;
 - (NSArray*) pagesOnStock;
 
 - (BOOL) pageExistAtIndex:(NSInteger)index;
@@ -403,6 +402,16 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSInteger) indexOfLastVisibleView:(BOOL)loadIfNeeded {
+    // calculate visible pages count, first visible and last visible page
+    NSInteger visiblePagesCount = [self visiblePagesCount];
+    NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
+    NSInteger lastVisiblePageIndex = MIN([_pages count]-1, firstVisiblePageIndex + visiblePagesCount);
+    return lastVisiblePageIndex;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger) visiblePagesCount {
     return ceil((self.frame.size.width - _leftInset) / _pageWidth);   
 }
@@ -463,9 +472,8 @@
         [self loadPageAtIndex: firstVisiblePageIndex];
     }
 
-    // calculate visible pages count and last visible page
-    NSInteger visiblePagesCount = [self visiblePagesCount];
-    NSInteger lastVisiblePageIndex = MIN([_pages count]-1, firstVisiblePageIndex + visiblePagesCount);
+    // calculate last visible page
+    NSInteger lastVisiblePageIndex = [self indexOfLastVisibleView: NO];
 
     // check if first page is last page    
     if (lastVisiblePageIndex != firstVisiblePageIndex) {

@@ -7,7 +7,6 @@
 //
 
 #import "CLSegmentedView.h"
-#import <QuartzCore/QuartzCore.h>
 
 @interface CLSegmentedView (Private)
 - (void) setupViews;
@@ -21,6 +20,8 @@
 @synthesize shadow = _shadow;
 @synthesize shadowWidth = _shadowWidth;
 @synthesize viewSize = _viewSize;
+@synthesize showRoundedCorners = _showRoundedCorners;
+@synthesize rectCorner = _rectCorner;
 
 #pragma mark - Init & dealloc
 
@@ -30,6 +31,8 @@
     self = [super init];
     if (self) {
         _viewSize = CLViewSizeNormal;
+        _rectCorner = UIRectCornerAllCorners;
+        _showRoundedCorners = NO;
     }
     return self;
 }
@@ -44,6 +47,16 @@
     return self;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+-(void)drawRect:(CGRect)rect {
+    if (_showRoundedCorners) {
+        UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:self.bounds 
+                                                   byRoundingCorners:_rectCorner 
+                                                         cornerRadii:CGSizeMake(16.0f, 16.0f)];
+        [path addClip];
+    }
+}
 
 #pragma mark -
 #pragma mark Setters
