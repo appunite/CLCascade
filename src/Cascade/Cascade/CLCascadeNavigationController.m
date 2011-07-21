@@ -299,7 +299,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) addPagesRoundedCorners {
-    return;
     
     // unload all rounded corners
     for (id item in [_cascadeView visiblePages]) {
