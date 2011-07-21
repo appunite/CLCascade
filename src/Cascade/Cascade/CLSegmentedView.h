@@ -14,7 +14,8 @@
     UIView* _headerView;
     UIView* _footerView;
     UIView* _contentView;
-
+    UIView* _roundedCornersView;
+    
     CAGradientLayer* _shadow;
     CGFloat _shadowWidth;
     

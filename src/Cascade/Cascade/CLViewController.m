@@ -22,7 +22,7 @@
     self = [super init];
     if (self) {
         _viewSize = CLViewSizeNormal;
-        _roundedCorners = YES;
+        _roundedCorners = NO;
     }
     return self;
 }
@@ -32,7 +32,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _viewSize = CLViewSizeNormal;
-        _roundedCorners = YES;
+        _roundedCorners = NO;
     }
     return self;
 }
@@ -42,7 +42,7 @@
     self = [super init];
     if (self) {
         _viewSize = size;
-        _roundedCorners = YES;
+        _roundedCorners = NO;
     }
     return self;
 }
@@ -53,7 +53,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _viewSize = size;
-        _roundedCorners = YES;
+        _roundedCorners = NO;
     }
     return self;
 }

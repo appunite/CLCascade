@@ -10,6 +10,7 @@
 
 @interface CLSegmentedView (Private)
 - (void) setupViews;
+- (void) updateRoundedCorners;
 @end
 
 @implementation CLSegmentedView
@@ -30,6 +31,10 @@
 {
     self = [super init];
     if (self) {
+        _roundedCornersView = [[UIView alloc] init];
+        [_roundedCornersView setBackgroundColor: [UIColor clearColor]];
+        [self addSubview: _roundedCornersView];
+        
         _viewSize = CLViewSizeNormal;
         _rectCorner = UIRectCornerAllCorners;
         _showRoundedCorners = NO;
@@ -40,22 +45,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id) initWithSize:(CLViewSize)size {
-    self = [super init];
+    self = [self init];
     if (self) {
         _viewSize = size;
     }
     return self;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
--(void)drawRect:(CGRect)rect {
-    if (_showRoundedCorners) {
-        UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:self.bounds 
-                                                   byRoundingCorners:_rectCorner 
-                                                         cornerRadii:CGSizeMake(16.0f, 16.0f)];
-        [path addClip];
-    }
 }
 
 #pragma mark -
@@ -78,7 +72,7 @@
              UIViewAutoresizingFlexibleWidth | 
              UIViewAutoresizingFlexibleHeight];
             
-            [self addSubview: _contentView];
+            [_roundedCornersView addSubview: _contentView];
             [self setNeedsLayout];
         }
     }
@@ -100,7 +94,7 @@
              UIViewAutoresizingFlexibleRightMargin | 
              UIViewAutoresizingFlexibleTopMargin];
             
-            [self addSubview: _headerView];
+            [_roundedCornersView addSubview: _headerView];
             [self setNeedsLayout];
         }
     }
@@ -120,11 +114,12 @@
              UIViewAutoresizingFlexibleRightMargin | 
              UIViewAutoresizingFlexibleBottomMargin];
             
-            [self addSubview: _footerView];
+            [_roundedCornersView addSubview: _footerView];
             [self setNeedsLayout];
         }
     }
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setShadow:(CAGradientLayer*)shadow {
@@ -141,6 +136,7 @@
     }
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setShadow:(CAGradientLayer*)shadow withWidth:(CGFloat)with {
     _shadowWidth = with;
@@ -152,6 +148,27 @@
 #pragma mark Private
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) updateRoundedCorners {
+    
+    if (_showRoundedCorners) {
+        CGRect toolbarBounds = self.bounds;
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect: toolbarBounds
+                                                   byRoundingCorners:_rectCorner
+                                                         cornerRadii:CGSizeMake(6.0f, 6.0f)];
+        [maskLayer setPath:[path CGPath]];
+        [maskLayer setFillColor:[[UIColor greenColor] CGColor]];
+        
+        _roundedCornersView.layer.masksToBounds = YES;
+        _roundedCornersView.layer.mask = maskLayer;
+    } 
+    else {
+        [_roundedCornersView.layer setMask: nil];
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) layoutSubviews {
     CGRect rect = self.bounds;
     
@@ -159,6 +176,8 @@
     CGFloat viewHeight = rect.size.height;
     CGFloat headerHeight = 0.0;
     CGFloat footerHeight = 0.0;
+    
+    _roundedCornersView.frame = rect;
     
     if (_headerView) {
         headerHeight = _headerView.frame.size.height;
@@ -197,8 +216,30 @@
     [_footerView release], _footerView = nil;
     [_headerView release], _headerView = nil;
     [_contentView release], _contentView = nil;
+    [_roundedCornersView release], _roundedCornersView = nil;
     [_shadow release], _shadow = nil;
     [super dealloc];
 }
+
+#pragma mark
+#pragma mark Setters
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setRectCorner:(UIRectCorner)corners {
+    if (corners != _rectCorner) {
+        _rectCorner = corners;
+        [self updateRoundedCorners];
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setShowRoundedCorners:(BOOL)show {
+    if (show != _showRoundedCorners) {
+        _showRoundedCorners = show;
+        [self updateRoundedCorners];
+    }
+}
+
 
 @end

@@ -13,7 +13,8 @@
 @end
 
 @interface CLCascadeNavigationController (Private)
-- (void) addViewRoundedCorners;
+- (void) addPagesRoundedCorners;
+- (void) addRoundedCorner:(UIRectCorner)rectCorner toPageAtIndex:(NSInteger)index;
 @end
 
 @implementation CLCascadeNavigationController
@@ -178,7 +179,7 @@
         [controller pageDidAppear];
     }
     
-    [self addViewRoundedCorners];
+    [self addPagesRoundedCorners];
 }
 
 
@@ -191,7 +192,7 @@
         [controller pageDidDisappear];
     }
 
-    [self addViewRoundedCorners];
+    [self addPagesRoundedCorners];
 }
 
 
@@ -278,8 +279,28 @@
 #pragma mark Private
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addViewRoundedCorners {
+- (void) addRoundedCorner:(UIRectCorner)rectCorner toPageAtIndex:(NSInteger)index {
 
+    if (index != NSNotFound) {
+        UIViewController* viewController = [_viewControllers objectAtIndex: index];
+        
+        if ([viewController isKindOfClass: [CLViewController class]]) {
+            CLViewController* firstVisibleController = (CLViewController*)viewController;
+            
+            if ([firstVisibleController showRoundedCorners]) {
+                CLSegmentedView* view = (CLSegmentedView*)firstVisibleController.view;
+                [view setShowRoundedCorners: YES];
+                [view setRectCorner: rectCorner];
+            }
+        }
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) addPagesRoundedCorners {
+    return;
+    
     // unload all rounded corners
     for (id item in [_cascadeView visiblePages]) {
         if (item != [NSNull null]) {
@@ -288,51 +309,28 @@
                 
                 if ([view showRoundedCorners]) {
                     [view setShowRoundedCorners: NO];
-                    [view setNeedsDisplay];
                 }
             }
         }
     }
 
-    UIViewController* viewController = nil;
-
     // get index of first visible page
     NSInteger indexOfFirstVisiblePage = [_cascadeView indexOfFirstVisibleView: NO];
     
-    if (indexOfFirstVisiblePage != NSNotFound) {
-        viewController = [_viewControllers objectAtIndex: indexOfFirstVisiblePage];
-
-        if ([viewController isKindOfClass: [CLViewController class]]) {
-            CLViewController* firstVisibleController = (CLViewController*)viewController;
-            
-            if ([firstVisibleController showRoundedCorners]) {
-                CLSegmentedView* view = (CLSegmentedView*)firstVisibleController.view;
-                [view setShowRoundedCorners: YES];
-                [view setRectCorner: UIRectCornerTopLeft | UIRectCornerBottomLeft];
-                [view setNeedsDisplay];
-            }
-        }
-    }
-
-
     // get index of last visible page
     NSInteger indexOfLastVisiblePage = [_cascadeView indexOfLastVisibleView: NO];
-    
-    if ((indexOfLastVisiblePage == [_viewControllers count] -1) && (indexOfLastVisiblePage != NSNotFound) ) {
-        viewController = [_viewControllers objectAtIndex: indexOfLastVisiblePage];
-        
-        if ([viewController isKindOfClass: [CLViewController class]]) {
-            CLViewController* firstVisibleController = (CLViewController*)viewController;
-            
-            if ([firstVisibleController showRoundedCorners]) {
-                CLSegmentedView* view = (CLSegmentedView*)firstVisibleController.view;
-                [view setShowRoundedCorners: YES];
-                [view setRectCorner: UIRectCornerTopRight | UIRectCornerBottomRight];
-                [view setNeedsDisplay];
-            }
-        }
-    }
 
+    if (indexOfLastVisiblePage == indexOfFirstVisiblePage) {
+        [self addRoundedCorner:UIRectCornerAllCorners toPageAtIndex: indexOfFirstVisiblePage];
+        
+    } else {
+
+        [self addRoundedCorner:UIRectCornerTopLeft | UIRectCornerBottomLeft toPageAtIndex:indexOfFirstVisiblePage];
+        
+        if (indexOfLastVisiblePage == [_viewControllers count] -1) {
+            [self addRoundedCorner:UIRectCornerTopRight | UIRectCornerBottomRight toPageAtIndex:indexOfLastVisiblePage];
+        }    
+    }
 }
 
 @end
