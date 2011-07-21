@@ -15,13 +15,14 @@
 
 @synthesize cascadeNavigationController = _cascadeNavigationController;
 @synthesize viewSize = _viewSize;
-
+@synthesize showRoundedCorners = _roundedCorners;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id) init {
     self = [super init];
     if (self) {
         _viewSize = CLViewSizeNormal;
+        _roundedCorners = NO;
     }
     return self;
 }
@@ -31,6 +32,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _viewSize = CLViewSizeNormal;
+        _roundedCorners = NO;
     }
     return self;
 }
@@ -40,6 +42,7 @@
     self = [super init];
     if (self) {
         _viewSize = size;
+        _roundedCorners = NO;
     }
     return self;
 }
@@ -50,6 +53,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _viewSize = size;
+        _roundedCorners = NO;
     }
     return self;
 }
@@ -58,8 +62,9 @@
 - (void)dealloc
 {
     [_cascadeNavigationController release], _cascadeNavigationController = nil;
-    if (_originShadow) [_originShadow release], _originShadow = nil;
-//    [_originShadow release], _originShadow = nil;    
+    if (_originShadow) 
+        [_originShadow release], _originShadow = nil;  
+    
     [super dealloc];
 }
 

@@ -14,6 +14,7 @@
     self = [super init];
     if (self) {
         self.cascadeNavigationController = viewController;
+        self.showRoundedCorners = NO;
     }
     return self;
 }

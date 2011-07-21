@@ -36,6 +36,8 @@
         unsigned int hasWiderPage:1;
     } _flags;
 
+    NSInteger _indexOfFirstVisiblePage;
+    NSInteger _indexOfLastVisiblePage;
 }
 
 @property(nonatomic, assign) id<CLCascadeViewDelegate> delegate;
@@ -69,6 +71,8 @@
 - (void) unloadInvisiblePages;
 
 - (NSInteger) indexOfFirstVisibleView:(BOOL)loadIfNeeded;
+- (NSInteger) indexOfLastVisibleView:(BOOL)loadIfNeeded;
+- (NSArray*) visiblePages;
 
 - (void) updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration;
 @end

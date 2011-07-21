@@ -42,6 +42,9 @@
     [header setImage: [UIImage imageNamed:@"ToolBar_479x45.png"]];
     [self.segmentedView setHeaderView: header];
     [header release];
+
+    // show rounded corners
+    [self setShowRoundedCorners: YES];
 }
 
 - (void)viewDidUnload
