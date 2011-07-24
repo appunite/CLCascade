@@ -44,7 +44,7 @@
     [header release];
 
     // show rounded corners
-    [self setShowRoundedCorners: YES];
+    [self setShowRoundedCorners: NO];
 }
 
 - (void)viewDidUnload
