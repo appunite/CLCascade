@@ -217,8 +217,6 @@
                              completion:^(BOOL finished) {
                                  // unload and remove page
                                  [self unloadPage:item remove:YES];
-                                 // update content size
-                                 [self setProperContentSize];
                                  // update edge inset
                                  [self setProperEdgeInset: NO];
                                  // send delegate message
@@ -228,8 +226,6 @@
         } else {
             // unload and remove page
             [self unloadPage:item remove:YES];
-            // update content size
-            [self setProperContentSize];
             // update edge inset
             [self setProperEdgeInset: NO];
             // send delegate message
