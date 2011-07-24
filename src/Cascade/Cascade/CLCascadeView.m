@@ -343,6 +343,10 @@
     [self setProperEdgeInset:YES forInterfaceOrientation:interfaceOrientation];
     // recalculate pages height and width
     [self setProperSizesForLodedPages: interfaceOrientation];
+    // bug fix conected with auto fit page to left border
+    NSInteger index = [self indexOfFirstVisiblePage];
+    CGPoint point = CGPointMake((index * _pageWidth) + 1, 0.0);
+    [_scrollView setContentOffset:point animated:YES];
 }
 
 
