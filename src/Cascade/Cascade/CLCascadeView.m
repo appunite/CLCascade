@@ -417,7 +417,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger) visiblePagesCount {
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
-    return ceil((_scrollView.contentOffset.x - firstVisiblePageIndex * _pageWidth + _pageWidth - _scrollView.contentInset.right) / _pageWidth);
+    return ceil((_scrollView.contentOffset.x - firstVisiblePageIndex * _pageWidth + _pageWidth - _scrollView.contentInset.right) / _pageWidth) + 1;
 }
 
 
@@ -437,7 +437,7 @@
     // calculate first visible page and visible page count
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
     NSInteger visiblePagesCount = [self visiblePagesCount];
-
+    
     // create array
     NSMutableArray* array = [NSMutableArray array];
     
@@ -466,25 +466,28 @@
     
     // calculate first visible page
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
-    // get first visible page
-    item = [_pages objectAtIndex: firstVisiblePageIndex];
-    
-    // load if needed
-    if (item == [NSNull null]) {
-        [self loadPageAtIndex: firstVisiblePageIndex];
-    }
 
-    // calculate last visible page
-    NSInteger lastVisiblePageIndex = [self indexOfLastVisibleView: NO];
-
-    // check if first page is last page    
-    if (lastVisiblePageIndex != firstVisiblePageIndex) {
-        // get last visible page
-        item = [_pages objectAtIndex: lastVisiblePageIndex];
+    if ([self pageExistAtIndex: firstVisiblePageIndex]) {
+        // get first visible page
+        item = [_pages objectAtIndex: firstVisiblePageIndex];
         
         // load if needed
         if (item == [NSNull null]) {
-            [self loadPageAtIndex: lastVisiblePageIndex];
+            [self loadPageAtIndex: firstVisiblePageIndex];
+        }
+        
+        // calculate last visible page
+        NSInteger lastVisiblePageIndex = [self indexOfLastVisibleView: NO];
+        
+        // check if first page is last page    
+        if (lastVisiblePageIndex != firstVisiblePageIndex) {
+            // get last visible page
+            item = [_pages objectAtIndex: lastVisiblePageIndex];
+            
+            // load if needed
+            if (item == [NSNull null]) {
+                [self loadPageAtIndex: lastVisiblePageIndex];
+            }
         }
     }
 }
@@ -760,7 +763,7 @@
         }
     }
         
-//    [self loadBoundaryPagesIfNeeded];    
+    [self loadBoundaryPagesIfNeeded];    
 }
 
 
@@ -849,8 +852,6 @@
     if ([_delegate respondsToSelector:@selector(cascadeView:pageDidAppearAtIndex:)]) {
         [_delegate cascadeView:self pageDidAppearAtIndex:index];
     }
-    
-    NSLog(@"Appear %i", index);
 }
 
 
@@ -861,8 +862,6 @@
     if ([_delegate respondsToSelector:@selector(cascadeView:pageDidDisappearAtIndex:)]) {
         [_delegate cascadeView:self pageDidDisappearAtIndex:index];
     }
-
-    NSLog(@"Disappear %i", index);
 }
 
 
