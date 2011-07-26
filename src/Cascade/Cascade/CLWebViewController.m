@@ -11,6 +11,9 @@
 @implementation CLWebViewController
 
 @dynamic webView;
+@synthesize requestURL = _requestURL;
+
+#define DEFAULT_URL @"http://www.google.com"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id) init {
@@ -34,6 +37,17 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithURL:(NSURL*)url {
+    self = [self init];
+    if (self) {
+        _requestURL = [url retain];
+        _viewSize = CLViewSizeWider;
+    }
+    return self;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -44,6 +58,7 @@
 
 - (void)dealloc {
     [_activityIndicatorView release], _activityIndicatorView = nil;
+    [_requestURL release], _requestURL = nil;
     [super dealloc];
 }
 #pragma mark - View lifecycle
@@ -91,16 +106,14 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) loadRequest {
-    NSURLRequest* request = [NSURLRequest requestWithURL:[self requestURL] 
+    if ([self.webView isLoading]) {
+        [self.webView stopLoading];    
+    }
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL: (_requestURL) ? _requestURL : [NSURL URLWithString: DEFAULT_URL]
                                              cachePolicy:NSURLRequestUseProtocolCachePolicy 
                                          timeoutInterval:30.0];
     [self.webView loadRequest: request];    
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSURL*) requestURL {
-    return [NSURL URLWithString: @"http://www.google.com"];
 }
  
 
@@ -156,5 +169,14 @@
     [self.segmentedView setContentView: newWebView];
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setRequestURL:(NSURL*)url {
+    if (_requestURL != url) {
+        [_requestURL release];
+        _requestURL = [url retain];
+
+        [self loadRequest];
+    }
+}
 
 @end
