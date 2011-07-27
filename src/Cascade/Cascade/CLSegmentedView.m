@@ -18,7 +18,6 @@
 @synthesize footerView = _footerView;
 @synthesize headerView = _headerView;
 @synthesize contentView = _contentView;
-@synthesize shadow = _shadow;
 @synthesize shadowWidth = _shadowWidth;
 @synthesize viewSize = _viewSize;
 @synthesize showRoundedCorners = _showRoundedCorners;
@@ -122,27 +121,63 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setShadow:(CAGradientLayer*)shadow {
-    
+- (void) addShadow:(CAGradientLayer*)shadow width:(CGFloat)with animated:(BOOL)animated {
+    _shadowWidth = with;
+
     if (_shadow != shadow) {
         [_shadow removeFromSuperlayer];
         [_shadow release];
         _shadow = [shadow retain];
+        [_shadow setOpaque: 0.0];
         
         [self setClipsToBounds: NO];
         
-		[self.layer insertSublayer:_shadow atIndex:0];
-        [self setNeedsLayout];
+        if (!animated) {
+            [shadow setOpaque: 1.0];
+            [self.layer insertSublayer:_shadow atIndex:0];            
+        } else {
+            [self.layer insertSublayer:_shadow atIndex:0];            
+            
+            CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+            animation.fromValue = [NSNumber numberWithFloat:0.0];
+            animation.toValue = [NSNumber numberWithFloat:1.0];
+            animation.duration = 1.2;
+            _shadow.opacity = 1.0;
+            [_shadow addAnimation:animation forKey:@"opacityAnimation"];
+        }
     }
+
+    [self setNeedsLayout];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setShadow:(CAGradientLayer*)shadow withWidth:(CGFloat)with {
-    _shadowWidth = with;
-    self.shadow = shadow;
+- (void) removeShadowAnimated:(BOOL)animated {
+
+    if (!animated) {
+        [_shadow removeFromSuperlayer];
+        [_shadow release], _shadow = nil;
+    } else {
+        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        animation.fromValue = [NSNumber numberWithFloat:1.0];
+        animation.toValue = [NSNumber numberWithFloat:0.0];
+        animation.duration = 0.7;
+        [animation setDelegate: self];
+        _shadow.opacity = 0.0;
+        [_shadow addAnimation:animation forKey:@"opacityAnimation"];
+    }
+
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
+//    if ((flag) && (theAnimation.keyPath == @"opacityAnimation")) {
+    if (flag) {
+        [_shadow removeFromSuperlayer];
+        [_shadow release], _shadow = nil;
+    }
+}
 
 #pragma mark -
 #pragma mark Private

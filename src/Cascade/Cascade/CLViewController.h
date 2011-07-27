@@ -19,10 +19,7 @@
 @interface CLViewController : UIViewController <CLViewControllerDelegate> {
     CLCascadeNavigationController* _cascadeNavigationController;
 
-    CAGradientLayer* _originShadow;
-    
     CLViewSize _viewSize;
-    
     BOOL _roundedCorners;
 }
 
@@ -37,9 +34,9 @@
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated;
 
 // Outer left shadow methods
-- (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha animated:(BOOL)animated;
-- (void) showShadow:(BOOL)animated;
-- (void) hideShadow:(BOOL)animated;
+- (void) addShadowWithWidth:(CGFloat)width animated:(BOOL)animated;
+- (void) removeShadow:(BOOL)animated;
 
+- (CAGradientLayer*) outerLeftShadow;
 
 @end

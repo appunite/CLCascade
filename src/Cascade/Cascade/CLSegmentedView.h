@@ -41,11 +41,6 @@
 @property (nonatomic, retain, readonly) IBOutlet UIView* contentView;
 
 /*
- * Shadow on the left side of the view
- */
-@property (nonatomic, retain) CAGradientLayer* shadow;
-
-/*
  * The width of the shadow
  */
 @property (nonatomic, assign) CGFloat shadowWidth;
@@ -88,6 +83,11 @@
 /* 
  * This methoad add left outer shadow
  */
-- (void) setShadow:(CAGradientLayer*)shadow withWidth:(CGFloat)with;
+- (void) addShadow:(CAGradientLayer*)shadow width:(CGFloat)with animated:(BOOL)animated;
+
+/* 
+ * This methoad remove left outer shadow
+ */
+- (void) removeShadowAnimated:(BOOL)animated;
 
 @end

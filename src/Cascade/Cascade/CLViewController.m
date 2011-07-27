@@ -9,8 +9,6 @@
 #import "CLViewController.h"
 #import "CLCascadeNavigationController.h"
 
-#define SHOW_SHADOW YES
-
 @implementation CLViewController
 
 @synthesize cascadeNavigationController = _cascadeNavigationController;
@@ -61,10 +59,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_cascadeNavigationController release], _cascadeNavigationController = nil;
-    if (_originShadow) 
-        [_originShadow release], _originShadow = nil;  
-    
+    [_cascadeNavigationController release], _cascadeNavigationController = nil;    
     [super dealloc];
 }
 
@@ -124,8 +119,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    
-    if (_originShadow) [_originShadow release], _originShadow = nil;
 }
 
 
@@ -141,60 +134,36 @@
 #pragma mark Class methods
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setOuterLeftShadow:(UIColor*)shadowColor width:(CGFloat)width alpha:(CGFloat)alpha animated:(BOOL)animated {
-    if (!SHOW_SHADOW) return;
-    
-    if (!_originShadow) {
-        _originShadow = [[CAGradientLayer alloc] init];
-    }
-    
-    _originShadow.startPoint = CGPointMake(0, 0.5);
-    _originShadow.endPoint = CGPointMake(1.0, 0.5);
-    CGRect newShadowFrame = CGRectMake(0, 0, width, self.view.frame.size.height);
-    
-    _originShadow.frame = newShadowFrame;
-    _originShadow.colors = [NSArray arrayWithObjects: 
+- (CAGradientLayer*) outerLeftShadow {
+
+    // generate default shadow
+    CAGradientLayer* shadow = [CAGradientLayer layer];
+    shadow.startPoint = CGPointMake(0, 0.5);
+    shadow.endPoint = CGPointMake(1.0, 0.5);
+
+    shadow.colors = [NSArray arrayWithObjects: 
                             (id)([[UIColor clearColor] colorWithAlphaComponent:0.0].CGColor), 
-                            (id)([shadowColor colorWithAlphaComponent: alpha].CGColor), 
+                            (id)([[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor), 
                             nil];
-    _originShadow.opacity = 0.0;
-    [(CLSegmentedView*)self.view setShadow:_originShadow withWidth:width];
     
-    [self showShadow: animated];
+    return shadow;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) addShadowWithWidth:(CGFloat)width animated:(BOOL)animated {
+    
+    CAGradientLayer* shadow = [self outerLeftShadow];
+
+    [(CLSegmentedView*)self.view addShadow:shadow 
+                                     width:width 
+                                  animated:animated];    
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) showShadow:(BOOL)animated {
-//    if (![_originShadow isHidden]) return;
-
-    if (!animated) {
-        [_originShadow setHidden: NO];
-    } else {
-        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        animation.fromValue = [NSNumber numberWithFloat:0.0];
-        animation.toValue = [NSNumber numberWithFloat:1.0];
-        animation.duration = 1.2;
-        _originShadow.opacity = 1.0;
-        [_originShadow addAnimation:animation forKey:@"opacityAnimation"];
-    }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) hideShadow:(BOOL)animated {
-//    if ([_originShadow isHidden]) return;
-
-    if (!animated) {
-        [_originShadow setHidden: YES];
-    } else {
-        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        animation.fromValue = [NSNumber numberWithFloat:1.0];
-        animation.toValue = [NSNumber numberWithFloat:0.0];
-        animation.duration = 0.7;
-        _originShadow.opacity = 0.0;
-        [_originShadow addAnimation:animation forKey:@"opacityAnimation"];
-    }
+- (void) removeShadow:(BOOL)animated {
+    
+    [(CLSegmentedView*)self.view removeShadowAnimated:animated];    
 }
 
 
@@ -215,7 +184,7 @@
      */
     
     
-    [self showShadow: NO];
+//    [self showShadow: NO];
 }
 
 
@@ -226,7 +195,7 @@
      * another page or will slide out CascadeView bounds
      */
 
-    [self hideShadow: NO];
+//    [self hideShadow: NO];
 }
 
 @end
