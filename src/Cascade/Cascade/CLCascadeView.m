@@ -744,12 +744,13 @@
                 
                 CGFloat contentOffset = _scrollView.contentOffset.x;
                 
-                if ((i == 0) && (contentOffset <= 0)) {
+                
+                if (((i == 0) && (contentOffset <= 0)) || ([_pages count] == 1)) {
                     return;
                 }
                 
                 UIView* view = (UIView*)item;
-                
+
                 CGRect rect = [view frame];
                 rect.origin.x = contentOffset;
                 [view setFrame: rect];
