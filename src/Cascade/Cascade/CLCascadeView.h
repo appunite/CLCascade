@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CLScrollView.h"
 
 @protocol CLCascadeViewDataSource;
 @protocol CLCascadeViewDelegate;
@@ -17,7 +18,7 @@
     id<CLCascadeViewDataSource> _dataSource;
 
     // scroll view
-    UIScrollView* _scrollView;
+    CLScrollView* _scrollView;
     
     // contain all pages, if page is unloaded then page is respresented as [NSNull null]
     NSMutableArray* _pages;

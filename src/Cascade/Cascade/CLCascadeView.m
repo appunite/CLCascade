@@ -90,7 +90,7 @@
         _indexOfLastVisiblePage = -1;
 
         CGRect rect = CGRectMake(_leftInset, 0.0f, _pageWidth, frame.size.height);
-        _scrollView = [[UIScrollView alloc] initWithFrame: rect];
+        _scrollView = [[CLScrollView alloc] initWithFrame: rect];
         [_scrollView setDelegate: self];
         [_scrollView setDecelerationRate: UIScrollViewDecelerationRateFast];
         [_scrollView setScrollsToTop: NO];
@@ -99,8 +99,8 @@
         [_scrollView setClipsToBounds: NO];
         [_scrollView setAlwaysBounceVertical: NO];
         [_scrollView setAlwaysBounceHorizontal: YES];
-        [_scrollView setDirectionalLockEnabled: NO];
-        [_scrollView setDelaysContentTouches:NO];
+        [_scrollView setDirectionalLockEnabled: YES];
+        [_scrollView setDelaysContentTouches:YES];
         [_scrollView setMultipleTouchEnabled:NO];
         [_scrollView setShowsVerticalScrollIndicator: NO];
         [_scrollView setShowsHorizontalScrollIndicator: NO];
@@ -180,7 +180,10 @@
 
     NSInteger index = [_pages count] -1;
     UIInterfaceOrientation interfaceOrienation = [[UIApplication sharedApplication] statusBarOrientation];
-
+    
+    // unset paging enabled (bug fix with auto scrolling when setContentOffset)
+    [_scrollView setPagingEnabled: NO];
+    
     if (index > 0) {
         // scroll to new page frame
         if (!_flags.hasWiderPage) {
@@ -197,6 +200,7 @@
             }
         }
     }
+        
 }
 
 
@@ -687,7 +691,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
+
     // operations connected with Pull To Detach Pages action
     CGFloat realContentOffsetX = _scrollView.contentOffset.x + _scrollView.contentInset.left;
     
@@ -726,8 +730,7 @@
         [self pageDidDisappearAtIndex: _indexOfLastVisiblePage];
         _indexOfLastVisiblePage = lastVisiblePageIndex;
     }
-
-
+    
     // operations connected with blocking pages on stock
     for (NSInteger i=0; i<=firstVisiblePageIndex; i++) {
         
@@ -770,12 +773,16 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    
+//    [_scrollView setPagingEnabled: NO];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+
+    // set paging enabled (bug fix with auto scrolling when setContentOffset in pushView:)
+    [_scrollView setPagingEnabled: YES];
+
     if (!_pullToDetachPages) return;
     
     CGFloat realContentOffsetX = _scrollView.contentOffset.x + _scrollView.contentInset.left;
@@ -792,7 +799,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    
+
     NSInteger secondVisiblePageIndex = [self indexOfFirstVisiblePage] + 1;
 
     if ([self pageExistAtIndex: secondVisiblePageIndex]) {
