@@ -27,6 +27,24 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark Class methods
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CAGradientLayer*) outerLeftShadow {
+    
+    // generate default shadow
+    CAGradientLayer* shadow = [CAGradientLayer layer];
+    shadow.startPoint = CGPointMake(0, 0.5);
+    shadow.endPoint = CGPointMake(1.0, 0.5);
+    
+    shadow.colors = [NSArray arrayWithObjects: 
+                     (id)([[UIColor clearColor] colorWithAlphaComponent:0.0].CGColor), 
+                     (id)([[UIColor colorWithRed:0.208 green:0.165 blue:0.118 alpha:1.0] colorWithAlphaComponent: 0.35].CGColor), 
+                     nil];
+    
+    return shadow;
+}
+
 #pragma mark - View lifecycle
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -35,7 +53,7 @@
     [super viewDidLoad];
 
     // add shadow
-    [self setOuterLeftShadow:[UIColor colorWithRed:0.208 green:0.165 blue:0.118 alpha:1.0] width:40.0 alpha:0.35 animated:YES];
+    [self addShadowWithWidth:40.0 animated:YES];
     
     // add header view
     UIImageView* header = [[UIImageView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.bounds.size.width, 45.0)];
