@@ -344,6 +344,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
+    // unset paging enabled (bug fix with auto scrolling when setContentOffset)
+    [_scrollView setPagingEnabled: NO];
     // set proper content size
     [self setProperContentSize: interfaceOrientation];
     // set proper edge inset
@@ -710,13 +712,24 @@
 
     // operations connected with Pull To Detach Pages action
     [self sendDetachDelegateMethodsIfNeeded];
-
+    
     // operations connected with Page Did Appear/Disappear delegate metgods
     [self sendAppearanceDelegateMethodsIfNeeded];
 
     // calculate first visible page
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
     
+    // bug fix with bad position of first page
+    if ((firstVisiblePageIndex == 0) && (-_scrollView.contentOffset.x >= _scrollView.contentInset.left)) {
+        // get page at index
+        id item = [_pages objectAtIndex: firstVisiblePageIndex];
+        UIView* view = (UIView*)item;
+        
+        CGRect rect = [view frame];
+        rect.origin.x = 0;
+        [view setFrame: rect];
+    }
+
     // operations connected with blocking pages on stock
     for (NSInteger i=0; i<=firstVisiblePageIndex; i++) {
         
@@ -732,7 +745,6 @@
                 }
                 
                 CGFloat contentOffset = _scrollView.contentOffset.x;
-                
                 
                 if (((i == 0) && (contentOffset <= 0)) || ([_pages count] == 1)) {
                     return;
@@ -752,22 +764,20 @@
             }
         }
     }
-        
+
     [self loadBoundaryPagesIfNeeded];    
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-//    [_scrollView setPagingEnabled: NO];
+    // set paging enabled (bug fix with auto scrolling when setContentOffset in pushView:)
+    [_scrollView setPagingEnabled: YES];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-
-    // set paging enabled (bug fix with auto scrolling when setContentOffset in pushView:)
-    [_scrollView setPagingEnabled: YES];
 
     if (!_pullToDetachPages) return;
     
@@ -835,6 +845,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pageDidAppearAtIndex:(NSInteger)index {
     if (![self pageExistAtIndex: index]) return;
+
+//    NSInteger secondVisiblePageIndex = [self indexOfFirstVisiblePage] +1;
+//    [self setProperPositionOfPageAtIndex: secondVisiblePageIndex];
 
     if ([_delegate respondsToSelector:@selector(cascadeView:pageDidAppearAtIndex:)]) {
         [_delegate cascadeView:self pageDidAppearAtIndex:index];
