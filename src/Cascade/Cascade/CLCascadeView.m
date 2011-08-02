@@ -19,6 +19,8 @@
 - (void) didStartPullingToDetachPages;
 - (void) didPullToDetachPages;
 - (void) didCancelPullToDetachPages;
+- (void) sendAppearanceDelegateMethodsIfNeeded;
+- (void) sendDetachDelegateMethodsIfNeeded;
 @end
 
 @interface CLCascadeView (Private)
@@ -693,43 +695,13 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
     // operations connected with Pull To Detach Pages action
-    CGFloat realContentOffsetX = _scrollView.contentOffset.x + _scrollView.contentInset.left;
-    
-    if ((_pullToDetachPages) && (!_flags.isDetachPages)) {
-        if ((!_flags.willDetachPages) && (realContentOffsetX < - _scrollView.frame.size.width * PULL_TO_DETACH_FACTOR)) {
-            [self didStartPullingToDetachPages];
-        }
-        
-        if ((_flags.willDetachPages) && (realContentOffsetX > - _scrollView.frame.size.width * PULL_TO_DETACH_FACTOR)) {
-            [self didCancelPullToDetachPages];
-        }
-    }
+    [self sendDetachDelegateMethodsIfNeeded];
 
     // operations connected with Page Did Appear/Disappear delegate metgods
+    [self sendAppearanceDelegateMethodsIfNeeded];
 
     // calculate first visible page
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
-    
-    if (_indexOfFirstVisiblePage > firstVisiblePageIndex) {
-        [self pageDidAppearAtIndex: firstVisiblePageIndex];
-        _indexOfFirstVisiblePage = firstVisiblePageIndex;
-    }
-    else if (_indexOfFirstVisiblePage < firstVisiblePageIndex) {
-        [self pageDidDisappearAtIndex: _indexOfFirstVisiblePage];
-        _indexOfFirstVisiblePage = firstVisiblePageIndex;
-    }
-    
-    // calculate last visible page
-    NSInteger lastVisiblePageIndex = [self indexOfLastVisibleView: NO];
-    
-    if (_indexOfLastVisiblePage < lastVisiblePageIndex) {
-        [self pageDidAppearAtIndex: lastVisiblePageIndex];
-        _indexOfLastVisiblePage = lastVisiblePageIndex;
-    }
-    else if (_indexOfLastVisiblePage > lastVisiblePageIndex) {
-        [self pageDidDisappearAtIndex: _indexOfLastVisiblePage];
-        _indexOfLastVisiblePage = lastVisiblePageIndex;
-    }
     
     // operations connected with blocking pages on stock
     for (NSInteger i=0; i<=firstVisiblePageIndex; i++) {
@@ -900,6 +872,49 @@
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) sendAppearanceDelegateMethodsIfNeeded {
+    // calculate first visible page
+    NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
+    
+    if (_indexOfFirstVisiblePage > firstVisiblePageIndex) {
+        [self pageDidAppearAtIndex: firstVisiblePageIndex];
+        _indexOfFirstVisiblePage = firstVisiblePageIndex;
+    }
+    else if (_indexOfFirstVisiblePage < firstVisiblePageIndex) {
+        [self pageDidDisappearAtIndex: _indexOfFirstVisiblePage];
+        _indexOfFirstVisiblePage = firstVisiblePageIndex;
+    }
+    
+    // calculate last visible page
+    NSInteger lastVisiblePageIndex = [self indexOfLastVisibleView: NO];
+    
+    if (_indexOfLastVisiblePage < lastVisiblePageIndex) {
+        [self pageDidAppearAtIndex: lastVisiblePageIndex];
+        _indexOfLastVisiblePage = lastVisiblePageIndex;
+    }
+    else if (_indexOfLastVisiblePage > lastVisiblePageIndex) {
+        [self pageDidDisappearAtIndex: _indexOfLastVisiblePage];
+        _indexOfLastVisiblePage = lastVisiblePageIndex;
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) sendDetachDelegateMethodsIfNeeded {
+    CGFloat realContentOffsetX = _scrollView.contentOffset.x + _scrollView.contentInset.left;
+    
+    if ((_pullToDetachPages) && (!_flags.isDetachPages)) {
+        if ((!_flags.willDetachPages) && (realContentOffsetX < - _scrollView.frame.size.width * PULL_TO_DETACH_FACTOR)) {
+            [self didStartPullingToDetachPages];
+        }
+        
+        if ((_flags.willDetachPages) && (realContentOffsetX > - _scrollView.frame.size.width * PULL_TO_DETACH_FACTOR)) {
+            [self didCancelPullToDetachPages];
+        }
+    }
+}
 
 #pragma mark -
 #pragma mark Setters
