@@ -46,6 +46,7 @@
 - (NSInteger) visiblePagesCount;
 - (CGFloat) widerPageWidth;
 
+- (void) setProperPositionOfPageAtIndex:(NSInteger)index;
 @end
 
 #define DEFAULT_LEFT_INSET 58.0f
@@ -688,6 +689,19 @@
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setProperPositionOfPageAtIndex:(NSInteger)index {
+
+    if ([self pageExistAtIndex: index]) {
+        UIView* page = [_pages objectAtIndex: index];
+        
+        CGRect rect = [page frame];
+        rect.origin.x = _pageWidth * index;
+        [page setFrame: rect];
+    }
+}
+
+
 #pragma mark -
 #pragma mark UIScrollView delegates methods
 
@@ -773,14 +787,7 @@
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
 
     NSInteger secondVisiblePageIndex = [self indexOfFirstVisiblePage] + 1;
-
-    if ([self pageExistAtIndex: secondVisiblePageIndex]) {
-        UIView* page = [_pages objectAtIndex: secondVisiblePageIndex];
-        
-        CGRect rect = [page frame];
-        rect.origin.x = _pageWidth * secondVisiblePageIndex;
-        [page setFrame: rect];
-    }
+    [self setProperPositionOfPageAtIndex: secondVisiblePageIndex];
 }
 
 
