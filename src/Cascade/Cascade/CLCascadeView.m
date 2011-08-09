@@ -716,6 +716,8 @@
     // operations connected with Page Did Appear/Disappear delegate metgods
     [self sendAppearanceDelegateMethodsIfNeeded];
 
+    if (_flags.isDetachPages) return;
+    
     // calculate first visible page
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
     

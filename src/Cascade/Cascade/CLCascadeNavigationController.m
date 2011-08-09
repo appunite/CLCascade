@@ -198,18 +198,33 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeViewDidStartPullingToDetachPages:(CLCascadeView*)cascadeView {
+    /*
+     Override this methods to implement own actions, animations
+     */
+    
     NSLog(@"cascadeViewDidStartPullingToDetachPages");
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeViewDidPullToDetachPages:(CLCascadeView*)cascadeView {
+    /*
+     Override this methods to implement own actions, animations
+     */
     NSLog(@"cascadeViewDidPullToDetachPages");
+    
+    // pop all pages
+    [_cascadeView popAllPagesAnimated: YES];
+    // remove all controllers
+    [_viewControllers removeAllObjects];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeViewDidCancelPullToDetachPages:(CLCascadeView*)cascadeView {
+    /*
+     Override this methods to implement own actions, animations
+     */
     NSLog(@"cascadeViewDidCancelPullToDetachPages");
 }
 
