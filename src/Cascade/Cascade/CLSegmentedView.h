@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "CLCascadeEnums.h"
+#import "CLGlobal.h"
 
 @interface CLSegmentedView : UIView {
     UIView* _headerView;

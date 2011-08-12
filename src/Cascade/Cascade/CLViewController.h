@@ -12,7 +12,7 @@
 #import "CLSegmentedView.h"
 #import "UIViewController+CLSegmentedView.h"
 #import "CLViewControllerDelegate.h"
-#import "CLCascadeEnums.h"
+#import "CLGlobal.h"
 
 @class CLCascadeNavigationController;
 

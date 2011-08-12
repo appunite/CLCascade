@@ -8,6 +8,7 @@
 
 #import "CLCascadeView.h"
 #import "CLSegmentedView.h"
+#import "CLGlobal.h"
 
 @interface CLCascadeView (DelegateMethods)
 - (void) didLoadPage:(UIView*)page;
@@ -595,14 +596,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIEdgeInsets) calculateEdgeInset:(UIInterfaceOrientation)interfaceOrientation {
     
-    CGFloat leftInset = 0.0f;
+    CGFloat leftInset = CATEGORIES_VIEW_WIDTH - _leftInset;
     CGFloat rightInset = 0.0f;
     
     //left inset depends on interface orientation
-    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
-        leftInset = self.bounds.size.width/2 - _pageWidth/2 - _leftInset;
-    } else {
-        leftInset = self.bounds.size.width - _pageWidth - _leftInset;
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
         rightInset = 2 * _pageWidth + _leftInset - self.bounds.size.width;
     }
     

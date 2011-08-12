@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CLCascadeNavigationController.h"
-#import "CLCascadeEnums.h"
 #import "CLSplitCascadeViewController.h"
+#import "CLGlobal.h"
 
 @interface CLSplitCascadeView : UIView {
     // views

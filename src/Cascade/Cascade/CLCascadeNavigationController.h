@@ -11,7 +11,7 @@
 #import "CLViewController.h"
 #import "CLCascadeView.h"
 #import "CLViewControllerDelegate.h"
-#import "CLCascadeEnums.h"
+#import "CLGlobal.h"
 
 @interface CLCascadeNavigationController : UIViewController <CLCascadeViewDataSource, CLCascadeViewDelegate> {
     // array of all view controllers

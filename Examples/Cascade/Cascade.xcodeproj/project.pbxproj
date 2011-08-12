@@ -71,6 +71,7 @@
 		201A2D8913994D6400EFAE15 /* divider_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = divider_vertical.png; sourceTree = "<group>"; };
 		201A2D8E1399522900EFAE15 /* ExampleSplitCascadeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleSplitCascadeViewController.h; sourceTree = "<group>"; };
 		201A2D8F1399522900EFAE15 /* ExampleSplitCascadeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleSplitCascadeViewController.m; sourceTree = "<group>"; };
+		201EAFD713F552AA0069E9F3 /* CLGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLGlobal.h; path = ../../src/Cascade/Cascade/CLGlobal.h; sourceTree = "<group>"; };
 		2026953C13E302F400EF60A6 /* CLScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLScrollView.h; path = ../../src/Cascade/Cascade/CLScrollView.h; sourceTree = "<group>"; };
 		2026953D13E302F400EF60A6 /* CLScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLScrollView.m; path = ../../src/Cascade/Cascade/CLScrollView.m; sourceTree = "<group>"; };
 		207EA48F13992C0400A8200F /* Cascade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cascade.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,7 +85,6 @@
 		207EA4A213992C0400A8200F /* CascadeAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CascadeAppDelegate.h; sourceTree = "<group>"; };
 		207EA4A313992C0400A8200F /* CascadeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CascadeAppDelegate.m; sourceTree = "<group>"; };
 		207EA4A613992C0400A8200F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		207EA4BD13992C6300A8200F /* CLCascadeEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCascadeEnums.h; path = ../../src/Cascade/Cascade/CLCascadeEnums.h; sourceTree = "<group>"; };
 		207EA4BF13992C6300A8200F /* CLCascadeNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCascadeNavigationController.h; path = ../../src/Cascade/Cascade/CLCascadeNavigationController.h; sourceTree = "<group>"; };
 		207EA4C013992C6300A8200F /* CLCascadeNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCascadeNavigationController.m; path = ../../src/Cascade/Cascade/CLCascadeNavigationController.m; sourceTree = "<group>"; };
 		207EA4C113992C6300A8200F /* CLCascadeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCascadeView.h; path = ../../src/Cascade/Cascade/CLCascadeView.h; sourceTree = "<group>"; };
@@ -274,9 +274,9 @@
 		20BA720713C1F31100CDE622 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				201EAFD713F552AA0069E9F3 /* CLGlobal.h */,
 				2026953C13E302F400EF60A6 /* CLScrollView.h */,
 				2026953D13E302F400EF60A6 /* CLScrollView.m */,
-				207EA4BD13992C6300A8200F /* CLCascadeEnums.h */,
 				207EA4C913992C6300A8200F /* CLSegmentedView.h */,
 				207EA4CA13992C6300A8200F /* CLSegmentedView.m */,
 				207EA4E113992C6A00A8200F /* UIViewController+CLSegmentedView.h */,

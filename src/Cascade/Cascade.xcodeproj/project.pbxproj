@@ -13,6 +13,7 @@
 		200BF67F13747494005C23EF /* CLCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200BF67E13747494005C23EF /* CLCategoriesViewController.m */; };
 		200BF6821374751B005C23EF /* CLCascadeNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200BF6811374751B005C23EF /* CLCascadeNavigationController.m */; };
 		201EAFC813F5402C0069E9F3 /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2026954413E3034500EF60A6 /* CLScrollView.m */; };
+		201EAFD113F5517F0069E9F3 /* CLGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 201EAFD013F5517F0069E9F3 /* CLGlobal.h */; };
 		2026954513E3034500EF60A6 /* CLScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2026954313E3034500EF60A6 /* CLScrollView.h */; };
 		2026954613E3034500EF60A6 /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2026954413E3034500EF60A6 /* CLScrollView.m */; };
 		206ECD1C1375595200B8405F /* UIViewController+CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD1B1375595200B8405F /* UIViewController+CLSegmentedView.m */; };
@@ -71,13 +72,13 @@
 		200BF67E13747494005C23EF /* CLCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCategoriesViewController.m; sourceTree = "<group>"; };
 		200BF6801374751B005C23EF /* CLCascadeNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCascadeNavigationController.h; sourceTree = "<group>"; };
 		200BF6811374751B005C23EF /* CLCascadeNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCascadeNavigationController.m; sourceTree = "<group>"; };
+		201EAFD013F5517F0069E9F3 /* CLGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLGlobal.h; sourceTree = "<group>"; };
 		2026954313E3034500EF60A6 /* CLScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLScrollView.h; sourceTree = "<group>"; };
 		2026954413E3034500EF60A6 /* CLScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLScrollView.m; sourceTree = "<group>"; };
 		206ECD1A1375595200B8405F /* UIViewController+CLSegmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CLSegmentedView.h"; sourceTree = "<group>"; };
 		206ECD1B1375595200B8405F /* UIViewController+CLSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CLSegmentedView.m"; sourceTree = "<group>"; };
 		206ECD5E137589DB00B8405F /* CLCategoriesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCategoriesView.h; sourceTree = "<group>"; };
 		206ECD5F137589DB00B8405F /* CLCategoriesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCategoriesView.m; sourceTree = "<group>"; };
-		206ECD611375973C00B8405F /* CLCascadeEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCascadeEnums.h; sourceTree = "<group>"; };
 		208B99051393EF0F0042165A /* CLViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewControllerDelegate.h; sourceTree = "<group>"; };
 		20B0D9791356518E008B1F7D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		20BA828A13C6D8A900CBFCD3 /* CLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebViewController.h; sourceTree = "<group>"; };
@@ -206,7 +207,7 @@
 				20F2DBA8136494350076E80D /* CLSegmentedView.m */,
 				206ECD1A1375595200B8405F /* UIViewController+CLSegmentedView.h */,
 				206ECD1B1375595200B8405F /* UIViewController+CLSegmentedView.m */,
-				206ECD611375973C00B8405F /* CLCascadeEnums.h */,
+				201EAFD013F5517F0069E9F3 /* CLGlobal.h */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -334,6 +335,7 @@
 				208B99061393EF0F0042165A /* CLViewControllerDelegate.h in Headers */,
 				20BA828C13C6D8A900CBFCD3 /* CLWebViewController.h in Headers */,
 				2026954513E3034500EF60A6 /* CLScrollView.h in Headers */,
+				201EAFD113F5517F0069E9F3 /* CLGlobal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

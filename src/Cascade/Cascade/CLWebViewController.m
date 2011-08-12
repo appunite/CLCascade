@@ -7,13 +7,12 @@
 //
 
 #import "CLWebViewController.h"
+#import "CLGlobal.h"
 
 @implementation CLWebViewController
 
 @dynamic webView;
 @synthesize requestURL = _requestURL;
-
-#define DEFAULT_URL @"http://www.google.com"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id) init {
