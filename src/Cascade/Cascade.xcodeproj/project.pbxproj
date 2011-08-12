@@ -12,6 +12,7 @@
 		20015598138F82FC00FA91B2 /* CLCascadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20015595138F824E00FA91B2 /* CLCascadeView.m */; };
 		200BF67F13747494005C23EF /* CLCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200BF67E13747494005C23EF /* CLCategoriesViewController.m */; };
 		200BF6821374751B005C23EF /* CLCascadeNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200BF6811374751B005C23EF /* CLCascadeNavigationController.m */; };
+		201EAFC813F5402C0069E9F3 /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2026954413E3034500EF60A6 /* CLScrollView.m */; };
 		2026954513E3034500EF60A6 /* CLScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2026954313E3034500EF60A6 /* CLScrollView.h */; };
 		2026954613E3034500EF60A6 /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2026954413E3034500EF60A6 /* CLScrollView.m */; };
 		206ECD1C1375595200B8405F /* UIViewController+CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD1B1375595200B8405F /* UIViewController+CLSegmentedView.m */; };
@@ -460,6 +461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				201EAFC813F5402C0069E9F3 /* CLScrollView.m in Sources */,
 				20015598138F82FC00FA91B2 /* CLCascadeView.m in Sources */,
 				20BB342B133FB8FF003EEB6E /* main.m in Sources */,
 				20BB342E133FB900003EEB6E /* CascadeAppDelegate.m in Sources */,

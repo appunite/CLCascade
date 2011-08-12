@@ -212,11 +212,20 @@
      Override this methods to implement own actions, animations
      */
     NSLog(@"cascadeViewDidPullToDetachPages");
+ 
+    // index of last page
+    NSUInteger index = [_viewControllers count] - 1;
+    // pop page from back
+    NSEnumerator* enumerator = [_viewControllers reverseObjectEnumerator];
+    // enumarate pages
+    while ([enumerator nextObject] && _viewControllers.count > 1) {
+        // pop page at index
+        [cascadeView popPageAtIndex:index animated:NO];
+        [_viewControllers removeLastObject];
+        index--;
+    }
+    [cascadeView loadPageAtIndex:0];
     
-    // pop all pages
-    [_cascadeView popAllPagesAnimated: YES];
-    // remove all controllers
-    [_viewControllers removeAllObjects];
 }
 
 

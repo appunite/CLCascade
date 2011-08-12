@@ -226,6 +226,8 @@
                                  [self unloadPage:item remove:YES];
                                  // update edge inset
                                  [self setProperEdgeInset: NO];
+                                 // update content size
+                                 [self setProperContentSize];
                                  // send delegate message
                                  [self didPopPageAtIndex: index];
                              }];
@@ -235,6 +237,8 @@
             [self unloadPage:item remove:YES];
             // update edge inset
             [self setProperEdgeInset: NO];
+            // update content size
+            [self setProperContentSize];
             // send delegate message
             [self didPopPageAtIndex: index];
         }

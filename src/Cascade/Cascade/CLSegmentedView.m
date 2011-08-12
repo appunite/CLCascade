@@ -31,7 +31,7 @@
     self = [super init];
     if (self) {
         _roundedCornersView = [[UIView alloc] init];
-        [_roundedCornersView setBackgroundColor: [UIColor clearColor]];
+        [_roundedCornersView setBackgroundColor: [UIColor whiteColor]];
         [self addSubview: _roundedCornersView];
         
         _viewSize = CLViewSizeNormal;
@@ -192,12 +192,12 @@
                                                    byRoundingCorners:_rectCorner
                                                          cornerRadii:CGSizeMake(6.0f, 6.0f)];
         [maskLayer setPath:[path CGPath]];
-        [maskLayer setFillColor:[[UIColor greenColor] CGColor]];
         
         _roundedCornersView.layer.masksToBounds = YES;
         _roundedCornersView.layer.mask = maskLayer;
     } 
     else {
+        _roundedCornersView.layer.masksToBounds = NO;
         [_roundedCornersView.layer setMask: nil];
     }
 }
@@ -205,6 +205,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) layoutSubviews {
+
     CGRect rect = self.bounds;
     
     CGFloat viewWidth = rect.size.width;
@@ -242,6 +243,8 @@
         [CATransaction commit];
 
     }
+
+    [self updateRoundedCorners];
 }
 
 
@@ -263,7 +266,7 @@
 - (void) setRectCorner:(UIRectCorner)corners {
     if (corners != _rectCorner) {
         _rectCorner = corners;
-        [self updateRoundedCorners];
+        [self setNeedsLayout];
     }
 }
 
@@ -272,7 +275,7 @@
 - (void) setShowRoundedCorners:(BOOL)show {
     if (show != _showRoundedCorners) {
         _showRoundedCorners = show;
-        [self updateRoundedCorners];
+        [self setNeedsLayout];
     }
 }
 
