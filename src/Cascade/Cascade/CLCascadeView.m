@@ -52,7 +52,7 @@
 
 #define DEFAULT_LEFT_INSET 58.0f
 #define DEFAULT_WIDER_LEFT_INSET 220.0f
-#define PULL_TO_DETACH_FACTOR 0.45f
+#define PULL_TO_DETACH_FACTOR 0.40f
 
 @implementation CLCascadeView
 
@@ -227,8 +227,6 @@
                                  [self unloadPage:item remove:YES];
                                  // update edge inset
                                  [self setProperEdgeInset: NO];
-                                 // update content size
-                                 [self setProperContentSize];
                                  // send delegate message
                                  [self didPopPageAtIndex: index];
                              }];
@@ -238,8 +236,6 @@
             [self unloadPage:item remove:YES];
             // update edge inset
             [self setProperEdgeInset: NO];
-            // update content size
-            [self setProperContentSize];
             // send delegate message
             [self didPopPageAtIndex: index];
         }
@@ -881,6 +877,9 @@
     if ([_delegate respondsToSelector:@selector(cascadeViewDidPullToDetachPages:)]) {
         [_delegate cascadeViewDidPullToDetachPages:self];
     }
+    
+    // update content size
+    [self setProperContentSize];
 }
 
 
