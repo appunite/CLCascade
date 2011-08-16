@@ -273,7 +273,8 @@
             // if got view from dataSorce
             if (view != nil) {
                 //preventive, set frame
-                CGRect pageFrame = CGRectMake(index * _pageWidth, 0.0f, _pageWidth, _scrollView.frame.size.height);
+                CGSize pageSize = [self calculatePageSize: view];
+                CGRect pageFrame = CGRectMake(index * _pageWidth, 0.0f, pageSize.width, pageSize.height);
                 [view setFrame: pageFrame];
                 // replace in array of pages
                 [_pages replaceObjectAtIndex:index withObject:view];
@@ -415,7 +416,7 @@
     // calculate visible pages count, first visible and last visible page
     NSInteger visiblePagesCount = [self visiblePagesCount];
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
-    NSInteger lastVisiblePageIndex = MIN([_pages count]-1, firstVisiblePageIndex + visiblePagesCount);
+    NSInteger lastVisiblePageIndex = MIN([_pages count]-1, firstVisiblePageIndex + visiblePagesCount -1);
     return lastVisiblePageIndex;
 }
 
@@ -689,11 +690,15 @@
 - (void) setProperPositionOfPageAtIndex:(NSInteger)index {
 
     if ([self pageExistAtIndex: index]) {
-        UIView* page = [_pages objectAtIndex: index];
-        
-        CGRect rect = [page frame];
-        rect.origin.x = _pageWidth * index;
-        [page setFrame: rect];
+        id item = [_pages objectAtIndex: index]; 
+
+        if (item != [NSNull null]) {
+            UIView* page = (UIView*)item;
+            
+            CGRect rect = [page frame];
+            rect.origin.x = _pageWidth * index;
+            [page setFrame: rect];
+        }
     }
 }
 
@@ -704,6 +709,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
+    if ([_pages count] == 0) return;
+    
     // operations connected with Pull To Detach Pages action
     [self sendDetachDelegateMethodsIfNeeded];
     
@@ -726,6 +733,8 @@
         [view setFrame: rect];
     }
 
+    [self loadBoundaryPagesIfNeeded];    
+
     // operations connected with blocking pages on stock
     for (NSInteger i=0; i<=firstVisiblePageIndex; i++) {
         
@@ -736,9 +745,9 @@
             
             if (i == firstVisiblePageIndex) {
                 
-                if (item == [NSNull null]) {
-                    item = [self loadPageAtIndex: i];
-                }
+//                if (item == [NSNull null]) {
+//                    item = [self loadPageAtIndex: i];
+//                }
                 
                 CGFloat contentOffset = _scrollView.contentOffset.x;
                 
@@ -761,7 +770,6 @@
         }
     }
 
-    [self loadBoundaryPagesIfNeeded];    
 }
 
 
