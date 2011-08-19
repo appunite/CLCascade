@@ -34,6 +34,8 @@
 - (CGSize) calculatePageSize:(UIView*)view;
 - (CGSize) calculateContentSize:(UIInterfaceOrientation)interfaceOrientation;
 - (UIEdgeInsets) calculateEdgeInset:(UIInterfaceOrientation)interfaceOrientation;
+- (CGPoint) calculateOriginOfPageAtIndex:(NSInteger)index;
+
 - (void) setProperContentSize;
 - (void) setProperContentSize:(UIInterfaceOrientation)interfaceOrientation;
 - (void) setProperEdgeInset:(BOOL)animated;
@@ -53,6 +55,7 @@
 #define DEFAULT_LEFT_INSET 58.0f
 #define DEFAULT_WIDER_LEFT_INSET 220.0f
 #define PULL_TO_DETACH_FACTOR 0.40f
+#define WTF 11.0f
 
 @implementation CLCascadeView
 
@@ -161,8 +164,10 @@
         _flags.hasWiderPage = YES;
     }
     
+    NSInteger index = [_pages count];
     CGSize size = [self calculatePageSize: newPage];
-    CGRect frame = CGRectMake(MAX(0, ([_pages count]) * _scrollView.frame.size.width), 0.0f, size.width, size.height);
+    CGPoint origin = [self calculateOriginOfPageAtIndex: index];
+    CGRect frame = CGRectMake(origin.x, origin.y, size.width, size.height);
     
     if (fromPage == nil) {
         [self popAllPagesAnimated: animated];
@@ -182,7 +187,6 @@
     // send message to delegate
     [self didAddPage:newPage animated:animated];
 
-    NSInteger index = [_pages count] -1;
     UIInterfaceOrientation interfaceOrienation = [[UIApplication sharedApplication] statusBarOrientation];
     
     // unset paging enabled (bug fix with auto scrolling when setContentOffset)
@@ -696,12 +700,16 @@
             UIView* page = (UIView*)item;
             
             CGRect rect = [page frame];
-            rect.origin.x = _pageWidth * index;
+            rect.origin = [self calculateOriginOfPageAtIndex: index];
             [page setFrame: rect];
         }
     }
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CGPoint) calculateOriginOfPageAtIndex:(NSInteger)index {
+    return CGPointMake(MAX(0, _pageWidth * index), 0.0f);
+}
 
 #pragma mark -
 #pragma mark UIScrollView delegates methods
