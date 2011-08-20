@@ -89,15 +89,10 @@
         _flags.isDetachPages = NO;
         _flags.hasWiderPage = NO;
 
-        self.leftInset = DEFAULT_LEFT_INSET;
-        self.widerLeftInset = DEFAULT_WIDER_LEFT_INSET;
-        self.pullToDetachPages = YES;
-
         _indexOfFirstVisiblePage = -1;
         _indexOfLastVisiblePage = -1;
 
-        CGRect rect = CGRectMake(_leftInset, 0.0f, _pageWidth, frame.size.height);
-        _scrollView = [[CLScrollView alloc] initWithFrame: rect];
+        _scrollView = [[CLScrollView alloc] init];
         [_scrollView setDelegate: self];
         [_scrollView setDecelerationRate: UIScrollViewDecelerationRateFast];
         [_scrollView setScrollsToTop: NO];
@@ -111,6 +106,10 @@
         [_scrollView setMultipleTouchEnabled:NO];
         [_scrollView setShowsVerticalScrollIndicator: NO];
         [_scrollView setShowsHorizontalScrollIndicator: NO];
+
+        self.leftInset = DEFAULT_LEFT_INSET;
+        self.widerLeftInset = DEFAULT_WIDER_LEFT_INSET;
+        self.pullToDetachPages = YES;
         
         [_scrollView setAutoresizingMask:
          UIViewAutoresizingFlexibleBottomMargin | 
