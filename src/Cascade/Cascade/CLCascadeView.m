@@ -92,7 +92,7 @@
         _indexOfFirstVisiblePage = -1;
         _indexOfLastVisiblePage = -1;
 
-        _scrollView = [[CLScrollView alloc] init];
+        _scrollView = [[CLScrollView alloc] init]; // frame will be set in setter of _leftInset
         [_scrollView setDelegate: self];
         [_scrollView setDecelerationRate: UIScrollViewDecelerationRateFast];
         [_scrollView setScrollsToTop: NO];
@@ -187,9 +187,6 @@
     [self didAddPage:newPage animated:animated];
 
     UIInterfaceOrientation interfaceOrienation = [[UIApplication sharedApplication] statusBarOrientation];
-    
-    // unset paging enabled (bug fix with auto scrolling when setContentOffset)
-    [_scrollView setPagingEnabled: NO];
     
     if (index > 0) {
         // scroll to new page frame
@@ -349,8 +346,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
-    // unset paging enabled (bug fix with auto scrolling when setContentOffset)
-    [_scrollView setPagingEnabled: NO];
     // set proper content size
     [self setProperContentSize: interfaceOrientation];
     // set proper edge inset
@@ -815,6 +810,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (_flags.isDetachPages) _flags.isDetachPages = NO;
+    [_scrollView setPagingEnabled: NO];
+
 }
 
 
