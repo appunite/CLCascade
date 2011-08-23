@@ -10,6 +10,7 @@
 
 @implementation CLScrollView
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)init
 {
     self = [super init];
@@ -20,10 +21,12 @@
     return self;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated {
-    NSLog(@"%@", NSStringFromCGRect(rect));
     // bug fix with auto scrolling when become first responder
     // do not overide it
 }
+
 
 @end

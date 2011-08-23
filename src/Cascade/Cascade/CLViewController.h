@@ -34,9 +34,9 @@
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated;
 
 // Outer left shadow methods
-- (void) addShadowWithWidth:(CGFloat)width animated:(BOOL)animated;
-- (void) removeShadow:(BOOL)animated;
+- (void) addLeftBorderShadowWithWidth:(CGFloat)width;
+- (void) removeLeftBorderShadow;
 
-- (CAGradientLayer*) outerLeftShadow;
+- (UIView *) leftBorderShadowView;
 
 @end

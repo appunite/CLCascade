@@ -246,7 +246,6 @@
 - (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated {
     // pop all pages
     [_cascadeView popAllPagesAnimated: animated];
-    [_cascadeView scrollToBegin];
     // remove all controllers
     [_viewControllers removeAllObjects];
     // add root view controller

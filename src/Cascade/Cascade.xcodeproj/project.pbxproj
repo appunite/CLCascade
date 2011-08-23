@@ -34,6 +34,8 @@
 		20BB344E133FBAA4003EEB6E /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3446133FBAA4003EEB6E /* CLViewController.m */; };
 		20BB3450133FBAA4003EEB6E /* CLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3449133FBAA4003EEB6E /* CLTableViewController.m */; };
 		20BB3453133FC07A003EEB6E /* CLSplitCascadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BB3452133FC07A003EEB6E /* CLSplitCascadeView.m */; };
+		20CCD4D81403D2D70067CEC6 /* CLBorderShadowView.h in Headers */ = {isa = PBXBuildFile; fileRef = 20CCD4D61403D2D60067CEC6 /* CLBorderShadowView.h */; };
+		20CCD4D91403D2D70067CEC6 /* CLBorderShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20CCD4D71403D2D70067CEC6 /* CLBorderShadowView.m */; };
 		20D40381137C23BC000A75DD /* divider_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D40380137C23BC000A75DD /* divider_vertical.png */; };
 		20F2DBA9136494350076E80D /* CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F2DBA8136494350076E80D /* CLSegmentedView.m */; };
 		4C17F0E8137999E8003A11F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20BB341F133FB8FF003EEB6E /* Foundation.framework */; };
@@ -103,6 +105,8 @@
 		20BB3449133FBAA4003EEB6E /* CLTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTableViewController.m; sourceTree = "<group>"; };
 		20BB3451133FC07A003EEB6E /* CLSplitCascadeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSplitCascadeView.h; sourceTree = "<group>"; };
 		20BB3452133FC07A003EEB6E /* CLSplitCascadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSplitCascadeView.m; sourceTree = "<group>"; };
+		20CCD4D61403D2D60067CEC6 /* CLBorderShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBorderShadowView.h; sourceTree = "<group>"; };
+		20CCD4D71403D2D70067CEC6 /* CLBorderShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBorderShadowView.m; sourceTree = "<group>"; };
 		20D40380137C23BC000A75DD /* divider_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = divider_vertical.png; sourceTree = "<group>"; };
 		20F2DBA7136494350076E80D /* CLSegmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSegmentedView.h; sourceTree = "<group>"; };
 		20F2DBA8136494350076E80D /* CLSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSegmentedView.m; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 				2026954413E3034500EF60A6 /* CLScrollView.m */,
 				20F2DBA7136494350076E80D /* CLSegmentedView.h */,
 				20F2DBA8136494350076E80D /* CLSegmentedView.m */,
+				20CCD4D61403D2D60067CEC6 /* CLBorderShadowView.h */,
+				20CCD4D71403D2D70067CEC6 /* CLBorderShadowView.m */,
 				206ECD1A1375595200B8405F /* UIViewController+CLSegmentedView.h */,
 				206ECD1B1375595200B8405F /* UIViewController+CLSegmentedView.m */,
 				201EAFD013F5517F0069E9F3 /* CLGlobal.h */,
@@ -336,6 +342,7 @@
 				20BA828C13C6D8A900CBFCD3 /* CLWebViewController.h in Headers */,
 				2026954513E3034500EF60A6 /* CLScrollView.h in Headers */,
 				201EAFD113F5517F0069E9F3 /* CLGlobal.h in Headers */,
+				20CCD4D81403D2D70067CEC6 /* CLBorderShadowView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +407,9 @@
 /* Begin PBXProject section */
 		20BB3410133FB8FF003EEB6E /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 20BB3413133FB8FF003EEB6E /* Build configuration list for PBXProject "Cascade" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -495,6 +505,7 @@
 				20015597138F824E00FA91B2 /* CLCascadeView.m in Sources */,
 				20BA828D13C6D8A900CBFCD3 /* CLWebViewController.m in Sources */,
 				2026954613E3034500EF60A6 /* CLScrollView.m in Sources */,
+				20CCD4D91403D2D70067CEC6 /* CLBorderShadowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

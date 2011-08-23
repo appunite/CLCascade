@@ -11,16 +11,16 @@
 #import "CLGlobal.h"
 
 @interface CLSegmentedView : UIView {
+    CLViewSize _viewSize;
+
     UIView* _headerView;
     UIView* _footerView;
     UIView* _contentView;
     UIView* _roundedCornersView;
     
-    CAGradientLayer* _shadow;
     CGFloat _shadowWidth;
+    UIView* _shadowView;
     
-    CLViewSize _viewSize;
-
     BOOL _showRoundedCorners;
     UIRectCorner _rectCorner;
 }
@@ -81,13 +81,13 @@
 - (void) setFooterView:(UIView*)footerView;
 
 /* 
- * This methoad add left outer shadow
+ * This methoad add left outer shadow view with proper width
  */
-- (void) addShadow:(CAGradientLayer*)shadow width:(CGFloat)with animated:(BOOL)animated;
+- (void) addLeftBorderShadowView:(UIView *)view withWidth:(CGFloat)width;
 
 /* 
  * This methoad remove left outer shadow
  */
-- (void) removeShadowAnimated:(BOOL)animated;
+- (void) removeLeftBorderShadowView;
 
 @end

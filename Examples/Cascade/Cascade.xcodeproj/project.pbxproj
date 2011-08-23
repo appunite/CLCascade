@@ -47,6 +47,7 @@
 		209E099013C8F95400BCFFD0 /* ExampleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E098F13C8F95300BCFFD0 /* ExampleWebViewController.m */; };
 		209E09A113C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209E09A013C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib */; };
 		20BA829413C6DD0A00CBFCD3 /* CLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BA829313C6DD0A00CBFCD3 /* CLWebViewController.m */; };
+		20CCD4DC1403D6C40067CEC6 /* CLBorderShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20CCD4DB1403D6C40067CEC6 /* CLBorderShadowView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,8 @@
 		209E09A013C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCategoriesViewController.xib; sourceTree = "<group>"; };
 		20BA829213C6DD0A00CBFCD3 /* CLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLWebViewController.h; path = ../../src/Cascade/Cascade/CLWebViewController.h; sourceTree = "<group>"; };
 		20BA829313C6DD0A00CBFCD3 /* CLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLWebViewController.m; path = ../../src/Cascade/Cascade/CLWebViewController.m; sourceTree = "<group>"; };
+		20CCD4DA1403D6C40067CEC6 /* CLBorderShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLBorderShadowView.h; path = ../../src/Cascade/Cascade/CLBorderShadowView.h; sourceTree = "<group>"; };
+		20CCD4DB1403D6C40067CEC6 /* CLBorderShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLBorderShadowView.m; path = ../../src/Cascade/Cascade/CLBorderShadowView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +282,8 @@
 				2026953D13E302F400EF60A6 /* CLScrollView.m */,
 				207EA4C913992C6300A8200F /* CLSegmentedView.h */,
 				207EA4CA13992C6300A8200F /* CLSegmentedView.m */,
+				20CCD4DA1403D6C40067CEC6 /* CLBorderShadowView.h */,
+				20CCD4DB1403D6C40067CEC6 /* CLBorderShadowView.m */,
 				207EA4E113992C6A00A8200F /* UIViewController+CLSegmentedView.h */,
 				207EA4E213992C6A00A8200F /* UIViewController+CLSegmentedView.m */,
 			);
@@ -381,6 +386,7 @@
 				20BA829413C6DD0A00CBFCD3 /* CLWebViewController.m in Sources */,
 				209E099013C8F95400BCFFD0 /* ExampleWebViewController.m in Sources */,
 				2026953E13E302F400EF60A6 /* CLScrollView.m in Sources */,
+				20CCD4DC1403D6C40067CEC6 /* CLBorderShadowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

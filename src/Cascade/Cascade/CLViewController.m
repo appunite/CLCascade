@@ -8,6 +8,7 @@
 
 #import "CLViewController.h"
 #import "CLCascadeNavigationController.h"
+#import "CLBorderShadowView.h"
 
 @implementation CLViewController
 
@@ -134,42 +135,30 @@
 #pragma mark Class methods
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CAGradientLayer*) outerLeftShadow {
-
-    // generate default shadow
-    CAGradientLayer* shadow = [CAGradientLayer layer];
-    shadow.startPoint = CGPointMake(0, 0.5);
-    shadow.endPoint = CGPointMake(1.0, 0.5);
-
-    shadow.colors = [NSArray arrayWithObjects: 
-                            (id)([[UIColor clearColor] colorWithAlphaComponent:0.0].CGColor), 
-                            (id)([[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor), 
-                            nil];
-    
-    return shadow;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addShadowWithWidth:(CGFloat)width animated:(BOOL)animated {
-    
-    CAGradientLayer* shadow = [self outerLeftShadow];
-
-    [(CLSegmentedView*)self.view addShadow:shadow 
-                                     width:width 
-                                  animated:animated];    
+- (UIView *) leftBorderShadowView {
+    return [[[CLBorderShadowView alloc] init] autorelease];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) removeShadow:(BOOL)animated {
+- (void) addLeftBorderShadowWithWidth:(CGFloat)width {
     
-    [(CLSegmentedView*)self.view removeShadowAnimated:animated];    
+    UIView* shadowView = [self leftBorderShadowView];
+    [(CLSegmentedView*)self.view addLeftBorderShadowView:shadowView 
+                                               withWidth:width];    
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) removeLeftBorderShadow {
+    
+    [(CLSegmentedView*)self.view removeLeftBorderShadowView];    
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushDetailViewController:(CLViewController *)viewController animated:(BOOL)animated {
-    NSAssert(_viewSize != CLViewSizeWider, @"Assert: You can't push a new view from a view which size is CLViewSizeWider.", nil);
+    NSAssert(_viewSize != CLViewSizeWider, @"Assert: You can't push a new view from a view which size is CLViewSizeWider.");
     [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
 }
 
@@ -183,8 +172,6 @@
      * another page or will slide in CascadeView bounds
      */
     
-    
-//    [self showShadow: NO];
 }
 
 
@@ -194,8 +181,7 @@
      * Called when page (view of this controller) will be shadowed by 
      * another page or will slide out CascadeView bounds
      */
-
-//    [self hideShadow: NO];
+    
 }
 
 @end

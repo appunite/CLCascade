@@ -30,8 +30,9 @@
 {
     self = [super init];
     if (self) {
+
         _roundedCornersView = [[UIView alloc] init];
-        [_roundedCornersView setBackgroundColor: [UIColor whiteColor]];
+        [_roundedCornersView setBackgroundColor: [UIColor clearColor]];
         [self addSubview: _roundedCornersView];
         
         _viewSize = CLViewSizeNormal;
@@ -50,6 +51,7 @@
     }
     return self;
 }
+
 
 #pragma mark -
 #pragma mark Setters
@@ -121,63 +123,38 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addShadow:(CAGradientLayer*)shadow width:(CGFloat)with animated:(BOOL)animated {
-    _shadowWidth = with;
+- (void) addLeftBorderShadowView:(UIView *)view withWidth:(CGFloat)width {
 
-    if (_shadow != shadow) {
-        [_shadow removeFromSuperlayer];
-        [_shadow release];
-        _shadow = [shadow retain];
-        [_shadow setOpaque: 0.0];
-        
-        [self setClipsToBounds: NO];
-        
-        if (!animated) {
-            [shadow setOpaque: 1.0];
-            [self.layer insertSublayer:_shadow atIndex:0];            
-        } else {
-            [self.layer insertSublayer:_shadow atIndex:0];            
-            
-            CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-            animation.fromValue = [NSNumber numberWithFloat:0.0];
-            animation.toValue = [NSNumber numberWithFloat:1.0];
-            animation.duration = 1.2;
-            _shadow.opacity = 1.0;
-            [_shadow addAnimation:animation forKey:@"opacityAnimation"];
-        }
+    [self setClipsToBounds: NO];
+
+    if (_shadowWidth != width) {
+        _shadowWidth = width;
+        [self setNeedsLayout];
+        [self setNeedsDisplay];
     }
 
+    if (view != _shadowView) {
+        [_shadowView release];
+        _shadowView = [view retain];
+        
+        [self insertSubview:_shadowView atIndex:0];
+        
+        [self setNeedsLayout];
+        [self setNeedsDisplay];
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) removeLeftBorderShadowView {
+
+    [self setClipsToBounds: YES];
+
+    [_shadowView release], _shadowView = nil;
     [self setNeedsLayout];
+    
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) removeShadowAnimated:(BOOL)animated {
-
-    if (!animated) {
-        [_shadow removeFromSuperlayer];
-        [_shadow release], _shadow = nil;
-    } else {
-        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        animation.fromValue = [NSNumber numberWithFloat:1.0];
-        animation.toValue = [NSNumber numberWithFloat:0.0];
-        animation.duration = 0.7;
-        [animation setDelegate: self];
-        _shadow.opacity = 0.0;
-        [_shadow addAnimation:animation forKey:@"opacityAnimation"];
-    }
-
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
-//    if ((flag) && (theAnimation.keyPath == @"opacityAnimation")) {
-    if (flag) {
-        [_shadow removeFromSuperlayer];
-        [_shadow release], _shadow = nil;
-    }
-}
 
 #pragma mark -
 #pragma mark Private
@@ -232,16 +209,9 @@
     
     [_contentView setFrame: CGRectMake(0.0, headerHeight, viewWidth, viewHeight - headerHeight - footerHeight)];
 
-    if (_shadow) {
-
-        [CATransaction begin];
-        [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-        
+    if (_shadowView) {
         CGRect shadowFrame = CGRectMake(0 - _shadowWidth, 0.0, _shadowWidth, rect.size.height);
-        _shadow.frame = shadowFrame;
-        
-        [CATransaction commit];
-
+        _shadowView.frame = shadowFrame;
     }
 
     [self updateRoundedCorners];
@@ -255,7 +225,8 @@
     [_headerView release], _headerView = nil;
     [_contentView release], _contentView = nil;
     [_roundedCornersView release], _roundedCornersView = nil;
-    [_shadow release], _shadow = nil;
+    [_shadowView release], _shadowView = nil;
+
     [super dealloc];
 }
 
