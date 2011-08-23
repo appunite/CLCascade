@@ -174,6 +174,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index {
+    if (index > [_viewControllers count] - 1) return;
+
     UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
     if ([controller respondsToSelector:@selector(pageDidAppear)]) {
         [controller pageDidAppear];
@@ -244,6 +246,7 @@
 - (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated {
     // pop all pages
     [_cascadeView popAllPagesAnimated: animated];
+    [_cascadeView scrollToBegin];
     // remove all controllers
     [_viewControllers removeAllObjects];
     // add root view controller

@@ -256,6 +256,8 @@
         [self popPageAtIndex:index animated:NO];
         index--;
     }    
+    
+    [_pages removeAllObjects];
 }
 
 
