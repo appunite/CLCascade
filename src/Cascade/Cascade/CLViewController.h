@@ -37,6 +37,11 @@
 - (void) addLeftBorderShadowWithWidth:(CGFloat)width;
 - (void) removeLeftBorderShadow;
 
+/*
+ Override this methods to return view which represent left border shadow.
+ It could be UIImageView with gradient image or simle UIView, where you can overrider drawRect: method
+ to draw gradient in Core Animation.
+ */
 - (UIView *) leftBorderShadowView;
 
 @end
