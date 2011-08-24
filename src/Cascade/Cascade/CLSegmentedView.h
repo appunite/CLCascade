@@ -19,6 +19,7 @@
     UIView* _roundedCornersView;
     
     CGFloat _shadowWidth;
+    CGFloat _shadowOffset;
     UIView* _shadowView;
     
     BOOL _showRoundedCorners;
@@ -44,6 +45,11 @@
  * The width of the shadow
  */
 @property (nonatomic, assign) CGFloat shadowWidth;
+
+/*
+ * The offset of the shadow in X-axis. Default 0.0
+ */
+@property (nonatomic, assign) CGFloat shadowOffset;
 
 /*
  * Set YES if you want rounded corners. Default NO.

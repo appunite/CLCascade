@@ -22,6 +22,7 @@
 @synthesize viewSize = _viewSize;
 @synthesize showRoundedCorners = _showRoundedCorners;
 @synthesize rectCorner = _rectCorner;
+@synthesize shadowOffset = _shadowOffset;
 
 #pragma mark - Init & dealloc
 
@@ -210,7 +211,7 @@
     [_contentView setFrame: CGRectMake(0.0, headerHeight, viewWidth, viewHeight - headerHeight - footerHeight)];
 
     if (_shadowView) {
-        CGRect shadowFrame = CGRectMake(0 - _shadowWidth, 0.0, _shadowWidth, rect.size.height);
+        CGRect shadowFrame = CGRectMake(0 - _shadowWidth + _shadowOffset, 0.0, _shadowWidth, rect.size.height);
         _shadowView.frame = shadowFrame;
     }
 
