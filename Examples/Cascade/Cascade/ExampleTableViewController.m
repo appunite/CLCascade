@@ -54,7 +54,7 @@
     [super viewDidLoad];
 
     // add shadow
-    [self addLeftBorderShadowWithWidth:140.0];
+    [self addLeftBorderShadowWithWidth:140.0 andOffset:0.0f];
     
     // add header view
     UIImageView* header = [[UIImageView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.bounds.size.width, 45.0)];

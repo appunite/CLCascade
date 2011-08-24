@@ -141,11 +141,14 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addLeftBorderShadowWithWidth:(CGFloat)width {
+- (void) addLeftBorderShadowWithWidth:(CGFloat)width andOffset:(CGFloat)offset {
     
     UIView* shadowView = [self leftBorderShadowView];
     [(CLSegmentedView*)self.view addLeftBorderShadowView:shadowView 
                                                withWidth:width];    
+    
+    [(CLSegmentedView*)self.view setShadowOffset:offset];
+    
 }
 
 
