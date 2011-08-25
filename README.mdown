@@ -18,8 +18,8 @@ Simple projects
 Simple project screencast: [Screencast][]
 
 Screenshots:
-[Screenshot1][]
-[Screenshot2][]
+![Screenshot1](http://farm7.static.flickr.com/6088/6080286077_ec02a4d727_b.jpg)
+![Screenshot2](http://farm7.static.flickr.com/6185/6080285057_5f4c96a41c_b.jpg)
 
 Roadmap
 ===============
@@ -39,6 +39,4 @@ AppUnite.com
 - Emil Wojtaszek
 
 [Screencast]: http://www.youtube.com/watch?v=XFtc1ksqOmU
-[Screenshot1]: http://farm7.static.flickr.com/6088/6080286077_ec02a4d727_b.jpg
-[Screenshot2]: http://farm7.static.flickr.com/6185/6080285057_5f4c96a41c_b.jpg
 [office@appunite.com]: office@appunite.com
