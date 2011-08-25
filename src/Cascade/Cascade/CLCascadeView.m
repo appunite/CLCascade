@@ -20,6 +20,8 @@
 - (void) didStartPullingToDetachPages;
 - (void) didPullToDetachPages;
 - (void) didCancelPullToDetachPages;
+- (void) didStickPageAtIndexToLeftBand:(NSInteger)index;
+- (void) didDetachPageAtIndexFromLeftBand:(NSInteger)index;
 - (void) sendAppearanceDelegateMethodsIfNeeded;
 - (void) sendDetachDelegateMethodsIfNeeded;
 @end
@@ -904,6 +906,22 @@
     _flags.willDetachPages = NO;
     if ([_delegate respondsToSelector:@selector(cascadeViewDidCancelPullToDetachPages:)]) {
         [_delegate cascadeViewDidCancelPullToDetachPages:self];
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) didStickPageAtIndexToLeftBand:(NSInteger)index {
+    if ([_delegate respondsToSelector:@selector(cascadeView:didStickPageAtIndexToLeftBand:)]) {
+        [_delegate cascadeView:self didStickPageAtIndexToLeftBand:index];
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) didDetachPageAtIndexFromLeftBand:(NSInteger)index {
+    if ([_delegate respondsToSelector:@selector(cascadeView:didDetachPageAtIndexFromLeftBand:)]) {
+        [_delegate cascadeView:self didDetachPageAtIndexFromLeftBand:index];
     }
 }
 

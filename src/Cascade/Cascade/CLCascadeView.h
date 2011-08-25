@@ -107,4 +107,7 @@
 - (void) cascadeViewDidPullToDetachPages:(CLCascadeView*)cascadeView;
 - (void) cascadeViewDidCancelPullToDetachPages:(CLCascadeView*)cascadeView;
 
+- (void) cascadeView:(CLCascadeView *)cascadeView didStickPageAtIndexToLeftBand:(NSInteger)index;
+- (void) cascadeView:(CLCascadeView *)cascadeView didDetachPageAtIndexFromLeftBand:(NSInteger)index;
+
 @end

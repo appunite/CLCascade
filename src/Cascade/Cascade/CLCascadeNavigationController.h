@@ -19,6 +19,9 @@
 
     // view containing all views on stack
     CLCascadeView* _cascadeView;
+    
+    // draw multiple pages effect
+    BOOL _drawMultiplePagesEffect;
 }
 
 /*
@@ -35,6 +38,11 @@
  * Left inset of wider size page from left boarder. Default 220.0f
  */
 @property(nonatomic) CGFloat widerLeftInset;
+
+/*
+ * Draw multiple pages effect like in iPad Twitter app
+ */
+@property(nonatomic) BOOL drawMultiplePagesEffect;
 
 /*
  * Set and push root view controller

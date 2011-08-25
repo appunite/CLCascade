@@ -21,6 +21,7 @@
 
 @synthesize viewControllers = _viewControllers;
 @synthesize leftInset, widerLeftInset;
+@synthesize drawMultiplePagesEffect = _drawMultiplePagesEffect;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -239,6 +240,7 @@
     NSLog(@"cascadeViewDidCancelPullToDetachPages");
 }
 
+
 #pragma mark -
 #pragma mark Calss methods
 
@@ -251,6 +253,7 @@
     // add root view controller
     [self addViewController:viewController sender:nil animated:animated];
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated {
@@ -289,6 +292,7 @@
                   animated:animated];
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIViewController*) firstVisibleViewController {
     NSInteger index = [_cascadeView indexOfFirstVisibleView: YES];
@@ -300,6 +304,17 @@
     return nil;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) cascadeView:(CLCascadeView *)cascadeView didStickPageAtIndexToLeftBand:(NSInteger)index {
+    
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) cascadeView:(CLCascadeView *)cascadeView didDetachPageAtIndexFromLeftBand:(NSInteger)index {
+    
+}
 
 #pragma mark -
 #pragma mark Private
