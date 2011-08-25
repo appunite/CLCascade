@@ -672,8 +672,10 @@
         if (obj != [NSNull null]) {
             UIView* view = (UIView*)obj;
             CGRect rect = view.frame;
+            CGPoint point = [self calculateOriginOfPageAtIndex: idx];
             CGSize size = [self calculatePageSize: obj];
             rect.size = size;
+            rect.origin = point;
             [view setFrame:rect];
         }
     }];
