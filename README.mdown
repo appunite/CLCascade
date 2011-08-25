@@ -17,8 +17,9 @@ Simple projects
 
 Simple project screencast: [Screencast][]
 
-[![](http://flic.kr/p/agi4dz)](http://flic.kr/p/agi4dz)
-[![](http://flic.kr/p/agi3UZ)](http://flic.kr/p/agi3UZ)
+Screenshots:
+[Screenshot1][]
+[Screenshot2][]
 
 Roadmap
 ===============
@@ -37,5 +38,7 @@ AppUnite.com
 
 - Emil Wojtaszek
 
-[Screencast]: http://www.youtube.com/watch?v=XFtc1ksqOmU
+[Screencast]: http://www.youtube.com/watch?v=XFtc1ksqOmU, 
+[Screenshot1]: http://flic.kr/p/agi4dz, 
+[Screenshot2]: http://flic.kr/p/agi3UZ
 [office@appunite.com]: office@appunite.com
