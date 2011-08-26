@@ -99,6 +99,16 @@
  */
 - (void) removeLeftBorderShadowView;
 
+/* 
+ * This methoad hide left outer shadow
+ */
+- (void) hideLeftBorderShadowView;
+
+/* 
+ * This methoad show left outer shadow
+ */
+- (void) showLeftBorderShadowView;
+
 /*
  * Fraw/erase multiple pages effect
  */

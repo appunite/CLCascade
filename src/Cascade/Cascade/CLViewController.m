@@ -191,12 +191,14 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pageDidStickToLeftBandAtIndex:(NSInteger)index {
     [(CLSegmentedView*)self.view drawMultiplePagesEffectAtLevel:index];
+    [(CLSegmentedView*)self.view hideLeftBorderShadowView];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pageDidDetachFromLeftBandAtIndex:(NSInteger)index {
     [(CLSegmentedView*)self.view eraseMultiplePagesEffect];
+    [(CLSegmentedView*)self.view showLeftBorderShadowView];
 }
 
 @end

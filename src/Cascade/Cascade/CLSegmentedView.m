@@ -127,7 +127,7 @@
         [_shadowView release];
         _shadowView = [view retain];
         
-//        [self insertSubview:_shadowView atIndex:0];
+        [self insertSubview:_shadowView atIndex:0];
         
         [self setNeedsLayout];
         [self setNeedsDisplay];
@@ -145,6 +145,17 @@
     
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) hideLeftBorderShadowView {
+    [self setClipsToBounds: YES];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) showLeftBorderShadowView {
+    [self setClipsToBounds: NO];
+}
 
 #pragma mark -
 #pragma mark Setters
