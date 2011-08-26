@@ -32,6 +32,10 @@
     return self;
 }
 
+- (void) awakeFromNib {
+    _drawMultiplePagesEffect = YES;
+}
+
 - (void)dealloc
 {
     [_viewControllers release], _viewControllers = nil;
@@ -307,13 +311,24 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView *)cascadeView didStickPageAtIndexToLeftBand:(NSInteger)index {
-    
+    if ((index > [_viewControllers count] - 1) || _drawMultiplePagesEffect) return;
+
+    UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
+    if ([controller respondsToSelector:@selector(pageDidStickToLeftBandAtIndex:)]) {
+        [controller pageDidStickToLeftBandAtIndex:index];
+    }
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView *)cascadeView didDetachPageAtIndexFromLeftBand:(NSInteger)index {
+
+    if ((index > [_viewControllers count] - 1) || _drawMultiplePagesEffect) return;
     
+    UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
+    if ([controller respondsToSelector:@selector(pageDidDetachFromLeftBandAtIndex:)]) {
+        [controller pageDidDetachFromLeftBandAtIndex:index];
+    }
 }
 
 #pragma mark -

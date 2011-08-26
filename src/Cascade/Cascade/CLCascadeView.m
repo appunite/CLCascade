@@ -860,11 +860,13 @@
 - (void) pageDidAppearAtIndex:(NSInteger)index {
     if (![self pageExistAtIndex: index]) return;
 
-//    NSInteger secondVisiblePageIndex = [self indexOfFirstVisiblePage] +1;
-//    [self setProperPositionOfPageAtIndex: secondVisiblePageIndex];
-
     if ([_delegate respondsToSelector:@selector(cascadeView:pageDidAppearAtIndex:)]) {
         [_delegate cascadeView:self pageDidAppearAtIndex:index];
+    }
+    
+    NSUInteger indexOfFirstVisiblePage = [self indexOfFirstVisiblePage];
+    if (indexOfFirstVisiblePage == index) {
+        [self didDetachPageAtIndexFromLeftBand:index+1];
     }
 }
 
@@ -875,6 +877,11 @@
 
     if ([_delegate respondsToSelector:@selector(cascadeView:pageDidDisappearAtIndex:)]) {
         [_delegate cascadeView:self pageDidDisappearAtIndex:index];
+    }
+
+    NSUInteger indexOfPreviousFirstVisiblePage = [self indexOfFirstVisiblePage] -1;
+    if (indexOfPreviousFirstVisiblePage == index) {
+        [self didStickPageAtIndexToLeftBand:index+1];
     }
 }
 
@@ -915,6 +922,9 @@
     if ([_delegate respondsToSelector:@selector(cascadeView:didStickPageAtIndexToLeftBand:)]) {
         [_delegate cascadeView:self didStickPageAtIndexToLeftBand:index];
     }
+    
+    NSLog(@"didStickPageAtIndexToLeftBand %i", index);
+
 }
 
 
@@ -923,6 +933,9 @@
     if ([_delegate respondsToSelector:@selector(cascadeView:didDetachPageAtIndexFromLeftBand:)]) {
         [_delegate cascadeView:self didDetachPageAtIndexFromLeftBand:index];
     }
+    
+    NSLog(@"didDetachPageAtIndexFromLeftBand %i", index);
+    
 }
 
 

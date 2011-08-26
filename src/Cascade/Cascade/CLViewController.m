@@ -187,4 +187,16 @@
     
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) pageDidStickToLeftBandAtIndex:(NSInteger)index {
+    [(CLSegmentedView*)self.view drawMultiplePagesEffectAtLevel:index];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) pageDidDetachFromLeftBandAtIndex:(NSInteger)index {
+    [(CLSegmentedView*)self.view eraseMultiplePagesEffect];
+}
+
 @end

@@ -23,4 +23,8 @@
  */
 - (void) pageDidDisappear;
 
+
+- (void) pageDidStickToLeftBandAtIndex:(NSInteger)index;
+- (void) pageDidDetachFromLeftBandAtIndex:(NSInteger)index;
+
 @end

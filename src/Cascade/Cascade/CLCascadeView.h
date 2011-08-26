@@ -86,9 +86,15 @@
 
 @protocol CLCascadeViewDelegate <NSObject>
 @optional
+/*
+ * Loading/unloading pages
+ */
 - (void) cascadeView:(CLCascadeView*)cascadeView didLoadPage:(UIView*)page;
 - (void) cascadeView:(CLCascadeView*)cascadeView didUnloadPage:(UIView*)page;
 
+/*
+ * Add/pop pages
+ */
 - (void) cascadeView:(CLCascadeView*)cascadeView didAddPage:(UIView*)page animated:(BOOL)animated;
 - (void) cascadeView:(CLCascadeView*)cascadeView didPopPageAtIndex:(NSInteger)index;
 
@@ -102,11 +108,15 @@
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index;
 
 /*
+ * Push to detach pages
  */
 - (void) cascadeViewDidStartPullingToDetachPages:(CLCascadeView*)cascadeView;
 - (void) cascadeViewDidPullToDetachPages:(CLCascadeView*)cascadeView;
 - (void) cascadeViewDidCancelPullToDetachPages:(CLCascadeView*)cascadeView;
 
+/*
+ * Page stick or detach left band
+ */
 - (void) cascadeView:(CLCascadeView *)cascadeView didStickPageAtIndexToLeftBand:(NSInteger)index;
 - (void) cascadeView:(CLCascadeView *)cascadeView didDetachPageAtIndexFromLeftBand:(NSInteger)index;
 

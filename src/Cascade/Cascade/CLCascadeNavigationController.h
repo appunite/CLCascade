@@ -20,7 +20,7 @@
     // view containing all views on stack
     CLCascadeView* _cascadeView;
     
-    // draw multiple pages effect
+    // draw multiple pages effect; default YES
     BOOL _drawMultiplePagesEffect;
 }
 
