@@ -95,6 +95,7 @@
              UIViewAutoresizingFlexibleLeftMargin | 
              UIViewAutoresizingFlexibleRightMargin | 
              UIViewAutoresizingFlexibleTopMargin];
+            [_headerView setUserInteractionEnabled:YES];
             
             [_roundedCornersView addSubview: _headerView];
             [self setNeedsLayout];
@@ -115,6 +116,7 @@
              UIViewAutoresizingFlexibleLeftMargin | 
              UIViewAutoresizingFlexibleRightMargin | 
              UIViewAutoresizingFlexibleBottomMargin];
+            [_headerView setUserInteractionEnabled:YES];
             
             [_roundedCornersView addSubview: _footerView];
             [self setNeedsLayout];
