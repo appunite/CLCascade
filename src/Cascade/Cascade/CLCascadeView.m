@@ -77,6 +77,7 @@
     _dataSource = nil;    
     [_scrollView release], _scrollView = nil;
     [_pages release], _pages = nil;
+    [_multiplePageEffectView release], _multiplePageEffectView = nil;
     [super dealloc];
 }
 
@@ -94,6 +95,9 @@
         _indexOfFirstVisiblePage = -1;
         _indexOfLastVisiblePage = -1;
 
+        _multiplePageEffectView = [[CLMultiplePageEffectView alloc] init];
+        [self addSubview:_multiplePageEffectView];
+        
         _scrollView = [[CLScrollView alloc] init]; // frame will be set in setter of _leftInset
         [_scrollView setDelegate: self];
         [_scrollView setDecelerationRate: UIScrollViewDecelerationRateFast];
@@ -922,6 +926,18 @@
     if ([_delegate respondsToSelector:@selector(cascadeView:didStickPageAtIndexToLeftBand:)]) {
         [_delegate cascadeView:self didStickPageAtIndexToLeftBand:index];
     }
+
+    if (index < 1) {
+        [_multiplePageEffectView setMultiPageEffectType:CLMultiPageEffectNone];
+    } 
+    else
+    if (index == 1) {
+        [_multiplePageEffectView setMultiPageEffectType:CLMultiPageEffectFirstLevel];
+    }
+    else
+    if (index > 1) {
+        [_multiplePageEffectView setMultiPageEffectType:CLMultiPageEffectSecondLevel];
+    }
     
     NSLog(@"didStickPageAtIndexToLeftBand %i", index);
 
@@ -933,7 +949,19 @@
     if ([_delegate respondsToSelector:@selector(cascadeView:didDetachPageAtIndexFromLeftBand:)]) {
         [_delegate cascadeView:self didDetachPageAtIndexFromLeftBand:index];
     }
-    
+
+    if (index < 1) {
+        [_multiplePageEffectView setMultiPageEffectType:CLMultiPageEffectNone];
+    } 
+    else
+    if (index == 1) {
+        [_multiplePageEffectView setMultiPageEffectType:CLMultiPageEffectFirstLevel];
+    }
+    else
+    if (index > 1) {
+        [_multiplePageEffectView setMultiPageEffectType:CLMultiPageEffectSecondLevel];
+    }
+
     NSLog(@"didDetachPageAtIndexFromLeftBand %i", index);
     
 }
@@ -995,6 +1023,8 @@
     _scrollView.frame = CGRectMake(_leftInset, 0.0, _pageWidth, self.frame.size.height);
     
     [self setProperEdgeInset: NO];
+    CGRect effectViewFrame = CGRectMake(_leftInset - 4.0f, 0.0, 4.0f, self.frame.size.height);
+    _multiplePageEffectView.frame = effectViewFrame;
 }
 
 @end

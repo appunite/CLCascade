@@ -24,9 +24,6 @@
     
     BOOL _showRoundedCorners;
     UIRectCorner _rectCorner;
-    
-    BOOL _drawMultiplePagesEffect;
-    NSUInteger _multiplePagesEffectLevel;
 }
 
 /*
@@ -108,11 +105,5 @@
  * This methoad show left outer shadow
  */
 - (void) showLeftBorderShadowView;
-
-/*
- * Fraw/erase multiple pages effect
- */
-- (void) drawMultiplePagesEffectAtLevel:(NSUInteger)level;
-- (void) eraseMultiplePagesEffect;
 
 @end

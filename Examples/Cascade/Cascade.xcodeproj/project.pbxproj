@@ -44,6 +44,7 @@
 		207EA4DE13992C6300A8200F /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 207EA4D213992C6300A8200F /* CLViewController.m */; };
 		207EA4E413992C6A00A8200F /* UIViewController+CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 207EA4E213992C6A00A8200F /* UIViewController+CLSegmentedView.m */; };
 		207EA4EC13992CE100A8200F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 207EA4EB13992CE100A8200F /* QuartzCore.framework */; };
+		2081DF29140C3C630023A466 /* CLMultiplePageEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2081DF28140C3C630023A466 /* CLMultiplePageEffectView.m */; };
 		209E099013C8F95400BCFFD0 /* ExampleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E098F13C8F95300BCFFD0 /* ExampleWebViewController.m */; };
 		209E09A113C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209E09A013C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib */; };
 		20BA829413C6DD0A00CBFCD3 /* CLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BA829313C6DD0A00CBFCD3 /* CLWebViewController.m */; };
@@ -108,6 +109,8 @@
 		207EA4E113992C6A00A8200F /* UIViewController+CLSegmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CLSegmentedView.h"; path = "../../src/Cascade/Cascade/UIViewController+CLSegmentedView.h"; sourceTree = "<group>"; };
 		207EA4E213992C6A00A8200F /* UIViewController+CLSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CLSegmentedView.m"; path = "../../src/Cascade/Cascade/UIViewController+CLSegmentedView.m"; sourceTree = "<group>"; };
 		207EA4EB13992CE100A8200F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2081DF27140C3C630023A466 /* CLMultiplePageEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLMultiplePageEffectView.h; path = ../../src/Cascade/Cascade/CLMultiplePageEffectView.h; sourceTree = "<group>"; };
+		2081DF28140C3C630023A466 /* CLMultiplePageEffectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLMultiplePageEffectView.m; path = ../../src/Cascade/Cascade/CLMultiplePageEffectView.m; sourceTree = "<group>"; };
 		209E098E13C8F95300BCFFD0 /* ExampleWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleWebViewController.h; sourceTree = "<group>"; };
 		209E098F13C8F95300BCFFD0 /* ExampleWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleWebViewController.m; sourceTree = "<group>"; };
 		209E09A013C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCategoriesViewController.xib; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 				207EA4CA13992C6300A8200F /* CLSegmentedView.m */,
 				20CCD4DA1403D6C40067CEC6 /* CLBorderShadowView.h */,
 				20CCD4DB1403D6C40067CEC6 /* CLBorderShadowView.m */,
+				2081DF27140C3C630023A466 /* CLMultiplePageEffectView.h */,
+				2081DF28140C3C630023A466 /* CLMultiplePageEffectView.m */,
 				207EA4E113992C6A00A8200F /* UIViewController+CLSegmentedView.h */,
 				207EA4E213992C6A00A8200F /* UIViewController+CLSegmentedView.m */,
 			);
@@ -387,6 +392,7 @@
 				209E099013C8F95400BCFFD0 /* ExampleWebViewController.m in Sources */,
 				2026953E13E302F400EF60A6 /* CLScrollView.m in Sources */,
 				20CCD4DC1403D6C40067CEC6 /* CLBorderShadowView.m in Sources */,
+				2081DF29140C3C630023A466 /* CLMultiplePageEffectView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,6 @@
 @interface CLSegmentedView (Private)
 - (void) setupViews;
 - (void) updateRoundedCorners;
-- (CGFloat) multiplePagesEffectWidth;
 @end
 
 @implementation CLSegmentedView
@@ -40,9 +39,6 @@
         _viewSize = CLViewSizeNormal;
         _rectCorner = UIRectCornerAllCorners;
         _showRoundedCorners = NO;
-        
-//        _evenColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:1.0f];
-//        _oddColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f];
 
     }
     return self;
@@ -57,57 +53,6 @@
     }
     return self;
 }
-
-#pragma mark -
-#pragma mark Drawing
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) drawRect:(CGRect)rect {
-//    [super drawRect:rect];
-    
-    if (_drawMultiplePagesEffect) {
-//        _multiplePagesEffectLevel
-        
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextClearRect(context, rect);
-        CGContextSetBlendMode(context, kCGBlendModeNormal);
-
-        CGContextSetRGBFillColor(context, 195.0f/255.0f, 195.0f/255.0f, 195.0f/255.0f, 1.0f);
-        CGContextFillRect(context, CGRectMake(0.0f, 0.0f, 1.0f, rect.size.height));
-        
-        CGContextSetRGBFillColor(context, 154.0f/255.0f, 154.0f/255.0f, 154.0f/255.0f, 1.0f);
-        CGContextFillRect(context, CGRectMake(1.0f, 0.0f, 1.0f, rect.size.height));
-        
-        CGContextSetRGBFillColor(context, 197.0f/255.0f, 197.0f/255.0f, 197.0f/255.0f, 1.0f);
-        CGContextFillRect(context, CGRectMake(2.0f, 0.0f, 1.0f, rect.size.height));
-        
-        CGContextSetRGBFillColor(context, 154.0f/255.0f, 154.0f/255.0f, 154.0f/255.0f, 1.0f);
-        CGContextFillRect(context, CGRectMake(3.0f, 0.0f, 1.0f, rect.size.height));
-
-    }
-}
-
-
-#pragma mark -
-#pragma mark Multiple pages effect
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) drawMultiplePagesEffectAtLevel:(NSUInteger)level {
-    _drawMultiplePagesEffect = YES;
-    _multiplePagesEffectLevel = level;
-    [self setNeedsLayout];
-    [self setNeedsDisplay];
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) eraseMultiplePagesEffect {
-    _drawMultiplePagesEffect = NO;
-    _multiplePagesEffectLevel = 0;
-    [self setNeedsLayout];
-    [self setNeedsDisplay];
-}
-
 
 #pragma mark -
 #pragma mark Left boarder shadow
@@ -229,16 +174,6 @@
 #pragma mark -
 #pragma mark Private
 
-- (CGFloat) multiplePagesEffectWidth {
-
-    if (_drawMultiplePagesEffect) {
-        if (_multiplePagesEffectLevel == 1) return 2.0f;
-        if (_multiplePagesEffectLevel >= 2) return 4.0f;
-    }
-
-    return 0.0f;
-}
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) updateRoundedCorners {
     
@@ -269,14 +204,13 @@
     CGFloat viewHeight = rect.size.height;
     CGFloat headerHeight = 0.0;
     CGFloat footerHeight = 0.0;
-    CGFloat pagesEffectWidth = [self multiplePagesEffectWidth];
     
     _roundedCornersView.frame = rect;
     
     if (_headerView) {
         headerHeight = _headerView.frame.size.height;
         
-        CGRect newHeaderViewFrame = CGRectMake(pagesEffectWidth, 0.0, viewWidth - pagesEffectWidth, headerHeight);
+        CGRect newHeaderViewFrame = CGRectMake(0.0f, 0.0, viewWidth, headerHeight);
         [_headerView setFrame: newHeaderViewFrame];
     }
     
@@ -284,14 +218,14 @@
         footerHeight = _footerView.frame.size.height;
         CGFloat footerY = viewHeight - footerHeight;
         
-        CGRect newFooterViewFrame = CGRectMake(pagesEffectWidth, footerY, viewWidth - pagesEffectWidth, footerHeight);
+        CGRect newFooterViewFrame = CGRectMake(0.0f, footerY, viewWidth, footerHeight);
         [_footerView setFrame: newFooterViewFrame];
     }
     
-    [_contentView setFrame: CGRectMake(pagesEffectWidth, headerHeight, viewWidth - pagesEffectWidth, viewHeight - headerHeight - footerHeight)];
+    [_contentView setFrame: CGRectMake(0.0f, headerHeight, viewWidth - 0.0f, viewHeight - headerHeight - footerHeight)];
 
     if (_shadowView) {
-        CGRect shadowFrame = CGRectMake(pagesEffectWidth - _shadowWidth + _shadowOffset, 0.0, _shadowWidth, rect.size.height);
+        CGRect shadowFrame = CGRectMake(0.0f - _shadowWidth + _shadowOffset, 0.0, _shadowWidth, rect.size.height);
         _shadowView.frame = shadowFrame;
     }
 

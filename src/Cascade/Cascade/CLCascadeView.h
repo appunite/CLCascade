@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "CLScrollView.h"
+#import "CLMultiplePageEffectView.h"
 
 @protocol CLCascadeViewDataSource;
 @protocol CLCascadeViewDelegate;
 
 @interface CLCascadeView : UIView <UIScrollViewDelegate> {
+    CLMultiplePageEffectView* _multiplePageEffectView;
+
     // delegate and dataSource
     id<CLCascadeViewDelegate> _delegate;
     id<CLCascadeViewDataSource> _dataSource;

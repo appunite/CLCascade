@@ -18,6 +18,8 @@
 		2026954613E3034500EF60A6 /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2026954413E3034500EF60A6 /* CLScrollView.m */; };
 		206ECD1C1375595200B8405F /* UIViewController+CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD1B1375595200B8405F /* UIViewController+CLSegmentedView.m */; };
 		206ECD60137589DB00B8405F /* CLCategoriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206ECD5F137589DB00B8405F /* CLCategoriesView.m */; };
+		2081DF21140C3C4B0023A466 /* CLMultiplePageEffectView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2081DF1F140C3C4B0023A466 /* CLMultiplePageEffectView.h */; };
+		2081DF22140C3C4B0023A466 /* CLMultiplePageEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2081DF20140C3C4B0023A466 /* CLMultiplePageEffectView.m */; };
 		208B99061393EF0F0042165A /* CLViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 208B99051393EF0F0042165A /* CLViewControllerDelegate.h */; };
 		20B0D97A1356518E008B1F7D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B0D9791356518E008B1F7D /* QuartzCore.framework */; };
 		20BA828C13C6D8A900CBFCD3 /* CLWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 20BA828A13C6D8A900CBFCD3 /* CLWebViewController.h */; };
@@ -81,6 +83,8 @@
 		206ECD1B1375595200B8405F /* UIViewController+CLSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CLSegmentedView.m"; sourceTree = "<group>"; };
 		206ECD5E137589DB00B8405F /* CLCategoriesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCategoriesView.h; sourceTree = "<group>"; };
 		206ECD5F137589DB00B8405F /* CLCategoriesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCategoriesView.m; sourceTree = "<group>"; };
+		2081DF1F140C3C4B0023A466 /* CLMultiplePageEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMultiplePageEffectView.h; sourceTree = "<group>"; };
+		2081DF20140C3C4B0023A466 /* CLMultiplePageEffectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMultiplePageEffectView.m; sourceTree = "<group>"; };
 		208B99051393EF0F0042165A /* CLViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewControllerDelegate.h; sourceTree = "<group>"; };
 		20B0D9791356518E008B1F7D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		20BA828A13C6D8A900CBFCD3 /* CLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebViewController.h; sourceTree = "<group>"; };
@@ -211,6 +215,8 @@
 				20F2DBA8136494350076E80D /* CLSegmentedView.m */,
 				20CCD4D61403D2D60067CEC6 /* CLBorderShadowView.h */,
 				20CCD4D71403D2D70067CEC6 /* CLBorderShadowView.m */,
+				2081DF1F140C3C4B0023A466 /* CLMultiplePageEffectView.h */,
+				2081DF20140C3C4B0023A466 /* CLMultiplePageEffectView.m */,
 				206ECD1A1375595200B8405F /* UIViewController+CLSegmentedView.h */,
 				206ECD1B1375595200B8405F /* UIViewController+CLSegmentedView.m */,
 				201EAFD013F5517F0069E9F3 /* CLGlobal.h */,
@@ -343,6 +349,7 @@
 				2026954513E3034500EF60A6 /* CLScrollView.h in Headers */,
 				201EAFD113F5517F0069E9F3 /* CLGlobal.h in Headers */,
 				20CCD4D81403D2D70067CEC6 /* CLBorderShadowView.h in Headers */,
+				2081DF21140C3C4B0023A466 /* CLMultiplePageEffectView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +513,7 @@
 				20BA828D13C6D8A900CBFCD3 /* CLWebViewController.m in Sources */,
 				2026954613E3034500EF60A6 /* CLScrollView.m in Sources */,
 				20CCD4D91403D2D70067CEC6 /* CLBorderShadowView.m in Sources */,
+				2081DF22140C3C4B0023A466 /* CLMultiplePageEffectView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
