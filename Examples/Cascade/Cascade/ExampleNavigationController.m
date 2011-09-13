@@ -114,14 +114,14 @@ static CGFloat kTopOffset = 10.0f;
     
     CGRect rect = self.view.bounds;
     
-    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:^ {
+    [UIView animateWithDuration:0.1f delay:0.0f options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:^ {
         
         //set point of rotation
         _dynamicDetachImage.center = CGPointMake(75.0f + kLeftPadding + kImageWidth/2, 130.0f + rect.size.height/2);
         
         // The transform matrix
         CGAffineTransform transform = 
-        CGAffineTransformMakeRotation(0.9f);
+        CGAffineTransformMakeRotation(1.4f);
         //    CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(degrees));
         _dynamicDetachImage.transform = transform;
     }

@@ -214,7 +214,7 @@
      Override this methods to implement own actions, animations
      */
     NSLog(@"cascadeViewDidPullToDetachPages");
- 
+
     // index of last page
     NSUInteger index = [_viewControllers count] - 1;
     // pop page from back

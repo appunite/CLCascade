@@ -235,7 +235,7 @@
             // unload and remove page
             [self unloadPage:item remove:YES];
             // update edge inset
-            [self setProperEdgeInset: NO];
+//            [self setProperEdgeInset: NO];
             // send delegate message
             [self didPopPageAtIndex: index];
         }
@@ -893,9 +893,8 @@
     if ([_delegate respondsToSelector:@selector(cascadeViewDidPullToDetachPages:)]) {
         [_delegate cascadeViewDidPullToDetachPages:self];
     }
-    
-    // update content size
-    [self setProperContentSize];
+
+    [self performSelector:@selector(setProperContentSize) withObject:nil afterDelay:0.3];
 }
 
 
