@@ -16,11 +16,10 @@
     self = [super init];
     if (self) {
         // Initialization code here.
+        [self setClipsToBounds: NO];
         [self setDecelerationRate: UIScrollViewDecelerationRateFast];
         [self setScrollsToTop: NO];
         [self setBounces: YES];
-        [self setPagingEnabled: YES];
-        [self setClipsToBounds: NO];
         [self setAlwaysBounceVertical: NO];
         [self setAlwaysBounceHorizontal: YES];
         [self setDirectionalLockEnabled: YES];
