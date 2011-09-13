@@ -235,7 +235,7 @@
             // unload and remove page
             [self unloadPage:item remove:YES];
             // update edge inset
-//            [self setProperEdgeInset: NO];
+            [self setProperEdgeInset: NO];
             // send delegate message
             [self didPopPageAtIndex: index];
         }
