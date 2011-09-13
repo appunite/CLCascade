@@ -32,12 +32,11 @@
 - (void) unloadPageIfNeeded:(NSInteger)index;
 
 - (CGSize) calculatePageSize:(UIView*)view;
-- (CGSize) calculateContentSize:(UIInterfaceOrientation)interfaceOrientation;
+- (CGSize) calculateContentSize;
 - (UIEdgeInsets) calculateEdgeInset:(UIInterfaceOrientation)interfaceOrientation;
 - (CGPoint) calculateOriginOfPageAtIndex:(NSInteger)index;
 
 - (void) setProperContentSize;
-- (void) setProperContentSize:(UIInterfaceOrientation)interfaceOrientation;
 - (void) setProperEdgeInset:(BOOL)animated;
 - (void) setProperEdgeInset:(BOOL)animated forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 - (void) setProperSizesForLodedPages:(UIInterfaceOrientation)interfaceOrientation;
@@ -187,7 +186,7 @@
     [self didAddPage:newPage animated:animated];
 
     UIInterfaceOrientation interfaceOrienation = [[UIApplication sharedApplication] statusBarOrientation];
-    
+
     if (index > 0) {
         // scroll to new page frame
         if (!_flags.hasWiderPage) {
@@ -349,7 +348,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
     // set proper content size
-    [self setProperContentSize: interfaceOrientation];
+    [self setProperContentSize];
     // set proper edge inset
     [self setProperEdgeInset:YES forInterfaceOrientation:interfaceOrientation];
     // recalculate pages height and width
@@ -536,21 +535,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setProperContentSize { 
-    // get current interface orientation
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     // set proper content size
-    [self setProperContentSize: orientation];
+    _scrollView.contentSize = [self calculateContentSize];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setProperContentSize:(UIInterfaceOrientation)interfaceOrientation {
-    _scrollView.contentSize = [self calculateContentSize:interfaceOrientation];
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CGSize) calculateContentSize:(UIInterfaceOrientation)interfaceOrientation {
+- (CGSize) calculateContentSize {
 
     CGFloat width = 0.0f;
     
@@ -560,7 +551,8 @@
         width = ([_pages count] -1) * _pageWidth + ([self widerPageWidth] - _pageWidth);
     }
     
-    return CGSizeMake(width, UIInterfaceOrientationIsPortrait(interfaceOrientation) ? self.bounds.size.height : self.bounds.size.height);
+//    return CGSizeMake(width, UIInterfaceOrientationIsPortrait(interfaceOrientation) ? self.bounds.size.height : self.bounds.size.height);
+    return CGSizeMake(width, self.bounds.size.height);
 }
 
 
