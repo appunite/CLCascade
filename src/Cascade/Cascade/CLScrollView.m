@@ -16,6 +16,24 @@
     self = [super init];
     if (self) {
         // Initialization code here.
+        [self setDecelerationRate: UIScrollViewDecelerationRateFast];
+        [self setScrollsToTop: NO];
+        [self setBounces: YES];
+        [self setPagingEnabled: YES];
+        [self setClipsToBounds: NO];
+        [self setAlwaysBounceVertical: NO];
+        [self setAlwaysBounceHorizontal: YES];
+        [self setDirectionalLockEnabled: YES];
+        [self setDelaysContentTouches:YES];
+        [self setMultipleTouchEnabled:NO];
+        [self setShowsVerticalScrollIndicator: NO];
+        [self setShowsHorizontalScrollIndicator: NO];
+
+        [self setAutoresizingMask:
+         UIViewAutoresizingFlexibleBottomMargin | 
+         UIViewAutoresizingFlexibleTopMargin | 
+         UIViewAutoresizingFlexibleHeight];
+
     }
     
     return self;

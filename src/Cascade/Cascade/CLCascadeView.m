@@ -93,27 +93,11 @@
 
         _scrollView = [[CLScrollView alloc] init]; // frame will be set in setter of _leftInset
         [_scrollView setDelegate: self];
-        [_scrollView setDecelerationRate: UIScrollViewDecelerationRateFast];
-        [_scrollView setScrollsToTop: NO];
-        [_scrollView setBounces: YES];
-        [_scrollView setPagingEnabled: YES];
-        [_scrollView setClipsToBounds: NO];
-        [_scrollView setAlwaysBounceVertical: NO];
-        [_scrollView setAlwaysBounceHorizontal: YES];
-        [_scrollView setDirectionalLockEnabled: YES];
-        [_scrollView setDelaysContentTouches:YES];
-        [_scrollView setMultipleTouchEnabled:NO];
-        [_scrollView setShowsVerticalScrollIndicator: NO];
-        [_scrollView setShowsHorizontalScrollIndicator: NO];
-
+        
         self.leftInset = DEFAULT_LEFT_INSET;
         self.widerLeftInset = DEFAULT_WIDER_LEFT_INSET;
         self.pullToDetachPages = YES;
         
-        [_scrollView setAutoresizingMask:
-         UIViewAutoresizingFlexibleBottomMargin | 
-         UIViewAutoresizingFlexibleTopMargin | 
-         UIViewAutoresizingFlexibleHeight];
         [self addSubview: _scrollView];
                 
         [self setAutoresizingMask:
@@ -552,7 +536,7 @@
     }
     
 //    return CGSizeMake(width, UIInterfaceOrientationIsPortrait(interfaceOrientation) ? self.bounds.size.height : self.bounds.size.height);
-    return CGSizeMake(width, self.bounds.size.height);
+    return CGSizeMake(width, 0.0f);
 }
 
 
