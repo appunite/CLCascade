@@ -46,6 +46,8 @@
 		207EA4EC13992CE100A8200F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 207EA4EB13992CE100A8200F /* QuartzCore.framework */; };
 		209E099013C8F95400BCFFD0 /* ExampleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E098F13C8F95300BCFFD0 /* ExampleWebViewController.m */; };
 		209E09A113C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209E09A013C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib */; };
+		20AB8423141FA51400C11F72 /* detached_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AB8422141FA51400C11F72 /* detached_image.png */; };
+		20AB8427141FA55B00C11F72 /* ExampleNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20AB8426141FA55B00C11F72 /* ExampleNavigationController.m */; };
 		20BA829413C6DD0A00CBFCD3 /* CLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20BA829313C6DD0A00CBFCD3 /* CLWebViewController.m */; };
 		20CCD4DC1403D6C40067CEC6 /* CLBorderShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20CCD4DB1403D6C40067CEC6 /* CLBorderShadowView.m */; };
 /* End PBXBuildFile section */
@@ -111,6 +113,9 @@
 		209E098E13C8F95300BCFFD0 /* ExampleWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleWebViewController.h; sourceTree = "<group>"; };
 		209E098F13C8F95300BCFFD0 /* ExampleWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleWebViewController.m; sourceTree = "<group>"; };
 		209E09A013C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCategoriesViewController.xib; sourceTree = "<group>"; };
+		20AB8422141FA51400C11F72 /* detached_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detached_image.png; sourceTree = "<group>"; };
+		20AB8425141FA55B00C11F72 /* ExampleNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleNavigationController.h; sourceTree = "<group>"; };
+		20AB8426141FA55B00C11F72 /* ExampleNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleNavigationController.m; sourceTree = "<group>"; };
 		20BA829213C6DD0A00CBFCD3 /* CLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLWebViewController.h; path = ../../src/Cascade/Cascade/CLWebViewController.h; sourceTree = "<group>"; };
 		20BA829313C6DD0A00CBFCD3 /* CLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLWebViewController.m; path = ../../src/Cascade/Cascade/CLWebViewController.m; sourceTree = "<group>"; };
 		20CCD4DA1403D6C40067CEC6 /* CLBorderShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLBorderShadowView.h; path = ../../src/Cascade/Cascade/CLBorderShadowView.h; sourceTree = "<group>"; };
@@ -135,6 +140,7 @@
 		201A2D0D13992EF800EFAE15 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				20AB8422141FA51400C11F72 /* detached_image.png */,
 				201A2D291399331300EFAE15 /* LightBackground.png */,
 				201A2D1413992FF700EFAE15 /* brown_bg_98x98.png */,
 				201A2D8913994D6400EFAE15 /* divider_vertical.png */,
@@ -193,6 +199,8 @@
 				209E098F13C8F95300BCFFD0 /* ExampleWebViewController.m */,
 				201A2D8E1399522900EFAE15 /* ExampleSplitCascadeViewController.h */,
 				201A2D8F1399522900EFAE15 /* ExampleSplitCascadeViewController.m */,
+				20AB8425141FA55B00C11F72 /* ExampleNavigationController.h */,
+				20AB8426141FA55B00C11F72 /* ExampleNavigationController.m */,
 				207EA49A13992C0400A8200F /* Supporting Files */,
 			);
 			path = Cascade;
@@ -358,6 +366,7 @@
 				201A2D2A1399331300EFAE15 /* LightBackground.png in Resources */,
 				201A2D8A13994D6500EFAE15 /* divider_vertical.png in Resources */,
 				209E09A113C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib in Resources */,
+				20AB8423141FA51400C11F72 /* detached_image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +396,7 @@
 				209E099013C8F95400BCFFD0 /* ExampleWebViewController.m in Sources */,
 				2026953E13E302F400EF60A6 /* CLScrollView.m in Sources */,
 				20CCD4DC1403D6C40067CEC6 /* CLBorderShadowView.m in Sources */,
+				20AB8427141FA55B00C11F72 /* ExampleNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

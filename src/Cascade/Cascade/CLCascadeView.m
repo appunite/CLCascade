@@ -54,7 +54,7 @@
 
 #define DEFAULT_LEFT_INSET 58.0f
 #define DEFAULT_WIDER_LEFT_INSET 220.0f
-#define PULL_TO_DETACH_FACTOR 0.40f
+#define PULL_TO_DETACH_FACTOR 0.32f
 #define WTF 11.0f
 
 @implementation CLCascadeView

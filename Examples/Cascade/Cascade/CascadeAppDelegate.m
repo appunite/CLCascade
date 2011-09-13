@@ -9,7 +9,7 @@
 #import "CascadeAppDelegate.h"
 #import "CLSplitCascadeViewController.h"
 
-#import "CLCascadeNavigationController.h"
+#import "ExampleNavigationController.h"
 #import "ExampleCategoriesViewController.h"
 
 @implementation CascadeAppDelegate
@@ -20,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    CLCascadeNavigationController* cascadeNavigationController = [[CLCascadeNavigationController alloc] init];
+    ExampleNavigationController* cascadeNavigationController = [[ExampleNavigationController alloc] init];
     ExampleCategoriesViewController* categoriesViewController = [[ExampleCategoriesViewController alloc] initWithNibName:@"ExampleCategoriesViewController" bundle:nil];
     [categoriesViewController setCascadeNavigationController: cascadeNavigationController];
     
