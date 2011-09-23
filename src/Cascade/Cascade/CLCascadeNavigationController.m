@@ -9,7 +9,7 @@
 #import "CLCascadeNavigationController.h"
 
 @interface UIViewController (ReadWrite)
-@property(nonatomic, assign, readwrite) UIViewController *parentViewController;
+@property(nonatomic, assign, readwrite) UIViewController *masterViewController;
 @end
 
 @interface CLCascadeNavigationController (Private)
@@ -279,7 +279,7 @@
     // set cascade navigator to view controller
     [viewController setCascadeNavigationController: self];
     // set parrent view controller, if rootViewController, then nil
-    [viewController setParentViewController: sender];
+    [viewController setMasterViewController: sender];
     // add controller to array
     [self.viewControllers addObject: viewController];
 
