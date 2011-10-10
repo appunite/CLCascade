@@ -29,9 +29,8 @@
 
 - (void)dealloc
 {
-    [_viewControllers release], _viewControllers = nil;
-    [_cascadeView release], _cascadeView = nil;
-    [super dealloc];
+    _viewControllers = nil;
+    _cascadeView = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,7 +64,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [_cascadeView removeFromSuperview];
-    [_cascadeView release], _cascadeView = nil;
+    _cascadeView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

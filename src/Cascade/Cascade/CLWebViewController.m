@@ -39,7 +39,7 @@
 - (id) initWithURL:(NSURL*)url {
     self = [self init];
     if (self) {
-        _requestURL = [url retain];
+        _requestURL = url;
         _viewSize = CLViewSizeWider;
     }
     return self;
@@ -56,9 +56,8 @@
 }
 
 - (void)dealloc {
-    [_activityIndicatorView release], _activityIndicatorView = nil;
-    [_requestURL release], _requestURL = nil;
-    [super dealloc];
+    _activityIndicatorView = nil;
+    _requestURL = nil;
 }
 #pragma mark - View lifecycle
 
@@ -76,7 +75,6 @@
     [webView_ setDataDetectorTypes: UIDataDetectorTypeAll];
     // set contentView of CLSegmentedView
     [self setWebView: webView_];
-    [webView_ release];
     
     // load request
     [self loadRequest];
@@ -134,14 +132,14 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     if (_activityIndicatorView) {
         [_activityIndicatorView removeFromSuperview];
-        [_activityIndicatorView release], _activityIndicatorView = nil;
+        _activityIndicatorView = nil;
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     if (_activityIndicatorView) {
         [_activityIndicatorView removeFromSuperview];
-        [_activityIndicatorView release], _activityIndicatorView = nil;
+        _activityIndicatorView = nil;
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -171,8 +169,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setRequestURL:(NSURL*)url {
     if (_requestURL != url) {
-        [_requestURL release];
-        _requestURL = [url retain];
+        _requestURL = url;
 
         [self loadRequest];
     }

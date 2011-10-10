@@ -41,7 +41,6 @@
     UIImageView* header = [[UIImageView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.bounds.size.width, 45.0)];
     [header setImage: [UIImage imageNamed:@"ToolBar_479x45.png"]];
     [self.segmentedView setHeaderView: header];
-    [header release];
 
     // show rounded corners
     [self setShowRoundedCorners: NO];
@@ -63,7 +62,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSURLRequest*) request {
-    NSURL* url = [NSURL URLWithString: @"https://github.com/creativelabs/CLCascade"];
+    NSURL* url = [NSURL URLWithString: @"https://github.com/appunite/CLCascade"];
     return [NSURLRequest requestWithURL:url 
                             cachePolicy:NSURLRequestUseProtocolCachePolicy 
                         timeoutInterval:30.0];

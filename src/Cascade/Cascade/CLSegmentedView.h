@@ -29,17 +29,17 @@
 /*
  * Header view - located on the top of view
  */
-@property (nonatomic, retain, readonly) IBOutlet UIView* headerView;
+@property (nonatomic, strong) IBOutlet UIView* headerView;
 
 /*
  * Footer view - located on the bottom of view
  */
-@property (nonatomic, retain, readonly) IBOutlet UIView* footerView;
+@property (nonatomic, strong) IBOutlet UIView* footerView;
 
 /*
  * Content view - located between header and footer view 
  */
-@property (nonatomic, retain, readonly) IBOutlet UIView* contentView;
+@property (nonatomic, strong) IBOutlet UIView* contentView;
 
 /*
  * The width of the shadow
@@ -67,24 +67,6 @@
 @property (nonatomic, assign, readonly) CLViewSize viewSize;
 
 - (id) initWithSize:(CLViewSize)size;
-
-/* 
- * To set content view.
- * This methoad add contentView to view and layout all views
- */
-- (void) setContentView:(UIView*)contentView;
-
-/* 
- * If you want set header view (above contentView).
- * This methoad add headerView to view and layout all views
- */
-- (void) setHeaderView:(UIView*)headerView;
-
-/* 
- * If you want set footer view (belove contentView)
- * This methoad add footerView to view and layout all views
- */
-- (void) setFooterView:(UIView*)footerView;
 
 /* 
  * This methoad add left outer shadow view with proper width

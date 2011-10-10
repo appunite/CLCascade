@@ -11,10 +11,6 @@
 @implementation ExampleSplitCascadeViewController
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +41,6 @@
     UIView* backgroundView = [[UIView alloc] init];
     [backgroundView setBackgroundColor: [UIColor colorWithPatternImage: [UIImage imageNamed: @"brown_bg_128x128"]]];
     [self setBackgroundView:backgroundView];
-    [backgroundView release];
     
     // add divider
     UIImage* divider = [UIImage imageNamed:@"divider_vertical.png"];

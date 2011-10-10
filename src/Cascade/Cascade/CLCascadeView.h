@@ -14,8 +14,8 @@
 
 @interface CLCascadeView : UIView <UIScrollViewDelegate> {
     // delegate and dataSource
-    id<CLCascadeViewDelegate> _delegate;
-    id<CLCascadeViewDataSource> _dataSource;
+    id<CLCascadeViewDelegate> __unsafe_unretained _delegate;
+    id<CLCascadeViewDataSource> __unsafe_unretained _dataSource;
 
     // scroll view
     CLScrollView* _scrollView;
@@ -41,8 +41,8 @@
     NSInteger _indexOfLastVisiblePage;
 }
 
-@property(nonatomic, assign) id<CLCascadeViewDelegate> delegate;
-@property(nonatomic, assign) id<CLCascadeViewDataSource> dataSource;
+@property(nonatomic, unsafe_unretained) id<CLCascadeViewDelegate> delegate;
+@property(nonatomic, unsafe_unretained) id<CLCascadeViewDataSource> dataSource;
 
 /*
  * Left inset of normal page from left boarder. Default 58.0f

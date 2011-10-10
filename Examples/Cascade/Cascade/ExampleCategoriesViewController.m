@@ -20,10 +20,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -47,7 +43,6 @@
     UIView* backgrounView = [[UIView alloc] initWithFrame: self.tableView.bounds];
     [backgrounView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"brown_bg_128x128.png"]]];
     [self.tableView setBackgroundView:backgrounView];
-    [backgrounView release];
 }
 
 - (void)viewDidUnload
@@ -88,7 +83,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
         [cell.textLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17.0]];
         [cell.textLabel setTextColor: [UIColor colorWithRed:0.894117 green:0.839215 blue:0.788235 alpha:1.0]];
@@ -96,7 +91,7 @@
         [cell.textLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
 
         UIImage *backgroundImage = [[UIImage imageNamed:@"LightBackground.png"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:1.0];
-        cell.backgroundView = [[[UIImageView alloc] initWithImage:backgroundImage] autorelease];
+        cell.backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
         cell.backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         cell.backgroundView.frame = cell.bounds;
         cell.backgroundView.alpha = 0.5;
@@ -115,7 +110,6 @@
     // if you select row, then create and push custom UIViewController
     ExampleTableViewController* rootTableViewController = [[ExampleTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
     [self.cascadeNavigationController setRootViewController:rootTableViewController animated:YES];
-    [rootTableViewController release];
     
 }
 

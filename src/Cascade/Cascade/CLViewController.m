@@ -60,8 +60,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_cascadeNavigationController release], _cascadeNavigationController = nil;    
-    [super dealloc];
+    _cascadeNavigationController = nil;    
 }
 
 
@@ -94,7 +93,6 @@
     
     CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: _viewSize];
     self.view = view_;
-    [view_ release];
     
     [view_ setAutoresizingMask:
      UIViewAutoresizingFlexibleLeftMargin | 
@@ -136,7 +134,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView *) leftBorderShadowView {
-    return [[[CLBorderShadowView alloc] init] autorelease];
+    return [[CLBorderShadowView alloc] init];
 }
 
 

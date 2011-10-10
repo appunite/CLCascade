@@ -12,6 +12,7 @@
 		20015598138F82FC00FA91B2 /* CLCascadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20015595138F824E00FA91B2 /* CLCascadeView.m */; };
 		200BF67F13747494005C23EF /* CLCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200BF67E13747494005C23EF /* CLCategoriesViewController.m */; };
 		200BF6821374751B005C23EF /* CLCascadeNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200BF6811374751B005C23EF /* CLCascadeNavigationController.m */; };
+		200DCD1C1443657300E4E686 /* CLBorderShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20CCD4D71403D2D70067CEC6 /* CLBorderShadowView.m */; };
 		201EAFC813F5402C0069E9F3 /* CLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2026954413E3034500EF60A6 /* CLScrollView.m */; };
 		201EAFD113F5517F0069E9F3 /* CLGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 201EAFD013F5517F0069E9F3 /* CLGlobal.h */; };
 		2026954513E3034500EF60A6 /* CLScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2026954313E3034500EF60A6 /* CLScrollView.h */; };
@@ -473,6 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				200DCD1C1443657300E4E686 /* CLBorderShadowView.m in Sources */,
 				201EAFC813F5402C0069E9F3 /* CLScrollView.m in Sources */,
 				20015598138F82FC00FA91B2 /* CLCascadeView.m in Sources */,
 				20BB342B133FB8FF003EEB6E /* main.m in Sources */,
@@ -601,11 +603,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tadeusz Wojtaszek (R7VEB36U8D)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cascade/Cascade-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Cascade/Cascade-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
@@ -621,10 +625,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tadeusz Wojtaszek (R7VEB36U8D)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cascade/Cascade-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Cascade/Cascade-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;

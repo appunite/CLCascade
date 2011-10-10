@@ -18,10 +18,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_cascadeNavigationController release], _cascadeNavigationController = nil;
-    [_categoriesViewController release], _categoriesViewController = nil;
+    _cascadeNavigationController = nil;
+    _categoriesViewController = nil;
     
-    [super dealloc];
 }
 
 
@@ -59,7 +58,6 @@
     self.view = view_;
     [view_ setCategoriesView: self.categoriesViewController.view];
     [view_ setCascadeView: self.cascadeNavigationController.view];
-    [view_ release];
 }
 
 
@@ -115,8 +113,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setCategoriesViewController:(CLCategoriesViewController *)viewController {
     if (viewController != _categoriesViewController) {
-        [_categoriesViewController release];
-        _categoriesViewController = [viewController retain];
+        _categoriesViewController = viewController;
         [(CLSplitCascadeView*)self.view setCategoriesView: viewController.view];
     }
 }
@@ -125,8 +122,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setCascadeNavigationController:(CLCascadeNavigationController *)viewController {
     if (viewController != _cascadeNavigationController) {
-        [_cascadeNavigationController release];
-        _cascadeNavigationController = [viewController retain];
+        _cascadeNavigationController = viewController;
         [(CLSplitCascadeView*)self.view setCascadeView: viewController.view];
     }
 }

@@ -26,27 +26,27 @@
     
 }
 
-@property (nonatomic, retain) IBOutlet CLSplitCascadeViewController* splitCascadeViewController;
+@property (nonatomic, strong) IBOutlet CLSplitCascadeViewController* splitCascadeViewController;
 
 /*
  * Divider image - image between categories and cascade view
  */
-@property (nonatomic, retain) UIImage* verticalDividerImage;
+@property (nonatomic, strong) UIImage* verticalDividerImage;
 
 /*
  * Background view - located under cascade view
  */
-@property (nonatomic, retain) UIView* backgroundView;
+@property (nonatomic, strong) UIView* backgroundView;
 
 /*
  * Categories view - located on the left, view containing table view
  */
-@property (nonatomic, retain) UIView* categoriesView;
+@property (nonatomic, strong) UIView* categoriesView;
 
 /*
  * Cascade content navigator - located on the right, view containing cascade view controllers
  */
-@property (nonatomic, retain) UIView* cascadeView;
+@property (nonatomic, strong) UIView* cascadeView;
 
 
 @end

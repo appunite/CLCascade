@@ -72,9 +72,8 @@
 {
     _delegate = nil;
     _dataSource = nil;    
-    [_scrollView release], _scrollView = nil;
-    [_pages release], _pages = nil;
-    [super dealloc];
+    _scrollView = nil;
+    _pages = nil;
 }
 
 
@@ -194,7 +193,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popPageAtIndex:(NSInteger)index animated:(BOOL)animated {
     // get item at index
-    __block id item = [_pages objectAtIndex:index];
+    __unsafe_unretained id item = [_pages objectAtIndex:index];
     
     // check if page is unloaded
     if (item != [NSNull null]) {

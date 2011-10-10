@@ -40,7 +40,7 @@
     
     if (_dividerView) {
         [_dividerView removeFromSuperview];
-        [_dividerView release], _dividerView = nil;
+        _dividerView = nil;
     }
         
     _dividerView = [[UIView alloc] init];
@@ -92,13 +92,12 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_cascadeView release], _cascadeView = nil;
-    [_categoriesView release], _categoriesView = nil;
-    [_backgroundView release], _backgroundView = nil;
-    [_verticalDividerImage release], _verticalDividerImage = nil;
-    [_dividerView release], _dividerView = nil;
+    _cascadeView = nil;
+    _categoriesView = nil;
+    _backgroundView = nil;
+    _verticalDividerImage = nil;
+    _dividerView = nil;
 
-    [super dealloc];
 }
 
 
@@ -154,8 +153,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setCategoriesView:(UIView*) aView {
     if (_categoriesView != aView) {
-        [_categoriesView release];
-        _categoriesView = [aView retain];
+        _categoriesView = aView;
         
         [self addSubview: _categoriesView];
         [self bringSubviewToFront: _cascadeView];
@@ -166,8 +164,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setCascadeView:(UIView*) aView {
     if (_cascadeView != aView) {
-        [_cascadeView release];
-        _cascadeView = [aView retain];
+        _cascadeView = aView;
                 
         [self addSubview: _cascadeView];
         [self bringSubviewToFront: _cascadeView];
@@ -178,11 +175,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setBackgroundView:(UIView*) aView {
     if (_backgroundView != aView) {
-        [_backgroundView release];
-        _backgroundView = [aView retain];
+        _backgroundView = aView;
         
         [_dividerView removeFromSuperview];
-        [_dividerView release], _dividerView = nil;
+        _dividerView = nil;
         
         if (_cascadeView == nil) {
             [self addSubview: _backgroundView];
@@ -199,8 +195,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setVerticalDividerImage:(UIImage*) image {
     if (_verticalDividerImage != image) {
-        [_verticalDividerImage release];
-        _verticalDividerImage = [image retain];
+        _verticalDividerImage = image;
         
         [self addDivierView];
     }

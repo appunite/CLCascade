@@ -18,10 +18,9 @@ static CGFloat kLeftOffset = 15.0f;
 static CGFloat kTopOffset = 10.0f;
 
 - (void)dealloc {
-    [_staticDetachImage release], _staticDetachImage = nil;
-    [_dynamicDetachImage release], _dynamicDetachImage = nil;
+    _staticDetachImage = nil;
+    _dynamicDetachImage = nil;
     
-    [super dealloc];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,8 +50,8 @@ static CGFloat kTopOffset = 10.0f;
 - (void)viewDidUnload {
     [super viewDidUnload];
     
-    [_staticDetachImage release], _staticDetachImage = nil;
-    [_dynamicDetachImage release], _dynamicDetachImage = nil;
+    _staticDetachImage = nil;
+    _dynamicDetachImage = nil;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

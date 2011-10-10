@@ -14,8 +14,8 @@
     NSURL* _requestURL;
 }
 
-@property (nonatomic, retain) UIWebView* webView;
-@property (nonatomic, retain) NSURL* requestURL;
+@property (nonatomic, strong) UIWebView* webView;
+@property (nonatomic, strong) NSURL* requestURL;
 
 - (id) initWithURL:(NSURL*)url;
 

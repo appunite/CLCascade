@@ -26,7 +26,7 @@
 - (id) initWithSize:(CLViewSize)size;
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil size:(CLViewSize)size;
 
-@property (nonatomic, retain) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
+@property (nonatomic, strong) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
 @property (nonatomic, assign, readonly) CLViewSize viewSize;
 @property (nonatomic, assign) BOOL showRoundedCorners;
 

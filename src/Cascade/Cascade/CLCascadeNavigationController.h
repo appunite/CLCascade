@@ -24,7 +24,7 @@
 /*
  List of CLViewControllers on stock.
  */
-@property (nonatomic, retain, readonly) NSMutableArray* viewControllers;
+@property (nonatomic, strong, readonly) NSMutableArray* viewControllers;
 
 /*
  * Left inset of normal size pages from left boarder

@@ -13,10 +13,6 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)didReceiveMemoryWarning
@@ -41,7 +37,6 @@
     UIImageView* header = [[UIImageView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.bounds.size.width, 45.0)];
     [header setImage: [UIImage imageNamed:@"ToolBar_479x45.png"]];
     [self.segmentedView setHeaderView: header];
-    [header release];
     
     // show rounded corners
     [self setShowRoundedCorners: NO];
@@ -90,7 +85,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -118,7 +113,6 @@
     } 
     
     [self pushDetailViewController:viewController animated:YES];
-    [viewController release];
 }
 
 @end

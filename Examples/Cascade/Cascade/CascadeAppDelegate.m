@@ -27,8 +27,6 @@
     [self.viewController setCategoriesViewController: categoriesViewController];
     [self.viewController setCascadeNavigationController: cascadeNavigationController];
     
-    [categoriesViewController release];
-    [cascadeNavigationController release];
 
     // Override point for customization after application launch.
     self.window.rootViewController = self.viewController;
@@ -76,11 +74,5 @@
      */
 }
 
-- (void)dealloc
-{
-    [_window release];
-    [_viewController release];
-    [super dealloc];
-}
 
 @end

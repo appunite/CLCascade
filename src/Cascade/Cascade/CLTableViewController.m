@@ -36,10 +36,6 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,13 +70,11 @@
     // create SegmentedView
     CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: _viewSize];
     self.view = view_;
-    [view_ release];
     
     UITableView* tableView_ = [[UITableView alloc] initWithFrame:CGRectZero style:_tableViewStyle];
     [tableView_ setDelegate: self];
     [tableView_ setDataSource: self];
     [self setTableView: tableView_];
-    [tableView_ release];
     
     // set clear background color
     [view_ setBackgroundColor: [UIColor clearColor]];
@@ -140,7 +134,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     return cell;

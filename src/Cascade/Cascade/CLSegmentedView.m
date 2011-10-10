@@ -61,9 +61,8 @@
 - (void) setContentView:(UIView*)contentView {
     if (_contentView != contentView) {
         [_contentView removeFromSuperview];
-        [_contentView release];
 
-        _contentView = [contentView retain];
+        _contentView = contentView;
 
         if (_contentView) {
             [_contentView setAutoresizingMask:
@@ -86,9 +85,8 @@
     
     if (_headerView != headerView) {
         [_headerView removeFromSuperview];
-        [_headerView release];
         
-        _headerView = [headerView retain];
+        _headerView = headerView;
 
         if (_headerView) {
             [_headerView setAutoresizingMask:
@@ -108,9 +106,8 @@
     
     if (_footerView != footerView) {
         [_footerView removeFromSuperview];
-        [_footerView release];
         
-        _footerView = [footerView retain];
+        _footerView = footerView;
         if (_footerView) {
             [_footerView setAutoresizingMask:
              UIViewAutoresizingFlexibleLeftMargin | 
@@ -137,8 +134,7 @@
     }
 
     if (view != _shadowView) {
-        [_shadowView release];
-        _shadowView = [view retain];
+        _shadowView = view;
         
         [self insertSubview:_shadowView atIndex:0];
         
@@ -153,7 +149,7 @@
 
     [self setClipsToBounds: YES];
 
-    [_shadowView release], _shadowView = nil;
+    _shadowView = nil;
     [self setNeedsLayout];
     
 }
@@ -224,13 +220,12 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc
 {
-    [_footerView release], _footerView = nil;
-    [_headerView release], _headerView = nil;
-    [_contentView release], _contentView = nil;
-    [_roundedCornersView release], _roundedCornersView = nil;
-    [_shadowView release], _shadowView = nil;
+    _footerView = nil;
+    _headerView = nil;
+    _contentView = nil;
+    _roundedCornersView = nil;
+    _shadowView = nil;
 
-    [super dealloc];
 }
 
 #pragma mark
