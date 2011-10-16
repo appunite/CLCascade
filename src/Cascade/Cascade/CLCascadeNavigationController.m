@@ -31,7 +31,6 @@
 
 - (void)dealloc
 {
-    _viewControllers = nil;
     _cascadeView = nil;
 }
 

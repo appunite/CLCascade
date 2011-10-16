@@ -94,7 +94,6 @@
 {
     _cascadeView = nil;
     _categoriesView = nil;
-    _backgroundView = nil;
     _verticalDividerImage = nil;
     _dividerView = nil;
 
