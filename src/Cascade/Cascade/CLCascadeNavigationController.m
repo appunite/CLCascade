@@ -11,6 +11,8 @@
 @interface CLCascadeNavigationController (Private)
 - (void) addPagesRoundedCorners;
 - (void) addRoundedCorner:(UIRectCorner)rectCorner toPageAtIndex:(NSInteger)index;
+- (void) popPagesFromLastIndexTo:(NSInteger)index;
+- (void) removeAllPageViewControllers;
 @end
 
 @implementation CLCascadeNavigationController
@@ -210,17 +212,9 @@
      */
     NSLog(@"cascadeViewDidPullToDetachPages");
 
-    // index of last page
-    NSUInteger index = [_viewControllers count] - 1;
     // pop page from back
-    NSEnumerator* enumerator = [_viewControllers reverseObjectEnumerator];
-    // enumarate pages
-    while ([enumerator nextObject] && _viewControllers.count > 1) {
-        // pop page at index
-        [cascadeView popPageAtIndex:index animated:NO];
-        [_viewControllers removeLastObject];
-        index--;
-    }
+    [self popPagesFromLastIndexTo:0];
+    //load first page
     [cascadeView loadPageAtIndex:0];
     
 }
@@ -242,7 +236,7 @@
     // pop all pages
     [_cascadeView popAllPagesAnimated: animated];
     // remove all controllers
-    [_viewControllers removeAllObjects];
+    [self removeAllPageViewControllers];
     // add root view controller
     [self addViewController:viewController sender:nil animated:animated];
 }
@@ -259,15 +253,8 @@
         // if sender is not last view controller
         if (indexOfSender != [_viewControllers count] - 1) {
             
-            // count of views to pop
-            NSInteger count = [_viewControllers count] - indexOfSender - 1;
-
             // pop views and remove from _viewControllers
-            for (NSInteger i = count; i>0; i--) {
-                NSInteger inx = indexOfSender + i;
-                [_cascadeView popPageAtIndex:inx animated:NO];
-                [_viewControllers removeLastObject];
-            }
+            [self popPagesFromLastIndexTo:indexOfSender];
         }
     } 
     
@@ -276,10 +263,18 @@
     // add controller to array
     [self.viewControllers addObject: viewController];
 
+    #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+    [self addChildViewController:viewController];
+    #endif
+    
     // push view
     [_cascadeView pushPage:[viewController view] 
                   fromPage:[sender view] 
                   animated:animated];
+
+    #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+    [viewController didMoveToParentViewController:self];
+    #endif
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -348,6 +343,57 @@
         if (indexOfLastVisiblePage == [_viewControllers count] -1) {
             [self addRoundedCorner:UIRectCornerTopRight | UIRectCornerBottomRight toPageAtIndex:indexOfLastVisiblePage];
         }    
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) popPagesFromLastIndexTo:(NSInteger)toIndex {
+    if (toIndex < 0) toIndex = 0;
+    
+    // index of last page
+    NSUInteger index = [_viewControllers count] - 1;
+    // pop page from back
+    NSEnumerator* enumerator = [_viewControllers reverseObjectEnumerator];
+    // enumarate pages
+    while ([enumerator nextObject] && _viewControllers.count > toIndex+1) {
+
+        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+        UIViewController* viewController = [_viewControllers objectAtIndex:index];
+        [viewController willMoveToParentViewController:nil];
+        #endif
+
+        // pop page at index
+        [_cascadeView popPageAtIndex:index animated:NO];
+        [_viewControllers removeLastObject];
+
+        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+        [viewController removeFromParentViewController];
+        #endif
+        
+        index--;
+    }
+    
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) removeAllPageViewControllers {
+
+    // pop page from back
+    NSEnumerator* enumerator = [_viewControllers reverseObjectEnumerator];
+    // enumarate pages
+    while ([enumerator nextObject]) {
+        
+        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+        UIViewController* viewController = [_viewControllers lastObject];
+        [viewController willMoveToParentViewController:nil];
+        #endif
+        
+        [_viewControllers removeLastObject];
+        
+        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+        [viewController removeFromParentViewController];
+        #endif
     }
 }
 

@@ -50,20 +50,16 @@
             CLSplitCascadeView* view_ = (CLSplitCascadeView*)self.view;
             [view_ setCategoriesView: self.categoriesViewController.view];
             [view_ setCascadeView: self.cascadeNavigationController.view];
+
             return;
         }
     }
     
     CLSplitCascadeView* view_ = [[CLSplitCascadeView alloc] init];
     self.view = view_;
+
     [view_ setCategoriesView: self.categoriesViewController.view];
     [view_ setCascadeView: self.cascadeNavigationController.view];
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) viewDidLoad {
-    [super viewDidLoad];
 }
 
 
@@ -115,6 +111,11 @@
     if (viewController != _categoriesViewController) {
         _categoriesViewController = viewController;
         [(CLSplitCascadeView*)self.view setCategoriesView: viewController.view];
+        
+        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+        [self addChildViewController:viewController];
+        [viewController didMoveToParentViewController:self];
+        #endif
     }
 }
 
@@ -124,6 +125,11 @@
     if (viewController != _cascadeNavigationController) {
         _cascadeNavigationController = viewController;
         [(CLSplitCascadeView*)self.view setCascadeView: viewController.view];
+    
+        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+        [self addChildViewController:viewController];
+        [viewController didMoveToParentViewController:self];
+        #endif
     }
 }
 

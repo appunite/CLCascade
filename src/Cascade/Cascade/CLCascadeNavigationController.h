@@ -15,6 +15,7 @@
 
 @interface CLCascadeNavigationController : UIViewController <CLCascadeViewDataSource, CLCascadeViewDelegate> {
     // array of all view controllers
+    // todo: in ios5 use childViewControllers
     NSMutableArray* _viewControllers;
 
     // view containing all views on stack
