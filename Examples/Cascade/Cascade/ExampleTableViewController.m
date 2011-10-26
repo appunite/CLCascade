@@ -8,6 +8,7 @@
 
 #import "ExampleTableViewController.h"
 #import "ExampleWebViewController.h"
+#import "ExampleXIBViewController.h"
 
 @implementation ExampleTableViewController
 
@@ -74,7 +75,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    return 6;
 }
 
 
@@ -90,11 +91,15 @@
     
     // Configure the cell...
 
-    if (indexPath.row%2 == 0) {
+    if (indexPath.row%3 == 0) {
         cell.textLabel.text = @"New Table View";
-    } else {
+    } else
+    if (indexPath.row%3 == 1)  {
         cell.textLabel.text = @"New Web View";
-    }    
+    } else
+    {
+        cell.textLabel.text = @"New View from XIB";
+    }
     return cell;
 }
 
@@ -106,11 +111,15 @@
 {
     CLViewController* viewController = nil;
     
-    if (indexPath.row%2 == 0) {
+    if (indexPath.row%3 == 0) {
         viewController = [[ExampleTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
-    } else {
+    } else 
+    if (indexPath.row%3 == 1) {
         viewController = [[ExampleWebViewController alloc] init];
-    } 
+    } else 
+    {
+        viewController = [[ExampleXIBViewController alloc] initWithNibName:@"ExampleXIBViewController" bundle:nil size:CLViewSizeNormal];
+    }
     
     [self pushDetailViewController:viewController animated:YES];
 }

@@ -44,6 +44,8 @@
 		207EA4DE13992C6300A8200F /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 207EA4D213992C6300A8200F /* CLViewController.m */; };
 		207EA4E413992C6A00A8200F /* UIViewController+CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 207EA4E213992C6A00A8200F /* UIViewController+CLSegmentedView.m */; };
 		207EA4EC13992CE100A8200F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 207EA4EB13992CE100A8200F /* QuartzCore.framework */; };
+		209BC87514587B77005160AE /* ExampleXIBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209BC87314587B77005160AE /* ExampleXIBViewController.m */; };
+		209BC87614587B77005160AE /* ExampleXIBViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209BC87414587B77005160AE /* ExampleXIBViewController.xib */; };
 		209E099013C8F95400BCFFD0 /* ExampleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209E098F13C8F95300BCFFD0 /* ExampleWebViewController.m */; };
 		209E09A113C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209E09A013C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib */; };
 		20AB8423141FA51400C11F72 /* detached_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AB8422141FA51400C11F72 /* detached_image.png */; };
@@ -110,6 +112,9 @@
 		207EA4E113992C6A00A8200F /* UIViewController+CLSegmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CLSegmentedView.h"; path = "../../src/Cascade/Cascade/UIViewController+CLSegmentedView.h"; sourceTree = "<group>"; };
 		207EA4E213992C6A00A8200F /* UIViewController+CLSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CLSegmentedView.m"; path = "../../src/Cascade/Cascade/UIViewController+CLSegmentedView.m"; sourceTree = "<group>"; };
 		207EA4EB13992CE100A8200F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		209BC87214587B77005160AE /* ExampleXIBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleXIBViewController.h; sourceTree = "<group>"; };
+		209BC87314587B77005160AE /* ExampleXIBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleXIBViewController.m; sourceTree = "<group>"; };
+		209BC87414587B77005160AE /* ExampleXIBViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleXIBViewController.xib; sourceTree = "<group>"; };
 		209E098E13C8F95300BCFFD0 /* ExampleWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleWebViewController.h; sourceTree = "<group>"; };
 		209E098F13C8F95300BCFFD0 /* ExampleWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleWebViewController.m; sourceTree = "<group>"; };
 		209E09A013C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExampleCategoriesViewController.xib; sourceTree = "<group>"; };
@@ -201,6 +206,9 @@
 				201A2D8F1399522900EFAE15 /* ExampleSplitCascadeViewController.m */,
 				20AB8425141FA55B00C11F72 /* ExampleNavigationController.h */,
 				20AB8426141FA55B00C11F72 /* ExampleNavigationController.m */,
+				209BC87214587B77005160AE /* ExampleXIBViewController.h */,
+				209BC87314587B77005160AE /* ExampleXIBViewController.m */,
+				209BC87414587B77005160AE /* ExampleXIBViewController.xib */,
 				207EA49A13992C0400A8200F /* Supporting Files */,
 			);
 			path = Cascade;
@@ -367,6 +375,7 @@
 				201A2D8A13994D6500EFAE15 /* divider_vertical.png in Resources */,
 				209E09A113C9EF6A00BCFFD0 /* ExampleCategoriesViewController.xib in Resources */,
 				20AB8423141FA51400C11F72 /* detached_image.png in Resources */,
+				209BC87614587B77005160AE /* ExampleXIBViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +406,7 @@
 				2026953E13E302F400EF60A6 /* CLScrollView.m in Sources */,
 				20CCD4DC1403D6C40067CEC6 /* CLBorderShadowView.m in Sources */,
 				20AB8427141FA55B00C11F72 /* ExampleNavigationController.m in Sources */,
+				209BC87514587B77005160AE /* ExampleXIBViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
