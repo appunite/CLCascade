@@ -7,7 +7,6 @@
 // 
 
 #import "CascadeAppDelegate.h"
-#import "CLSplitCascadeViewController.h"
 
 #import "ExampleNavigationController.h"
 #import "ExampleCategoriesViewController.h"

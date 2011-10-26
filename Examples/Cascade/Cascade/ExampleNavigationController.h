@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "CLCascadeNavigationController.h"
+#import <Cascade/Cascade.h>
 
 @interface ExampleNavigationController : CLCascadeNavigationController {
     UIImageView* _staticDetachImage;
