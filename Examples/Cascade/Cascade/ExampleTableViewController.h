@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CLTableViewController.h"
+#import <Cascade/Cascade.h>
 
 @interface ExampleTableViewController : CLTableViewController {
     

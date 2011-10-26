@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "CLWebViewController.h"
+#import <Cascade/Cascade.h>
 
 @interface ExampleWebViewController : CLWebViewController
 

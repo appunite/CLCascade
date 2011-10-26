@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Cascade/Cascade.h>
 
-#import "CLCategoriesViewController.h"
 #import "ExampleTableViewController.h"
 
 @interface ExampleCategoriesViewController : CLCategoriesViewController {

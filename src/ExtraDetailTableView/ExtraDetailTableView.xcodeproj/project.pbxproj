@@ -92,6 +92,7 @@
 				2068AAF71371B63C001B81F8 /* ExtraDetailTableViewViewController.m */,
 				2068AB011371B679001B81F8 /* CLDetailTableViewController.h */,
 				2068AB181371BC90001B81F8 /* CLDetailTableViewController.m */,
+				2068AAE91371B63C001B81F8 /* ExtraDetailTableView-Info.plist */,
 				2068AAE81371B63C001B81F8 /* Supporting Files */,
 			);
 			path = ExtraDetailTableView;
@@ -102,20 +103,11 @@
 			children = (
 				2068AAF31371B63C001B81F8 /* MainWindow.xib */,
 				2068AAF91371B63C001B81F8 /* ExtraDetailTableViewViewController.xib */,
-				2068AB041371B680001B81F8 /* Images */,
-				2068AAE91371B63C001B81F8 /* ExtraDetailTableView-Info.plist */,
 				2068AAEA1371B63C001B81F8 /* InfoPlist.strings */,
 				2068AAED1371B63C001B81F8 /* ExtraDetailTableView-Prefix.pch */,
 				2068AAEE1371B63C001B81F8 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2068AB041371B680001B81F8 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
