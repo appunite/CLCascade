@@ -145,7 +145,6 @@
 		207EA48413992C0400A8200F = {
 			isa = PBXGroup;
 			children = (
-				B680750A14582041008035DC /* Cascade.xcodeproj */,
 				207EA49913992C0400A8200F /* Cascade */,
 				207EA49213992C0400A8200F /* Frameworks */,
 				207EA49013992C0400A8200F /* Products */,
@@ -163,6 +162,7 @@
 		207EA49213992C0400A8200F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B680750A14582041008035DC /* Cascade.xcodeproj */,
 				207EA49313992C0400A8200F /* UIKit.framework */,
 				207EA49513992C0400A8200F /* Foundation.framework */,
 				207EA4EB13992CE100A8200F /* QuartzCore.framework */,

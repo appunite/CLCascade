@@ -6,7 +6,8 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "CLViewController.h"
+#import <Foundation/Foundation.h>
+#import <Cascade/Cascade.h>
 
 @interface ExampleXIBViewController : CLViewController
 
