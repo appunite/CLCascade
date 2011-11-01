@@ -59,9 +59,10 @@
     
     CLSplitCascadeView* view_ = [[CLSplitCascadeView alloc] init];
     self.view = view_;
-
+    
     [view_ setCategoriesView: self.categoriesViewController.view];
     [view_ setCascadeView: self.cascadeNavigationController.view];
+    [view_ setSplitCascadeViewController:self];
 }
 
 
