@@ -16,11 +16,14 @@
 @dynamic webView;
 @synthesize requestURL = _requestURL;
 
+- (void) loadView {
+    self.view = [[CLSegmentedView alloc] initWithSize:CLViewSizeWider];
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id) init {
     self = [super init];
     if (self) {
-        _viewSize = CLViewSizeWider;
+        self.clViewSize = CLViewSizeWider;
     }
     return self;
 }
@@ -31,7 +34,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _viewSize = CLViewSizeWider;
+        self.clViewSize = CLViewSizeWider;
     }
     return self;
 }
@@ -42,7 +45,7 @@
     self = [self init];
     if (self) {
         _requestURL = url;
-        _viewSize = CLViewSizeWider;
+        self.clViewSize = CLViewSizeWider;
     }
     return self;
 }

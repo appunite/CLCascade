@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <Cascade/Cascade.h>
 
-@interface ExampleXIBViewController : CLViewController
+@interface ExampleXIBViewController : UIViewController
 
 @end

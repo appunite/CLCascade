@@ -18,7 +18,7 @@
 - (id) initWithTableViewStyle:(UITableViewStyle)style {
     self = [super init];
     if (self) {
-        _viewSize = CLViewSizeNormal;
+        self.clViewSize = CLViewSizeNormal;
         _tableViewStyle = style;
     }
     return self;
@@ -69,17 +69,13 @@
     }
     
     // create SegmentedView
-    CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: _viewSize];
+    CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: self.clViewSize];
     self.view = view_;
     
     UITableView* tableView_ = [[UITableView alloc] initWithFrame:CGRectZero style:_tableViewStyle];
     [tableView_ setDelegate: self];
     [tableView_ setDataSource: self];
     [self setTableView: tableView_];
-    
-    // set clear background color
-    [view_ setBackgroundColor: [UIColor clearColor]];
-
 }
 
 

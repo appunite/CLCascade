@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Cascade/CLCustomViewControllers/CLViewController.h>
+#import <Cascade/CLCascadeNavigationController/CLCascadeNavigationController.h>
 
-
-@interface CLTableViewController : CLViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface CLTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     UITableViewStyle _tableViewStyle;
 }
 

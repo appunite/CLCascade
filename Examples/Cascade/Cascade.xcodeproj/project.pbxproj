@@ -40,6 +40,7 @@
 		20AB8423141FA51400C11F72 /* detached_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 20AB8422141FA51400C11F72 /* detached_image.png */; };
 		20AB8427141FA55B00C11F72 /* ExampleNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20AB8426141FA55B00C11F72 /* ExampleNavigationController.m */; };
 		B68075131458204B008035DC /* libCascade.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B680751214582041008035DC /* libCascade.a */; };
+		E06EEEE6146160A30095F933 /* ExampleUITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06EEEE5146160A20095F933 /* ExampleUITableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,8 @@
 		20AB8425141FA55B00C11F72 /* ExampleNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleNavigationController.h; sourceTree = "<group>"; };
 		20AB8426141FA55B00C11F72 /* ExampleNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleNavigationController.m; sourceTree = "<group>"; };
 		B680750A14582041008035DC /* Cascade.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cascade.xcodeproj; path = ../../src/Cascade/Cascade.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E06EEEE4146160A20095F933 /* ExampleUITableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleUITableViewController.h; sourceTree = "<group>"; };
+		E06EEEE5146160A20095F933 /* ExampleUITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleUITableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +191,8 @@
 				209BC87214587B77005160AE /* ExampleXIBViewController.h */,
 				209BC87314587B77005160AE /* ExampleXIBViewController.m */,
 				209BC87414587B77005160AE /* ExampleXIBViewController.xib */,
+				E06EEEE4146160A20095F933 /* ExampleUITableViewController.h */,
+				E06EEEE5146160A20095F933 /* ExampleUITableViewController.m */,
 				207EA49A13992C0400A8200F /* Supporting Files */,
 			);
 			path = Cascade;
@@ -323,6 +328,7 @@
 				209E099013C8F95400BCFFD0 /* ExampleWebViewController.m in Sources */,
 				20AB8427141FA55B00C11F72 /* ExampleNavigationController.m in Sources */,
 				209BC87514587B77005160AE /* ExampleXIBViewController.m in Sources */,
+				E06EEEE6146160A30095F933 /* ExampleUITableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +432,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COPY_PHASE_STRIP = NO;
@@ -444,6 +451,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COPY_PHASE_STRIP = YES;

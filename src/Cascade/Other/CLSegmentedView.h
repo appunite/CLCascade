@@ -18,10 +18,6 @@
     UIView* _contentView;
     UIView* _roundedCornersView;
     
-    CGFloat _shadowWidth;
-    CGFloat _shadowOffset;
-    UIView* _shadowView;
-    
     BOOL _showRoundedCorners;
     UIRectCorner _rectCorner;
 }
@@ -41,15 +37,6 @@
  */
 @property (nonatomic, strong) IBOutlet UIView* contentView;
 
-/*
- * The width of the shadow
- */
-@property (nonatomic, assign) CGFloat shadowWidth;
-
-/*
- * The offset of the shadow in X-axis. Default 0.0
- */
-@property (nonatomic, assign) CGFloat shadowOffset;
 
 /*
  * Set YES if you want rounded corners. Default NO.
@@ -59,6 +46,7 @@
 /*
  * Type of rect corners. Default UIRectCornerAllCorners.
  */
+
 @property (nonatomic, assign) UIRectCorner rectCorner;
 
 /*
@@ -67,15 +55,5 @@
 @property (nonatomic, assign, readonly) CLViewSize viewSize;
 
 - (id) initWithSize:(CLViewSize)size;
-
-/* 
- * This methoad add left outer shadow view with proper width
- */
-- (void) addLeftBorderShadowView:(UIView *)view withWidth:(CGFloat)width;
-
-/* 
- * This methoad remove left outer shadow
- */
-- (void) removeLeftBorderShadowView;
 
 @end

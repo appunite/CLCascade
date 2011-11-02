@@ -19,8 +19,6 @@
 		B6EA8CE91456D53200817157 /* CLCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA8CC91456D53200817157 /* CLCategoriesViewController.m */; };
 		B6EA8CEA1456D53200817157 /* CLTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B6EA8CCB1456D53200817157 /* CLTableViewController.h */; };
 		B6EA8CEB1456D53200817157 /* CLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA8CCC1456D53200817157 /* CLTableViewController.m */; };
-		B6EA8CEC1456D53200817157 /* CLViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B6EA8CCD1456D53200817157 /* CLViewController.h */; };
-		B6EA8CED1456D53200817157 /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA8CCE1456D53200817157 /* CLViewController.m */; };
 		B6EA8CEE1456D53200817157 /* CLViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B6EA8CCF1456D53200817157 /* CLViewControllerDelegate.h */; };
 		B6EA8CEF1456D53200817157 /* CLWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B6EA8CD01456D53200817157 /* CLWebViewController.h */; };
 		B6EA8CF01456D53200817157 /* CLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA8CD11456D53200817157 /* CLWebViewController.m */; };
@@ -37,6 +35,8 @@
 		B6EA8CFB1456D53200817157 /* CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA8CDF1456D53200817157 /* CLSegmentedView.m */; };
 		B6EA8CFC1456D53200817157 /* UIViewController+CLSegmentedView.h in Headers */ = {isa = PBXBuildFile; fileRef = B6EA8CE01456D53200817157 /* UIViewController+CLSegmentedView.h */; };
 		B6EA8CFD1456D53200817157 /* UIViewController+CLSegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA8CE11456D53200817157 /* UIViewController+CLSegmentedView.m */; };
+		E06EEF02146186360095F933 /* CLContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = E06EEF00146186350095F933 /* CLContainerView.h */; };
+		E06EEF03146186360095F933 /* CLContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E06EEF01146186360095F933 /* CLContainerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,8 +54,6 @@
 		B6EA8CC91456D53200817157 /* CLCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCategoriesViewController.m; sourceTree = "<group>"; };
 		B6EA8CCB1456D53200817157 /* CLTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTableViewController.h; sourceTree = "<group>"; };
 		B6EA8CCC1456D53200817157 /* CLTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTableViewController.m; sourceTree = "<group>"; };
-		B6EA8CCD1456D53200817157 /* CLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewController.h; sourceTree = "<group>"; };
-		B6EA8CCE1456D53200817157 /* CLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController.m; sourceTree = "<group>"; };
 		B6EA8CCF1456D53200817157 /* CLViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewControllerDelegate.h; sourceTree = "<group>"; };
 		B6EA8CD01456D53200817157 /* CLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebViewController.h; sourceTree = "<group>"; };
 		B6EA8CD11456D53200817157 /* CLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebViewController.m; sourceTree = "<group>"; };
@@ -73,6 +71,8 @@
 		B6EA8CDF1456D53200817157 /* CLSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSegmentedView.m; sourceTree = "<group>"; };
 		B6EA8CE01456D53200817157 /* UIViewController+CLSegmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CLSegmentedView.h"; sourceTree = "<group>"; };
 		B6EA8CE11456D53200817157 /* UIViewController+CLSegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CLSegmentedView.m"; sourceTree = "<group>"; };
+		E06EEF00146186350095F933 /* CLContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLContainerView.h; sourceTree = "<group>"; };
+		E06EEF01146186360095F933 /* CLContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLContainerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,8 +161,6 @@
 			children = (
 				B6EA8CCB1456D53200817157 /* CLTableViewController.h */,
 				B6EA8CCC1456D53200817157 /* CLTableViewController.m */,
-				B6EA8CCD1456D53200817157 /* CLViewController.h */,
-				B6EA8CCE1456D53200817157 /* CLViewController.m */,
 				B6EA8CCF1456D53200817157 /* CLViewControllerDelegate.h */,
 				B6EA8CD01456D53200817157 /* CLWebViewController.h */,
 				B6EA8CD11456D53200817157 /* CLWebViewController.m */,
@@ -194,6 +192,8 @@
 				B6EA8CDF1456D53200817157 /* CLSegmentedView.m */,
 				B6EA8CE01456D53200817157 /* UIViewController+CLSegmentedView.h */,
 				B6EA8CE11456D53200817157 /* UIViewController+CLSegmentedView.m */,
+				E06EEF00146186350095F933 /* CLContainerView.h */,
+				E06EEF01146186360095F933 /* CLContainerView.m */,
 			);
 			path = Other;
 			sourceTree = SOURCE_ROOT;
@@ -211,7 +211,6 @@
 				B6EA8CE61456D53200817157 /* CLCategoriesView.h in Headers */,
 				B6EA8CE81456D53200817157 /* CLCategoriesViewController.h in Headers */,
 				B6EA8CEA1456D53200817157 /* CLTableViewController.h in Headers */,
-				B6EA8CEC1456D53200817157 /* CLViewController.h in Headers */,
 				B6EA8CEE1456D53200817157 /* CLViewControllerDelegate.h in Headers */,
 				B6EA8CEF1456D53200817157 /* CLWebViewController.h in Headers */,
 				B6EA8CF11456D53200817157 /* CLSplitCascadeView.h in Headers */,
@@ -221,6 +220,7 @@
 				B6EA8CF81456D53200817157 /* CLScrollView.h in Headers */,
 				B6EA8CFA1456D53200817157 /* CLSegmentedView.h in Headers */,
 				B6EA8CFC1456D53200817157 /* UIViewController+CLSegmentedView.h in Headers */,
+				E06EEF02146186360095F933 /* CLContainerView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,7 +279,6 @@
 				B6EA8CE71456D53200817157 /* CLCategoriesView.m in Sources */,
 				B6EA8CE91456D53200817157 /* CLCategoriesViewController.m in Sources */,
 				B6EA8CEB1456D53200817157 /* CLTableViewController.m in Sources */,
-				B6EA8CED1456D53200817157 /* CLViewController.m in Sources */,
 				B6EA8CF01456D53200817157 /* CLWebViewController.m in Sources */,
 				B6EA8CF21456D53200817157 /* CLSplitCascadeView.m in Sources */,
 				B6EA8CF41456D53200817157 /* CLSplitCascadeViewController.m in Sources */,
@@ -287,6 +286,7 @@
 				B6EA8CF91456D53200817157 /* CLScrollView.m in Sources */,
 				B6EA8CFB1456D53200817157 /* CLSegmentedView.m in Sources */,
 				B6EA8CFD1456D53200817157 /* UIViewController+CLSegmentedView.m in Sources */,
+				E06EEF03146186360095F933 /* CLContainerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +354,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -368,6 +369,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

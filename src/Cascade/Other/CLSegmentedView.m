@@ -18,11 +18,9 @@
 @synthesize footerView = _footerView;
 @synthesize headerView = _headerView;
 @synthesize contentView = _contentView;
-@synthesize shadowWidth = _shadowWidth;
 @synthesize viewSize = _viewSize;
 @synthesize showRoundedCorners = _showRoundedCorners;
 @synthesize rectCorner = _rectCorner;
-@synthesize shadowOffset = _shadowOffset;
 
 #pragma mark - Init & dealloc
 
@@ -122,37 +120,7 @@
 }
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addLeftBorderShadowView:(UIView *)view withWidth:(CGFloat)width {
 
-    [self setClipsToBounds: NO];
-
-    if (_shadowWidth != width) {
-        _shadowWidth = width;
-        [self setNeedsLayout];
-        [self setNeedsDisplay];
-    }
-
-    if (view != _shadowView) {
-        _shadowView = view;
-        
-        [self insertSubview:_shadowView atIndex:0];
-        
-        [self setNeedsLayout];
-        [self setNeedsDisplay];
-    }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) removeLeftBorderShadowView {
-
-    [self setClipsToBounds: YES];
-
-    _shadowView = nil;
-    [self setNeedsLayout];
-    
-}
 
 
 #pragma mark -
@@ -208,11 +176,6 @@
     
     [_contentView setFrame: CGRectMake(0.0, headerHeight, viewWidth, viewHeight - headerHeight - footerHeight)];
 
-    if (_shadowView) {
-        CGRect shadowFrame = CGRectMake(0 - _shadowWidth + _shadowOffset, 0.0, _shadowWidth, rect.size.height);
-        _shadowView.frame = shadowFrame;
-    }
-
     [self updateRoundedCorners];
 }
 
@@ -224,7 +187,6 @@
     _headerView = nil;
     _contentView = nil;
     _roundedCornersView = nil;
-    _shadowView = nil;
 
 }
 
