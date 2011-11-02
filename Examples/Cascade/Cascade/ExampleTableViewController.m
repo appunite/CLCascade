@@ -9,11 +9,32 @@
 #import "ExampleTableViewController.h"
 #import "ExampleWebViewController.h"
 #import "ExampleXIBViewController.h"
+#import "ExampleUITableViewController.h"
 
 @implementation ExampleTableViewController
-
+@synthesize tableView = _tableView;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) loadView {
+    CLSegmentedView *view_ = [[CLSegmentedView alloc] initWithSize:CLViewSizeWider];
+    self.view = view_;
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero
+                                                   style:_tableViewStyle];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [view_ setContentView:_tableView];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithTableViewStyle:(UITableViewStyle)style size:(CLViewSize)size;
+{
+    self = [super initWithSize: size];
+    if (self) {
+        _tableViewStyle = style;
+    }
+    return self;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)didReceiveMemoryWarning
@@ -75,7 +96,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 6;
+    return 8;
 }
 
 
@@ -90,16 +111,20 @@
     }
     
     // Configure the cell...
-
-    if (indexPath.row%3 == 0) {
-        cell.textLabel.text = @"New Table View";
+    
+    if (indexPath.row%4 == 0) {
+        cell.textLabel.text = @"New Table View with CLSegmentedView";
     } else
-    if (indexPath.row%3 == 1)  {
-        cell.textLabel.text = @"New Web View";
-    } else
-    {
-        cell.textLabel.text = @"New View from XIB";
-    }
+        if (indexPath.row%4 == 1)  {
+            cell.textLabel.text = @"New Web View";
+        } else
+            if (indexPath.row%4 == 2)  {
+                cell.textLabel.text = @"New UITableViewController";
+            }
+            else
+            {
+                cell.textLabel.text = @"New View from XIB";
+            }
     return cell;
 }
 
@@ -109,17 +134,19 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CLViewController* viewController = nil;
+    UIViewController* viewController = nil;
     
-    if (indexPath.row%3 == 0) {
-        viewController = [[ExampleTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
+    if (indexPath.row%4 == 0) {
+        viewController = [[ExampleTableViewController alloc] initWithTableViewStyle:UITableViewStylePlain size:CLViewSizeNormal];
     } else 
-    if (indexPath.row%3 == 1) {
+    if (indexPath.row%4 == 1) {
         viewController = [[ExampleWebViewController alloc] init];
     } else 
-    {
-        viewController = [[ExampleXIBViewController alloc] initWithNibName:@"ExampleXIBViewController" bundle:nil size:CLViewSizeNormal];
-    }
+        if (indexPath.row%4 == 2) {
+            viewController = [[ExampleUITableViewController alloc] initWithStyle:UITableViewStylePlain];
+        } else
+            viewController = [[ExampleXIBViewController alloc] initWithNibName:@"ExampleXIBViewController" bundle:nil size:CLViewSizeNormal];
+    
     
     [self pushDetailViewController:viewController animated:YES];
 }
