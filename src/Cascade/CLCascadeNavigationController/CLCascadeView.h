@@ -61,7 +61,7 @@
 @property(nonatomic, assign) BOOL pullToDetachPages;
 
 
-- (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated;
+- (void) pushPage:(UIViewController*)newPageController fromPage:(UIViewController*)fromPage animated:(BOOL)animated;
 
 - (void) popPageAtIndex:(NSInteger)index animated:(BOOL)animated;
 - (void) popAllPagesAnimated:(BOOL)animated;
@@ -80,16 +80,16 @@
 
 @protocol CLCascadeViewDataSource <NSObject>
 @required
-- (UIView*) cascadeView:(CLCascadeView*)cascadeView pageAtIndex:(NSInteger)index;
+- (UIViewController*) cascadeView:(CLCascadeView*)cascadeView pageAtIndex:(NSInteger)index;
 - (NSInteger) numberOfPagesInCascadeView:(CLCascadeView*)cascadeView;
 @end
 
 @protocol CLCascadeViewDelegate <NSObject>
 @optional
-- (void) cascadeView:(CLCascadeView*)cascadeView didLoadPage:(UIView*)page;
-- (void) cascadeView:(CLCascadeView*)cascadeView didUnloadPage:(UIView*)page;
+- (void) cascadeView:(CLCascadeView*)cascadeView didLoadPage:(UIViewController*)page;
+- (void) cascadeView:(CLCascadeView*)cascadeView didUnloadPage:(UIViewController*)page;
 
-- (void) cascadeView:(CLCascadeView*)cascadeView didAddPage:(UIView*)page animated:(BOOL)animated;
+- (void) cascadeView:(CLCascadeView*)cascadeView didAddPage:(UIViewController*)page animated:(BOOL)animated;
 - (void) cascadeView:(CLCascadeView*)cascadeView didPopPageAtIndex:(NSInteger)index;
 
 /*

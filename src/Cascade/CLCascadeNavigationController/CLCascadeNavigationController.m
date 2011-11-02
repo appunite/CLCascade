@@ -8,8 +8,10 @@
 
 #import "CLCascadeNavigationController.h"
 
-#import "CLViewController.h"
 #import "CLSegmentedView.h"
+#import "CLBorderShadowView.h"
+
+#import <objc/runtime.h>
 
 @interface CLCascadeNavigationController (Private)
 - (void) addPagesRoundedCorners;
@@ -133,8 +135,8 @@
 #pragma marl CLCascadeViewDataSource
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UIView*) cascadeView:(CLCascadeView *)cascadeView pageAtIndex:(NSInteger)index {
-    return [[_viewControllers objectAtIndex:index] view];    
+- (UIViewController*) cascadeView:(CLCascadeView *)cascadeView pageAtIndex:(NSInteger)index {
+    return [_viewControllers objectAtIndex:index];    
 }
 
 
@@ -148,19 +150,19 @@
 #pragma marl CLCascadeViewDelegate
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) cascadeView:(CLCascadeView*)cascadeView didLoadPage:(UIView*)page {
+- (void) cascadeView:(CLCascadeView*)cascadeView didLoadPage:(UIViewController*)page {
 
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) cascadeView:(CLCascadeView*)cascadeView didUnloadPage:(UIView*)page {
+- (void) cascadeView:(CLCascadeView*)cascadeView didUnloadPage:(UIViewController*)page {
 
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) cascadeView:(CLCascadeView*)cascadeView didAddPage:(UIView*)page animated:(BOOL)animated {
+- (void) cascadeView:(CLCascadeView*)cascadeView didAddPage:(UIViewController*)page animated:(BOOL)animated {
 
 }
 
@@ -234,7 +236,7 @@
 #pragma mark Calss methods
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated {
+- (void) setRootViewController:(UIViewController*)viewController animated:(BOOL)animated {
     // pop all pages
     [_cascadeView popAllPagesAnimated: animated];
     // remove all controllers
@@ -244,7 +246,7 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated {
+- (void) addViewController:(UIViewController*)viewController sender:(UIViewController*)sender animated:(BOOL)animated {
     
     // if in not sent from categoirs view
     if (sender) {
@@ -270,8 +272,8 @@
     #endif
     
     // push view
-    [_cascadeView pushPage:[viewController view] 
-                  fromPage:[sender view] 
+    [_cascadeView pushPage:viewController 
+                  fromPage:sender 
                   animated:animated];
 
     #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
@@ -296,18 +298,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) addRoundedCorner:(UIRectCorner)rectCorner toPageAtIndex:(NSInteger)index {
-
+    
     if (index != NSNotFound) {
         UIViewController* viewController = [_viewControllers objectAtIndex: index];
-        
-        if ([viewController isKindOfClass: [CLViewController class]]) {
-            CLViewController* firstVisibleController = (CLViewController*)viewController;
-            
-            if ([firstVisibleController showRoundedCorners]) {
-                CLSegmentedView* view = (CLSegmentedView*)firstVisibleController.view;
-                [view setShowRoundedCorners: YES];
-                [view setRectCorner: rectCorner];
-            }
+        if ([viewController showRoundedCorners]) {
+            CLSegmentedView* view = (CLSegmentedView*)viewController.view;
+            [view setShowRoundedCorners: YES];
+            [view setRectCorner: rectCorner];
         }
     }
 }
@@ -397,6 +394,116 @@
         [viewController removeFromParentViewController];
         #endif
     }
+}
+
+@end
+
+@implementation UIViewController (CLCascade)
+static char cascadeNavigationControllerKey;
+static char viewSizeKey;
+static char showRoundedCornersKey;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setCascadeNavigationController:(CLCascadeNavigationController *)cascadeNavigationController {
+    objc_setAssociatedObject( self, &cascadeNavigationControllerKey, cascadeNavigationController, OBJC_ASSOCIATION_RETAIN );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CLCascadeNavigationController*) cascadeNavigationController {
+    return objc_getAssociatedObject( self, &cascadeNavigationControllerKey );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setViewSize:(CLViewSize)viewSize {
+    objc_setAssociatedObject( self, &viewSizeKey, [NSNumber numberWithInt:viewSize], OBJC_ASSOCIATION_RETAIN );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CLViewSize) viewSize {
+    NSNumber *numberViewSize = objc_getAssociatedObject( self, &viewSizeKey );
+    return [numberViewSize intValue];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setShowRoundedCorners:(BOOL)showRoundedCorners {
+    objc_setAssociatedObject( self, &showRoundedCornersKey, [NSNumber numberWithBool:showRoundedCorners], OBJC_ASSOCIATION_RETAIN );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL) showRoundedCorners {
+    NSNumber *numberShowCorners = objc_getAssociatedObject( self, &showRoundedCornersKey );
+    return [numberShowCorners intValue];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithSize:(CLViewSize)size {
+    self = [self init];
+    if (self) {
+        NSLog(@"%d", size);
+        self.viewSize = size;
+        NSLog(@"after %d", self.viewSize);
+        self.showRoundedCorners = NO;
+    }
+    return self;   
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil size:(CLViewSize)size {
+    self = [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.viewSize = size;
+        self.showRoundedCorners = NO;
+    }
+    return self;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) pushDetailViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    NSAssert(self.viewSize != CLViewSizeWider, @"Assert: You can't push a new view from a view which size is CLViewSizeWider.");
+    [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIView *) leftBorderShadowView {
+    return [[CLBorderShadowView alloc] init];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) addLeftBorderShadowWithWidth:(CGFloat)width andOffset:(CGFloat)offset {
+    UIView* shadowView = [self leftBorderShadowView];
+    
+    NSAssert(![[self.view class] isKindOfClass:[CLSegmentedView class]], @"Assert: self.view is not a CLSegmentedView class");
+    [(CLSegmentedView*)self.view addLeftBorderShadowView:shadowView 
+                                               withWidth:width];    
+    
+    [(CLSegmentedView*)self.view setShadowOffset:offset];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) removeLeftBorderShadow {
+    NSAssert(![[self.view class] isKindOfClass:[CLSegmentedView class]], @"Assert: self.view is not a CLSegmentedView class");
+    [(CLSegmentedView*)self.view removeLeftBorderShadowView];    
+}
+
+#pragma mark CLViewControllerDelegate
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) pageDidAppear {
+    /*
+     * Called when page (view of this controller) will be unveiled by 
+     * another page or will slide in CascadeView bounds
+     */
+    
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) pageDidDisappear {
+    /*
+     * Called when page (view of this controller) will be shadowed by 
+     * another page or will slide out CascadeView bounds
+     */
+    
 }
 
 @end

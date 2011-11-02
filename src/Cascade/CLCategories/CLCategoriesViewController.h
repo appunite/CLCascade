@@ -11,10 +11,15 @@
 #import <Cascade/CLCategories/CLCategoriesView.h>
 #import <Cascade/CLCascadeNavigationController/CLCascadeNavigationController.h>
 
-@interface CLCategoriesViewController : CLTableViewController {
+@interface CLCategoriesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+    
+    UITableViewStyle _tableViewStyle;
 
 }
+@property (nonatomic, strong) UITableView *tableView;
 
 - (id) initWithNavigationController:(CLCascadeNavigationController*)viewController;
+- (id) initWithTableViewStyle:(UITableViewStyle)style;
+- (id) initWithTableViewStyle:(UITableViewStyle)style size:(CLViewSize)size;
 
 @end

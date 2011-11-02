@@ -6,9 +6,10 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <Cascade/CLCustomViewControllers/CLViewController.h>
+#import <UIKit/UIKit.h>
+#import <Cascade/CLCascadeNavigationController/CLCascadeNavigationController.h>
 
-@interface CLWebViewController : CLViewController <UIWebViewDelegate> {
+@interface CLWebViewController : UIViewController <UIWebViewDelegate> {
     UIActivityIndicatorView* _activityIndicatorView;
     BOOL _firstLoad;
     NSURL* _requestURL;

@@ -19,8 +19,6 @@
 		B6EA8CE91456D53200817157 /* CLCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA8CC91456D53200817157 /* CLCategoriesViewController.m */; };
 		B6EA8CEA1456D53200817157 /* CLTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B6EA8CCB1456D53200817157 /* CLTableViewController.h */; };
 		B6EA8CEB1456D53200817157 /* CLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA8CCC1456D53200817157 /* CLTableViewController.m */; };
-		B6EA8CEC1456D53200817157 /* CLViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B6EA8CCD1456D53200817157 /* CLViewController.h */; };
-		B6EA8CED1456D53200817157 /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA8CCE1456D53200817157 /* CLViewController.m */; };
 		B6EA8CEE1456D53200817157 /* CLViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B6EA8CCF1456D53200817157 /* CLViewControllerDelegate.h */; };
 		B6EA8CEF1456D53200817157 /* CLWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B6EA8CD01456D53200817157 /* CLWebViewController.h */; };
 		B6EA8CF01456D53200817157 /* CLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA8CD11456D53200817157 /* CLWebViewController.m */; };
@@ -54,8 +52,6 @@
 		B6EA8CC91456D53200817157 /* CLCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCategoriesViewController.m; sourceTree = "<group>"; };
 		B6EA8CCB1456D53200817157 /* CLTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTableViewController.h; sourceTree = "<group>"; };
 		B6EA8CCC1456D53200817157 /* CLTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTableViewController.m; sourceTree = "<group>"; };
-		B6EA8CCD1456D53200817157 /* CLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewController.h; sourceTree = "<group>"; };
-		B6EA8CCE1456D53200817157 /* CLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController.m; sourceTree = "<group>"; };
 		B6EA8CCF1456D53200817157 /* CLViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewControllerDelegate.h; sourceTree = "<group>"; };
 		B6EA8CD01456D53200817157 /* CLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLWebViewController.h; sourceTree = "<group>"; };
 		B6EA8CD11456D53200817157 /* CLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLWebViewController.m; sourceTree = "<group>"; };
@@ -161,8 +157,6 @@
 			children = (
 				B6EA8CCB1456D53200817157 /* CLTableViewController.h */,
 				B6EA8CCC1456D53200817157 /* CLTableViewController.m */,
-				B6EA8CCD1456D53200817157 /* CLViewController.h */,
-				B6EA8CCE1456D53200817157 /* CLViewController.m */,
 				B6EA8CCF1456D53200817157 /* CLViewControllerDelegate.h */,
 				B6EA8CD01456D53200817157 /* CLWebViewController.h */,
 				B6EA8CD11456D53200817157 /* CLWebViewController.m */,
@@ -211,7 +205,6 @@
 				B6EA8CE61456D53200817157 /* CLCategoriesView.h in Headers */,
 				B6EA8CE81456D53200817157 /* CLCategoriesViewController.h in Headers */,
 				B6EA8CEA1456D53200817157 /* CLTableViewController.h in Headers */,
-				B6EA8CEC1456D53200817157 /* CLViewController.h in Headers */,
 				B6EA8CEE1456D53200817157 /* CLViewControllerDelegate.h in Headers */,
 				B6EA8CEF1456D53200817157 /* CLWebViewController.h in Headers */,
 				B6EA8CF11456D53200817157 /* CLSplitCascadeView.h in Headers */,
@@ -279,7 +272,6 @@
 				B6EA8CE71456D53200817157 /* CLCategoriesView.m in Sources */,
 				B6EA8CE91456D53200817157 /* CLCategoriesViewController.m in Sources */,
 				B6EA8CEB1456D53200817157 /* CLTableViewController.m in Sources */,
-				B6EA8CED1456D53200817157 /* CLViewController.m in Sources */,
 				B6EA8CF01456D53200817157 /* CLWebViewController.m in Sources */,
 				B6EA8CF21456D53200817157 /* CLSplitCascadeView.m in Sources */,
 				B6EA8CF41456D53200817157 /* CLSplitCascadeViewController.m in Sources */,

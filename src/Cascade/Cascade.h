@@ -8,7 +8,6 @@
 #import <Cascade/CLCategories/CLCategoriesView.h>
 #import <Cascade/CLCategories/CLCategoriesViewController.h>
 #import <Cascade/CLCustomViewControllers/CLTableViewController.h>
-#import <Cascade/CLCustomViewControllers/CLViewController.h>
 #import <Cascade/CLCustomViewControllers/CLViewControllerDelegate.h>
 #import <Cascade/CLCustomViewControllers/CLWebViewController.h>
 #import <Cascade/CLSplitViewController/CLSplitCascadeView.h>

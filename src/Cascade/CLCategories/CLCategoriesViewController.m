@@ -7,8 +7,10 @@
 //
 
 #import "CLCategoriesViewController.h"
+#import "UIViewController+CLSegmentedView.h"
 
 @implementation CLCategoriesViewController
+@synthesize tableView = _tableView;
 
 - (id) initWithNavigationController:(CLCascadeNavigationController*)viewController {
     self = [super init];
@@ -28,6 +30,26 @@
     return self;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithTableViewStyle:(UITableViewStyle)style {
+    self = [super init];
+    if (self) {
+        self.viewSize = CLViewSizeNormal;
+        _tableViewStyle = style;
+    }
+    return self;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id) initWithTableViewStyle:(UITableViewStyle)style size:(CLViewSize)size;
+{
+    self = [super initWithSize: size];
+    if (self) {
+        _tableViewStyle = style;
+    }
+    return self;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -39,13 +61,11 @@
 
 #pragma mark - View lifecycle
 
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) loadView {
     NSString *nib = self.nibName;
     if (nib) {
         NSBundle *bundle = self.nibBundle;
-        
         if(!bundle) bundle = [NSBundle mainBundle];
         
         NSString *path = [bundle pathForResource:nib ofType:@"nib"];
@@ -57,7 +77,8 @@
         }
     }
     
-    CLCategoriesView* view_ = [[CLCategoriesView alloc] init]; 
+    // create SegmentedView
+    CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: self.viewSize];
     self.view = view_;
     
     UITableView* tableView_ = [[UITableView alloc] initWithFrame:CGRectZero style:_tableViewStyle];
@@ -65,16 +86,18 @@
     [tableView_ setDataSource: self];
     [self setTableView: tableView_];
     
+    self.tableView.backgroundColor = [UIColor clearColor];
     // set clear background color
     [view_ setBackgroundColor: [UIColor clearColor]];
-    
-
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // set clear background color
+    [self.view setBackgroundColor: [UIColor clearColor]];
 }
 
 - (void)viewDidUnload
@@ -125,6 +148,23 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
+}
+
+#pragma mark -
+#pragma mark Getters
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UITableView*) tableView {
+    return (UITableView*)[self.segmentedView contentView];
+}
+
+#pragma mark -
+#pragma mark Setters
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setTableView:(UITableView *)newTableView {
+    [newTableView setDirectionalLockEnabled: YES];
+    [(CLSegmentedView*)self.view setContentView: newTableView];
 }
 
 @end
