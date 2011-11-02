@@ -72,10 +72,10 @@
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil size:(CLViewSize)size;
 
 @property (nonatomic, strong) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
-@property (nonatomic, strong) CLContainerView* containerView;
+@property (nonatomic, strong) CLContainerView* clContainerView;
 
-@property (nonatomic, assign) CLViewSize viewSize;
-@property (nonatomic, assign) BOOL showRoundedCorners;
+@property (nonatomic, assign) CLViewSize clViewSize;
+@property (nonatomic, assign) BOOL showRoundedCorners; // TODO : check the utility ... !
 
 // method used to push (animated) new UIViewController on Cascade stack
 - (void) pushDetailViewController:(UIViewController *)viewController animated:(BOOL)animated;

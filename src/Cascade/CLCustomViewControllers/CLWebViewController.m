@@ -23,7 +23,7 @@
 - (id) init {
     self = [super init];
     if (self) {
-        self.viewSize = CLViewSizeWider;
+        self.clViewSize = CLViewSizeWider;
     }
     return self;
 }
@@ -34,7 +34,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.viewSize = CLViewSizeWider;
+        self.clViewSize = CLViewSizeWider;
     }
     return self;
 }
@@ -45,7 +45,7 @@
     self = [self init];
     if (self) {
         _requestURL = url;
-        self.viewSize = CLViewSizeWider;
+        self.clViewSize = CLViewSizeWider;
     }
     return self;
 }

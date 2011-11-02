@@ -122,7 +122,7 @@
     while ((item = [enumerator nextObject])) {
         if (item != [NSNull null]) {
             
-            UIView* page = ((UIViewController*)item).containerView;
+            UIView* page = ((UIViewController*)item).clContainerView;
             CGRect rect = [_scrollView convertRect:page.frame toView:self];
             
             if (CGRectContainsPoint(rect, point)) {
@@ -141,7 +141,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushPage:(UIViewController*)newPageController fromPage:(UIViewController*)fromPageController animated:(BOOL)animated {
 
-    CLViewSize viewSize = newPageController.viewSize;
+    CLViewSize viewSize = newPageController.clViewSize;
     UIView *newPage = newPageController.view;
     UIView *fromPage = fromPageController.view;
     
@@ -168,13 +168,13 @@
     // update edge inset
     [self setProperEdgeInset: NO];
     
-    CLContainerView *contV = newPageController.containerView;
+    CLContainerView *contV = newPageController.clContainerView;
     if (!contV) {
         // create a container view (for shadow stuff)
         contV = [[CLContainerView alloc] initWithFrame:newPage.frame];
         
         // set the container
-        newPageController.containerView = contV;
+        newPageController.clContainerView = contV;
     }
     else
         contV.frame = newPage.frame;
@@ -274,7 +274,7 @@
         if (item == [NSNull null]) {
             // get page from dataSource
             UIViewController* viewC = [_dataSource cascadeView:self pageAtIndex:index];
-            UIView* view = viewC.containerView;
+            UIView* view = viewC.clContainerView;
 
             // if got view from dataSorce
             if (view != nil) {
@@ -626,7 +626,7 @@
     // if page exist
     if (index != NSNotFound) {
         // remove from superview
-        [page.containerView removeFromSuperview];
+        [page.clContainerView removeFromSuperview];
         
         // send message to delegate
         [self didUnloadPage:page];        
@@ -651,7 +651,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGSize) calculatePageSize:(UIViewController*)viewC {
-    CLViewSize size = [viewC viewSize];
+    CLViewSize size = [viewC clViewSize];
     CGFloat height = _scrollView.frame.size.height;
     CGFloat width = _pageWidth;
     
@@ -667,7 +667,7 @@
 - (void) setProperSizesForLodedPages:(UIInterfaceOrientation)interfaceOrientation {
     [_pages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (obj != [NSNull null]) {
-            UIView* view = ((UIViewController*)obj).containerView;
+            UIView* view = ((UIViewController*)obj).clContainerView;
             CGRect rect = view.frame;
             CGPoint point = [self calculateOriginOfPageAtIndex: idx];
             CGSize size = [self calculatePageSize: obj];
@@ -692,7 +692,7 @@
         id item = [_pages objectAtIndex: index]; 
 
         if (item != [NSNull null]) {
-            UIView* page = ((UIViewController*)item).containerView;
+            UIView* page = ((UIViewController*)item).clContainerView;
             
             CGRect rect = [page frame];
             rect.origin = [self calculateOriginOfPageAtIndex: index];
@@ -729,7 +729,7 @@
     if ((firstVisiblePageIndex == 0) && (-_scrollView.contentOffset.x >= _scrollView.contentInset.left)) {
         // get page at index
         id item = [_pages objectAtIndex: firstVisiblePageIndex];
-        UIView* view = ((UIViewController*)item).containerView;
+        UIView* view = ((UIViewController*)item).clContainerView;
         
         CGRect rect = [view frame];
         rect.origin.x = 0;
@@ -758,7 +758,7 @@
                     return;
                 }
                 
-                UIView* view = ((UIViewController*)item).containerView;
+                UIView* view = ((UIViewController*)item).clContainerView;
 
                 CGRect rect = [view frame];
                 rect.origin.x = contentOffset;

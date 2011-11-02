@@ -18,7 +18,7 @@
 - (id) initWithTableViewStyle:(UITableViewStyle)style {
     self = [super init];
     if (self) {
-        self.viewSize = CLViewSizeNormal;
+        self.clViewSize = CLViewSizeNormal;
         _tableViewStyle = style;
     }
     return self;
@@ -69,7 +69,7 @@
     }
     
     // create SegmentedView
-    CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: self.viewSize];
+    CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: self.clViewSize];
     self.view = view_;
     
     UITableView* tableView_ = [[UITableView alloc] initWithFrame:CGRectZero style:_tableViewStyle];

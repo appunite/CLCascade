@@ -416,22 +416,22 @@ static char containerViewKey;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setContainerView:(CLContainerView *)containerView {
+- (void) setClContainerView:(CLContainerView *)containerView {
     objc_setAssociatedObject( self, &containerViewKey, containerView, OBJC_ASSOCIATION_RETAIN );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CLContainerView*) containerView {
+- (CLContainerView*) clContainerView {
     return objc_getAssociatedObject( self, &containerViewKey );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setViewSize:(CLViewSize)viewSize {
+- (void) setClViewSize:(CLViewSize)viewSize {
     objc_setAssociatedObject( self, &viewSizeKey, [NSNumber numberWithInt:viewSize], OBJC_ASSOCIATION_RETAIN );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (CLViewSize) viewSize {
+- (CLViewSize) clViewSize {
     NSNumber *numberViewSize = objc_getAssociatedObject( self, &viewSizeKey );
     return [numberViewSize intValue];
 }
@@ -452,8 +452,8 @@ static char containerViewKey;
     self = [self init];
     if (self) {
         NSLog(@"%d", size);
-        self.viewSize = size;
-        NSLog(@"after %d", self.viewSize);
+        self.clViewSize = size;
+        NSLog(@"after %d", self.clViewSize);
         self.showRoundedCorners = NO;
     }
     return self;   
@@ -463,7 +463,7 @@ static char containerViewKey;
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil size:(CLViewSize)size {
     self = [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.viewSize = size;
+        self.clViewSize = size;
         self.showRoundedCorners = NO;
     }
     return self;
@@ -471,7 +471,7 @@ static char containerViewKey;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushDetailViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    NSAssert(self.viewSize != CLViewSizeWider, @"Assert: You can't push a new view from a view which size is CLViewSizeWider.");
+    NSAssert(self.clViewSize != CLViewSizeWider, @"Assert: You can't push a new view from a view which size is CLViewSizeWider.");
     [self.cascadeNavigationController addViewController:viewController sender:self animated:animated];
 }
 
@@ -484,23 +484,23 @@ static char containerViewKey;
 - (void) addLeftBorderShadowWithWidth:(CGFloat)width andOffset:(CGFloat)offset {
     UIView* shadowView = [self leftBorderShadowView];
     
-    if (!self.containerView) {
+    if (!self.clContainerView) {
         // create a container view (for shadow stuff)
         CLContainerView *contV = [[CLContainerView alloc] initWithFrame:self.view.frame];
         contV.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         // set the container
-        self.containerView = contV;
+        self.clContainerView = contV;
     }
     
-    [self.containerView addLeftBorderShadowView:shadowView 
+    [self.clContainerView addLeftBorderShadowView:shadowView 
                                                withWidth:width];    
     
-    [self.containerView setShadowOffset:offset];
+    [self.clContainerView setShadowOffset:offset];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) removeLeftBorderShadow {
-    [self.containerView removeLeftBorderShadowView];    
+    [self.clContainerView removeLeftBorderShadowView];    
 }
 
 #pragma mark CLViewControllerDelegate
