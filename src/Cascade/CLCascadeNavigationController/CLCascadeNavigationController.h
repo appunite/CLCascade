@@ -11,6 +11,8 @@
 #import <Cascade/Other/CLGlobal.h>
 #import <Cascade/CLCustomViewControllers/CLViewControllerDelegate.h>
 
+@class CLContainerView;
+
 @interface CLCascadeNavigationController : UIViewController <CLCascadeViewDataSource, CLCascadeViewDelegate> {
     // array of all view controllers
     // todo: in ios5 use childViewControllers
@@ -70,6 +72,8 @@
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil size:(CLViewSize)size;
 
 @property (nonatomic, strong) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
+@property (nonatomic, strong) CLContainerView* containerView;
+
 @property (nonatomic, assign) CLViewSize viewSize;
 @property (nonatomic, assign) BOOL showRoundedCorners;
 

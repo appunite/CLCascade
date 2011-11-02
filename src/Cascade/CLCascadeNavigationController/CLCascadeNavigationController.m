@@ -12,6 +12,7 @@
 #import "CLBorderShadowView.h"
 
 #import <objc/runtime.h>
+#import "CLContainerView.h"
 
 @interface CLCascadeNavigationController (Private)
 - (void) addPagesRoundedCorners;
@@ -402,6 +403,7 @@
 static char cascadeNavigationControllerKey;
 static char viewSizeKey;
 static char showRoundedCornersKey;
+static char containerViewKey;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setCascadeNavigationController:(CLCascadeNavigationController *)cascadeNavigationController {
@@ -411,6 +413,16 @@ static char showRoundedCornersKey;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CLCascadeNavigationController*) cascadeNavigationController {
     return objc_getAssociatedObject( self, &cascadeNavigationControllerKey );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) setContainerView:(CLContainerView *)containerView {
+    objc_setAssociatedObject( self, &containerViewKey, containerView, OBJC_ASSOCIATION_RETAIN );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CLContainerView*) containerView {
+    return objc_getAssociatedObject( self, &containerViewKey );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -472,17 +484,23 @@ static char showRoundedCornersKey;
 - (void) addLeftBorderShadowWithWidth:(CGFloat)width andOffset:(CGFloat)offset {
     UIView* shadowView = [self leftBorderShadowView];
     
-    NSAssert(![[self.view class] isKindOfClass:[CLSegmentedView class]], @"Assert: self.view is not a CLSegmentedView class");
-    [(CLSegmentedView*)self.view addLeftBorderShadowView:shadowView 
+    if (!self.containerView) {
+        // create a container view (for shadow stuff)
+        CLContainerView *contV = [[CLContainerView alloc] initWithFrame:self.view.frame];
+        contV.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        // set the container
+        self.containerView = contV;
+    }
+    
+    [self.containerView addLeftBorderShadowView:shadowView 
                                                withWidth:width];    
     
-    [(CLSegmentedView*)self.view setShadowOffset:offset];
+    [self.containerView setShadowOffset:offset];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) removeLeftBorderShadow {
-    NSAssert(![[self.view class] isKindOfClass:[CLSegmentedView class]], @"Assert: self.view is not a CLSegmentedView class");
-    [(CLSegmentedView*)self.view removeLeftBorderShadowView];    
+    [self.containerView removeLeftBorderShadowView];    
 }
 
 #pragma mark CLViewControllerDelegate
