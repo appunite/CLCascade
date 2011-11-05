@@ -154,9 +154,24 @@
         [self popAllPagesAnimated: animated];
         frame.origin.x = 0.0f;
     }
+
+    // animation, from left to right
+    if (animated && (fromPage == nil) && (([_scrollView contentOffset].x >= 0))) {
+        // start frame animation
+        CGRect startRect = CGRectMake(origin.x - size.width, origin.y, size.width, size.height);
+        // set new page frame
+        [newPage setFrame: startRect];
+        // animation
+        [UIView animateWithDuration:0.15 
+                         animations: ^{
+                             // set new page frame aimated
+                             [newPage setFrame: frame];
+                         }];
+    } else {
+        // set new page frame
+        [newPage setFrame: frame];
+    }
     
-    // set new page frame
-    [newPage setFrame: frame];
     // add page to array of pages
     [_pages addObject: newPage];
     // update content size
@@ -224,7 +239,6 @@
     }
     
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popAllPagesAnimated:(BOOL)animated {
