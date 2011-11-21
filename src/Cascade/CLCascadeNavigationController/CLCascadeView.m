@@ -54,7 +54,6 @@
 #define DEFAULT_LEFT_INSET 58.0f
 #define DEFAULT_WIDER_LEFT_INSET 220.0f
 #define PULL_TO_DETACH_FACTOR 0.32f
-#define WTF 11.0f
 
 @implementation CLCascadeView
 
@@ -776,6 +775,21 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (_flags.isDetachPages) _flags.isDetachPages = NO;
+    [_scrollView setPagingEnabled: NO];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    [_scrollView setPagingEnabled: YES];
+    [_scrollView setPagingEnabled: NO];
+    [_scrollView setScrollEnabled: YES];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
 
     if (!_pullToDetachPages) return;
@@ -798,15 +812,6 @@
     NSInteger secondVisiblePageIndex = [self indexOfFirstVisiblePage] + 1;
     [self setProperPositionOfPageAtIndex: secondVisiblePageIndex];
 }
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    if (_flags.isDetachPages) _flags.isDetachPages = NO;
-    [_scrollView setPagingEnabled: NO];
-
-}
-
 
 #pragma mark -
 #pragma mark Delegate methods
