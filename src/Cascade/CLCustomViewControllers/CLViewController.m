@@ -86,10 +86,17 @@
         
         NSString *path = [bundle pathForResource:nib ofType:@"nib"];
         
-        if(path) {
-            self.view = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex: 0];
-            return;
-        }
+       if(path)
+       {
+          UIView* view_ = [ [ bundle loadNibNamed: nib owner: self options: nil ] objectAtIndex: 0 ];
+          if ( [ view_ isKindOfClass: [ CLSegmentedView class ] ] )
+          {
+             [ (CLSegmentedView*)view_ setViewSize: self.viewSize ];
+          }
+
+          self.view = view_;
+          return;
+       }
     }
     
     CLSegmentedView* view_ = [[CLSegmentedView alloc] initWithSize: _viewSize];
