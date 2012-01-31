@@ -328,14 +328,40 @@
 }
 
 
+-(void)layoutSubviews
+{
+   UIInterfaceOrientation interfaceOrientation = [ [ UIApplication sharedApplication ] statusBarOrientation ]; 
+
+   
+   // recalculate pages height and width
+   [ self setProperSizesForLodedPages: interfaceOrientation ];
+   
+   //dodikk - crash workaround
+   if ( [ self->_pages isEqual: [ NSNull null ] ] )
+   {
+      return;
+   }
+   
+   [ self->_pages enumerateObjectsUsingBlock: ^void(id obj_, NSUInteger idx_, BOOL *stop_)
+   {
+      UIView* page_view_ = ( UIView* )obj_;
+      [ page_view_ setNeedsLayout ];
+      
+      *stop_ = NO;
+   } ];
+    
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
-    // set proper content size
+- (void)updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+                                       duration:(NSTimeInterval)duration
+{
     [self setProperContentSize];
-    // set proper edge inset
-    [self setProperEdgeInset:YES forInterfaceOrientation:interfaceOrientation];
+    [self setProperEdgeInset: YES 
+     forInterfaceOrientation: interfaceOrientation ];
+   
     // recalculate pages height and width
-    [self setProperSizesForLodedPages: interfaceOrientation];
+    [ self setProperSizesForLodedPages: interfaceOrientation ];
 }
 
 
@@ -642,17 +668,21 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setProperSizesForLodedPages:(UIInterfaceOrientation)interfaceOrientation {
-    [_pages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if (obj != [NSNull null]) {
-            UIView* view = (UIView*)obj;
-            CGRect rect = view.frame;
-            CGPoint point = [self calculateOriginOfPageAtIndex: idx];
-            CGSize size = [self calculatePageSize: obj];
-            rect.size = size;
-            rect.origin = point;
-            [view setFrame:rect];
-        }
+-(void)setProperSizesForLodedPages:(UIInterfaceOrientation)interfaceOrientation
+{
+   [ _pages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
+    {
+       if (obj != [NSNull null]) 
+       {
+          UIView* view = (UIView*)obj;
+          CGRect rect = view.frame;
+          CGPoint point = [self calculateOriginOfPageAtIndex: idx];
+          CGSize size = [self calculatePageSize: obj];
+          rect.size = size;
+          rect.origin = point;
+          [ view setFrame: rect ];
+          [ view setNeedsLayout ];
+       }
     }];
 }
 
