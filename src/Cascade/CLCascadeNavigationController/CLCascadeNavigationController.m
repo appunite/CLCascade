@@ -79,6 +79,7 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
     [_cascadeView updateContentLayoutToInterfaceOrientation:interfaceOrientation duration:duration];
+   //dodikk - blocks are available since iOS4
 }
 
 
