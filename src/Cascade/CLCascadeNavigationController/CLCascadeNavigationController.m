@@ -23,14 +23,6 @@
 @synthesize viewControllers = _viewControllers;
 @synthesize leftInset, widerLeftInset;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)dealloc
 {
@@ -77,9 +69,48 @@
 	return YES;
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
-    [_cascadeView updateContentLayoutToInterfaceOrientation:interfaceOrientation duration:duration];
+-(void)willRotateToInterfaceOrientation:( UIInterfaceOrientation )toInterfaceOrientation_
+                               duration:( NSTimeInterval )duration_
+{
    //dodikk - blocks are available since iOS4
+   [ self.viewControllers enumerateObjectsUsingBlock: ^void(id obj_, NSUInteger idx_, BOOL *stop_)
+   {
+      UIViewController* controller_ = (UIViewController*)obj_;
+      [ controller_ willRotateToInterfaceOrientation: toInterfaceOrientation_
+                                            duration: duration_ ];
+
+      *stop_ = NO;
+   } ];
+}
+
+-(void)didRotateFromInterfaceOrientation:( UIInterfaceOrientation )fromInterfaceOrientation_
+{
+   //dodikk - blocks are available since iOS4
+   [ self.viewControllers enumerateObjectsUsingBlock: ^void(id obj_, NSUInteger idx_, BOOL *stop_)
+    {
+       UIViewController* controller_ = (UIViewController*)obj_;
+       [ controller_ didRotateFromInterfaceOrientation: fromInterfaceOrientation_ ];
+
+       *stop_ = NO;
+    } ];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:( UIInterfaceOrientation )interfaceOrientation_
+                                         duration:( NSTimeInterval )duration_ 
+{
+   //dodikk - blocks are available since iOS4
+   [ self.viewControllers enumerateObjectsUsingBlock: ^void(id obj_, NSUInteger idx_, BOOL *stop_)
+    {
+       UIViewController* controller_ = (UIViewController*)obj_;
+       [ controller_ willAnimateRotationToInterfaceOrientation: interfaceOrientation_
+                                                      duration: duration_ ];
+       
+       *stop_ = NO;
+    } ];
+   
+   
+    [_cascadeView updateContentLayoutToInterfaceOrientation: interfaceOrientation_
+                                                   duration: duration_ ];
 }
 
 
