@@ -64,7 +64,7 @@
 /*
  * Size of view
  */
-@property (nonatomic, assign, readonly) CLViewSize viewSize;
+@property (nonatomic, assign ) CLViewSize viewSize;
 
 - (id) initWithSize:(CLViewSize)size;
 
