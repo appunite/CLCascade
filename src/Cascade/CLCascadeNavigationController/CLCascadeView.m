@@ -344,9 +344,12 @@
    
    [ self->_pages enumerateObjectsUsingBlock: ^void(id obj_, NSUInteger idx_, BOOL *stop_)
    {
-      UIView* page_view_ = ( UIView* )obj_;
-      [ page_view_ setNeedsLayout ];
-      
+      if (obj_ != [NSNull null]) 
+      {
+         UIView* page_view_ = ( UIView* )obj_;
+         [ page_view_ setNeedsLayout ];
+      }
+
       *stop_ = NO;
    } ];
     
