@@ -1,4 +1,4 @@
-//
+ //
 //  CLCascadeView.m
 //  Cascade
 //
@@ -39,7 +39,7 @@
 - (void) setProperContentSize;
 - (void) setProperEdgeInset:(BOOL)animated;
 - (void) setProperEdgeInset:(BOOL)animated forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
-- (void) setProperSizesForLodedPages:(UIInterfaceOrientation)interfaceOrientation;
+- (void) setProperSizesForLoadedPages:(UIInterfaceOrientation)interfaceOrientation;
 
 - (void) unloadPage:(UIView*)page remove:(BOOL)remove;
 - (void) loadBoundaryPagesIfNeeded;
@@ -247,6 +247,7 @@
 - (UIView*) loadPageAtIndex:(NSInteger)index {
     // check if index exist
     if ([self pageExistAtIndex: index]) {
+         NSLog(@"[CLCascade view loadPageAtIndex] index: %d %d", index, [self pageExistAtIndex: index] );
         id item = [_pages objectAtIndex:index];
         
         // if item at index is null
@@ -334,7 +335,7 @@
 
    
    // recalculate pages height and width
-   [ self setProperSizesForLodedPages: interfaceOrientation ];
+   [ self setProperSizesForLoadedPages: interfaceOrientation ];
    
    //dodikk - crash workaround
    if ( [ self->_pages isEqual: [ NSNull null ] ] )
@@ -364,7 +365,7 @@
      forInterfaceOrientation: interfaceOrientation ];
    
     // recalculate pages height and width
-    [ self setProperSizesForLodedPages: interfaceOrientation ];
+    [ self setProperSizesForLoadedPages: interfaceOrientation ];
 }
 
 
@@ -593,16 +594,17 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIEdgeInsets) calculateEdgeInset:(UIInterfaceOrientation)interfaceOrientation {
     
-    CGFloat leftInset = CATEGORIES_VIEW_WIDTH - _leftInset;
-    CGFloat rightInset = 0.0f;
+   CGFloat leftInset = CATEGORIES_VIEW_WIDTH - _leftInset;
+   CGFloat rightInset = 0.0f;
     
     //left inset depends on interface orientation
-    if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
-        rightInset = 2 * _pageWidth + _leftInset - self.bounds.size.width;
-    }
+   if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) 
+   {
+      rightInset = 2 * _pageWidth + _leftInset - self.bounds.size.width;
+   }
     
-    // return edge inset
-    return UIEdgeInsetsMake(0.0f, leftInset, 0.0f, rightInset);
+   // return edge inset
+   return UIEdgeInsetsMake(0.0f, leftInset, 0.0f, rightInset);
 }
 
 
@@ -671,7 +673,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
--(void)setProperSizesForLodedPages:(UIInterfaceOrientation)interfaceOrientation
+-(void)setProperSizesForLoadedPages:(UIInterfaceOrientation)interfaceOrientation
 {
    [ _pages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
     {
@@ -740,11 +742,14 @@
     if ((firstVisiblePageIndex == 0) && (-_scrollView.contentOffset.x >= _scrollView.contentInset.left)) {
         // get page at index
         id item = [_pages objectAtIndex: firstVisiblePageIndex];
-        UIView* view = (UIView*)item;
+        if( item != [ NSNull null ] )
+        {
+           UIView* view = (UIView*)item;
         
-        CGRect rect = [view frame];
-        rect.origin.x = 0;
-        [view setFrame: rect];
+           CGRect rect = [view frame];
+           rect.origin.x = 0;
+           [view setFrame: rect];
+        }
     }
 
     [self loadBoundaryPagesIfNeeded];    
@@ -756,7 +761,10 @@
         if ([self pageExistAtIndex: i]) {
             // get page at index
             id item = [_pages objectAtIndex: i];
-            
+            if( item == [ NSNull null ] )
+            {
+               break;
+            }
             if (i == firstVisiblePageIndex) {
                 
 //                if (item == [NSNull null]) {
@@ -768,18 +776,15 @@
                 if (((i == 0) && (contentOffset <= 0)) || ([_pages count] == 1)) {
                     return;
                 }
-                
-                UIView* view = (UIView*)item;
+                  UIView* view = (UIView*)item;
 
-                CGRect rect = [view frame];
-                rect.origin.x = contentOffset;
-                [view setFrame: rect];
+                  CGRect rect = [view frame];
+                  rect.origin.x = contentOffset;
+                  [view setFrame: rect];
                 
             } else {
-                if (item != [NSNull null]) {
                     [self unloadPage:item remove:NO];
-                }
-                
+               
             }
         }
     }
@@ -822,7 +827,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (_flags.isDetachPages) _flags.isDetachPages = NO;
-    [_scrollView setPagingEnabled: NO];
+    //apuz - Freezing cascade view bug fix(I hope).
+    //[_scrollView setPagingEnabled: NO];
 
 }
 

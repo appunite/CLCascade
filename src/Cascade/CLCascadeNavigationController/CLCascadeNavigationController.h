@@ -20,6 +20,8 @@
     CLCascadeView* _cascadeView;
 }
 
+@property (nonatomic, strong, readonly) CLCascadeView* cascadeView;
+
 /*
  List of CLViewControllers on stock.
  */
@@ -45,6 +47,7 @@
  * If sender is not last, then controller pop next controller and push new view from sender
  */
 - (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated;
+- (void) popPagesFromLastIndexTo:(NSInteger)toIndex;
 
 /* 
  First in hierarchy CascadeViewController (opposite to lastCascadeViewController)
