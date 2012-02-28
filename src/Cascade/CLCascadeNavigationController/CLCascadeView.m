@@ -191,29 +191,59 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) popPageAtIndex:(NSInteger)index animated:(BOOL)animated {
-    // get item at index
-    __unsafe_unretained id item = [_pages objectAtIndex:index];
+
+-(NSInteger)normalizeIndex:(NSInteger)index
+{
+   NSUInteger pages_count_ = [ _pages count ];
+   
+   if ( index >= pages_count_ )
+   {
+      index = pages_count_ - 1;
+   }
+   else if ( index < 0 )
+   {
+      index = 0;
+   }
+   
+   return index;
+}
+
+- (void) popPageAtIndex:(NSInteger)index 
+               animated:(BOOL)animated
+{
+   NSUInteger pages_count_ = [ _pages count ];
+   if ( 0 == pages_count_ )
+   {
+      return;
+   }
+   index = [ self normalizeIndex: index ];
+   __unsafe_unretained id item = [_pages objectAtIndex:index];
     
     // check if page is unloaded
-    if (item != [NSNull null]) {
+    if (item != [NSNull null]) 
+   {
         
-        if (animated) {
+        if (animated)
+        {
             // animate pop
             [UIView animateWithDuration:0.4f 
-                             animations:^ {
-                                 [item setAlpha: 0.0f];
-                             }
-                             completion:^(BOOL finished) {
-                                 // unload and remove page
-                                 [self unloadPage:item remove:YES];
-                                 // update edge inset
-                                 [self setProperEdgeInset: NO];
-                                 // send delegate message
-                                 [self didPopPageAtIndex: index];
-                             }];
+                             animations:^ 
+                                         {
+                                             [item setAlpha: 0.0f];
+                                         }
+                             completion:^(BOOL finished) 
+                                         {
+                                             // unload and remove page
+                                             [self unloadPage:item remove:YES];
+                                             // update edge inset
+                                             [self setProperEdgeInset: NO];
+                                             // send delegate message
+                                             [self didPopPageAtIndex: index];
+                                         }];
             
-        } else {
+        }
+        else 
+        {
             // unload and remove page
             [self unloadPage:item remove:YES];
             // update edge inset
@@ -222,7 +252,6 @@
             [self didPopPageAtIndex: index];
         }
     }
-    
 }
 
 
