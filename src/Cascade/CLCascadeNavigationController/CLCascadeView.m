@@ -192,6 +192,14 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+-(BOOL)canPopPageAtIndex:(NSInteger)index
+{
+   NSRange pages_range_ = { 0, [ _pages count ] };
+   BOOL result_ = NSLocationInRange( index, pages_range_ );
+
+   return result_;
+}
+
 -(NSInteger)normalizePageIndex:(NSInteger)index
 {
    NSUInteger pages_count_ = [ _pages count ];
@@ -208,8 +216,8 @@
    return index;
 }
 
-- (void) popPageAtIndex:(NSInteger)index 
-               animated:(BOOL)animated
+-(void)popPageAtIndex:(NSInteger)index 
+             animated:(BOOL)animated
 {
    NSUInteger pages_count_ = [ _pages count ];
    if ( 0 == pages_count_ )
@@ -252,6 +260,8 @@
             [self didPopPageAtIndex: index];
         }
     }
+   
+   
 }
 
 
@@ -997,11 +1007,17 @@
 #pragma mark Setters
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setLeftInset:(CGFloat)newLeftInset {
+- (void) setLeftInset:(CGFloat)newLeftInset 
+{
     CGFloat width = [UIScreen mainScreen].bounds.size.height;
     
     _leftInset = newLeftInset;
     _pageWidth = (width - _leftInset) / 2.0f;
+   
+   if ( 0.f == _pageWidth )
+   {
+      NSAssert( NO, @"CLCascadeView->_pageWidth == 0. Possible zero division crashes" );
+   }
     
     _scrollView.frame = CGRectMake(_leftInset, 0.0, _pageWidth, self.frame.size.height);
     

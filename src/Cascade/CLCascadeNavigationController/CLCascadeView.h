@@ -63,7 +63,9 @@
 
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated;
 
-- (void) popPageAtIndex:(NSInteger)index animated:(BOOL)animated;
+-(void)popPageAtIndex:(NSInteger)index animated:(BOOL)animated;
+-(BOOL)canPopPageAtIndex:(NSInteger)index;
+
 - (void) popAllPagesAnimated:(BOOL)animated;
 
 - (UIView*) loadPageAtIndex:(NSInteger)index;
