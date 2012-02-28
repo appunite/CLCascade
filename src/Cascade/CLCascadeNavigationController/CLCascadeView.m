@@ -192,7 +192,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
--(NSInteger)normalizeIndex:(NSInteger)index
+-(NSInteger)normalizePageIndex:(NSInteger)index
 {
    NSUInteger pages_count_ = [ _pages count ];
    
@@ -216,7 +216,7 @@
    {
       return;
    }
-   index = [ self normalizeIndex: index ];
+   index = [ self normalizePageIndex: index ];
    __unsafe_unretained id item = [_pages objectAtIndex:index];
     
     // check if page is unloaded
