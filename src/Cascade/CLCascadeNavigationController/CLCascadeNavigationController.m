@@ -11,8 +11,8 @@
 #import "CLViewController.h"
 #import "CLSegmentedView.h"
 
-#define NSDebugLog( ... ) NSLog( __VA_ARGS__ )
-//#define NSDebugLog( ... )
+//#define NSDebugLog( ... ) NSLog( __VA_ARGS__ )
+#define NSDebugLog( ... )
 
 @interface CLCascadeNavigationController (Private)
 - (void) addPagesRoundedCorners;
