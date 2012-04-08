@@ -68,8 +68,40 @@
 	return YES;
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
-    [_cascadeView updateContentLayoutToInterfaceOrientation:interfaceOrientation duration:duration];
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                duration:(NSTimeInterval)duration
+{
+    [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [(UIViewController*)obj willRotateToInterfaceOrientation:toInterfaceOrientation
+                                                        duration:duration];
+        
+        *stop = NO;
+    }];
+    
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [(UIViewController*)obj didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+        
+        *stop = NO;
+    }];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:( UIInterfaceOrientation )interfaceOrientation
+                                         duration:( NSTimeInterval )duration 
+{
+
+    [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [(UIViewController*)obj willAnimateRotationToInterfaceOrientation:interfaceOrientation
+                                                                 duration:duration];
+        
+        *stop = NO;
+    }];
+    
+    [_cascadeView updateContentLayoutToInterfaceOrientation:interfaceOrientation
+                                                   duration:duration ];
 }
 
 
@@ -391,4 +423,3 @@
 }
 
 @end
-
