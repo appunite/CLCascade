@@ -111,7 +111,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    
+
     id item = nil;
     // create enumerator
     NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
@@ -206,6 +206,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popPageAtIndex:(NSInteger)index animated:(BOOL)animated {
+    if (!_pages) return;
+    
     // get item at index
     __unsafe_unretained id item = [_pages objectAtIndex:index];
     
