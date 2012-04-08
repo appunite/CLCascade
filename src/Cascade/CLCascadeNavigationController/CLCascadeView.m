@@ -31,6 +31,7 @@
 - (void) unloadInvisiblePagesOnStock;
 - (void) unloadPageIfNeeded:(NSInteger)index;
 
+- (NSInteger) normalizePageIndex:(NSInteger)index;
 - (CGSize) calculatePageSize:(UIView*)view;
 - (CGSize) calculateContentSize;
 - (UIEdgeInsets) calculateEdgeInset:(UIInterfaceOrientation)interfaceOrientation;
@@ -664,6 +665,11 @@
     }    
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (NSInteger)normalizePageIndex:(NSInteger)index {
+    return MAX(0, MIN(index, [_pages count] -1));
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGSize) calculatePageSize:(UIView*)view {
