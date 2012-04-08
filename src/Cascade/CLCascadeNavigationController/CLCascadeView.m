@@ -344,6 +344,27 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)layoutSubviews {
+    /*
+     * dodikk update -  Added size adjustments on layoutSubviews
+     */
+    
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation]; 
+    
+    // recalculate pages height and width
+    [self setProperSizesForLodedPages:interfaceOrientation];
+    
+    [_pages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        if (obj != [NSNull null]) {
+            [(UIView*)obj setNeedsLayout];
+        }        
+        
+        *stop = NO;
+    }];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
     // set proper content size
     [self setProperContentSize];
@@ -667,6 +688,7 @@
             rect.size = size;
             rect.origin = point;
             [view setFrame:rect];
+            [view setNeedsLayout];
         }
     }];
 }
