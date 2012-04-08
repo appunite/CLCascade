@@ -212,7 +212,7 @@
     if (index > [_viewControllers count] - 1) return;
     
     UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
-    if ([controller respondsToSelector:@selector(pageDidAppear)]) {
+    if ([controller respondsToSelector:@selector(pageDidDisappear)]) {
         [controller pageDidDisappear];
     }
 

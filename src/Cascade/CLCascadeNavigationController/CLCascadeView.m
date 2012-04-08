@@ -39,7 +39,7 @@
 - (void) setProperContentSize;
 - (void) setProperEdgeInset:(BOOL)animated;
 - (void) setProperEdgeInset:(BOOL)animated forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
-- (void) setProperSizesForLodedPages:(UIInterfaceOrientation)interfaceOrientation;
+- (void) setProperSizesForLoadedPages:(UIInterfaceOrientation)interfaceOrientation;
 
 - (void) unloadPage:(UIView*)page remove:(BOOL)remove;
 - (void) loadBoundaryPagesIfNeeded;
@@ -352,7 +352,7 @@
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation]; 
     
     // recalculate pages height and width
-    [self setProperSizesForLodedPages:interfaceOrientation];
+    [self setProperSizesForLoadedPages:interfaceOrientation];
     
     [_pages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
@@ -371,7 +371,7 @@
     // set proper edge inset
     [self setProperEdgeInset:YES forInterfaceOrientation:interfaceOrientation];
     // recalculate pages height and width
-    [self setProperSizesForLodedPages: interfaceOrientation];
+    [self setProperSizesForLoadedPages: interfaceOrientation];
 }
 
 
@@ -678,7 +678,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setProperSizesForLodedPages:(UIInterfaceOrientation)interfaceOrientation {
+- (void) setProperSizesForLoadedPages:(UIInterfaceOrientation)interfaceOrientation {
     [_pages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (obj != [NSNull null]) {
             UIView* view = (UIView*)obj;
