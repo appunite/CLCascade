@@ -55,6 +55,8 @@
 #define DEFAULT_WIDER_LEFT_INSET 220.0f
 #define PULL_TO_DETACH_FACTOR 0.32f
 
+//#define CONTESTED_CASE
+
 @implementation CLCascadeView
 
 @synthesize leftInset = _leftInset; 
@@ -739,20 +741,22 @@
     
     // calculate first visible page
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
-    
+
     // bug fix with bad position of first page
     if ((firstVisiblePageIndex == 0) && (-_scrollView.contentOffset.x >= _scrollView.contentInset.left)) {
         // get page at index
         id item = [_pages objectAtIndex: firstVisiblePageIndex];
-        UIView* view = (UIView*)item;
-        
-        CGRect rect = [view frame];
-        rect.origin.x = 0;
-        [view setFrame: rect];
+        if (item != [NSNull null]) {
+            UIView* view = (UIView*)item;
+            
+            CGRect rect = [view frame];
+            rect.origin.x = 0;
+            [view setFrame: rect];
+        }
     }
-
+    
     [self loadBoundaryPagesIfNeeded];    
-
+    
     // operations connected with blocking pages on stock
     for (NSInteger i=0; i<=firstVisiblePageIndex; i++) {
         
@@ -760,6 +764,10 @@
         if ([self pageExistAtIndex: i]) {
             // get page at index
             id item = [_pages objectAtIndex: i];
+            
+            if (item == [NSNull null]) {
+                break;
+            }
             
             if (i == firstVisiblePageIndex) {
                 
@@ -801,7 +809,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (_flags.isDetachPages) _flags.isDetachPages = NO;
+
+#ifndef CONTESTED_CASE
     [_scrollView setPagingEnabled: NO];
+#endif
 }
 
 
