@@ -25,6 +25,11 @@
     return self;
 }
 
+-(void)setTableSize
+{
+   _viewSize = CLViewSizeNormal;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -79,7 +84,7 @@
     [self setWebView: webView_];
     
     // load request
-    [self loadRequest];
+   // [self loadRequest];
 }
 
 

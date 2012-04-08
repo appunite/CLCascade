@@ -23,5 +23,7 @@
  * This method fire loadRequest in webView.
  */
 - (void) loadRequest;
+
+-(void)setTableSize;
  
 @end

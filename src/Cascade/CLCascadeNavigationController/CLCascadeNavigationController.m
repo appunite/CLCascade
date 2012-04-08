@@ -11,6 +11,9 @@
 #import "CLViewController.h"
 #import "CLSegmentedView.h"
 
+//#define NSDebugLog( ... ) NSLog( __VA_ARGS__ )
+#define NSDebugLog( ... )
+
 @interface CLCascadeNavigationController (Private)
 - (void) addPagesRoundedCorners;
 - (void) addRoundedCorner:(UIRectCorner)rectCorner toPageAtIndex:(NSInteger)index;
@@ -23,14 +26,6 @@
 @synthesize viewControllers = _viewControllers;
 @synthesize leftInset, widerLeftInset;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)dealloc
 {
@@ -47,6 +42,11 @@
 }
 
 #pragma mark - View lifecycle
+
+- (CLCascadeView*)cascadeView
+{
+   return _cascadeView;
+}
 
 - (void)viewDidLoad
 {
@@ -77,8 +77,48 @@
 	return YES;
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
-    [_cascadeView updateContentLayoutToInterfaceOrientation:interfaceOrientation duration:duration];
+-(void)willRotateToInterfaceOrientation:( UIInterfaceOrientation )toInterfaceOrientation_
+                               duration:( NSTimeInterval )duration_
+{
+   //dodikk - blocks are available since iOS4
+   [ self.viewControllers enumerateObjectsUsingBlock: ^void(id obj_, NSUInteger idx_, BOOL *stop_)
+   {
+      UIViewController* controller_ = (UIViewController*)obj_;
+      [ controller_ willRotateToInterfaceOrientation: toInterfaceOrientation_
+                                            duration: duration_ ];
+
+      *stop_ = NO;
+   } ];
+}
+
+-(void)didRotateFromInterfaceOrientation:( UIInterfaceOrientation )fromInterfaceOrientation_
+{
+   //dodikk - blocks are available since iOS4
+   [ self.viewControllers enumerateObjectsUsingBlock: ^void(id obj_, NSUInteger idx_, BOOL *stop_)
+    {
+       UIViewController* controller_ = (UIViewController*)obj_;
+       [ controller_ didRotateFromInterfaceOrientation: fromInterfaceOrientation_ ];
+
+       *stop_ = NO;
+    } ];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:( UIInterfaceOrientation )interfaceOrientation_
+                                         duration:( NSTimeInterval )duration_ 
+{
+   //dodikk - blocks are available since iOS4
+   [ self.viewControllers enumerateObjectsUsingBlock: ^void(id obj_, NSUInteger idx_, BOOL *stop_)
+    {
+       UIViewController* controller_ = (UIViewController*)obj_;
+       [ controller_ willAnimateRotationToInterfaceOrientation: interfaceOrientation_
+                                                      duration: duration_ ];
+       
+       *stop_ = NO;
+    } ];
+   
+   
+    [_cascadeView updateContentLayoutToInterfaceOrientation: interfaceOrientation_
+                                                   duration: duration_ ];
 }
 
 
@@ -189,7 +229,7 @@
     if (index > [_viewControllers count] - 1) return;
     
     UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
-    if ([controller respondsToSelector:@selector(pageDidAppear)]) {
+    if ([controller respondsToSelector:@selector(pageDidDisappear)]) {
         [controller pageDidDisappear];
     }
 
@@ -244,39 +284,63 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated {
-    
-    // if in not sent from categoirs view
-    if (sender) {
-
-        // get index of sender
-        NSInteger indexOfSender = [_viewControllers indexOfObject:sender];
-        
-        // if sender is not last view controller
-        if (indexOfSender != [_viewControllers count] - 1) {
-            
-            // pop views and remove from _viewControllers
-            [self popPagesFromLastIndexTo:indexOfSender];
-        }
-    } 
-    
-    // set cascade navigator to view controller
-    [viewController setCascadeNavigationController: self];
-    // add controller to array
-    [self.viewControllers addObject: viewController];
-
-    #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
-    [self addChildViewController:viewController];
-    #endif
-    
-    // push view
-    [_cascadeView pushPage:[viewController view] 
-                  fromPage:[sender view] 
-                  animated:animated];
-
-    #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
-    [viewController didMoveToParentViewController:self];
-    #endif
+-(void)addViewController:(CLViewController*)viewController 
+                  sender:(CLViewController*)sender
+                animated:(BOOL)animated 
+{    
+   // if in not sent from categoirs view
+   if (sender) 
+   {
+      // get index of sender
+      NSInteger indexOfSender = [_viewControllers indexOfObject:sender];
+      
+      // if sender is not last view controller
+      if (indexOfSender != [_viewControllers count] - 1) 
+      {
+         // pop views and remove from _viewControllers
+         [self popPagesFromLastIndexTo:indexOfSender];
+      }
+   } 
+   
+   UIView* sender_view_ = [ sender view ];
+   UIView* view_to_push_ = [ viewController view ];
+   
+   NSDebugLog
+   ( 
+    @"CLCascadeNavigationController->addViewController: %@"
+    @"\n \t\t\t " @"sender: %@"
+    @"\n \t\t\t " @"animated: %d"
+    @"\n"
+    @"\n \t\t\t " @"self->_cascadeView: %@"
+    @"\n \t\t\t " @"sender->view: %@"
+    @"\n \t\t\t " @"viewController->view: %@"    
+    , viewController         
+    , sender
+    , animated
+    , _cascadeView 
+    , sender_view_
+    , view_to_push_
+   );
+   
+   // set cascade navigator to view controller
+   [viewController setCascadeNavigationController: self];
+   // add controller to array
+   [self.viewControllers addObject: viewController];
+   
+   {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+   [self addChildViewController:viewController];
+#endif
+   
+   // push view
+   [ _cascadeView pushPage: view_to_push_ 
+                  fromPage: sender_view_ 
+                  animated: animated ];
+   
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+   [viewController didMoveToParentViewController:self];
+#endif
+   }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -350,16 +414,32 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) popPagesFromLastIndexTo:(NSInteger)toIndex {
-    if (toIndex < 0) toIndex = 0;
+-(void)popPagesFromLastIndexTo:(NSInteger)toIndex 
+{
+   NSUInteger view_controllers_count_ = [_viewControllers count];
+   if ( 0 == view_controllers_count_ )
+   {
+      return;
+   }
+   
+    if (toIndex < 0) 
+    {
+       toIndex = 0;
+    }
     
     // index of last page
-    NSUInteger index = [_viewControllers count] - 1;
+    NSUInteger index = view_controllers_count_ - 1;
     // pop page from back
     NSEnumerator* enumerator = [_viewControllers reverseObjectEnumerator];
     // enumarate pages
-    while ([enumerator nextObject] && _viewControllers.count > toIndex+1) {
-
+    while ([enumerator nextObject] && _viewControllers.count > toIndex+1) 
+    {
+       if ( ![ _cascadeView canPopPageAtIndex: index ] )
+       {
+          //dodikk - maybe break fits better
+          continue;
+       }
+       
         #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
         UIViewController* viewController = [_viewControllers objectAtIndex:index];
         [viewController willMoveToParentViewController:nil];
