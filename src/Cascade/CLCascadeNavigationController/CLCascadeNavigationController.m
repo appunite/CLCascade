@@ -374,15 +374,25 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popPagesFromLastIndexTo:(NSInteger)toIndex {
+    NSUInteger count = [_viewControllers count];
+
+    if (count == 0) {
+        return;
+    }
+        
     if (toIndex < 0) toIndex = 0;
     
     // index of last page
-    NSUInteger index = [_viewControllers count] - 1;
+    NSUInteger index = count - 1;
     // pop page from back
     NSEnumerator* enumerator = [_viewControllers reverseObjectEnumerator];
     // enumarate pages
     while ([enumerator nextObject] && _viewControllers.count > toIndex+1) {
-
+        if (![_cascadeView canPopPageAtIndex: index]) {
+            //dodikk - maybe break fits better
+            continue;
+        }
+        
         #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
         UIViewController* viewController = [_viewControllers objectAtIndex:index];
         [viewController willMoveToParentViewController:nil];

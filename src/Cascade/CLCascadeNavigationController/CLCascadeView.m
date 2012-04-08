@@ -209,7 +209,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popPageAtIndex:(NSInteger)index animated:(BOOL)animated {
-    if (!_pages) return;
+    if ([_pages count] == 0) return;
+
+    // normalize index - by @dodikk
+    index = [self normalizePageIndex: index];
     
     // get item at index
     __unsafe_unretained id item = [_pages objectAtIndex:index];
@@ -377,6 +380,11 @@
     [self setProperSizesForLoadedPages: interfaceOrientation];
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL) canPopPageAtIndex:(NSInteger)index {
+    NSRange range = {0, [_pages count]};
+    return NSLocationInRange(index, range);
+}
 
 #pragma mark -
 #pragma mark Private methods
@@ -994,6 +1002,11 @@
     
     _leftInset = newLeftInset;
     _pageWidth = (width - _leftInset) / 2.0f;
+    
+    // by @dodikk
+    if (_pageWidth == 0.0f ) {
+        NSAssert(NO, @"CLCascadeView->_pageWidth == 0. Possible zero division crashes");
+    }
     
     _scrollView.frame = CGRectMake(_leftInset, 0.0, _pageWidth, self.frame.size.height);
     

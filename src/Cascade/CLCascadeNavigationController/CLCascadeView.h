@@ -76,6 +76,8 @@
 - (NSArray*) visiblePages;
 
 - (void) updateContentLayoutToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration;
+
+- (BOOL) canPopPageAtIndex:(NSInteger)index; // @dodikk
 @end
 
 @protocol CLCascadeViewDataSource <NSObject>
