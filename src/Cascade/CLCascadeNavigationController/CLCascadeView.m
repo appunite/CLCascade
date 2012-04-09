@@ -749,6 +749,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
+    if(scrollView.dragging && scrollView.tracking && !scrollView.pagingEnabled) {
+        [scrollView setPagingEnabled:YES];
+    }
+    
     if ([_pages count] == 0) return;
     
     // operations connected with Pull To Detach Pages action
@@ -813,10 +817,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    // set paging enabled (bug fix with auto scrolling when setContentOffset in pushView:)
-    [_scrollView setPagingEnabled: YES];
+
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    [scrollView setPagingEnabled:NO];
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
