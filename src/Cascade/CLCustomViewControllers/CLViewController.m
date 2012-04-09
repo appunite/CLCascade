@@ -10,11 +10,12 @@
 #import "CLCascadeNavigationController.h"
 #import "CLBorderShadowView.h"
 
-
 #import "CLSegmentedView.h"
 #import "UIViewController+CLSegmentedView.h"
 #import "CLViewControllerDelegate.h"
 #import "CLGlobal.h"
+
+#import "CLSegmentedView+Extension.h"
 
 @implementation CLViewController
 
@@ -86,9 +87,13 @@
         
         NSString *path = [bundle pathForResource:nib ofType:@"nib"];
         
-        if(path) {
-            self.view = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex: 0];
-            return;
+        if (path) {
+            UIView* view_ = [[bundle loadNibNamed:nib owner:self options:nil] objectAtIndex:0];
+            
+            if ([view_ isKindOfClass:[CLSegmentedView class]]) {
+                [(CLSegmentedView*)view_ setViewSize:self.viewSize];
+            }
+            self.view = view_; return;
         }
     }
     

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20226E8A1532E06800195298 /* CLSegmentedView+Extension.h in Headers */ = {isa = PBXBuildFile; fileRef = 20226E881532E06700195298 /* CLSegmentedView+Extension.h */; };
+		20226E8E1532E0A500195298 /* CLSegmentedView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 20226E8D1532E0A500195298 /* CLSegmentedView+Extension.m */; };
 		B6EA8CB01456D25200817157 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EA8CAF1456D25200817157 /* Foundation.framework */; };
 		B6EA8CBF1456D2EC00817157 /* Cascade.h in Headers */ = {isa = PBXBuildFile; fileRef = B6EA8CBE1456D2EC00817157 /* Cascade.h */; };
 		B6EA8CE21456D53200817157 /* CLCascadeNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = B6EA8CC11456D53200817157 /* CLCascadeNavigationController.h */; };
@@ -40,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		20226E881532E06700195298 /* CLSegmentedView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLSegmentedView+Extension.h"; sourceTree = "<group>"; };
+		20226E8D1532E0A500195298 /* CLSegmentedView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLSegmentedView+Extension.m"; sourceTree = "<group>"; };
 		B6EA8CAC1456D25200817157 /* libCascade.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCascade.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6EA8CAF1456D25200817157 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B6EA8CB31456D25200817157 /* Cascade-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cascade-Prefix.pch"; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 				B6EA8CDD1456D53200817157 /* CLScrollView.m */,
 				B6EA8CDE1456D53200817157 /* CLSegmentedView.h */,
 				B6EA8CDF1456D53200817157 /* CLSegmentedView.m */,
+				20226E881532E06700195298 /* CLSegmentedView+Extension.h */,
+				20226E8D1532E0A500195298 /* CLSegmentedView+Extension.m */,
 				B6EA8CE01456D53200817157 /* UIViewController+CLSegmentedView.h */,
 				B6EA8CE11456D53200817157 /* UIViewController+CLSegmentedView.m */,
 			);
@@ -221,6 +227,7 @@
 				B6EA8CF81456D53200817157 /* CLScrollView.h in Headers */,
 				B6EA8CFA1456D53200817157 /* CLSegmentedView.h in Headers */,
 				B6EA8CFC1456D53200817157 /* UIViewController+CLSegmentedView.h in Headers */,
+				20226E8A1532E06800195298 /* CLSegmentedView+Extension.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +294,7 @@
 				B6EA8CF91456D53200817157 /* CLScrollView.m in Sources */,
 				B6EA8CFB1456D53200817157 /* CLSegmentedView.m in Sources */,
 				B6EA8CFD1456D53200817157 /* UIViewController+CLSegmentedView.m in Sources */,
+				20226E8E1532E0A500195298 /* CLSegmentedView+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
