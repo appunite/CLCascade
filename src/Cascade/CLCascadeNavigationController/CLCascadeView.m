@@ -114,11 +114,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-
     id item = nil;
     // create enumerator
-    NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
+    NSEnumerator* enumerator = [_pages objectEnumerator];
     // enumarate pages
+    UIView *view = nil;
+    
     while ((item = [enumerator nextObject])) {
         if (item != [NSNull null]) {
             
@@ -127,10 +128,15 @@
             
             if (CGRectContainsPoint(rect, point)) {
                 CGPoint newPoint = [self convertPoint:point toView:page];
-                return [page hitTest:newPoint withEvent:event];
+                view = [page hitTest:newPoint withEvent:event];
             }
         }
-    }    
+    } 
+    
+    // bug fix: @YuriSarkisyan
+    if (view != nil) {
+        return view;
+    }
     
     return [super hitTest:point withEvent:event];
 }
@@ -778,17 +784,9 @@
         if ([self pageExistAtIndex: i]) {
             // get page at index
             id item = [_pages objectAtIndex: i];
-            
-            if (item == [NSNull null]) {
-                break;
-            }
-            
+
             if (i == firstVisiblePageIndex) {
-                
-//                if (item == [NSNull null]) {
-//                    item = [self loadPageAtIndex: i];
-//                }
-                
+
                 CGFloat contentOffset = _scrollView.contentOffset.x;
                 
                 if (((i == 0) && (contentOffset <= 0)) || ([_pages count] == 1)) {
@@ -824,9 +822,9 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (_flags.isDetachPages) _flags.isDetachPages = NO;
 
-#ifndef CONTESTED_CASE
+    #ifdef CONTESTED_CASE
     [_scrollView setPagingEnabled: NO];
-#endif
+    #endif
 }
 
 
