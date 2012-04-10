@@ -11,16 +11,6 @@
 
 @implementation ExampleCategoriesViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -43,13 +33,6 @@
     UIView* backgrounView = [[UIView alloc] initWithFrame: self.tableView.bounds];
     [backgrounView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"brown_bg_128x128.png"]]];
     [self.tableView setBackgroundView:backgrounView];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

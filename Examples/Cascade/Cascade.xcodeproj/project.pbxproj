@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		201A2D0813992DB900EFAE15 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 201A2D0613992DB900EFAE15 /* InfoPlist.strings */; };
-		201A2D0C13992DCD00EFAE15 /* CLSplitCascadeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 201A2D0A13992DCD00EFAE15 /* CLSplitCascadeViewController.xib */; };
 		201A2D0F13992EF800EFAE15 /* Categories_header_view_289x89.png in Resources */ = {isa = PBXBuildFile; fileRef = 201A2D0E13992EF800EFAE15 /* Categories_header_view_289x89.png */; };
 		201A2D1113992F5400EFAE15 /* app_logo_32x26.png in Resources */ = {isa = PBXBuildFile; fileRef = 201A2D1013992F5400EFAE15 /* app_logo_32x26.png */; };
 		201A2D1D13992FF700EFAE15 /* brown_bg_98x98.png in Resources */ = {isa = PBXBuildFile; fileRef = 201A2D1413992FF700EFAE15 /* brown_bg_98x98.png */; };
@@ -61,7 +60,6 @@
 
 /* Begin PBXFileReference section */
 		201A2D0713992DB900EFAE15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		201A2D0B13992DCD00EFAE15 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CLSplitCascadeViewController.xib; sourceTree = "<group>"; };
 		201A2D0E13992EF800EFAE15 /* Categories_header_view_289x89.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Categories_header_view_289x89.png; sourceTree = "<group>"; };
 		201A2D1013992F5400EFAE15 /* app_logo_32x26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_logo_32x26.png; sourceTree = "<group>"; };
 		201A2D1413992FF700EFAE15 /* brown_bg_98x98.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brown_bg_98x98.png; sourceTree = "<group>"; };
@@ -196,7 +194,6 @@
 		207EA49A13992C0400A8200F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				201A2D0A13992DCD00EFAE15 /* CLSplitCascadeViewController.xib */,
 				207EA4A513992C0400A8200F /* MainWindow.xib */,
 				207EA4A213992C0400A8200F /* CascadeAppDelegate.h */,
 				207EA4A313992C0400A8200F /* CascadeAppDelegate.m */,
@@ -288,7 +285,6 @@
 				207EA49E13992C0400A8200F /* InfoPlist.strings in Resources */,
 				207EA4A713992C0400A8200F /* MainWindow.xib in Resources */,
 				201A2D0813992DB900EFAE15 /* InfoPlist.strings in Resources */,
-				201A2D0C13992DCD00EFAE15 /* CLSplitCascadeViewController.xib in Resources */,
 				201A2D0F13992EF800EFAE15 /* Categories_header_view_289x89.png in Resources */,
 				201A2D1113992F5400EFAE15 /* app_logo_32x26.png in Resources */,
 				201A2D1D13992FF700EFAE15 /* brown_bg_98x98.png in Resources */,
@@ -343,14 +339,6 @@
 				201A2D0713992DB900EFAE15 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		201A2D0A13992DCD00EFAE15 /* CLSplitCascadeViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				201A2D0B13992DCD00EFAE15 /* en */,
-			);
-			name = CLSplitCascadeViewController.xib;
 			sourceTree = "<group>";
 		};
 		207EA49C13992C0400A8200F /* InfoPlist.strings */ = {

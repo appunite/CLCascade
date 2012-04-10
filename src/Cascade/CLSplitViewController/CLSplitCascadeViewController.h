@@ -17,7 +17,9 @@
 }
 
 @property (nonatomic, strong) IBOutlet CLCategoriesViewController* categoriesViewController;
-@property (nonatomic, strong) IBOutlet CLCascadeNavigationController* cascadeNavigationController;
+@property (nonatomic, strong) IBOutlet CLCascadeNavigationController* cascadeNavigationController; //it should be readonly
+
+- (id) initWithNavigationController:(CLCascadeNavigationController*)navigationController;
 
 - (void) setBackgroundView:(UIView*)backgroundView;
 - (void) setDividerImage:(UIImage*)image;
