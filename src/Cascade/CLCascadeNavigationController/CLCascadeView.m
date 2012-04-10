@@ -116,7 +116,7 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     id item = nil;
     // create enumerator
-    NSEnumerator* enumerator = [_pages objectEnumerator];
+    NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
     // enumarate pages
     UIView *view = nil;
     
@@ -128,7 +128,7 @@
             
             if (CGRectContainsPoint(rect, point)) {
                 CGPoint newPoint = [self convertPoint:point toView:page];
-                view = [page hitTest:newPoint withEvent:event];
+                view = [page hitTest:newPoint withEvent:event]; break;
             }
         }
     } 
@@ -820,10 +820,10 @@
 
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    [scrollView setPagingEnabled:NO];
-}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+//    [scrollView setPagingEnabled:NO];
+//}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
