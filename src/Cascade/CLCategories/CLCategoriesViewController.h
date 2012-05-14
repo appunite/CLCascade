@@ -7,14 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Cascade/CLCustomViewControllers/CLTableViewController.h>
 #import <Cascade/CLCategories/CLCategoriesView.h>
 #import <Cascade/CLCascadeNavigationController/CLCascadeNavigationController.h>
 
-@interface CLCategoriesViewController : CLTableViewController {
+@interface CLCategoriesViewController : UITableViewController {
 
 }
-
-- (id) initWithNavigationController:(CLCascadeNavigationController*)viewController;
 
 @end

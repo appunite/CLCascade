@@ -19,16 +19,17 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CLSegmentedView*) segmentedView {
-    return (CLSegmentedView*)self.view;
+    UIView *contentView = [self.view superview];
+    return (CLSegmentedView*)[contentView superview];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) headerView {
 
-    if (![self.view isKindOfClass:[CLSegmentedView class]]) return nil;
+    if (![self.segmentedView isKindOfClass:[CLSegmentedView class]]) return nil;
     
-    CLSegmentedView* view_ = (CLSegmentedView*)self.view;
+    CLSegmentedView* view_ = (CLSegmentedView*)self.segmentedView;
     return view_.headerView;
 }
 
@@ -36,18 +37,18 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) footerView {
 
-    if (![self.view isKindOfClass:[CLSegmentedView class]]) return nil;
+    if (![self.segmentedView isKindOfClass:[CLSegmentedView class]]) return nil;
     
-    CLSegmentedView* view_ = (CLSegmentedView*)self.view;
+    CLSegmentedView* view_ = (CLSegmentedView*)self.segmentedView;
     return view_.footerView;
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) contentView {
-    if (![self.view isKindOfClass:[CLSegmentedView class]]) return self.view;
+    if (![self.segmentedView isKindOfClass:[CLSegmentedView class]]) return self.view;
 
-    CLSegmentedView* view_ = (CLSegmentedView*)self.view;
+    CLSegmentedView* view_ = (CLSegmentedView*)self.segmentedView;
     return view_.contentView;
 }
 

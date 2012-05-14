@@ -146,15 +146,29 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated {
+    [self pushPage:newPage fromPage:fromPage animated:animated viewSize:CLViewSizeNormal];
+}
 
-    CLViewSize viewSize = [(CLSegmentedView*)newPage viewSize];
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated viewSize:(CLViewSize)viewSize {
+    // put the newPage view into a segmentedView container
+    CLSegmentedView *newPageContainer = [[CLSegmentedView alloc] initWithSize:viewSize];
+    newPageContainer.showRoundedCorners = YES;
+    [newPage setAutoresizingMask:
+     UIViewAutoresizingFlexibleLeftMargin |
+     UIViewAutoresizingFlexibleRightMargin |
+     UIViewAutoresizingFlexibleBottomMargin |
+     UIViewAutoresizingFlexibleTopMargin |
+     UIViewAutoresizingFlexibleWidth |
+     UIViewAutoresizingFlexibleHeight];
+    newPageContainer.contentView = newPage;
+    
     if (viewSize == CLViewSizeWider) {
         _flags.hasWiderPage = YES;
     }
     
     NSInteger index = [_pages count];
-    CGSize size = [self calculatePageSize: newPage];
+    CGSize size = [self calculatePageSize: newPageContainer];
     CGPoint origin = [self calculateOriginOfPageAtIndex: index];
     CGRect frame = CGRectMake(origin.x, origin.y, size.width, size.height);
     
@@ -162,37 +176,37 @@
         [self popAllPagesAnimated: animated];
         frame.origin.x = 0.0f;
     }
-
+    
     // animation, from left to right
     if (animated && (fromPage == nil) && (([_scrollView contentOffset].x >= 0))) {
         // start frame animation
         CGRect startRect = CGRectMake(origin.x - size.width, origin.y, size.width, size.height);
         // set new page frame
-        [newPage setFrame: startRect];
+        [newPageContainer setFrame: startRect];
         // animation
         [UIView animateWithDuration:0.15 
                          animations: ^{
                              // set new page frame aimated
-                             [newPage setFrame: frame];
+                             [newPageContainer setFrame: frame];
                          }];
     } else {
         // set new page frame
-        [newPage setFrame: frame];
+        [newPageContainer setFrame: frame];
     }
     
     // add page to array of pages
-    [_pages addObject: newPage];
+    [_pages addObject: newPageContainer];
     // update content size
     [self setProperContentSize];
     // update edge inset
     [self setProperEdgeInset: NO];
     // add subview
-    [_scrollView addSubview: newPage];
+    [_scrollView addSubview: newPageContainer];
     // send message to delegate
-    [self didAddPage:newPage animated:animated];
-
+    [self didAddPage:newPageContainer animated:animated];
+    
     UIInterfaceOrientation interfaceOrienation = [[UIApplication sharedApplication] statusBarOrientation];
-
+    
     if (index > 0) {
         // scroll to new page frame
         if (!_flags.hasWiderPage) {
@@ -209,7 +223,6 @@
             }
         }
     }
-        
 }
 
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Cascade/Other/CLScrollView.h>
+#import <Cascade/Other/CLGlobal.h>
 
 @protocol CLCascadeViewDataSource;
 @protocol CLCascadeViewDelegate;
@@ -62,6 +63,7 @@
 
 
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated;
+- (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated viewSize:(CLViewSize)viewSize;
 
 - (void) popPageAtIndex:(NSInteger)index animated:(BOOL)animated;
 - (void) popAllPagesAnimated:(BOOL)animated;

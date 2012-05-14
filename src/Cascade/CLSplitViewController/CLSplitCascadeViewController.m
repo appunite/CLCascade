@@ -121,15 +121,9 @@
     if (viewController != _categoriesViewController) {
         _categoriesViewController = viewController;
         [(CLSplitCascadeView*)self.view setCategoriesView: viewController.view];
-        
-        if (_cascadeNavigationController) {
-            [_categoriesViewController setCascadeNavigationController:_cascadeNavigationController];    
-        }
                 
-        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
         [self addChildViewController:viewController];
         [viewController didMoveToParentViewController:self];
-        #endif
     }
 }
 
@@ -140,10 +134,8 @@
         _cascadeNavigationController = viewController;
         [(CLSplitCascadeView*)self.view setCascadeView: viewController.view];
         
-        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
         [self addChildViewController:viewController];
         [viewController didMoveToParentViewController:self];
-        #endif
     }
 }
 

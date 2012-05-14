@@ -7,8 +7,8 @@
 //
 
 #import "CLCascadeNavigationController.h"
-
-#import "CLViewController.h"
+#import <Cascade/Other/UIViewController+CLSegmentedView.h>
+#import <Cascade/Other/UIViewController+CLCascade.h>
 #import "CLSegmentedView.h"
 
 @interface CLCascadeNavigationController (Private)
@@ -198,10 +198,11 @@
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index {
     if (index > [_viewControllers count] - 1) return;
 
-    UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
-    if ([controller respondsToSelector:@selector(pageDidAppear)]) {
-        [controller pageDidAppear];
-    }
+//TODO: Decide whether we want to send -viewDidAppear: here or not
+//    UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
+//    if ([controller respondsToSelector:@selector(pageDidAppear)]) {
+//        [controller pageDidAppear];
+//    }
     
     [self addPagesRoundedCorners];
 }
@@ -210,11 +211,12 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index {
     if (index > [_viewControllers count] - 1) return;
-    
-    UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
-    if ([controller respondsToSelector:@selector(pageDidDisappear)]) {
-        [controller pageDidDisappear];
-    }
+
+//TODO: Decide whether we want to send -viewDidDisappear: here or not
+//    UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
+//    if ([controller respondsToSelector:@selector(pageDidDisappear)]) {
+//        [controller pageDidDisappear];
+//    }
 
     [self addPagesRoundedCorners];
 }
@@ -257,7 +259,7 @@
 #pragma mark Calss methods
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated {
+- (void) setRootViewController:(UIViewController*)viewController animated:(BOOL)animated {
     // pop all pages
     [_cascadeView popAllPagesAnimated: NO];
     // remove all controllers
@@ -267,11 +269,15 @@
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated {
-    
+- (void) addViewController:(UIViewController*)viewController sender:(UIViewController*)sender animated:(BOOL)animated {
+    [self addViewController:viewController sender:sender animated:animated viewSize:CLViewSizeNormal];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) addViewController:(UIViewController*)viewController sender:(UIViewController*)sender animated:(BOOL)animated viewSize:(CLViewSize)size {
     // if in not sent from categoirs view
     if (sender) {
-
+        
         // get index of sender
         NSInteger indexOfSender = [_viewControllers indexOfObject:sender];
         
@@ -283,23 +289,21 @@
         }
     } 
     
-    // set cascade navigator to view controller
-    [viewController setCascadeNavigationController: self];
     // add controller to array
     [self.viewControllers addObject: viewController];
-
-    #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+    
     [self addChildViewController:viewController];
-    #endif
     
     // push view
     [_cascadeView pushPage:[viewController view] 
                   fromPage:[sender view] 
-                  animated:animated];
-
-    #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
+                  animated:animated
+                  viewSize:size];
+    
+    // force shadow
+    [viewController addLeftBorderShadowWithWidth:20.0 andOffset:0.0f];
+    
     [viewController didMoveToParentViewController:self];
-    #endif
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -321,17 +325,11 @@
 - (void) addRoundedCorner:(UIRectCorner)rectCorner toPageAtIndex:(NSInteger)index {
 
     if (index != NSNotFound) {
-        UIViewController* viewController = [_viewControllers objectAtIndex: index];
+        UIViewController* firstVisibleController = [_viewControllers objectAtIndex: index];
         
-        if ([viewController isKindOfClass: [CLViewController class]]) {
-            CLViewController* firstVisibleController = (CLViewController*)viewController;
-            
-            if ([firstVisibleController showRoundedCorners]) {
-                CLSegmentedView* view = (CLSegmentedView*)firstVisibleController.view;
-                [view setShowRoundedCorners: YES];
-                [view setRectCorner: rectCorner];
-            }
-        }
+        CLSegmentedView* view = firstVisibleController.segmentedView;
+        [view setShowRoundedCorners: YES];
+        [view setRectCorner: rectCorner];
     }
 }
 
@@ -344,10 +342,7 @@
         if (item != [NSNull null]) {
             if ([item isKindOfClass:[CLSegmentedView class]]) {
                 CLSegmentedView* view = (CLSegmentedView*)item;
-                
-                if ([view showRoundedCorners]) {
-                    [view setShowRoundedCorners: NO];
-                }
+                [view setShowRoundedCorners: NO];
             }
         }
     }

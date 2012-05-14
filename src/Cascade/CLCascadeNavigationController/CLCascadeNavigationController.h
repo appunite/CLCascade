@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Cascade/CLCascadeNavigationController/CLCascadeView.h>
-
-@class CLViewController;
+#import <Cascade/Other/CLGlobal.h>
 
 @interface CLCascadeNavigationController : UIViewController <CLCascadeViewDataSource, CLCascadeViewDelegate> {
     // array of all view controllers
@@ -38,13 +37,14 @@
 /*
  * Set and push root view controller
  */
-- (void) setRootViewController:(CLViewController*)viewController animated:(BOOL)animated;
+- (void) setRootViewController:(UIViewController*)viewController animated:(BOOL)animated;
 
 /*
  * Push new view controller from sender.
  * If sender is not last, then controller pop next controller and push new view from sender
  */
-- (void) addViewController:(CLViewController*)viewController sender:(CLViewController*)sender animated:(BOOL)animated;
+- (void) addViewController:(UIViewController*)viewController sender:(UIViewController*)sender animated:(BOOL)animated;
+- (void) addViewController:(UIViewController*)viewController sender:(UIViewController*)sender animated:(BOOL)animated viewSize:(CLViewSize)size;
 
 /* 
  First in hierarchy CascadeViewController (opposite to lastCascadeViewController)
