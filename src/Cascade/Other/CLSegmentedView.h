@@ -62,6 +62,11 @@
 @property (nonatomic, assign) UIRectCorner rectCorner;
 
 /*
+ * Returns view's load status within container's hierarchy 
+ */
+@property (nonatomic, readonly) BOOL isLoaded;
+
+/*
  * Size of view
  */
 @property (nonatomic, assign, readonly) CLViewSize viewSize;
@@ -72,10 +77,5 @@
  * This methoad add left outer shadow view with proper width
  */
 - (void) addLeftBorderShadowView:(UIView *)view withWidth:(CGFloat)width;
-
-/* 
- * This methoad remove left outer shadow
- */
-- (void) removeLeftBorderShadowView;
 
 @end

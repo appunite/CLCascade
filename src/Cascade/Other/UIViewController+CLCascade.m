@@ -9,8 +9,6 @@
 #import "UIViewController+CLCascade.h"
 #import <Cascade/CLSplitViewController/CLSplitCascadeViewController.h>
 #import <Cascade/CLCascadeNavigationController/CLCascadeNavigationController.h>
-#import <Cascade/Other/CLBorderShadowView.h>
-#import <Cascade/Other/UIViewController+CLSegmentedView.h>
 
 @implementation UIViewController (CLCascade)
 
@@ -37,28 +35,6 @@
     else {
         return parent.cascadeNavigationController;
     }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UIView *) leftBorderShadowView {
-    return [[CLBorderShadowView alloc] init];
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addLeftBorderShadowWithWidth:(CGFloat)width andOffset:(CGFloat)offset {
-    UIView* shadowView = [self leftBorderShadowView];
-    [self.segmentedView addLeftBorderShadowView:shadowView
-                                      withWidth:width];
-    
-    [self.segmentedView setShadowOffset:offset];
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) removeLeftBorderShadow {
-    [self.segmentedView removeLeftBorderShadowView];    
 }
 
 @end

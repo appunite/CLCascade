@@ -20,7 +20,6 @@
 
 @implementation CLCascadeNavigationController
 
-@synthesize viewControllers = _viewControllers;
 @synthesize leftInset, widerLeftInset;
 
 - (void)dealloc
@@ -45,8 +44,6 @@
     // set background color
     [self.view setBackgroundColor: [UIColor clearColor]];
 
-    _viewControllers = [[NSMutableArray alloc] init];
-
     _cascadeView = [[CLCascadeView alloc] initWithFrame:self.view.bounds];
     _cascadeView.delegate = self;
     _cascadeView.dataSource = self;
@@ -68,38 +65,9 @@
 	return YES;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                duration:(NSTimeInterval)duration
-{
-    [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [(UIViewController*)obj willRotateToInterfaceOrientation:toInterfaceOrientation
-                                                        duration:duration];
-        
-        *stop = NO;
-    }];
-    
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [(UIViewController*)obj didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-        
-        *stop = NO;
-    }];
-}
 
 - (void)willAnimateRotationToInterfaceOrientation:( UIInterfaceOrientation )interfaceOrientation
-                                         duration:( NSTimeInterval )duration 
-{
-
-    [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [(UIViewController*)obj willAnimateRotationToInterfaceOrientation:interfaceOrientation
-                                                                 duration:duration];
-        
-        *stop = NO;
-    }];
-    
+                                         duration:( NSTimeInterval )duration {
     [_cascadeView updateContentLayoutToInterfaceOrientation:interfaceOrientation
                                                    duration:duration ];
 }
@@ -134,8 +102,8 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIViewController*) rootViewController {
-    if ([_viewControllers count] > 0) {
-        return [_viewControllers objectAtIndex: 0];
+    if ([self.childViewControllers count] > 0) {
+        return [self.childViewControllers objectAtIndex: 0];
     }
     return nil;
 }
@@ -143,12 +111,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIViewController*) lastCascadeViewController {
-    if ([_viewControllers count] > 0) {
-        NSUInteger index = [_viewControllers count] - 1;
-        return [_viewControllers objectAtIndex: index];
-    }
-    
-    return nil;
+    return [self.childViewControllers lastObject];
 }
 
 
@@ -157,13 +120,13 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) cascadeView:(CLCascadeView *)cascadeView pageAtIndex:(NSInteger)index {
-    return [[_viewControllers objectAtIndex:index] view];    
+    return [[self.childViewControllers objectAtIndex:index] view];    
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger) numberOfPagesInCascadeView:(CLCascadeView*)cascadeView {
-    return [_viewControllers count];
+    return [self.childViewControllers count];
 }
 
 
@@ -196,7 +159,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidAppearAtIndex:(NSInteger)index {
-    if (index > [_viewControllers count] - 1) return;
+    if (index > [self.childViewControllers count] - 1) return;
 
 //TODO: Decide whether we want to send -viewDidAppear: here or not
 //    UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
@@ -210,7 +173,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView pageDidDisappearAtIndex:(NSInteger)index {
-    if (index > [_viewControllers count] - 1) return;
+    if (index > [self.childViewControllers count] - 1) return;
 
 //TODO: Decide whether we want to send -viewDidDisappear: here or not
 //    UIViewController<CLViewControllerDelegate>* controller = [_viewControllers objectAtIndex: index];
@@ -279,18 +242,15 @@
     if (sender) {
         
         // get index of sender
-        NSInteger indexOfSender = [_viewControllers indexOfObject:sender];
+        NSInteger indexOfSender = [self.childViewControllers indexOfObject:sender];
         
         // if sender is not last view controller
-        if (indexOfSender != [_viewControllers count] - 1) {
+        if (indexOfSender != [self.childViewControllers count] - 1) {
             
             // pop views and remove from _viewControllers
             [self popPagesFromLastIndexTo:indexOfSender];
         }
-    } 
-    
-    // add controller to array
-    [self.viewControllers addObject: viewController];
+    }
     
     [self addChildViewController:viewController];
     
@@ -300,9 +260,6 @@
                   animated:animated
                   viewSize:size];
     
-    // force shadow
-    [viewController addLeftBorderShadowWithWidth:20.0 andOffset:0.0f];
-    
     [viewController didMoveToParentViewController:self];
 }
 
@@ -311,7 +268,7 @@
     NSInteger index = [_cascadeView indexOfFirstVisibleView: YES];
 
     if (index != NSNotFound) {
-        return [_viewControllers objectAtIndex: index];
+        return [self.childViewControllers objectAtIndex: index];
     }
     
     return nil;
@@ -325,7 +282,7 @@
 - (void) addRoundedCorner:(UIRectCorner)rectCorner toPageAtIndex:(NSInteger)index {
 
     if (index != NSNotFound) {
-        UIViewController* firstVisibleController = [_viewControllers objectAtIndex: index];
+        UIViewController* firstVisibleController = [self.childViewControllers objectAtIndex: index];
         
         CLSegmentedView* view = firstVisibleController.segmentedView;
         [view setShowRoundedCorners: YES];
@@ -360,7 +317,7 @@
 
         [self addRoundedCorner:UIRectCornerTopLeft | UIRectCornerBottomLeft toPageAtIndex:indexOfFirstVisiblePage];
         
-        if (indexOfLastVisiblePage == [_viewControllers count] -1) {
+        if (indexOfLastVisiblePage == [self.childViewControllers count] -1) {
             [self addRoundedCorner:UIRectCornerTopRight | UIRectCornerBottomRight toPageAtIndex:indexOfLastVisiblePage];
         }    
     }
@@ -369,7 +326,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) popPagesFromLastIndexTo:(NSInteger)toIndex {
-    NSUInteger count = [_viewControllers count];
+    NSUInteger count = [self.childViewControllers count];
 
     if (count == 0) {
         return;
@@ -380,26 +337,21 @@
     // index of last page
     NSUInteger index = count - 1;
     // pop page from back
-    NSEnumerator* enumerator = [_viewControllers reverseObjectEnumerator];
+    NSEnumerator* enumerator = [self.childViewControllers reverseObjectEnumerator];
     // enumarate pages
-    while ([enumerator nextObject] && _viewControllers.count > toIndex+1) {
+    while ([enumerator nextObject] && self.childViewControllers.count > toIndex+1) {
         if (![_cascadeView canPopPageAtIndex: index]) {
             //dodikk - maybe break fits better
             continue;
         }
         
-        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
-        UIViewController* viewController = [_viewControllers objectAtIndex:index];
+        UIViewController* viewController = [self.childViewControllers objectAtIndex:index];
         [viewController willMoveToParentViewController:nil];
-        #endif
 
         // pop page at index
         [_cascadeView popPageAtIndex:index animated:NO];
-        [_viewControllers removeLastObject];
 
-        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
         [viewController removeFromParentViewController];
-        #endif
         
         index--;
     }
@@ -410,20 +362,14 @@
 - (void) removeAllPageViewControllers {
 
     // pop page from back
-    NSEnumerator* enumerator = [_viewControllers reverseObjectEnumerator];
+    NSEnumerator* enumerator = [self.childViewControllers reverseObjectEnumerator];
     // enumarate pages
     while ([enumerator nextObject]) {
         
-        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
-        UIViewController* viewController = [_viewControllers lastObject];
+        UIViewController* viewController = [self.childViewControllers lastObject];
         [viewController willMoveToParentViewController:nil];
-        #endif
         
-        [_viewControllers removeLastObject];
-        
-        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
         [viewController removeFromParentViewController];
-        #endif
     }
 }
 

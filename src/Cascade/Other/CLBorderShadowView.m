@@ -22,7 +22,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) drawRect:(CGRect)rect {
-    
     CGFloat colors [] = { 
         0.0, 0.0, 0.0, 0.0,
         0.0, 0.0, 0.0, 0.3
@@ -39,8 +38,6 @@
     
     CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
     CGGradientRelease(gradient), gradient = NULL;
-    
-    
 }
 
 @end

@@ -70,7 +70,6 @@
 
 - (UIView*) loadPageAtIndex:(NSInteger)index;
 
-// unload pages which are not visible
 - (void) unloadInvisiblePages;
 
 - (NSInteger) indexOfFirstVisibleView:(BOOL)loadIfNeeded;

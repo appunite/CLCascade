@@ -11,18 +11,10 @@
 #import <Cascade/Other/CLGlobal.h>
 
 @interface CLCascadeNavigationController : UIViewController <CLCascadeViewDataSource, CLCascadeViewDelegate> {
-    // array of all view controllers
-    // todo: in ios5 use childViewControllers
-    NSMutableArray* _viewControllers;
-
     // view containing all views on stack
     CLCascadeView* _cascadeView;
 }
 
-/*
- List of CLViewControllers on stock.
- */
-@property (nonatomic, strong, readonly) NSMutableArray* viewControllers;
 
 /*
  * Left inset of normal size pages from left boarder
@@ -54,7 +46,7 @@
 /* 
  Last in hierarchy CascadeViewController (opposite to rootViewController)
  */
-- (UIViewController*)  lastCascadeViewController;
+- (UIViewController*) lastCascadeViewController;
 
 /* 
  Return first visible view controller (load if needed)
