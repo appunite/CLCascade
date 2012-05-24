@@ -117,12 +117,16 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     UIView *view = nil;
     
-    for (UIView *page in [self visiblePages]) {
+    NSEnumerator *enumerator = [[self visiblePages] reverseObjectEnumerator];
+    
+    UIView *page;
+    while (page = [enumerator nextObject]) {
         CGRect rect = [_scrollView convertRect:page.frame toView:self];
         
         if (CGRectContainsPoint(rect, point)) {
             CGPoint newPoint = [self convertPoint:point toView:page];
-            view = [page hitTest:newPoint withEvent:event]; break;
+            view = [page hitTest:newPoint withEvent:event];
+            break;
         }
     }
     
