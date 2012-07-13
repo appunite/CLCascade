@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Cascade/Cascade.h>
 
-@interface ExampleTableViewController : CLTableViewController {
+@interface ExampleTableViewController : UITableViewController {
     
 }
 
