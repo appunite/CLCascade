@@ -26,16 +26,12 @@
 {
     [super viewDidLoad];
     
-    // add shadow
-    [self addLeftBorderShadowWithWidth:140.0 andOffset:0.0f];
     
     // add header view
     UIImageView* header = [[UIImageView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.bounds.size.width, 45.0)];
     [header setImage: [UIImage imageNamed:@"ToolBar_479x45.png"]];
     [self.segmentedView setHeaderView: header];
     
-    // show rounded corners
-    [self setShowRoundedCorners: NO];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

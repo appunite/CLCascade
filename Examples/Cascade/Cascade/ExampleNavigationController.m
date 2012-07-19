@@ -104,7 +104,7 @@ static CGFloat kTopOffset = 10.0f;
 - (void) cascadeViewDidPullToDetachPages:(CLCascadeView*)cascadeView {
     [super cascadeViewDidPullToDetachPages:cascadeView];
     
-    id view = [[(CLViewController*)self.rootViewController segmentedView] contentView];
+    id view = [[(UIViewController*)self.rootViewController segmentedView] contentView];
     if ([view isKindOfClass:[UITableView class]]) {
         UITableView* tableView = (UITableView*)view;
         NSIndexPath* indexPath = [tableView indexPathForSelectedRow];
@@ -138,15 +138,15 @@ static CGFloat kTopOffset = 10.0f;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didAddPage:(UIView*)page animated:(BOOL)animated {
-    _dynamicDetachImage.hidden = ([self.viewControllers count] < 2) ? YES : NO;    
-    _staticDetachImage.hidden = ([self.viewControllers count] < 2) ? YES : NO;    
+    _dynamicDetachImage.hidden = ([self.childViewControllers count] < 2) ? YES : NO;    
+    _staticDetachImage.hidden = ([self.childViewControllers count] < 2) ? YES : NO;    
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) cascadeView:(CLCascadeView*)cascadeView didPopPageAtIndex:(NSInteger)index {
-    _dynamicDetachImage.hidden = ([self.viewControllers count] < 2) ? YES : NO;    
-    _staticDetachImage.hidden = ([self.viewControllers count] < 2) ? YES : NO;    
+    _dynamicDetachImage.hidden = ([self.childViewControllers count] < 2) ? YES : NO;    
+    _staticDetachImage.hidden = ([self.childViewControllers count] < 2) ? YES : NO;    
 }
 
 @end
