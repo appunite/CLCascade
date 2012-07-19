@@ -7,17 +7,9 @@
 //
 
 #import "CLCategoriesViewController.h"
+#import <Cascade/Other/UIViewController+CLCascade.h>
 
 @implementation CLCategoriesViewController
-
-- (id) initWithNavigationController:(CLCascadeNavigationController*)viewController {
-    self = [super init];
-    if (self) {
-        self.cascadeNavigationController = viewController;
-        self.showRoundedCorners = NO;
-    }
-    return self;
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -50,7 +42,7 @@
     CLCategoriesView* view_ = [[CLCategoriesView alloc] init]; 
     self.view = view_;
     
-    UITableView* tableView_ = [[UITableView alloc] initWithFrame:CGRectZero style:_tableViewStyle];
+    UITableView* tableView_ = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     [tableView_ setDelegate: self];
     [tableView_ setDataSource: self];
     [self setTableView: tableView_];

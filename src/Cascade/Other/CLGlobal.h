@@ -10,10 +10,6 @@
 // here you can change categories view with
 #define CATEGORIES_VIEW_WIDTH 289.0f
 
-// used in WebViewController
-#define DEFAULT_URL @"http://www.google.com"
-
-
 // enums
 typedef enum {
     CLViewSizeNormal   = 0,

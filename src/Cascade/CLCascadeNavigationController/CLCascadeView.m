@@ -42,7 +42,8 @@
 - (void) setProperEdgeInset:(BOOL)animated forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 - (void) setProperSizesForLoadedPages:(UIInterfaceOrientation)interfaceOrientation;
 
-- (void) unloadPage:(UIView*)page remove:(BOOL)remove;
+- (CLSegmentedView *)createPageFromView:(UIView*)view size:(CLViewSize)viewSize;
+- (void) unloadPage:(CLSegmentedView*)page remove:(BOOL)remove;
 - (void) loadBoundaryPagesIfNeeded;
 
 - (NSInteger) indexOfFirstVisiblePage;
@@ -114,31 +115,27 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    id item = nil;
-    // create enumerator
-    NSEnumerator* enumerator = [_pages reverseObjectEnumerator];
-    // enumarate pages
     UIView *view = nil;
     
-    while ((item = [enumerator nextObject])) {
-        if (item != [NSNull null]) {
-            
-            UIView* page = (UIView*)item;
-            CGRect rect = [_scrollView convertRect:page.frame toView:self];
-            
-            if (CGRectContainsPoint(rect, point)) {
-                CGPoint newPoint = [self convertPoint:point toView:page];
-                view = [page hitTest:newPoint withEvent:event]; break;
-            }
-        }
-    } 
+    NSEnumerator *enumerator = [[self visiblePages] reverseObjectEnumerator];
     
-    // bug fix: @YuriSarkisyan
+    UIView *page;
+    while (page = [enumerator nextObject]) {
+        CGRect rect = [_scrollView convertRect:page.frame toView:self];
+        
+        if (CGRectContainsPoint(rect, point)) {
+            CGPoint newPoint = [self convertPoint:point toView:page];
+            view = [page hitTest:newPoint withEvent:event];
+            break;
+        }
+    }
+    
     if (view != nil) {
         return view;
     }
-    
-    return [super hitTest:point withEvent:event];
+    else {
+        return [super hitTest:point withEvent:event];
+    }
 }
 
 #pragma mark -
@@ -146,15 +143,20 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated {
+    [self pushPage:newPage fromPage:fromPage animated:animated viewSize:CLViewSizeNormal];
+}
 
-    CLViewSize viewSize = [(CLSegmentedView*)newPage viewSize];
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) pushPage:(UIView*)newPage fromPage:(UIView*)fromPage animated:(BOOL)animated viewSize:(CLViewSize)viewSize {
+    // put the newPage view into a segmentedView container
+    CLSegmentedView *newPageContainer = [self createPageFromView:newPage size:viewSize];
+    
     if (viewSize == CLViewSizeWider) {
         _flags.hasWiderPage = YES;
     }
     
     NSInteger index = [_pages count];
-    CGSize size = [self calculatePageSize: newPage];
+    CGSize size = [self calculatePageSize: newPageContainer];
     CGPoint origin = [self calculateOriginOfPageAtIndex: index];
     CGRect frame = CGRectMake(origin.x, origin.y, size.width, size.height);
     
@@ -162,37 +164,37 @@
         [self popAllPagesAnimated: animated];
         frame.origin.x = 0.0f;
     }
-
+    
     // animation, from left to right
     if (animated && (fromPage == nil) && (([_scrollView contentOffset].x >= 0))) {
         // start frame animation
         CGRect startRect = CGRectMake(origin.x - size.width, origin.y, size.width, size.height);
         // set new page frame
-        [newPage setFrame: startRect];
+        [newPageContainer setFrame: startRect];
         // animation
         [UIView animateWithDuration:0.15 
                          animations: ^{
                              // set new page frame aimated
-                             [newPage setFrame: frame];
+                             [newPageContainer setFrame: frame];
                          }];
     } else {
         // set new page frame
-        [newPage setFrame: frame];
+        [newPageContainer setFrame: frame];
     }
     
     // add page to array of pages
-    [_pages addObject: newPage];
+    [_pages addObject: newPageContainer];
     // update content size
     [self setProperContentSize];
     // update edge inset
     [self setProperEdgeInset: NO];
     // add subview
-    [_scrollView addSubview: newPage];
+    [_scrollView addSubview: newPageContainer];
     // send message to delegate
-    [self didAddPage:newPage animated:animated];
-
+    [self didAddPage:newPageContainer animated:animated];
+    
     UIInterfaceOrientation interfaceOrienation = [[UIApplication sharedApplication] statusBarOrientation];
-
+    
     if (index > 0) {
         // scroll to new page frame
         if (!_flags.hasWiderPage) {
@@ -209,7 +211,6 @@
             }
         }
     }
-        
 }
 
 
@@ -221,20 +222,20 @@
     index = [self normalizePageIndex: index];
     
     // get item at index
-    __unsafe_unretained id item = [_pages objectAtIndex:index];
+    __unsafe_unretained CLSegmentedView *page = [_pages objectAtIndex:index];
     
     // check if page is unloaded
-    if (item != [NSNull null]) {
+    if (page.isLoaded) {
         
         if (animated) {
             // animate pop
             [UIView animateWithDuration:0.4f 
                              animations:^ {
-                                 [item setAlpha: 0.0f];
+                                 [page setAlpha: 0.0f];
                              }
                              completion:^(BOOL finished) {
                                  // unload and remove page
-                                 [self unloadPage:item remove:YES];
+                                 [self unloadPage:page remove:YES];
                                  // update edge inset
                                  [self setProperEdgeInset: NO];
                                  // send delegate message
@@ -243,14 +244,13 @@
             
         } else {
             // unload and remove page
-            [self unloadPage:item remove:YES];
+            [self unloadPage:page remove:YES];
             // update edge inset
             [self setProperEdgeInset: NO];
             // send delegate message
             [self didPopPageAtIndex: index];
         }
     }
-    
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -272,46 +272,42 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UIView*) loadPageAtIndex:(NSInteger)index {
-    // check if index exist
-    if ([self pageExistAtIndex: index]) {
-        id item = [_pages objectAtIndex:index];
+    UIView *page = nil; // nil == index out of range
+    
+    // check the page exists
+    if ([self pageExistAtIndex:index]) {
+        CLSegmentedView *page = [_pages objectAtIndex:index];
         
-        // if item at index is null
-        if (item == [NSNull null]) {
+        // rebuild page if necessery
+        if (page.contentView == nil) {
             // get page from dataSource
             UIView* view = [_dataSource cascadeView:self pageAtIndex:index];
             
-            // if got view from dataSorce
             if (view != nil) {
                 //preventive, set frame
-                CGSize pageSize = [self calculatePageSize: view];
+                CGSize pageSize = [self calculatePageSize:page];
                 CGRect pageFrame = CGRectMake(index * _pageWidth, 0.0f, pageSize.width, pageSize.height);
-                [view setFrame: pageFrame];
-                // replace in array of pages
-                [_pages replaceObjectAtIndex:index withObject:view];
+                page.frame = pageFrame;
+                
+                page.contentView = view;
 
-                // calculete direction of movement (if move left add view at index 0 else add at last position)
+                // calculate direction of movement (if move left add view at index 0 else add at last position)
                 if ((_scrollView.contentOffset.x + _scrollView.contentInset.left) > index * _pageWidth) {
                     // add subview
-                    [_scrollView insertSubview:view atIndex:0];
+                    [_scrollView insertSubview:page atIndex:0];
                 }
                 else {
                     // add subview
-                    [_scrollView addSubview:view];
+                    [_scrollView addSubview:page];
                 }
-                
                 
                 // send delegate
                 [self didLoadPage:view];
-                // return loaded page
-                return view;
             }
         }
-        // return page from array
-        return item;
     }
-    // nil, index out of range
-    return nil;
+    
+    return page;
 }
 
 
@@ -326,20 +322,21 @@
     // get array of visible pages
     NSArray* visiblePages = [self visiblePages];
     
-    // if visible page exist in array of pages then can't ubload
-    for (id item in _pages) {
+    // if visible page exist in array of pages then can't unload
+    for (CLSegmentedView *page in _pages) {
         
-        if (item != [NSNull null]) {
+        if (page.isLoaded) {
             
             for (UIView* visiblePage in visiblePages) {
                 
-                if (item == visiblePage) {
-                    canUnload = NO; break;
+                if (page == visiblePage) {
+                    canUnload = NO;
+                    break;
                 }
             }
             // if can, add to array - pages to unlaod
             if (canUnload) {
-                [pagesToUnload addObject: item];
+                [pagesToUnload addObject:page];
             } 
             // set flag to YES
             canUnload = YES;
@@ -366,14 +363,7 @@
     // recalculate pages height and width
     [self setProperSizesForLoadedPages:interfaceOrientation];
     
-    [_pages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
-        if (obj != [NSNull null]) {
-            [(UIView*)obj setNeedsLayout];
-        }        
-        
-        *stop = NO;
-    }];
+    [[self visiblePages] makeObjectsPerformSelector:@selector(setNeedsLayout)];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -397,11 +387,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) unloadPageIfNeeded:(NSInteger)index {
-    // get page at index
-    id item = [_pages objectAtIndex: index];
+    CLSegmentedView *page = [_pages objectAtIndex: index];
     
     // if page is unloaded, do nothing
-    if (item == [NSNull null]) return;
+    if (page.isLoaded == NO) return;
     
     // load all visible pages
     NSArray* visiblePages = [self visiblePages];
@@ -417,7 +406,7 @@
     
     // if page don't contain in array of visible pages, then unloadPage
     if (!pageIsVisible) {
-        [self unloadPage:item remove:NO];
+        [self unloadPage:page remove:NO];
     }
 }
 
@@ -431,10 +420,10 @@
         
         if (loadIfNeeded) {
             // get first visible page
-            id item = [_pages objectAtIndex: firstVisiblePageIndex];
+            CLSegmentedView* page = [_pages objectAtIndex: firstVisiblePageIndex];
             
             // chceck if is loaded, and load if needed
-            if (item == [NSNull null]) {
+            if (page.isLoaded == NO) {
                 [self loadPageAtIndex: firstVisiblePageIndex];
             }
         }        
@@ -504,17 +493,17 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) loadBoundaryPagesIfNeeded {
-    id item = nil;
+    CLSegmentedView* page = nil;
     
     // calculate first visible page
     NSInteger firstVisiblePageIndex = [self indexOfFirstVisiblePage];
 
     if ([self pageExistAtIndex: firstVisiblePageIndex]) {
         // get first visible page
-        item = [_pages objectAtIndex: firstVisiblePageIndex];
+        page = [_pages objectAtIndex: firstVisiblePageIndex];
         
         // load if needed
-        if (item == [NSNull null]) {
+        if (page.isLoaded == NO) {
             [self loadPageAtIndex: firstVisiblePageIndex];
         }
         
@@ -524,10 +513,10 @@
         // check if first page is last page    
         if (lastVisiblePageIndex != firstVisiblePageIndex) {
             // get last visible page
-            item = [_pages objectAtIndex: lastVisiblePageIndex];
+            page = [_pages objectAtIndex: lastVisiblePageIndex];
             
             // load if needed
-            if (item == [NSNull null]) {
+            if (page.isLoaded == NO) {
                 [self loadPageAtIndex: lastVisiblePageIndex];
             }
         }
@@ -551,7 +540,7 @@
             // get page at index
             id item = [_pages objectAtIndex: i];
             
-            // adds all parties, even if they are represented by [NSNull null]
+            // adds all parties, even if they are not loaded
             [array addObject: item];
         }
     }
@@ -639,25 +628,40 @@
     __block NSUInteger lastIndex = [array count] -1;
     
     // enumerate all pages on stock
-    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [array enumerateObjectsUsingBlock:^(CLSegmentedView* page, NSUInteger idx, BOOL *stop) {
         // if item is not null and is not last page (first visible page on stock)
-        if ((obj != [NSNull null]) && (idx != lastIndex)) {
+        if ((page.isLoaded) && (idx != lastIndex)) {
             // unload page
-            [self unloadPage:obj remove:NO];
+            [self unloadPage:page remove:NO];
         }
     }];
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) unloadPage:(UIView*)page remove:(BOOL)remove {
-    // get index of page
+- (CLSegmentedView *)createPageFromView:(UIView*)view size:(CLViewSize)viewSize {
+    CLSegmentedView *page = [[CLSegmentedView alloc] initWithSize:viewSize];
+    page.showRoundedCorners = YES;
+    [page setAutoresizingMask:
+     UIViewAutoresizingFlexibleLeftMargin |
+     UIViewAutoresizingFlexibleRightMargin |
+     UIViewAutoresizingFlexibleBottomMargin |
+     UIViewAutoresizingFlexibleTopMargin |
+     UIViewAutoresizingFlexibleWidth |
+     UIViewAutoresizingFlexibleHeight];
+    page.contentView = view;
+    
+    return page;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void) unloadPage:(CLSegmentedView*)page remove:(BOOL)remove {
     NSUInteger index = [_pages indexOfObject: page];
     
-    // if page exist
     if (index != NSNotFound) {
-        // remove from superview
         [page removeFromSuperview];
+        page.contentView = nil;
         
         // send message to delegate
         [self didUnloadPage:page];        
@@ -670,11 +674,7 @@
                 _flags.hasWiderPage = NO;
             }
             
-            // remove from array
             [_pages removeObject: page];
-        } else {
-            // replace with null
-            [_pages replaceObjectAtIndex:index withObject:[NSNull null]];
         }
     }    
 }
@@ -701,12 +701,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void) setProperSizesForLoadedPages:(UIInterfaceOrientation)interfaceOrientation {
-    [_pages enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if (obj != [NSNull null]) {
-            UIView* view = (UIView*)obj;
+    [_pages enumerateObjectsUsingBlock:^(CLSegmentedView* page, NSUInteger idx, BOOL *stop) {
+        if (page.isLoaded) {
+            UIView* view = (UIView*)page;
             CGRect rect = view.frame;
             CGPoint point = [self calculateOriginOfPageAtIndex: idx];
-            CGSize size = [self calculatePageSize: obj];
+            CGSize size = [self calculatePageSize: page];
             rect.size = size;
             rect.origin = point;
             [view setFrame:rect];
@@ -726,10 +726,10 @@
 - (void) setProperPositionOfPageAtIndex:(NSInteger)index {
 
     if ([self pageExistAtIndex: index]) {
-        id item = [_pages objectAtIndex: index]; 
+        CLSegmentedView* page = [_pages objectAtIndex: index]; 
 
-        if (item != [NSNull null]) {
-            UIView* page = (UIView*)item;
+        if (page.isLoaded) {
+            UIView* page = (UIView*)page;
             
             CGRect rect = [page frame];
             rect.origin = [self calculateOriginOfPageAtIndex: index];
@@ -769,13 +769,11 @@
     // bug fix with bad position of first page
     if ((firstVisiblePageIndex == 0) && (-_scrollView.contentOffset.x >= _scrollView.contentInset.left)) {
         // get page at index
-        id item = [_pages objectAtIndex: firstVisiblePageIndex];
-        if (item != [NSNull null]) {
-            UIView* view = (UIView*)item;
-            
-            CGRect rect = [view frame];
+        CLSegmentedView* page = [_pages objectAtIndex: firstVisiblePageIndex];
+        if (page.isLoaded) {
+            CGRect rect = [page frame];
             rect.origin.x = 0;
-            [view setFrame: rect];
+            [page setFrame:rect];
         }
     }
     
@@ -787,7 +785,7 @@
         // check if page index is in bounds 
         if ([self pageExistAtIndex: i]) {
             // get page at index
-            id item = [_pages objectAtIndex: i];
+            CLSegmentedView* page = [_pages objectAtIndex: i];
 
             if (i == firstVisiblePageIndex) {
 
@@ -797,15 +795,15 @@
                     return;
                 }
                 
-                UIView* view = (UIView*)item;
+                UIView* view = (UIView*)page;
 
                 CGRect rect = [view frame];
                 rect.origin.x = contentOffset;
                 [view setFrame: rect];
                 
             } else {
-                if (item != [NSNull null]) {
-                    [self unloadPage:item remove:NO];
+                if (page.isLoaded) {
+                    [self unloadPage:page remove:NO];
                 }
                 
             }

@@ -91,7 +91,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // if you select row, then create and push custom UIViewController
-    ExampleTableViewController* rootTableViewController = [[ExampleTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
+    ExampleTableViewController* rootTableViewController = [[ExampleTableViewController alloc] initWithStyle:UITableViewStylePlain];
     [self.cascadeNavigationController setRootViewController:rootTableViewController animated:YES];
     
 }

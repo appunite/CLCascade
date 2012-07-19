@@ -7,7 +7,6 @@
 //
 
 #import "ExampleTableViewController.h"
-#import "ExampleWebViewController.h"
 #import "ExampleXIBViewController.h"
 
 @implementation ExampleTableViewController
@@ -30,17 +29,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // add shadow
-    [self addLeftBorderShadowWithWidth:140.0 andOffset:0.0f];
     
     // add header view
     UIImageView* header = [[UIImageView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.bounds.size.width, 45.0)];
     [header setImage: [UIImage imageNamed:@"ToolBar_479x45.png"]];
     [self.segmentedView setHeaderView: header];
     
-    // show rounded corners
-    [self setShowRoundedCorners: NO];
 }
 
 
@@ -82,11 +76,8 @@
     
     // Configure the cell...
 
-    if (indexPath.row%3 == 0) {
+    if (indexPath.row%2 == 0) {
         cell.textLabel.text = @"New Table View";
-    } else
-    if (indexPath.row%3 == 1)  {
-        cell.textLabel.text = @"New Web View";
     } else
     {
         cell.textLabel.text = @"New View from XIB";
@@ -100,19 +91,16 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CLViewController* viewController = nil;
+    UIViewController* viewController = nil;
     
-    if (indexPath.row%3 == 0) {
-        viewController = [[ExampleTableViewController alloc] initWithTableViewStyle: UITableViewStylePlain];
-    } else 
-    if (indexPath.row%3 == 1) {
-        viewController = [[ExampleWebViewController alloc] init];
+    if (indexPath.row%2 == 0) {
+        viewController = [[ExampleTableViewController alloc] initWithStyle:UITableViewStylePlain];
     } else 
     {
-        viewController = [[ExampleXIBViewController alloc] initWithNibName:@"ExampleXIBViewController" bundle:nil size:CLViewSizeNormal];
+        viewController = [[ExampleXIBViewController alloc] initWithNibName:@"ExampleXIBViewController" bundle:nil];
     }
     
-    [self pushDetailViewController:viewController animated:YES];
+    [[self cascadeNavigationController] addViewController:viewController sender:self animated:YES];
 }
 
 @end
