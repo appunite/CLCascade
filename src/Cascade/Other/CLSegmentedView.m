@@ -7,6 +7,7 @@
 //
 
 #import "CLSegmentedView.h"
+#import <Cascade/Other/CLBorderShadowView.h>
 
 @interface CLSegmentedView (Private)
 - (void) setupViews;
@@ -24,11 +25,15 @@
 @synthesize rectCorner = _rectCorner;
 @synthesize shadowOffset = _shadowOffset;
 
+- (BOOL)isLoaded
+{
+    return self.superview != nil;
+}
+
 #pragma mark - Init & dealloc
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (id)init
-{
+- (id)init {
     self = [super init];
     if (self) {
 
@@ -39,6 +44,10 @@
         _viewSize = CLViewSizeNormal;
         _rectCorner = UIRectCornerAllCorners;
         _showRoundedCorners = NO;
+        
+        [self addLeftBorderShadowView:[CLBorderShadowView new]
+                            withWidth:20.0];
+        [self setShadowOffset:10.0];
     }
     return self;
 }
@@ -141,17 +150,6 @@
         [self setNeedsLayout];
         [self setNeedsDisplay];
     }
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) removeLeftBorderShadowView {
-
-    [self setClipsToBounds: YES];
-
-    _shadowView = nil;
-    [self setNeedsLayout];
-    
 }
 
 
